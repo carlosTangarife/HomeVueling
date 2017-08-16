@@ -1,0 +1,13 @@
+/* You can add global styles to this file, and also import other style files */
+.widget {
+    height: 150px;
+    width: 150px;
+    font-family: 'Roboto', sans-serif;
+    font-size: 20px;
+}
+.lazy-one {
+    float:left;
+}
+.lazy-two {
+    float:right;
+}
