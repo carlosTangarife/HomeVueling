@@ -16,6 +16,7 @@ import { ROUTES } from './app.routes';
   ],
   providers: [SystemJsNgModuleLoader]
 })
+
 export class AppModule {
 
   constructor(private injector: Injector, private moduleLoader: SystemJsNgModuleLoader) { }
