@@ -1,16 +1,20 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { SearchComponent } from './search.component';
-import { CheckInComponent } from './components/check-in/check-in.component';
-import { ReservationComponent } from './components/reservation/reservation.component';
-import { FlightComponent } from './components/flight/flight.component';
+import { SEARCH_COMPONENTS } from './index';
 
 @NgModule({
   imports: [
     CommonModule
   ],
-  declarations: [SearchComponent, CheckInComponent, ReservationComponent, FlightComponent],
-  providers: [{ provide: 'components', useValue: [SearchComponent], multi: true }],
-  entryComponents: [SearchComponent]
+  declarations: [
+    ...SEARCH_COMPONENTS
+  ],
+  exports: [
+    ...SEARCH_COMPONENTS
+  ],
+  providers: [
+
+  ],
+  entryComponents: [SEARCH_COMPONENTS]
 })
 export class SearchModule { }
