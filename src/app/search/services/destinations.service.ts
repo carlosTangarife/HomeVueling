@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs/Observable';
+import 'rxjs/add/observable/of';
+import 'rxjs/add/operator/delay';
+
 
 @Injectable()
 export class DestinatiosService {
-  public destinations: any;
+
+  public destinations$;
   constructor() {
-    this.destinations = [
+    this.destinations$ = [
       {iata : 'AAL', value: 'Aalborg, Dinamarca'},
       {iata : 'LCG', value: 'A Coruña, España'},
       {iata : 'ALC', value: 'Alicante, España'},
@@ -149,8 +154,7 @@ export class DestinatiosService {
       {iata : 'ZRH', value: 'Zúrich, Suiz'}
     ];
   }
-
-  getDestinations(): any {
-    return this.destinations;
+  getDestinations() {
+    return Observable.of(this.destinations$).delay(3000);
   }
 }

@@ -7,7 +7,7 @@ import { DestinatiosService } from '../../services/destinations.service'
   styleUrls: ['./station-selector.component.css']
 })
 export class StationSelectorComponent implements OnInit {
-  public destinations: any;
+  public destinations$;
   @Input() show: boolean;
   public textoPrueba: string;
   public iata: string;
@@ -17,7 +17,7 @@ export class StationSelectorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.destinations = this._ds.getDestinations();
+     this.destinations$ = this._ds.getDestinations();
   }
 
   selected() {
