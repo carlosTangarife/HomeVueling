@@ -15,6 +15,7 @@ import { SearchComponent } from './search/components/index-search/search.compone
 
   ]
 })
+
 export class AppModule {
   private browser_document;
   ngDoBootstrap(appRef: ApplicationRef ) {
