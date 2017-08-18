@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
 
 @Component({
@@ -7,10 +7,26 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./check-in.component.css']
 })
 export class CheckInComponent implements OnInit {
-
-  constructor() { }
+  flagCheckIn: boolean;
+  flag: boolean;
+  @Input() type: string;
+  constructor() {
+    this.flagCheckIn = false;
+    this.flag = true;
+  }
 
   ngOnInit() {
+    if (this.type === 'check-in') {
+      this.flagCheckIn = true;
+    }
+  }
+
+  isEmail() {
+      this.flag = true;
+  }
+
+  isOrigin() {
+    this.flag = !this.flag;
   }
 
 }

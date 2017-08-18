@@ -1,8 +1,8 @@
 <div class="container">
-    <strong>text</strong>
+    <strong *ngIf="flagCheckIn">Obten tus tarjetas de embarque para subir al avion. Podras imprimirlas o descargarlas en tu movil.</strong>
     <br><br>
-    <button type="button" class="btn btn-default">Email del Comprador</button>
-    <button type="button" class="btn btn-primary">Origen/destino</button>
+    <button type="button" (click)="isEmail()" class="btn" [ngClass]="{'btn-primary': flag, 'btn-default': !flag }" >Email del Comprador</button>
+    <button type="button" (click)="isOrigin()" class="btn" [ngClass]="{'btn-primary': !flag, 'btn-default': flag }">Origen/destino</button>
 
     <br><br>
     <form class="form-inline">
@@ -11,21 +11,21 @@
         <input type="password" class="form-control" id="codigo">
       </div>
 
-      <div class="form-group">
+      <div class="form-group" *ngIf="flag">
         <label for="email">Email del Comprador:</label><br>
         <input type="email" class="form-control" id="email">
       </div>
 
-      <!-- <app-station-selector [show]="true"></app-station-selector> -->
+      <app-station-selector [show]="!flag"></app-station-selector>
 
-      <div class="form-group">
+      <div class="form-group" *ngIf="!flag">
         <label for="vuelta">Fecha del Primer Vuelo</label><br>
         <input type="date" name="vuelta" class="form-control" />
       </div>
 
       <div class="form-group">
         <label for="Acceder"></label><br>
-        <input type="submit" class="btn btn-primary" value="Acceder" [disabled]="loginForm.invalid" />
+        <input type="submit" class="btn btn-primary" value="Acceder" />
       </div>
   </form>
    <br><br>
