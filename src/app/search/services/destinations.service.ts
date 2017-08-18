@@ -5,7 +5,7 @@ import 'rxjs/add/operator/delay';
 
 
 @Injectable()
-export class DestinatiosService {
+export class DestinationsService {
 
   public destinations$;
   constructor() {

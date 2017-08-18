@@ -1,5 +1,5 @@
-import { DestinatiosService } from '../services/destinations.service';
+import { DestinationsService } from './destinations.service';
 
 export const SEARCH_SERVICES = [
-  DestinatiosService
+  DestinationsService
 ];

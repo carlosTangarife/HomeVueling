@@ -1,5 +1,5 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { DestinatiosService } from '../../services/destinations.service'
+import { DestinationsService } from '../../services/destinations.service'
 
 @Component({
   selector: 'app-station-selector',
@@ -11,7 +11,7 @@ export class StationSelectorComponent implements OnInit {
   @Input() show: boolean;
   public textoPrueba: string;
   public iata: string;
-  constructor(public _ds: DestinatiosService) {
+  constructor(public _ds: DestinationsService) {
     this.show = true;
     this.textoPrueba = 'prueba';
   }
