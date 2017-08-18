@@ -1,45 +1,24 @@
-import { ModuleWithProviders } from '@angular/core';
-import { RouterModule, Routes } from '@angular/router';
-import { BrowserModule } from '@angular/platform-browser';
-import { SystemJsNgModuleLoader, NgModule, ApplicationRef, Injector, NgModuleFactory, Type } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
-import { ROUTES } from './app.routes';
+import { BrowserModule, DOCUMENT } from '@angular/platform-browser';
+import { NgModule, Inject, ApplicationRef } from '@angular/core';
 
 @NgModule({
-  declarations: [],
-  imports: [
-    BrowserModule,
-    FormsModule,
-    HttpModule,
-    RouterModule.forChild(ROUTES)
+  declarations: [
+
   ],
-  providers: [SystemJsNgModuleLoader]
+  imports: [
+    BrowserModule
+  ],
+  providers: [
+
+  ]
 })
 export class AppModule {
-
-  constructor(private injector: Injector, private moduleLoader: SystemJsNgModuleLoader) { }
-
-  ngDoBootstrap(appRef: ApplicationRef) {
-    const widgets = document.querySelectorAll('[data-module-path]');
-    for (const i in widgets) {
-      if (widgets.hasOwnProperty(i)) {
-        const modulePath = widgets[i].getAttribute('data-module-path');
-        if (modulePath) {
-          this.moduleLoader.load(modulePath)
-            .then((moduleFactory: NgModuleFactory<any>) => {
-              const ngModuleRef = moduleFactory.create(this.injector);
-              ngModuleRef.injector.get('components').forEach((components: Type<{}>[]) => {
-                components.forEach((component: Type<{}>) => {
-                  const compFactory = ngModuleRef.componentFactoryResolver.resolveComponentFactory(component);
-                  if (document.querySelector(compFactory.selector)) {
-                    appRef.bootstrap(compFactory);
-                  }
-                });
-              });
-            });
-        }
-      }
-    }
+  private browser_document;
+  ngDoBootstrap(appRef: ApplicationRef ) {
+    if (this.browser_document.getElementsByTagName('app-index-search').length > 0) { appRef.bootstrap(IndexSearchComponent); }
+    if (this.browser_document.getElementsByTagName('app-index-header').length > 0) { appRef.bootstrap(IndexHeaderComponent); }
+  }
+  constructor(@Inject(DOCUMENT) private document: any) {
+    this.browser_document = document;
   }
 }
