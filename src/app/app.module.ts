@@ -6,6 +6,8 @@ import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { ROUTES } from './app.routes';
 
+import { CheckInService } from "../app/search/components/check-in/check-in.service";
+
 @NgModule({
   declarations: [],
   imports: [
@@ -14,7 +16,7 @@ import { ROUTES } from './app.routes';
     HttpModule,
     RouterModule.forChild(ROUTES)
   ],
-  providers: [SystemJsNgModuleLoader]
+  providers: [SystemJsNgModuleLoader, CheckInService]
 })
 export class AppModule {
 

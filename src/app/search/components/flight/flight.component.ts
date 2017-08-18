@@ -6,10 +6,18 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./flight.component.css']
 })
 export class FlightComponent implements OnInit {
+   totalVuelos= 0;
 
-  constructor() { }
-
+  constructor() {    
+  }
+  
   ngOnInit() {
+  }
+
+  addFlightTest(){
+    
+    this.totalVuelos++;
+   
   }
 
 }

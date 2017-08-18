@@ -22,4 +22,9 @@ describe('FlightComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it ('should add +1', () => {
+    component.addFlightTest();
+    expect(component.totalVuelos).toBe(1);
+  });
 });
