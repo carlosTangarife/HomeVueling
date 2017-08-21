@@ -42,7 +42,7 @@ describe('CheckInComponent', () => {
     expect(component).toBeTruthy();
   });
 
-  it ('should set the service??', () => {
+  it ('should set the service?? - test ', () => {
     spyOn(checkService, 'getCheckIn').and.returnValue(Observable.of('FAKE SERVICE'));
     fixture.detectChanges();
     const el = de.query(By.css('p')).nativeElement;
