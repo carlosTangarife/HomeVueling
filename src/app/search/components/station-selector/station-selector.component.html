@@ -1,6 +1,0 @@
-<div class="form-group" *ngIf="show && destinations$">
-  <label for="value">Origenes</label><br>
-  <select [(ngModel)]="iata" name="value" #value="ngModel" class="form-control" (ngModelChange)="selected()">
-    <option *ngFor="let t of destinations$ | async" [ngValue]="t.iata" >{{t.value}} {{t.iata}} </option>
-  </select>
-</div>

@@ -1,23 +1,68 @@
-<form class="pane-wrapper">
-  <div class="form-group form-group--flight-search">
-    <div class="form-input">
-      <label for="usr">Origen</label>
-      <!-- <div class="input-group"><span class="prefix">MAD</span> <input type="text" class="form-control" id="destino" placeholder="Madrid"></div> -->
-      <!-- <app-station-selector></app-station-selector> -->
+<form class="pane-wrapper" _lpchecked="1">
+    <div class="form-group form-group--flight-search">
+      <app-station-selector-new [label]="'origin'" [stationOrigin]="stationOrigin$"></app-station-selector-new>
+      <div class="form-input">
+        <label for="usr">Fechas</label>
+        <div class="input-group">
+          <input type="text" id="destination-input" class="form-control js-searchbar-input" placeholder="Ciudad, país o aeropuerto">
+        </div>
+      </div>
+      <div id="form-group--passengers" class="form-input">
+        <label for="usr">Pasajeros</label>
+        <div class="input-group">
+          <input type="text" id="passengers-input" class="form-control js-searchbar-input" placeholder="Ciudad, país o aeropuerto">
+        </div>
+        <div id="passengers-popup" class="searchbar-popup passengers-popup">
+          <ul class="passengers-popup_main">
+            <li>
+              <div class="passengers-popup_main_description">
+                <p class="title">Adultos</p>
+                <label class="label">Desde 16 años</label>
+              </div>
+              <div class="passengers-popup_main_counter">
+                <span class="icon icon-rounded-less"></span>
+                <div class="number">1</div>
+                <span class="icon icon-rounded-more"></span>
+              </div>
+            </li>
+            <li>
+              <div class="passengers-popup_main_description">
+                <p class="title">Niños</p>
+                <label class="label">De 2 a 15 años</label>
+              </div>
+              <div class="passengers-popup_main_counter">
+                <span class="icon icon-rounded-less disabled"></span>
+                <div class="number">0</div>
+                <span class="icon icon-rounded-more"></span>
+              </div>
+            </li>
+            <li>
+              <div class="passengers-popup_main_description">
+                <p class="title">Bebé</p>
+                <label class="label">De 7 días - 23 meses</label>
+              </div>
+              <div class="passengers-popup_main_counter">
+                <span class="icon icon-rounded-less disabled"></span>
+                <div class="number">0</div>
+                <span class="icon icon-rounded-more"></span>
+              </div>
+            </li>
+            <li>
+              <div class="passengers-popup_main_description">
+                <p class="title">Asiento extra</p>
+                <label class="label"><a href="">+ info</a></label>
+              </div>
+              <div class="passengers-popup_main_counter">
+                <span class="icon icon-rounded-less disabled"></span>
+                <div class="number">0</div>
+                <span class="icon icon-rounded-more"></span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
     </div>
-    <div class="form-input">
-      <label for="usr">Destino</label>
-      <!-- <div class="input-group"><span class="prefix">BCN</span> <input type="text" class="form-control" id="destino" placeholder="Barcelona"></div> -->
-      <!-- <app-station-selector></app-station-selector> -->
+    <div class="form-action">
+      <a href="#" onclick="return false;" class="mv_button color-darkGrey size-md icon icon-right">Buscar</a>
     </div>
-    <div class="form-input">
-      <label for="usr">Fechas</label>
-      <div class="input-group"><input type="text" class="form-control" id="destino" placeholder="Ciudad, país o aeropuerto"></div>
-    </div>
-    <div class="form-input">
-      <label for="usr">Pasajeros</label>
-      <div class="input-group"><input type="text" class="form-control" id="destino" placeholder="Ciudad, país o aeropuerto"></div>
-    </div>
-  </div>
-  <div class="form-action"><a href="#" onclick="return!1" class="mv_button color-darkGrey size-md icon-right">Buscar Vuelos</a></div>
-</form>
+  </form>

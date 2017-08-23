@@ -16,9 +16,7 @@ export class CheckInComponent implements OnInit {
   }
 
   ngOnInit() {
-    if (this.type === 'check-in') {
-      this.flagCheckIn = true;
-    }
+    this.flagCheckIn = this.type === 'check-in' ? true : false;
   }
 
   isEmail() {

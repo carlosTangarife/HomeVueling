@@ -16,7 +16,7 @@
         <input type="email" class="form-control" id="email">
       </div>
 
-      <app-station-selector [show]="!flag"></app-station-selector>
+      <app-station-selector [show]="!flag" [label]="'Origen/Destino'"></app-station-selector>
 
       <div class="form-group" *ngIf="!flag">
         <label for="vuelta">Fecha del Primer Vuelo</label><br>
