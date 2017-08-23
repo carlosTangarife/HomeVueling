@@ -22,4 +22,9 @@ describe('ReservationComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  it ('should deduct -1 ', () => {
+    component.deleteReservation();
+    expect(component.totalReserva).toBe(-1);
+  });
 });

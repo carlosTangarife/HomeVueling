@@ -1,5 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { NgForm } from '@angular/forms';
+import { HttpModule } from "@angular/http";
+
 
 @Component({
   selector: 'app-check-in',
@@ -12,13 +14,11 @@ export class CheckInComponent implements OnInit {
   @Input() type: string;
   constructor() {
     this.flagCheckIn = false;
-    this.flag = true;
+    this.flag = true;    
   }
 
-  ngOnInit() {
-    if (this.type === 'check-in') {
-      this.flagCheckIn = true;
-    }
+  ngOnInit() { 
+    this.flagCheckIn = this.type === 'check-in'?true:false;
   }
 
   isEmail() {
@@ -30,3 +30,4 @@ export class CheckInComponent implements OnInit {
   }
 
 }
+

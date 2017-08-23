@@ -20,7 +20,7 @@ export class StationSelectorComponent implements OnInit {
      this.destinations$ = this._ds.getDestinations();
   }
 
-  selected() {
+  /*selected() {
     console.log(this.iata);
-  }
+  }*/
 }

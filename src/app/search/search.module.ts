@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SEARCH_COMPONENTS } from './index';
 import { StationSelectorComponent } from './components/station-selector/station-selector.component';
@@ -9,7 +9,8 @@ import { SEARCH_SERVICES } from './services/index';
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ...SEARCH_COMPONENTS,

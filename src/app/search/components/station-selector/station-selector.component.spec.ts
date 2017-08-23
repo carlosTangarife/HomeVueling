@@ -1,6 +1,7 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { StationSelectorComponent } from './station-selector.component';
+import { FormsModule, ReactiveFormsModule } from "@angular/forms";
 
 describe('StationSelectorComponent', () => {
   let component: StationSelectorComponent;
@@ -8,7 +9,8 @@ describe('StationSelectorComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StationSelectorComponent ]
+      declarations: [ StationSelectorComponent ],
+      
     })
     .compileComponents();
   }));
@@ -22,4 +24,6 @@ describe('StationSelectorComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
+
+  
 });
