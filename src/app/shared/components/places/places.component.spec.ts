@@ -1,20 +1,20 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { StationSelectorNewComponent } from './station-selector-new.component';
+import { PlacesComponent } from './places.component';
 
-describe('StationSelectorNewComponent', () => {
-  let component: StationSelectorNewComponent;
-  let fixture: ComponentFixture<StationSelectorNewComponent>;
+describe('PlacesComponent', () => {
+  let component: PlacesComponent;
+  let fixture: ComponentFixture<PlacesComponent>;
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ StationSelectorNewComponent ]
+      declarations: [ PlacesComponent ]
     })
     .compileComponents();
   }));
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(StationSelectorNewComponent);
+    fixture = TestBed.createComponent(PlacesComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

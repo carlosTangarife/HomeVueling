@@ -1,0 +1,13 @@
+<p class="cities-sugestion-popup_title">Búsquedas recientes</p>
+<ul class="cities-sugestion-popup_list">
+  <li *ngFor="let place of places | async" (click)="sendCode(place)">
+    <p class="list-item">{{place?.name}}</p>
+    <p class="list-item">{{place?.country}}</p>
+    <p class="list-item">{{place?.code}}</p>
+    <p class="list-item">
+      <span class="{{place?.claseCss}} icon">
+        <span *ngFor="let y of contador(place?.paths)" class="path{{y}}"></span>
+      </span>
+    </p>
+  </li>
+</ul>

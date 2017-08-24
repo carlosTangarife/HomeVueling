@@ -7,8 +7,6 @@ import { IndexHeaderComponent} from './header/components/index-header/index-head
 import { FooterModule } from './footer/footer.module';
 import { IndexFooterComponent } from './footer/components/index-footer/index-footer.component';
 @NgModule({
-  declarations: [
-  ],
   imports: [
     BrowserModule,
     SearchModule,

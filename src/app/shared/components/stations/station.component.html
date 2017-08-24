@@ -1,0 +1,23 @@
+<div id="form-group--{{type}}" class="form-input" [ngClass]="{'focused':focusIn}">
+  <label for="usr">{{label}}</label>
+  <div class="input-group">
+      <span class="prefix">{{station?.code}}</span>
+      <input
+        (focus)="prueba1()"
+        type="text"
+        id="{{type}}-input"
+        class="form-control js-searchbar-input"
+        placeholder="Ciudad, país o aeropuerto"
+      >
+  </div>
+
+  <div
+    id="{{type}}-sugestion-popup"
+    class="searchbar-popup cities-sugestion-popup"
+    [ngStyle]="{'display':focusIn === true ? 'block' : 'none'}"
+  >
+
+  <app-places [places]="stationRecent$" *ngIf="stationRecent$" (placeSelected)="prueba3($event)"></app-places>
+  <app-places [places]="stationOrigin$" *ngIf="stationOrigin$" (placeSelected)="prueba3($event)"></app-places>
+  </div>
+</div>

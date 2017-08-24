@@ -3,14 +3,15 @@ import { CheckInComponent } from './components/check-in/check-in.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { FlightComponent } from './components/flight/flight.component';
 import { StationSelectorComponent } from '../shared/components/station-selector/station-selector.component';
-import { StationSelectorNewComponent } from '../shared/components/station-selector-new/station-selector-new.component';
-import { RecentSearchComponent } from '../shared/components/recent-search/recent-search.component';
+import { PlacesComponent } from '../shared/components/places/places.component';
+import { StationsComponent } from '../shared/components/stations/stations.component';
+
 export const SEARCH_COMPONENTS = [
   IndexSearchComponent,
   CheckInComponent,
   ReservationComponent,
   FlightComponent,
   StationSelectorComponent,
-  StationSelectorNewComponent,
-  RecentSearchComponent
+  PlacesComponent,
+  StationsComponent
 ];

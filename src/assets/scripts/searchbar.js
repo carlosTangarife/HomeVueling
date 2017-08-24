@@ -24,14 +24,14 @@ $(document).ready(function(){
 
   // Searchbar Popups
 
-  $("#origin-input").focus(function(){
-      $("#form-group--origin").addClass("focused");
-      $("#origin-sugestion-popup").css("display", "block");
-  });
-  $("#origin-input").focusout(function(){
-      $("#form-group--origin").removeClass("focused");
-      $("#origin-sugestion-popup").css("display", "none");
-  });
+  // $("#origin-input").focus(function(){
+  //     $("#form-group--origin").addClass("focused");
+  //     $("#origin-sugestion-popup").css("display", "block");
+  // });
+  // $("#origin-input").focusout(function(){
+  //     $("#form-group--origin").removeClass("focused");
+  //     $("#origin-sugestion-popup").css("display", "none");
+  // });
 
   $("#destination-input").focus(function(){
       $("#form-group--destination").addClass("focused");

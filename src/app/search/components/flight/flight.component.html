@@ -1,6 +1,10 @@
 <form class="pane-wrapper" _lpchecked="1">
     <div class="form-group form-group--flight-search">
-      <app-station-selector-new [label]="'origin'" [stationOrigin]="stationOrigin$"></app-station-selector-new>
+
+      <app-stations [type]="'origin'" [label]="'Origen'"></app-stations>
+
+      <app-stations [type]="'destination'" [label]="'Destinos'"></app-stations>
+
       <div class="form-input">
         <label for="usr">Fechas</label>
         <div class="input-group">
