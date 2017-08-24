@@ -13,7 +13,7 @@ module.exports = function (config) {
       require('karma-istanbul-threshold'),
       require('@angular/cli/plugins/karma')
     ],
-    client:{
+    client: {
       clearContext: false // leave Jasmine Spec Runner output visible in browser
     },
     files: [
@@ -23,16 +23,16 @@ module.exports = function (config) {
       './src/test.ts': ['@angular/cli']
     },
     mime: {
-      'text/x-typescript': ['ts','tsx']
+      'text/x-typescript': ['ts', 'tsx']
     },
     coverageIstanbulReporter: {
-      reports: [ 'html', 'lcovonly' ],
+      reports: ['html', 'lcovonly'],
       fixWebpackSourcePaths: true,
       watermarks: {
-        statements: [ 75, 98 ],
-        functions: [ 75, 98 ],
-        branches: [ 75, 98 ],
-        lines: [ 75, 98 ]
+        statements: [75, 98],
+        functions: [75, 98],
+        branches: [75, 98],
+        lines: [75, 98]
       },
       thresholds: {
         statements: 80,
@@ -40,16 +40,14 @@ module.exports = function (config) {
         branches: 100,
         functions: 100
       },
-    }, 
-
-
+    },
     angularCli: {
       config: './.angular-cli.json',
       environment: 'dev'
     },
     reporters: config.angularCli && config.angularCli.codeCoverage
-              ? ['progress', 'coverage-istanbul']
-              : ['progress', 'kjhtml'],
+      ? ['progress', 'coverage-istanbul']
+      : ['progress', 'kjhtml'],
     port: 9876,
     colors: true,
     logLevel: config.LOG_INFO,

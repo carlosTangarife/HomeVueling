@@ -5,16 +5,17 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './flight.component.html',
   styleUrls: ['./flight.component.css']
 })
+
 export class FlightComponent implements OnInit {
-  totalVuelos= 0;
+
+  totalVuelos = 0;
 
   constructor() { }
 
   ngOnInit() {
   }
 
-  addFlightTest(){
+  addFlightTest() {
     this.totalVuelos++;
   }
-
 }

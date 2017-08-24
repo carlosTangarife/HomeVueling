@@ -5,6 +5,7 @@ import { Component, OnInit } from '@angular/core';
   templateUrl: './reservation.component.html',
   styleUrls: ['./reservation.component.css']
 })
+
 export class ReservationComponent implements OnInit {
   totalReserva = 0;
 
@@ -13,8 +14,7 @@ export class ReservationComponent implements OnInit {
   ngOnInit() {
   }
 
-  deleteReservation(){
+  deleteReservation() {
     this.totalReserva--;
   }
-
 }

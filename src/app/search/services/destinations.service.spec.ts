@@ -1,10 +1,9 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { DestinationsService } from './destinations.service';
 
 describe('DestinationsService', () => {
-  
-  beforeEach(() => {    
+
+  beforeEach(() => {
     TestBed.configureTestingModule({
       providers: [DestinationsService]
     });
@@ -14,8 +13,8 @@ describe('DestinationsService', () => {
     expect(service).toBeTruthy();
   }));
 
-  it ('should be not null', inject([DestinationsService], (service: DestinationsService) => {
-      service.getDestinations();
-      expect(service.destinations$).toBeDefined();
+  it('should be not null', inject([DestinationsService], (service: DestinationsService) => {
+    service.getDestinations();
+    expect(service.destinations$).toBeDefined();
   }));
 });

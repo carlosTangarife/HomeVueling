@@ -4,11 +4,11 @@ import { Component, OnInit } from '@angular/core';
   selector: 'app-search',
   templateUrl: './search.component.html'
 })
+
 export class SearchComponent implements OnInit {
 
   constructor() { }
 
   ngOnInit() {
   }
-
 }

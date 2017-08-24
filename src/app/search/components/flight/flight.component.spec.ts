@@ -1,5 +1,4 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { FlightComponent } from './flight.component';
 
 describe('FlightComponent', () => {
@@ -8,9 +7,9 @@ describe('FlightComponent', () => {
 
   beforeEach(async(() => {
     TestBed.configureTestingModule({
-      declarations: [ FlightComponent ]
+      declarations: [FlightComponent]
     })
-    .compileComponents();
+      .compileComponents();
   }));
 
   beforeEach(() => {
@@ -22,8 +21,8 @@ describe('FlightComponent', () => {
   it('should be created', () => {
     expect(component).toBeTruthy();
   });
-  
-  it ('should add +1', () => {
+
+  it('should add +1', () => {
     component.addFlightTest();
     expect(component.totalVuelos).toBe(1);
   });

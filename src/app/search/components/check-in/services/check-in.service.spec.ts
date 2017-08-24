@@ -1,5 +1,4 @@
 import { TestBed, inject } from '@angular/core/testing';
-
 import { CheckInService } from './check-in.service';
 
 describe('Check-In Service', () => {
