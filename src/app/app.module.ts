@@ -18,10 +18,10 @@ import { SearchComponent } from './search/components/index-search/search.compone
 
 export class AppModule {
   private browser_document;
-  ngDoBootstrap(appRef: ApplicationRef ) {
+  ngDoBootstrap(appRef: ApplicationRef) {
     if (this.browser_document.getElementsByTagName('app-search').length > 0) { appRef.bootstrap(SearchComponent); }
   }
-  constructor(@Inject(DOCUMENT) private document: any) {
+  constructor( @Inject(DOCUMENT) private document: any) {
     this.browser_document = document;
   }
 }

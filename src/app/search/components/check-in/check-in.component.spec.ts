@@ -26,17 +26,17 @@ describe('CheckInComponent', () => {
 
   it('should initialized the flagEmail in true', () => {
     component.isEmail();
-    expect(component.flag).toBeTruthy;
+    expect(component.flag).toBeTruthy();
   });
 
   it('The flagCheckin should be false if condition no apply', () => {
     component.ngOnInit();
-    expect(component.flagCheckIn == false).toBeTruthy();
+    expect(component.flagCheckIn === false).toBeTruthy();
   });
 
   it('should be true if the condition apply', () => {
     component.ngOnInit();
-    expect(component.flagCheckIn == true).toBeFalsy();
+    expect(component.flagCheckIn === true).toBeFalsy();
   });
 
   it('should be negative', () => {

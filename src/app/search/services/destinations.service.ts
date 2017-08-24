@@ -3,11 +3,11 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 
-
 @Injectable()
 export class DestinationsService {
 
   public destinations$;
+
   constructor() {
     this.destinations$ = [
       {iata : 'AAL', value: 'Aalborg, Dinamarca'},
@@ -154,6 +154,7 @@ export class DestinationsService {
       {iata : 'ZRH', value: 'Zúrich, Suiz'}
     ];
   }
+
   getDestinations() {
     return Observable.of(this.destinations$).delay(3000);
   }

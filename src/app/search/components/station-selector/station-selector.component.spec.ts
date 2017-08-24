@@ -1,21 +1,24 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, inject, TestBed } from '@angular/core/testing';
+import { FormsModule } from '@angular/forms';
 import { StationSelectorComponent } from './station-selector.component';
+import { DestinationsService } from '../../services/destinations.service';
 
 describe('StationSelectorComponent', () => {
   let component: StationSelectorComponent;
   let fixture: ComponentFixture<StationSelectorComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [StationSelectorComponent]
-    }).compileComponents();
-  }));
-
   beforeEach(() => {
+    TestBed.configureTestingModule({
+      imports: [ FormsModule ],
+      declarations: [StationSelectorComponent],
+      providers: [DestinationsService]
+    });
     fixture = TestBed.createComponent(StationSelectorComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
   });
+
+  beforeEach(inject([DestinationsService], (service: DestinationsService) => {
+    component = new StationSelectorComponent(service);
+  }));
 
   it('should be created', () => {
     expect(component).toBeTruthy();
