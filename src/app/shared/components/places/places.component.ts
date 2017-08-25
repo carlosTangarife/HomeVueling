@@ -3,7 +3,7 @@ import {
   OnInit,
   Input,
   Output,
-  EventEmitter,
+  EventEmitter
 
 } from '@angular/core';
 import { IStationInfo } from 'app/shared/model/stationInfo.model';
@@ -23,13 +23,14 @@ export class PlacesComponent implements OnInit {
   ngOnInit() {
   }
 
-  contador(lenght: number) {
+  totalPaths(lenght: number) {
     const res = [];
     for (let i = 1; i < lenght + 1; i++) {
         res.push(i);
       }
       return res;
   }
+
   sendCode(station: IStationInfo) {
       this.placeSelected.emit(station);
   }

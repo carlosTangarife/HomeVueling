@@ -2,7 +2,6 @@ import { IndexSearchComponent } from './components/index-search/search-index.com
 import { CheckInComponent } from './components/check-in/check-in.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { FlightComponent } from './components/flight/flight.component';
-import { StationSelectorComponent } from '../shared/components/station-selector/station-selector.component';
 import { PlacesComponent } from '../shared/components/places/places.component';
 import { StationsComponent } from '../shared/components/stations/stations.component';
 
@@ -11,7 +10,6 @@ export const SEARCH_COMPONENTS = [
   CheckInComponent,
   ReservationComponent,
   FlightComponent,
-  StationSelectorComponent,
   PlacesComponent,
   StationsComponent
 ];

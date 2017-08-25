@@ -4,9 +4,9 @@ import { AsEnumerable  } from 'linq-es2015';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/map';
-// import { destinations } from 'app/search/services/destinations';
+import { destinations } from './destinations';
 // import { MARKETS } from 'app/search/services/destinations2';
-// import { MarketList } from 'app/search/services/marketList';
+import { MarketList } from './marketList';
 import { IStationInfo } from 'app/shared/model/stationInfo.model';
 
 
@@ -15,7 +15,6 @@ import { IStationInfo } from 'app/shared/model/stationInfo.model';
 export class DestinationsService {
   stationInfo: IStationInfo[];
   stationResent: IStationInfo[];
-  public destinations$;
   constructor() {
     this.stationInfo = [
       {
@@ -50,12 +49,13 @@ export class DestinationsService {
   }
 
   getStationsOrigin() {
-    // return Observable.of(this.destinations$).delay(100);
-    return Observable.of(this.stationInfo);
+    return Observable.of(destinations);
+    // return Observable.of(this.stationInfo);
   }
 
   getStationsDestination(iata: string) {
-    // return Observable.of(MarketList[iata]);
+    debugger;
+    return Observable.of(MarketList[iata]);
   }
 
   getRecentSearch() {

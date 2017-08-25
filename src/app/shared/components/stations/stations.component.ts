@@ -1,7 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { IStationInfo } from 'app/shared/model/stationInfo.model';
-import { DestinationsService } from '../../../search/services/destinations.service';
+import { DestinationsService } from '../../services/destinations.service';
 
 @Component({
   selector: 'app-stations',
@@ -13,39 +13,39 @@ export class StationsComponent implements OnInit {
   @Input() type: string;
   @Input() label: string;
 
-  protected station: IStationInfo;
-  protected focusIn: boolean;
-  protected focusOut: boolean;
+  public station: IStationInfo;
+  public focusIn: boolean;
+  public focusOut: boolean;
 
   public stationRecent$;
-  public stationOrigin$;
-  public stationDestinations$;
+  public stations$;
   constructor(public _ds: DestinationsService) {}
 
   ngOnInit() {
     if (this.type && this.type.length > 0 &&  this.type === 'origin') {
-      this.stationOrigin$ = this._ds.getStationsOrigin();
+      this.stations$ = this._ds.getStationsOrigin();
       this.stationRecent$ = this._ds.getRecentSearch();
     }
   }
 
-  prueba1() {
+  focused() {
     console.log('focusado');
       this.focusIn = true;
       this.focusOut = false;
   }
 
-  prueba2() {
+  unfocused() {
     console.log('on-focusado');
     setTimeout(() => {
       this.focusOut = true;
       this.focusIn = false;
-    }, 300)
+    }, 0)
   }
 
-  prueba3(te: IStationInfo) {
-    this.station = te;
-    console.log(this.station);
-    this.prueba2();
+  placeSelected(place: IStationInfo) {
+    this.station = place;
+    this.stations$ = this._ds.getStationsDestination(place.code);
+    console.log(this.stations$);
+    this.unfocused();
   }
 }

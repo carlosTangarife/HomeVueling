@@ -4,8 +4,6 @@
       <ng-container *ngIf="station?.code"><span class="prefix">{{station?.code}}</span></ng-container>
 
       <input
-        (focus)="prueba1()"
-        (focusout)="prueba2()"
         type="text"
         id="{{type}}-input"
         class="form-control js-searchbar-input"
@@ -20,7 +18,7 @@
     [ngStyle]="{'display':focusIn === true ? 'block' : 'none'}"
   >
 
-  <app-places [places]="stationRecent$" *ngIf="stationRecent$" (placeSelected)="prueba3($event)"></app-places>
-  <app-places [places]="stationOrigin$" *ngIf="stationOrigin$" (placeSelected)="prueba3($event)"></app-places>
+  <app-places [places]="stationRecent$" *ngIf="stationRecent$" (placeSelected)="placeSelected($event)"></app-places>
+  <app-places [places]="stations$" *ngIf="stations$" (placeSelected)="placeSelected($event)"></app-places>
   </div>
 </div>

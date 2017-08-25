@@ -6,7 +6,7 @@
     <p class="list-item">{{place?.code}}</p>
     <p class="list-item">
       <span class="{{place?.claseCss}} icon">
-        <span *ngFor="let y of contador(place?.paths)" class="path{{y}}"></span>
+        <span *ngFor="let y of totalPaths(place?.paths)" class="path{{y}}"></span>
       </span>
     </p>
   </li>

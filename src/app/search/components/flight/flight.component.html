@@ -1,7 +1,7 @@
 <form class="pane-wrapper" _lpchecked="1">
     <div class="form-group form-group--flight-search">
 
-      <app-stations [type]="'origin'" [label]="'Origen'" class="form-input"></app-stations>
+      <app-stations [type]="'origin'" [label]="'Origen'" class="form-input" #origin (click)="origin.focused()"></app-stations>
 
       <app-stations [type]="'destination'" [label]="'Destinos'" class="form-input"></app-stations>
 
