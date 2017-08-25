@@ -1,13 +1,16 @@
-<div id="form-group--{{type}}" class="form-input" [ngClass]="{'focused':focusIn}">
+<div id="form-group--{{type}}" [ngClass]="{'focused':focusIn}">
   <label for="usr">{{label}}</label>
   <div class="input-group">
-      <span class="prefix">{{station?.code}}</span>
+      <ng-container *ngIf="station?.code"><span class="prefix">{{station?.code}}</span></ng-container>
+
       <input
         (focus)="prueba1()"
+        (focusout)="prueba2()"
         type="text"
         id="{{type}}-input"
         class="form-control js-searchbar-input"
         placeholder="Ciudad, país o aeropuerto"
+        [value]="station?.name"
       >
   </div>
 

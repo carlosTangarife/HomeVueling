@@ -1,70 +1,14 @@
 <form class="pane-wrapper" _lpchecked="1">
     <div class="form-group form-group--flight-search">
 
-      <app-stations [type]="'origin'" [label]="'Origen'"></app-stations>
+      <app-stations [type]="'origin'" [label]="'Origen'" class="form-input"></app-stations>
 
-      <app-stations [type]="'destination'" [label]="'Destinos'"></app-stations>
+      <app-stations [type]="'destination'" [label]="'Destinos'" class="form-input"></app-stations>
 
-      <div class="form-input">
-        <label for="usr">Fechas</label>
-        <div class="input-group">
-          <input type="text" id="destination-input" class="form-control js-searchbar-input" placeholder="Ciudad, país o aeropuerto">
-        </div>
-      </div>
-      <div id="form-group--passengers" class="form-input">
-        <label for="usr">Pasajeros</label>
-        <div class="input-group">
-          <input type="text" id="passengers-input" class="form-control js-searchbar-input" placeholder="Ciudad, país o aeropuerto">
-        </div>
-        <div id="passengers-popup" class="searchbar-popup passengers-popup">
-          <ul class="passengers-popup_main">
-            <li>
-              <div class="passengers-popup_main_description">
-                <p class="title">Adultos</p>
-                <label class="label">Desde 16 años</label>
-              </div>
-              <div class="passengers-popup_main_counter">
-                <span class="icon icon-rounded-less"></span>
-                <div class="number">1</div>
-                <span class="icon icon-rounded-more"></span>
-              </div>
-            </li>
-            <li>
-              <div class="passengers-popup_main_description">
-                <p class="title">Niños</p>
-                <label class="label">De 2 a 15 años</label>
-              </div>
-              <div class="passengers-popup_main_counter">
-                <span class="icon icon-rounded-less disabled"></span>
-                <div class="number">0</div>
-                <span class="icon icon-rounded-more"></span>
-              </div>
-            </li>
-            <li>
-              <div class="passengers-popup_main_description">
-                <p class="title">Bebé</p>
-                <label class="label">De 7 días - 23 meses</label>
-              </div>
-              <div class="passengers-popup_main_counter">
-                <span class="icon icon-rounded-less disabled"></span>
-                <div class="number">0</div>
-                <span class="icon icon-rounded-more"></span>
-              </div>
-            </li>
-            <li>
-              <div class="passengers-popup_main_description">
-                <p class="title">Asiento extra</p>
-                <label class="label"><a href="">+ info</a></label>
-              </div>
-              <div class="passengers-popup_main_counter">
-                <span class="icon icon-rounded-less disabled"></span>
-                <div class="number">0</div>
-                <span class="icon icon-rounded-more"></span>
-              </div>
-            </li>
-          </ul>
-        </div>
-      </div>
+      <app-calendar></app-calendar>
+
+      <app-passenger class="form-input"></app-passenger>
+
     </div>
     <div class="form-action">
       <a href="#" onclick="return false;" class="mv_button color-darkGrey size-md icon icon-right">Buscar</a>

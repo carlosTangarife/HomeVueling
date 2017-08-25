@@ -51,4 +51,19 @@ $(document).ready(function(){
       $("#passengers-popup").css("display", "none");
   });
 
+    // Searchbar Passenger popup
+
+    $("#discount-list-active").click(function(){
+      $(".discount-list").toggleClass("active");
+  });
+  $(".discount-item").click(function(){
+      $("#discount-list").toggleClass("active");
+  });
+  $("#discount-item").click(function(){
+      $("#discount-item").addClass("selected");
+  });
+  $(".js-discount").click(function(){
+      $(".js-discount-item-selected").slideDown();
+  });
+
 });

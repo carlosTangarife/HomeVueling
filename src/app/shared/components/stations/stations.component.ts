@@ -5,7 +5,8 @@ import { DestinationsService } from '../../../search/services/destinations.servi
 
 @Component({
   selector: 'app-stations',
-  templateUrl: './station.component.html'
+  templateUrl: './station.component.html',
+  providers: [DestinationsService]
 })
 export class StationsComponent implements OnInit {
 
@@ -16,13 +17,13 @@ export class StationsComponent implements OnInit {
   protected focusIn: boolean;
   protected focusOut: boolean;
 
-  public stationRecent$: Observable<IStationInfo[]>;
+  public stationRecent$;
   public stationOrigin$;
   public stationDestinations$;
   constructor(public _ds: DestinationsService) {}
 
   ngOnInit() {
-    if (this.type === 'origin') {
+    if (this.type && this.type.length > 0 &&  this.type === 'origin') {
       this.stationOrigin$ = this._ds.getStationsOrigin();
       this.stationRecent$ = this._ds.getRecentSearch();
     }
@@ -36,8 +37,10 @@ export class StationsComponent implements OnInit {
 
   prueba2() {
     console.log('on-focusado');
+    setTimeout(() => {
       this.focusOut = true;
       this.focusIn = false;
+    }, 300)
   }
 
   prueba3(te: IStationInfo) {

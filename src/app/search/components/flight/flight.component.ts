@@ -11,8 +11,4 @@ export class FlightComponent implements OnInit {
   ngOnInit() {
   }
 
-  test1(iata: string) {
-    alert(iata + 'pruba');
-    // this.stationDestinations$ = this._ds.getStationsDestination(iata);
-  }
 }

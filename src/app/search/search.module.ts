@@ -3,7 +3,8 @@ import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 
 import { SEARCH_COMPONENTS } from './index';
-import { SEARCH_SERVICES } from './services/index';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { PassengerComponent } from './components/passenger/passenger.component';
 
 @NgModule({
   imports: [
@@ -12,14 +13,14 @@ import { SEARCH_SERVICES } from './services/index';
   ],
   declarations: [
     ...SEARCH_COMPONENTS,
+    CalendarComponent,
+    PassengerComponent,
 
   ],
   exports: [
     // ...SEARCH_COMPONENTS
   ],
-  providers: [
-    SEARCH_SERVICES
-  ],
+  providers: [],
   entryComponents: [SEARCH_COMPONENTS]
 })
 export class SearchModule { }

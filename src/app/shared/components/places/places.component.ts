@@ -1,4 +1,11 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+
+} from '@angular/core';
 import { IStationInfo } from 'app/shared/model/stationInfo.model';
 import { Observable } from 'rxjs/Observable';
 
@@ -6,6 +13,7 @@ import { Observable } from 'rxjs/Observable';
   selector: 'app-places',
   templateUrl: './places.component.html',
   styles: []
+
 })
 export class PlacesComponent implements OnInit {
   @Input() places: Observable<IStationInfo[]>;
