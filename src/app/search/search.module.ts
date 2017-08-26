@@ -14,7 +14,7 @@ import { PassengerComponent } from './components/passenger/passenger.component';
   declarations: [
     ...SEARCH_COMPONENTS,
     CalendarComponent,
-    PassengerComponent,
+    PassengerComponent
 
   ],
   exports: [

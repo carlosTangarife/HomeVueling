@@ -15,45 +15,41 @@ $(document).ready(function(){
 
   // Overlay
 
-  $(".js-searchbar-input").focus(function(){
-      $("#searchbar-overlay").css("display", "block");
-  });
-  $(".js-searchbar-input").focusout(function(){
-      $("#searchbar-overlay").css("display", "none");
-  });
+  // $("#searchbar-overlay").click(function(){
+  //     $("#searchbar-overlay").toggleClass("show");
+  //     $(".searchbar-popup").toggleClass("hide");
+  //     $(".form-input").removeClass("focused");
+  // });
 
   // Searchbar Popups
 
-  // $("#origin-input").focus(function(){
-  //     $("#form-group--origin").addClass("focused");
-  //     $("#origin-sugestion-popup").css("display", "block");
+  $("#origin-input").click(function(){
+      $("#form-group--origin").toggleClass("focused");
+      $("#origin-sugestion-popup").toggleClass("show");
+      $("#searchbar-overlay").toggleClass("show");
+  });
+
+  $("#destination-input").click(function(){
+      $("#form-group--destination").toggleClass("focused");
+      $("#destination-sugestion-popup").toggleClass("show");
+      $("#searchbar-overlay").toggleClass("show");
+  });
+
+  $("#passengers-input").click(function(){
+      $("#form-group--passengers").toggleClass("focused");
+      $("#passengers-popup").toggleClass("show-table");
+      $("#searchbar-overlay").toggleClass("show");
+  });
+
+  // $(".js-searchbar-date-input").focus(function(){
+  //     $("#form-group--dates").addClass("focused");
+  //     //$("#passengers-popup")toggleClass("show");
+  //     //$("#searchbar-overlay").toggleClass("show");
   // });
-  // $("#origin-input").focusout(function(){
-  //     $("#form-group--origin").removeClass("focused");
-  //     $("#origin-sugestion-popup").css("display", "none");
-  // });
 
-  $("#destination-input").focus(function(){
-      $("#form-group--destination").addClass("focused");
-      $("#destination-sugestion-popup").css("display", "block");
-  });
-  $("#destination-input").focusout(function(){
-      $("#form-group--destination").removeClass("focused");
-      $("#destination-sugestion-popup").css("display", "none");
-  });
+  // Searchbar Passenger popup
 
-  $("#passengers-input").focus(function(){
-      $("#form-group--passengers").addClass("focused");
-      $("#passengers-popup").css("display", "block");
-  });
-  $("#passengers-input").focusout(function(){
-      $("#form-group--passengers").removeClass("focused");
-      $("#passengers-popup").css("display", "none");
-  });
-
-    // Searchbar Passenger popup
-
-    $("#discount-list-active").click(function(){
+  $("#discount-list-active").click(function(){
       $(".discount-list").toggleClass("active");
   });
   $(".discount-item").click(function(){

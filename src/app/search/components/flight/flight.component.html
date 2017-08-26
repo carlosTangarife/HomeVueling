@@ -1,16 +1,336 @@
-<form class="pane-wrapper" _lpchecked="1">
-    <div class="form-group form-group--flight-search">
+<form autocomplete="off" #searchFlight class="pane-wrapper" (ngSubmit)="submit(searchFlight.value)" novalidate>
+  <div class="form-group form-group--flight-search">
+     <div id="form-group--origin" class="form-input origin" (mouseenter)="true" (mouseleave)="true" (>
+        <label for="origin-input">Origen</label>
+        <div class="input-group" ngModelGroup="{{dataFlight.origin}}">
+          <span class="prefix">{{dataFlight.origin.code}}</span>
+            <input type="text" id="origin-input"
+              [(ngModel)]="dataFlight.origin.name"
+              name="origin"
+              class="form-control js-searchbar-input"
+              placeholder="Ciudad, país o aeropuerto"
+              required
+            >
+        </div>
 
-      <app-stations [type]="'origin'" [label]="'Origen'" class="form-input" #origin (click)="origin.focused()"></app-stations>
+        <div class="popover popover--error" *ngIf="searchFlight.control.valid">
+          <div class="popover-content">Antes de continuar, debes seleccionar un origen.</div>
+        </div>
 
-      <app-stations [type]="'destination'" [label]="'Destinos'" class="form-input"></app-stations>
+        <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup">
+           <p class="cities-sugestion-popup_title">Búsquedas recientes</p>
+           <ul class="cities-sugestion-popup_list">
+              <li>
+                 <p class="list-item">Barcelona</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">BCN</p>
+                 <p class="list-item"><span class="icon icon-arrow-list"></span></p>
+              </li>
+              <li>
+                 <p class="list-item">A coruña</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">LCG</p>
+                 <p class="list-item">
+                    <span class="icon icon-clock"><span class="path1"></span><span class="path2"></span></span>
+                 </p>
+              </li>
+           </ul>
+           <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
+           <ul class="cities-sugestion-popup_list">
+              <li>
+                 <p class="list-item">Barcelona</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">BCN</p>
+              </li>
+              <li>
+                 <p class="list-item">A coruña</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">LCG</p>
+              </li>
+              <li>
+                 <p class="list-item">A coruña</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">LCG</p>
+              </li>
+              <li>
+                 <p class="list-item">A coruña</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">LCG</p>
+              </li>
+              <li>
+                 <p class="list-item">A coruña</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">LCG</p>
+              </li>
+              <li>
+                 <p class="list-item">A coruña</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">LCG</p>
+              </li>
+              <li>
+                 <p class="list-item">A coruña</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">LCG</p>
+              </li>
+              <li>
+                 <p class="list-item">A coruña</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">LCG</p>
+              </li>
+              <li>
+                 <p class="list-item">A coruña</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">LCG</p>
+              </li>
+              <li>
+                 <p class="list-item">A coruña</p>
+                 <p class="list-item">España</p>
+                 <p class="list-item">LCG</p>
+              </li>
+           </ul>
+        </div>
+     </div>
 
-      <app-calendar></app-calendar>
-
-      <app-passenger class="form-input"></app-passenger>
-
+     <div id="form-group--destination" class="form-input destination">
+      <label for="destination-input">Destino</label>
+      <div class="input-group">
+        <span class="prefix">{{dataFlight.destination.code}}</span>
+        <input type="text" id="destination-input"
+              [(ngModel)]="dataFlight.destination.name"
+              name="destination"
+              class="form-control js-searchbar-input"
+              placeholder="Ciudad, país o aeropuerto"
+              required
+        >
+      </div>
+      <div id="destination-sugestion-popup" class="searchbar-popup cities-sugestion-popup destination">
+        <p class="cities-sugestion-popup_title">
+          Búsquedas recientes
+          <span class="erase-label">Borrar</span>
+        </p>
+        <ul class="cities-sugestion-popup_list">
+          <li>
+            <p class="list-item">Barcelona</p>
+            <p class="list-item">España</p>
+            <p class="list-item">BCN</p>
+            <p class="list-item"><span class="icon icon-arrow-list"></span></p>
+          </li>
+          <li>
+            <p class="list-item">A coruña</p>
+            <p class="list-item">España</p>
+            <p class="list-item">LCG</p>
+            <p class="list-item">
+              <span class="icon icon-clock"><span class="path1"></span><span class="path2"></span></span>
+            </p>
+          </li>
+        </ul>
+        <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
+        <ul class="cities-sugestion-popup_list">
+          <li>
+            <p class="list-item">Barcelona</p>
+            <p class="list-item">España</p>
+            <p class="list-item">BCN</p>
+          </li>
+          <li>
+            <p class="list-item">A coruña</p>
+            <p class="list-item">España</p>
+            <p class="list-item">LCG</p>
+          </li>
+          <li>
+            <p class="list-item">A coruña</p>
+            <p class="list-item">España</p>
+            <p class="list-item">LCG</p>
+          </li>
+          <li>
+            <p class="list-item">A coruña</p>
+            <p class="list-item">España</p>
+            <p class="list-item">LCG</p>
+          </li>
+          <li>
+            <p class="list-item">A coruña</p>
+            <p class="list-item">España</p>
+            <p class="list-item">LCG</p>
+          </li>
+          <li>
+            <p class="list-item">A coruña</p>
+            <p class="list-item">España</p>
+            <p class="list-item">LCG</p>
+          </li>
+          <li>
+            <p class="list-item">A coruña</p>
+            <p class="list-item">España</p>
+            <p class="list-item">LCG</p>
+          </li>
+          <li>
+            <p class="list-item">A coruña</p>
+            <p class="list-item">España</p>
+            <p class="list-item">LCG</p>
+          </li>
+          <li>
+            <p class="list-item">A coruña</p>
+            <p class="list-item">España</p>
+            <p class="list-item">LCG</p>
+          </li>
+          <li>
+            <p class="list-item">A coruña</p>
+            <p class="list-item">España</p>
+            <p class="list-item">LCG</p>
+          </li>
+        </ul>
+        <div class="cities-sugestion-popup_legend">
+          <ul>
+            <li>Vuelos directos</li>
+            <li>Vuelos en conexión</li>
+          </ul>
+          <div class="cities-sugestion-popup_legend_actions">
+            <div class="link">
+              <span class="icon icon-arrow-right"></span>
+            <a href="">Mapa de destinos</a>
+          </div>
+          <div class="form-checbox--button color-darkGrey">
+             <label>
+                <input type="checkbox" hidden>
+                <span>Múltiples destinos</span>
+              </label>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    <div class="form-action">
-      <a href="#" onclick="return false;" class="mv_button color-darkGrey size-md icon icon-right">Buscar</a>
-    </div>
-  </form>
+
+    <div id="form-group--dates" class="form-input dates">
+        <div class="col col-md-6">
+          <label for="dates-input--from">Ida</label>
+          <div class="input-group">
+            <input type="text" id="dates-input--from" class="form-control js-searchbar-input js-searchbar-date-input"
+                   placeholder="DD/MM/YY"
+                   [ngModel]="dataFlight.going | date:'dd/MM/yy'"
+                   name="going"
+                   readonly="readonly"
+            >
+            <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+          </div>
+        </div>
+        <div class="col col-md-6">
+          <label for="dates-input--to">Vuelta</label>
+          <div class="input-group">
+            <input type="text" id="dates-input--to" class="form-control js-searchbar-input js-searchbar-date-input"
+                   placeholder="DD/MM/YY"
+                   [ngModel]="dataFlight.return | date:'dd/MM/yy'"
+                   name="return"
+                   readonly="readonly"
+            >
+            <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+          </div>
+        </div>
+      </div>
+
+      <div id="form-group--passengers" class="form-input passengers">
+        <label for="passengers-input">{{dataFlight.passenger.adult}} Adult, {{dataFlight.passenger.children}} Children, {{dataFlight.passenger.babies}} babies</label>
+        <div class="input-group">
+          <input type="text" class="form-control js-searchbar-input" id="passengers-input"
+                 [ngModel]="dataFlight.passenger.totalPassengers"
+                 name="totalPassengers"
+                 placeholder=""
+                 readonly="readonly"
+          >
+
+          <span class="icon icon-arrow-down"></span>
+        </div>
+        <div id="passengers-popup" class="searchbar-popup passengers-popup discount">
+            <ul class="passengers-popup_main">
+              <li>
+                <div class="passengers-popup_main_description">
+                  <p class="title">Adults</p>
+                  <label class="label">Since 16 years</label>
+                </div>
+                <div class="passengers-popup_main_counter">
+                  <span class="icon icon-rounded-less"></span>
+                  <div class="number">{{dataFlight.passenger.adult}}</div>
+                  <span class="icon icon-rounded-more"></span>
+                </div>
+              </li>
+              <li>
+                <div class="passengers-popup_main_description">
+                  <p class="title">Children</p>
+                  <label class="label">2 to 15 years</label>
+                </div>
+                <div class="passengers-popup_main_counter">
+                  <span class="icon icon-rounded-less disabled"></span>
+                  <div class="number">{{dataFlight.passenger.children}}</div>
+                  <span class="icon icon-rounded-more"></span>
+                </div>
+              </li>
+              <li>
+                <div class="passengers-popup_main_description">
+                  <p class="title">Baby</p>
+                  <label class="label">From 7 days to 23 months</label>
+                </div>
+                <div class="passengers-popup_main_counter">
+                  <span class="icon icon-rounded-less disabled"></span>
+                  <div class="number">{{dataFlight.passenger.babies}}</div>
+                  <span class="icon icon-rounded-more"></span>
+                </div>
+              </li>
+              <li>
+                <div class="passengers-popup_main_description">
+                  <p class="title">Extraseat</p>
+                  <label class="label"><a href="">+ info</a></label>
+                </div>
+                <div class="passengers-popup_main_counter">
+                  <span class="icon icon-rounded-less disabled"></span>
+                  <div class="number">{{dataFlight.passenger.extraSeat}}</div>
+                  <span class="icon icon-rounded-more"></span>
+                </div>
+              </li>
+            </ul>
+            <ul class="passengers-popup_main discount">
+              <li id="discount-list-active">
+                <p>Descuento Residente o familia numerosa</p>
+                <span class="icon icon-arrow-right"></span>
+              </li>
+              <li class="js-discount-item-selected" style="display: list-item;">
+                <p class="discount-item selected">Fam. Numerosa Especial (10%)</p>
+              </li>
+              <div class="alert alert--icon info">
+                <div class="alert_wrap">
+                  <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
+                  <p class="alert_wrap_title">Residentes</p>
+                  <p class="alert_wrap_message">Durante la reserva se validará tu condición de residente.</p>
+                </div>
+                <div class="alert_wrap">
+                  <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
+                  <p class="alert_wrap_title">Familia numerosa</p>
+                  <p class="alert_wrap_message">Se debe presentar la documentación acreditativa en el aeropuerto.</p>
+                </div>
+              </div>
+            </ul>
+            <ul id="discount-list" class="passengers-popup_main discount-list">
+              <li>
+                <p class="discount-item js-discount">Residente islas o Ceuta (50%)</p>
+              </li>
+              <li>
+                <p class="discount-item js-discount">Fam. Numerosa General (5%)</p>
+              </li>
+              <li>
+                <p id="discount-item" class="discount-item js-discount">Fam. Numerosa Especial (10%)</p>
+              </li>
+              <li>
+                <p class="discount-item js-discount">Fam. Numerosa General Residente (55%)</p>
+              </li>
+              <li>
+                <p class="discount-item js-discount">Fam. Numerosa Especial Residente (60%)</p>
+              </li>
+            </ul>
+          </div>
+      </div>
+  </div>
+
+
+
+  <div class="form-action">
+     <button
+      [disabled]="searchFlight.invalid"
+      class="mv_button color-darkGrey size-md icon icon-right">Buscar</button>
+  </div>
+</form>
