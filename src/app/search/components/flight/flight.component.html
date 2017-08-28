@@ -1,6 +1,6 @@
 <form autocomplete="off" #searchFlight="ngForm" class="pane-wrapper" (ngSubmit)="submit(searchFlight)" novalidate>
   <div class="form-group form-group--flight-search">
-     <div id="form-group--origin" class="form-input origin" [ngClass]="{'error':origin.errors?.required}">
+     <div id="form-group--origin" class="form-input origin">
         <label for="origin-input">Origen</label>
         <div class="input-group" (click)="clearInputOrigin()">
           <span class="prefix" *ngIf="dataFlight.origin.iataCode">{{dataFlight.origin.iataCode}}</span>
@@ -14,7 +14,7 @@
             >
         </div>
 
-        <div class="popover popover--error" *ngIf="origin.errors?.required">
+        <div class="popover popover--error" *ngIf="false">
           <div class="popover-content">Before continiung, you must select your origin.</div>
         </div>
 
@@ -40,7 +40,7 @@
         </div>
      </div>
 
-     <div id="form-group--destination" class="form-input destination" [ngClass]="{'error':destination.errors?.required}">
+     <div id="form-group--destination" class="form-input destination">
       <label for="destination-input">Destino</label>
       <div class="input-group" (click)="clearInputDestination()">
         <span class="prefix" *ngIf="dataFlight.destination.iataCode">{{dataFlight.destination.iataCode}}</span>
@@ -54,7 +54,7 @@
         >
       </div>
 
-      <div class="popover popover--error" *ngIf="destination.errors?.required">
+      <div class="popover popover--error" *ngIf="false">
           <div class="popover-content">Before continiung, you must select your destination</div>
       </div>
 
