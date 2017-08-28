@@ -4,12 +4,9 @@ import { AsEnumerable  } from 'linq-es2015';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/map';
-import { STATIONS } from './destinations';
-// import { MARKETS } from 'app/search/services/destinations2';
 import { MarketList } from './marketList';
 import { IStationInfo } from 'app/shared/model/stationInfo.model';
-
-
+import { STATION_INFO } from './stationInfo';
 
 @Injectable()
 export class DestinationsService {
@@ -54,12 +51,11 @@ export class DestinationsService {
   }
 
   getStationsOrigin() {
-    return Observable.of(STATIONS);
+    return Observable.of(STATION_INFO);
     // return Observable.of(this.stationInfo);
   }
 
   getStationsDestination(iata: string) {
-    debugger;
     return Observable.of(MarketList[iata]);
   }
 
