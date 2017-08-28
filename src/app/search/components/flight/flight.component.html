@@ -1,25 +1,25 @@
 <form autocomplete="off" #searchFlight="ngForm" class="pane-wrapper" (ngSubmit)="submit(searchFlight)" novalidate>
   <div class="form-group form-group--flight-search">
-     <div id="form-group--origin" class="form-input origin" [ngClass]="{'error':nombre.errors?.required}">
+     <div id="form-group--origin" class="form-input origin" [ngClass]="{'error':origin.errors?.required}">
         <label for="origin-input">Origen</label>
-        <div class="input-group">
-          <span class="prefix">{{dataFlight.origin.code}}</span>
+        <div class="input-group" (click)="clearInputOrigin()">
+          <span class="prefix" *ngIf="dataFlight.origin.code">{{dataFlight.origin.code}}</span>
             <input type="text" id="origin-input"
               [(ngModel)]="dataFlight.origin.name"
               name="origin"
-              #nombre="ngModel"
+              #origin="ngModel"
               class="form-control js-searchbar-input"
               placeholder="Ciudad, país o aeropuerto"
               required
             >
         </div>
 
-        <div class="popover popover--error" *ngIf="nombre.errors?.required">
-          <div class="popover-content">Antes de continuar, debes seleccionar un origen.</div>
+        <div class="popover popover--error" *ngIf="origin.errors?.required">
+          <div class="popover-content">Before continiung, you must select your origin.</div>
         </div>
 
         <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup">
-           <p class="cities-sugestion-popup_title">Búsquedas recientes</p>
+           <p class="cities-sugestion-popup_title">Búsquedas recientes <span class="erase-label">Borrar</span></p>
            <ul class="cities-sugestion-popup_list">
               <li *ngFor="let resent of stationsResent$ | async">
                 <p class="list-item">{{resent?.name}}</p>
@@ -40,18 +40,24 @@
         </div>
      </div>
 
-     <div id="form-group--destination" class="form-input destination">
+     <div id="form-group--destination" class="form-input destination" [ngClass]="{'error':destination.errors?.required}">
       <label for="destination-input">Destino</label>
-      <div class="input-group">
-        <span class="prefix">{{dataFlight.destination.code}}</span>
+      <div class="input-group" (click)="clearInputDestination()">
+        <span class="prefix" *ngIf="dataFlight.destination.code">{{dataFlight.destination.code}}</span>
         <input type="text" id="destination-input"
               [(ngModel)]="dataFlight.destination.name"
               name="destination"
+              #destination="ngModel"
               class="form-control js-searchbar-input"
               placeholder="Ciudad, país o aeropuerto"
               required
         >
       </div>
+
+      <div class="popover popover--error" *ngIf="destination.errors?.required">
+          <div class="popover-content">Before continiung, you must select your destination</div>
+      </div>
+
       <div id="destination-sugestion-popup" class="searchbar-popup cities-sugestion-popup destination">
         <p class="cities-sugestion-popup_title">
           Búsquedas recientes
@@ -221,8 +227,6 @@
           </div>
       </div>
   </div>
-
-
 
   <div class="form-action">
     <button [disabled]="searchFlight.invalid" class="mv_button color-darkGrey size-md icon icon-right">Buscar</button>

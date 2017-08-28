@@ -104,4 +104,15 @@ export class FlightComponent implements OnInit {
     // tslint:disable-next-line:max-line-length
     this.dataFlight.passenger.totalPassengers = this.dataFlight.passenger.adult + this.dataFlight.passenger.babies + this.dataFlight.passenger.children + this.dataFlight.passenger.extraSeat;
   }
+
+  clearInputDestination() {
+    this.dataFlight.destination.code = '';
+    this.dataFlight.destination.name = '';
+  }
+
+  clearInputOrigin() {
+    this.dataFlight.origin.code = '';
+    this.dataFlight.origin.name = '';
+  }
+
 }
