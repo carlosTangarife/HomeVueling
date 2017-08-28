@@ -7,8 +7,10 @@ export interface IPassenger {
 };
 
 export interface IStation {
-  code: string,
-  name: string
+  countryName: string,
+  countryCode: string,
+  iataName: string,
+  iataCode: string
 };
 
 export interface IStations {
