@@ -4,7 +4,7 @@ import { AsEnumerable  } from 'linq-es2015';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/map';
-import { destinations } from './destinations';
+import { STATIONS } from './destinations';
 // import { MARKETS } from 'app/search/services/destinations2';
 import { MarketList } from './marketList';
 import { IStationInfo } from 'app/shared/model/stationInfo.model';
@@ -34,22 +34,27 @@ export class DestinationsService {
     this.stationResent = [
       {
         macCode: '',
-        name: 'Pereira',
-        code: 'PER',
-        country: 'Colombia'
+        name: 'Ginebra',
+        code: 'GVA',
+        country: 'Suiza'
       },
       {
         macCode: '',
-        name: 'Barranquilla',
-        code: 'BAR',
-        country: 'Colombia'
+        name: 'Granada',
+        code: 'GRX',
+        country: 'España'
+      },
+      {
+        macCode: '',
+        name: 'Ibiza',
+        code: 'IBZ',
+        country: 'España'
       }
     ];
-
   }
 
   getStationsOrigin() {
-    return Observable.of(destinations);
+    return Observable.of(STATIONS);
     // return Observable.of(this.stationInfo);
   }
 

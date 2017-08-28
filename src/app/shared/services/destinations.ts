@@ -1,4 +1,4 @@
-export const destinations = [
+export const STATIONS = [
   {code: 'AAL', name: 'Aalborg, Dinamarca'},
   {code: 'LCG', name: 'A Coruña, España'},
   {code: 'ALC', name: 'Alicante, España'},

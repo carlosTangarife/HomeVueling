@@ -1,93 +1,42 @@
-<form autocomplete="off" #searchFlight class="pane-wrapper" (ngSubmit)="submit(searchFlight.value)" novalidate>
+<form autocomplete="off" #searchFlight="ngForm" class="pane-wrapper" (ngSubmit)="submit(searchFlight)" novalidate>
   <div class="form-group form-group--flight-search">
-     <div id="form-group--origin" class="form-input origin" (mouseenter)="true" (mouseleave)="true" (>
+     <div id="form-group--origin" class="form-input origin" [ngClass]="{'error':nombre.errors?.required}">
         <label for="origin-input">Origen</label>
-        <div class="input-group" ngModelGroup="{{dataFlight.origin}}">
+        <div class="input-group">
           <span class="prefix">{{dataFlight.origin.code}}</span>
             <input type="text" id="origin-input"
               [(ngModel)]="dataFlight.origin.name"
               name="origin"
+              #nombre="ngModel"
               class="form-control js-searchbar-input"
               placeholder="Ciudad, país o aeropuerto"
               required
             >
         </div>
 
-        <div class="popover popover--error" *ngIf="searchFlight.control.valid">
+        <div class="popover popover--error" *ngIf="nombre.errors?.required">
           <div class="popover-content">Antes de continuar, debes seleccionar un origen.</div>
         </div>
 
         <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup">
            <p class="cities-sugestion-popup_title">Búsquedas recientes</p>
            <ul class="cities-sugestion-popup_list">
-              <li>
-                 <p class="list-item">Barcelona</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">BCN</p>
-                 <p class="list-item"><span class="icon icon-arrow-list"></span></p>
+              <li *ngFor="let resent of stationsResent$ | async">
+                <p class="list-item">{{resent?.name}}</p>
+                <p class="list-item">{{resent?.country}}</p>
+                <p class="list-item">{{resent?.code}}</p>
+                <p class="list-item"><span class="icon icon-arrow-list"></span></p>
               </li>
-              <li>
-                 <p class="list-item">A coruña</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">LCG</p>
-                 <p class="list-item">
-                    <span class="icon icon-clock"><span class="path1"></span><span class="path2"></span></span>
-                 </p>
-              </li>
-           </ul>
+            </ul>
+
            <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
            <ul class="cities-sugestion-popup_list">
-              <li>
-                 <p class="list-item">Barcelona</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">BCN</p>
+              <li *ngFor="let origin of origin$ | async">
+                <p class="list-item">{{origin?.name}}</p>
+                <p class="list-item">{{origin?.country}}</p>
+                <p class="list-item">{{origin?.code}}</p>
               </li>
-              <li>
-                 <p class="list-item">A coruña</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">LCG</p>
-              </li>
-              <li>
-                 <p class="list-item">A coruña</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">LCG</p>
-              </li>
-              <li>
-                 <p class="list-item">A coruña</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">LCG</p>
-              </li>
-              <li>
-                 <p class="list-item">A coruña</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">LCG</p>
-              </li>
-              <li>
-                 <p class="list-item">A coruña</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">LCG</p>
-              </li>
-              <li>
-                 <p class="list-item">A coruña</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">LCG</p>
-              </li>
-              <li>
-                 <p class="list-item">A coruña</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">LCG</p>
-              </li>
-              <li>
-                 <p class="list-item">A coruña</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">LCG</p>
-              </li>
-              <li>
-                 <p class="list-item">A coruña</p>
-                 <p class="list-item">España</p>
-                 <p class="list-item">LCG</p>
-              </li>
-           </ul>
+            </ul>
         </div>
      </div>
 
@@ -109,72 +58,19 @@
           <span class="erase-label">Borrar</span>
         </p>
         <ul class="cities-sugestion-popup_list">
-          <li>
-            <p class="list-item">Barcelona</p>
-            <p class="list-item">España</p>
-            <p class="list-item">BCN</p>
-            <p class="list-item"><span class="icon icon-arrow-list"></span></p>
-          </li>
-          <li>
-            <p class="list-item">A coruña</p>
-            <p class="list-item">España</p>
-            <p class="list-item">LCG</p>
-            <p class="list-item">
-              <span class="icon icon-clock"><span class="path1"></span><span class="path2"></span></span>
-            </p>
-          </li>
+            <li *ngFor="let resent of stationsResent$ | async">
+                <p class="list-item">{{resent?.name}}</p>
+                <p class="list-item">{{resent?.country}}</p>
+                <p class="list-item">{{resent?.code}}</p>
+                <p class="list-item"><span class="icon icon-arrow-list"></span></p>
+              </li>
         </ul>
         <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
         <ul class="cities-sugestion-popup_list">
-          <li>
-            <p class="list-item">Barcelona</p>
+          <li *ngFor="let origin of origin$ | async">
+            <p class="list-item">{{origin.name}}</p>
             <p class="list-item">España</p>
-            <p class="list-item">BCN</p>
-          </li>
-          <li>
-            <p class="list-item">A coruña</p>
-            <p class="list-item">España</p>
-            <p class="list-item">LCG</p>
-          </li>
-          <li>
-            <p class="list-item">A coruña</p>
-            <p class="list-item">España</p>
-            <p class="list-item">LCG</p>
-          </li>
-          <li>
-            <p class="list-item">A coruña</p>
-            <p class="list-item">España</p>
-            <p class="list-item">LCG</p>
-          </li>
-          <li>
-            <p class="list-item">A coruña</p>
-            <p class="list-item">España</p>
-            <p class="list-item">LCG</p>
-          </li>
-          <li>
-            <p class="list-item">A coruña</p>
-            <p class="list-item">España</p>
-            <p class="list-item">LCG</p>
-          </li>
-          <li>
-            <p class="list-item">A coruña</p>
-            <p class="list-item">España</p>
-            <p class="list-item">LCG</p>
-          </li>
-          <li>
-            <p class="list-item">A coruña</p>
-            <p class="list-item">España</p>
-            <p class="list-item">LCG</p>
-          </li>
-          <li>
-            <p class="list-item">A coruña</p>
-            <p class="list-item">España</p>
-            <p class="list-item">LCG</p>
-          </li>
-          <li>
-            <p class="list-item">A coruña</p>
-            <p class="list-item">España</p>
-            <p class="list-item">LCG</p>
+            <p class="list-item">{{origin.code}}</p>
           </li>
         </ul>
         <div class="cities-sugestion-popup_legend">
@@ -245,9 +141,9 @@
                   <label class="label">Since 16 years</label>
                 </div>
                 <div class="passengers-popup_main_counter">
-                  <span class="icon icon-rounded-less"></span>
+                  <span class="icon icon-rounded-less" (click)="lessAdults()"></span>
                   <div class="number">{{dataFlight.passenger.adult}}</div>
-                  <span class="icon icon-rounded-more"></span>
+                  <span class="icon icon-rounded-more" (click)="moreAdults()"></span>
                 </div>
               </li>
               <li>
@@ -256,9 +152,9 @@
                   <label class="label">2 to 15 years</label>
                 </div>
                 <div class="passengers-popup_main_counter">
-                  <span class="icon icon-rounded-less disabled"></span>
+                  <span class="icon icon-rounded-less" (click)="lessChildren()"></span>
                   <div class="number">{{dataFlight.passenger.children}}</div>
-                  <span class="icon icon-rounded-more"></span>
+                  <span class="icon icon-rounded-more" (click)="moreChildren()"></span>
                 </div>
               </li>
               <li>
@@ -267,9 +163,9 @@
                   <label class="label">From 7 days to 23 months</label>
                 </div>
                 <div class="passengers-popup_main_counter">
-                  <span class="icon icon-rounded-less disabled"></span>
+                  <span class="icon icon-rounded-less" (click)="lessBabies()"></span>
                   <div class="number">{{dataFlight.passenger.babies}}</div>
-                  <span class="icon icon-rounded-more"></span>
+                  <span class="icon icon-rounded-more" (click)="moreBabies()"></span>
                 </div>
               </li>
               <li>
@@ -278,9 +174,9 @@
                   <label class="label"><a href="">+ info</a></label>
                 </div>
                 <div class="passengers-popup_main_counter">
-                  <span class="icon icon-rounded-less disabled"></span>
+                  <span class="icon icon-rounded-less" (click)="lessExtraSeat()"></span>
                   <div class="number">{{dataFlight.passenger.extraSeat}}</div>
-                  <span class="icon icon-rounded-more"></span>
+                  <span class="icon icon-rounded-more" (click)="moreExtraSeat()"></span>
                 </div>
               </li>
             </ul>
@@ -329,8 +225,6 @@
 
 
   <div class="form-action">
-     <button
-      [disabled]="searchFlight.invalid"
-      class="mv_button color-darkGrey size-md icon icon-right">Buscar</button>
+    <button [disabled]="searchFlight.invalid" class="mv_button color-darkGrey size-md icon icon-right">Buscar</button>
   </div>
 </form>

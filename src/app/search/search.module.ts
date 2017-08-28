@@ -1,15 +1,17 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { SEARCH_COMPONENTS } from './index';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
+import { DestinationsService } from '../shared/services/destinations.service';
 
 @NgModule({
   imports: [
     CommonModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   declarations: [
     ...SEARCH_COMPONENTS,
@@ -20,7 +22,7 @@ import { PassengerComponent } from './components/passenger/passenger.component';
   exports: [
     // ...SEARCH_COMPONENTS
   ],
-  providers: [],
+  providers: [DestinationsService],
   entryComponents: [SEARCH_COMPONENTS]
 })
 export class SearchModule { }
