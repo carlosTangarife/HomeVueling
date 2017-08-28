@@ -1,6 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { IStationInfo } from 'app/shared/model/stationInfo.model';
+import { IStationInfo } from 'app/shared/models/stationInfo.model';
 import { DestinationsService } from '../../services/destinations.service';
 
 @Component({

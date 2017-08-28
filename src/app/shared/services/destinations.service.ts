@@ -7,7 +7,7 @@ import 'rxjs/add/operator/map';
 import { STATIONS } from './destinations';
 // import { MARKETS } from 'app/search/services/destinations2';
 import { MarketList } from './marketList';
-import { IStationInfo } from 'app/shared/model/stationInfo.model';
+import { IStationInfo } from 'app/shared/models/stationInfo.model';
 
 
 
