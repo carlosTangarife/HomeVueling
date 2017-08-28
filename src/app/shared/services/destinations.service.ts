@@ -5,54 +5,21 @@ import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/delay';
 import 'rxjs/add/operator/map';
 import { MarketList } from './marketList';
-import { IStationInfo } from 'app/shared/model/stationInfo.model';
 import { STATION_INFO } from './stationInfo';
+import { STATION_RESENT } from './stationResent';
+import { IStation, IStations } from '../../search/components/flight/flight.model'
 
 @Injectable()
 export class DestinationsService {
-  stationInfo: IStationInfo[];
-  stationResent: IStationInfo[];
+  public stationResent$: IStation[];
+  public stations$: IStation[];
   constructor() {
-    this.stationInfo = [
-      {
-        macCode: '',
-        name: 'Manizales',
-        code: 'MAL',
-        country: 'Colombia'
-      },
-      {
-        macCode: '',
-        name: 'Medellin',
-        code: 'MED',
-        country: 'Colombia'
-      }
-    ];
-
-    this.stationResent = [
-      {
-        macCode: '',
-        name: 'Ginebra',
-        code: 'GVA',
-        country: 'Suiza'
-      },
-      {
-        macCode: '',
-        name: 'Granada',
-        code: 'GRX',
-        country: 'España'
-      },
-      {
-        macCode: '',
-        name: 'Ibiza',
-        code: 'IBZ',
-        country: 'España'
-      }
-    ];
+    this.stationResent$ = STATION_RESENT.stationResent;
+    this.stations$ = STATION_INFO.stationInfo.StationList;
   }
 
   getStationsOrigin() {
-    return Observable.of(STATION_INFO);
-    // return Observable.of(this.stationInfo);
+    return Observable.of(this.stations$);
   }
 
   getStationsDestination(iata: string) {
@@ -60,6 +27,6 @@ export class DestinationsService {
   }
 
   getRecentSearch() {
-    return Observable.of(this.stationResent);
+    return Observable.of(this.stationResent$);
   }
 }

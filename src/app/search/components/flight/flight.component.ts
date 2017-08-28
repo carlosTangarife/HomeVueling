@@ -16,12 +16,12 @@ export class FlightComponent implements OnInit {
   constructor( public _ds: DestinationsService) {
     this.dataFlight = {
       origin: {
-        code: 'BCN',
-        name: 'Barcelona'
+        iataCode: 'BCN',
+        iataName: 'Barcelona'
       },
       destination: {
-        code: 'MAD',
-        name: 'Madrid'
+        iataCode: 'MAD',
+        iataName: 'Madrid'
       },
       going: new Date(),
       return: new Date(17, 8, 15),
@@ -106,13 +106,13 @@ export class FlightComponent implements OnInit {
   }
 
   clearInputDestination() {
-    this.dataFlight.destination.code = '';
-    this.dataFlight.destination.name = '';
+    this.dataFlight.destination.iataCode = '';
+    this.dataFlight.destination.iataName = '';
   }
 
   clearInputOrigin() {
-    this.dataFlight.origin.code = '';
-    this.dataFlight.origin.name = '';
+    this.dataFlight.origin.iataCode = '';
+    this.dataFlight.origin.iataName = '';
   }
 
 }

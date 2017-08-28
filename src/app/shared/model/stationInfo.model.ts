@@ -1,8 +1,8 @@
 export interface IStationInfo {
-  macCode?: string;
-  name: string;
-  code: string;
-  country?: string;
+  countryName?: string,
+  countryCode?: string,
+  iataName: string,
+  iataCode: string
   claseCss?: string;
   paths?: number;
 }

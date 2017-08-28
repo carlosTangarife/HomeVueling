@@ -3,9 +3,9 @@
      <div id="form-group--origin" class="form-input origin" [ngClass]="{'error':origin.errors?.required}">
         <label for="origin-input">Origen</label>
         <div class="input-group" (click)="clearInputOrigin()">
-          <span class="prefix" *ngIf="dataFlight.origin.code">{{dataFlight.origin.code}}</span>
+          <span class="prefix" *ngIf="dataFlight.origin.iataCode">{{dataFlight.origin.iataCode}}</span>
             <input type="text" id="origin-input"
-              [(ngModel)]="dataFlight.origin.name"
+              [(ngModel)]="dataFlight.origin.iataName"
               name="origin"
               #origin="ngModel"
               class="form-control js-searchbar-input"
@@ -22,9 +22,9 @@
            <p class="cities-sugestion-popup_title">Búsquedas recientes <span class="erase-label">Borrar</span></p>
            <ul class="cities-sugestion-popup_list">
               <li *ngFor="let resent of stationsResent$ | async">
-                <p class="list-item">{{resent?.name}}</p>
-                <p class="list-item">{{resent?.country}}</p>
-                <p class="list-item">{{resent?.code}}</p>
+                <p class="list-item">{{resent?.iataName}}</p>
+                <p class="list-item">{{resent?.countryName}}</p>
+                <p class="list-item">{{resent?.iataCode}}</p>
                 <p class="list-item"><span class="icon icon-arrow-list"></span></p>
               </li>
             </ul>
@@ -32,9 +32,9 @@
            <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
            <ul class="cities-sugestion-popup_list">
               <li *ngFor="let origin of origin$ | async">
-                <p class="list-item">{{origin?.name}}</p>
-                <p class="list-item">{{origin?.country}}</p>
-                <p class="list-item">{{origin?.code}}</p>
+                <p class="list-item">{{origin?.iataName}}</p>
+                <p class="list-item">{{origin?.countryName}}</p>
+                <p class="list-item">{{origin?.iataCode}}</p>
               </li>
             </ul>
         </div>
@@ -43,9 +43,9 @@
      <div id="form-group--destination" class="form-input destination" [ngClass]="{'error':destination.errors?.required}">
       <label for="destination-input">Destino</label>
       <div class="input-group" (click)="clearInputDestination()">
-        <span class="prefix" *ngIf="dataFlight.destination.code">{{dataFlight.destination.code}}</span>
+        <span class="prefix" *ngIf="dataFlight.destination.iataCode">{{dataFlight.destination.iataCode}}</span>
         <input type="text" id="destination-input"
-              [(ngModel)]="dataFlight.destination.name"
+              [(ngModel)]="dataFlight.destination.iataName"
               name="destination"
               #destination="ngModel"
               class="form-control js-searchbar-input"
@@ -65,18 +65,18 @@
         </p>
         <ul class="cities-sugestion-popup_list">
             <li *ngFor="let resent of stationsResent$ | async">
-                <p class="list-item">{{resent?.name}}</p>
-                <p class="list-item">{{resent?.country}}</p>
-                <p class="list-item">{{resent?.code}}</p>
+                <p class="list-item">{{resent?.iataName}}</p>
+                <p class="list-item">{{resent?.countryName}}</p>
+                <p class="list-item">{{resent?.iataCode}}</p>
                 <p class="list-item"><span class="icon icon-arrow-list"></span></p>
               </li>
         </ul>
         <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
         <ul class="cities-sugestion-popup_list">
           <li *ngFor="let origin of origin$ | async">
-            <p class="list-item">{{origin.name}}</p>
+            <p class="list-item">{{origin.iataName}}</p>
             <p class="list-item">España</p>
-            <p class="list-item">{{origin.code}}</p>
+            <p class="list-item">{{origin.iataCode}}</p>
           </li>
         </ul>
         <div class="cities-sugestion-popup_legend">

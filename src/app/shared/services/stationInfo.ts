@@ -1,6 +1,6 @@
 export const STATION_INFO = {
-  'stationInfo': {
-    'StationList': [
+  stationInfo: {
+    StationList: [
       {
         countryName: 'España',
         countryCode: 'ES',
