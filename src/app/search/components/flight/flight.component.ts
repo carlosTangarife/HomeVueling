@@ -1,7 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms/src/forms';
-import { IFlight } from './flight.model';
-import { DestinationsService } from '../../../shared/services/destinations.service'
+import { IFlight, IStations, IStation } from './flight.model';
+import 'rxjs/add/operator/map';
+import { DestinationsService } from '../../../shared/services/destinations.service';
+import { Observable } from 'rxjs/Observable';
+import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-flight',
@@ -9,10 +12,11 @@ import { DestinationsService } from '../../../shared/services/destinations.servi
 
 })
 export class FlightComponent implements OnInit {
-
+  public stationResent$: Observable<IStation[]>;
+  public stations$: Observable<IStation[]>;
+  public endSubscription: Subscription;
   public dataFlight: IFlight;
-  public origin$: any;
-  public stationsResent$: any;
+  public originPopup: boolean = false;
   constructor( public _ds: DestinationsService) {
     this.dataFlight = {
       origin: {
@@ -36,8 +40,8 @@ export class FlightComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.origin$ = this._ds.getStationsOrigin();
-    this.stationsResent$ = this._ds.getRecentSearch();
+    this.stations$ = this._ds.getStationsOrigin();
+    this.stationResent$ = this._ds.getRecentSearch();
   }
 
   submit(formFlight: NgForm) {
@@ -113,6 +117,22 @@ export class FlightComponent implements OnInit {
   clearInputOrigin() {
     this.dataFlight.origin.iataCode = '';
     this.dataFlight.origin.iataName = '';
+    this.togglePopUp();
   }
 
+  getStationFilter(key: string) {
+    this.stations$ = this._ds.getStationsOrigin();
+    this.stations$ = this._ds.getStationFilter(key);
+  }
+
+  originSelected(originSelected: IStation) {
+    this.dataFlight.origin.iataName = originSelected.iataName;
+    this.dataFlight.origin.iataCode = originSelected.iataCode;
+    this.dataFlight.origin.countryName = originSelected.countryName;
+    this.togglePopUp();
+  }
+
+  togglePopUp() {
+    this.originPopup = !this.originPopup;
+  }
 }

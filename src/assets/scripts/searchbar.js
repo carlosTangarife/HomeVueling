@@ -24,8 +24,8 @@ $(document).ready(function(){
   // Searchbar Popups
 
   $("#origin-input").click(function(){
-      $("#form-group--origin").toggleClass("focused");
-      $("#origin-sugestion-popup").toggleClass("show");
+      // $("#form-group--origin").toggleClass("focused");
+      // $("#origin-sugestion-popup").toggleClass("show");
       $("#searchbar-overlay").toggleClass("show");
   });
 
