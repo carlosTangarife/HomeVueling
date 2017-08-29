@@ -7,21 +7,23 @@ export interface IPassenger {
 };
 
 export interface IStation {
-  countryName?: string,
+  macCode?: string,
+  name: string,
+  code: string,
   countryCode?: string,
-  iataName: string,
-  iataCode: string
+  countryName?: string
 };
 
-export interface IStations {
-  station: IStation,
-  country: string
-};
-
-export interface IStationsResent {
-  station: IStation,
-  country: string
+export interface IMarket {
+  destination: string,
+  connection: boolean,
+  largefamily: boolean,
+  residents: boolean
 }
+
+export interface IMarketList {
+  code: IMarket
+};
 
 export interface IFlight {
   origin: IStation,

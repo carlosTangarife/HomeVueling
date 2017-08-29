@@ -13,9 +13,7 @@ import { IndexFooterComponent } from './footer/components/index-footer/index-foo
     HeaderModule,
     FooterModule
   ],
-  providers: [
-
-  ]
+  providers: []
 })
 
 export class AppModule {

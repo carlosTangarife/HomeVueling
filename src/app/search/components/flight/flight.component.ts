@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms/src/forms';
-import { IFlight, IStations, IStation } from './flight.model';
+import { IFlight, IStation } from './flight.model';
 import 'rxjs/add/operator/map';
 import { DestinationsService } from '../../../shared/services/destinations.service';
 import { Observable } from 'rxjs/Observable';
@@ -16,16 +16,16 @@ export class FlightComponent implements OnInit {
   public stations$: Observable<IStation[]>;
   public endSubscription: Subscription;
   public dataFlight: IFlight;
-  public originPopup: boolean = false;
+  public originPopup = false;
   constructor( public _ds: DestinationsService) {
     this.dataFlight = {
       origin: {
-        iataCode: 'BCN',
-        iataName: 'Barcelona'
+        code: 'BCN',
+        name: 'Barcelona'
       },
       destination: {
-        iataCode: 'MAD',
-        iataName: 'Madrid'
+        code: 'MAD',
+        name: 'Madrid'
       },
       going: new Date(),
       return: new Date(17, 8, 15),
@@ -40,7 +40,7 @@ export class FlightComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.stations$ = this._ds.getStationsOrigin();
+    this.stations$ = this._ds.getStationsOrigin()
     this.stationResent$ = this._ds.getRecentSearch();
   }
 
@@ -110,24 +110,24 @@ export class FlightComponent implements OnInit {
   }
 
   clearInputDestination() {
-    this.dataFlight.destination.iataCode = '';
-    this.dataFlight.destination.iataName = '';
+    this.dataFlight.destination.code = '';
+    this.dataFlight.destination.name = '';
   }
 
   clearInputOrigin() {
-    this.dataFlight.origin.iataCode = '';
-    this.dataFlight.origin.iataName = '';
+    this.dataFlight.origin.code = '';
+    this.dataFlight.origin.name = '';
     this.togglePopUp();
   }
 
   getStationFilter(key: string) {
     this.stations$ = this._ds.getStationsOrigin();
-    this.stations$ = this._ds.getStationFilter(key);
+    // this.stations$ = this._ds.getStationFilter(key);
   }
 
   originSelected(originSelected: IStation) {
-    this.dataFlight.origin.iataName = originSelected.iataName;
-    this.dataFlight.origin.iataCode = originSelected.iataCode;
+    this.dataFlight.origin.name = originSelected.name;
+    this.dataFlight.origin.code = originSelected.code;
     this.dataFlight.origin.countryName = originSelected.countryName;
     this.togglePopUp();
   }

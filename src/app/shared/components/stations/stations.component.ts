@@ -44,7 +44,7 @@ export class StationsComponent implements OnInit {
 
   placeSelected(place: IStationInfo) {
     this.station = place;
-    this.stations$ = this._ds.getStationsDestination(place.code);
+    this.stations$ = this._ds.getStationsDestination(place.iataCode);
     console.log(this.stations$);
     this.unfocused();
   }

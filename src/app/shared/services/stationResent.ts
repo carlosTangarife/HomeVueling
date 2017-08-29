@@ -3,20 +3,20 @@ export const STATION_RESENT = {
     {
       countryName: 'España',
       countryCode: 'ES',
-      iataName: 'A Coruña',
-      iataCode: 'LCG'
+      name: 'A Coruña',
+      code: 'LCG'
     },
     {
       countryName: 'Dinamarca',
       countryCode: 'DK',
-      iataName: 'A alborg',
-      iataCode: 'AAL'
+      name: 'A alborg',
+      code: 'AAL'
     },
     {
       countryName: 'España',
       countryCode: 'ES',
-      iataName: 'Alicante',
-      iataCode: 'ALC'
+      name: 'Alicante',
+      code: 'ALC'
     }
   ]
 };
