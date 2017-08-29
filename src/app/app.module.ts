@@ -6,12 +6,15 @@ import { HeaderModule } from './header/header.module';
 import { IndexHeaderComponent} from './header/components/index-header/index-header.component';
 import { FooterModule } from './footer/footer.module';
 import { IndexFooterComponent } from './footer/components/index-footer/index-footer.component';
+import { PersistenceModule } from 'angular-persistence';
+
 @NgModule({
   imports: [
     BrowserModule,
     SearchModule,
     HeaderModule,
-    FooterModule
+    FooterModule,
+    PersistenceModule
   ],
   providers: [
 
