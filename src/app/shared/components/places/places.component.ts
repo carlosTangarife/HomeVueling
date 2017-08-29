@@ -6,7 +6,7 @@ import {
   EventEmitter
 
 } from '@angular/core';
-import { IStationInfo } from 'app/shared/model/stationInfo.model';
+import { IStationInfo } from 'app/shared/models/stationInfo.model';
 import { Observable } from 'rxjs/Observable';
 
 @Component({
