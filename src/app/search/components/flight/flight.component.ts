@@ -123,6 +123,7 @@ export class FlightComponent implements OnInit {
     this.dataFlight.origin.name = originSelected.name;
     this.dataFlight.origin.code = originSelected.code;
     this.dataFlight.origin.countryName = originSelected.countryName;
+    this._ds.getStationsDestination(originSelected.code);
     this.togglePopUp();
   }
 
