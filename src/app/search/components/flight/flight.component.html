@@ -6,7 +6,7 @@
           <span class="prefix" *ngIf="dataFlight.origin.code">{{dataFlight.origin.code}}</span>
             <input type="text" id="origin-input"
               [(ngModel)]="dataFlight.origin.name"
-              (keyup)="getStationFilter(origin.value)"
+              (keyup)="getStations(origin.value); originPopup = true;"
               name="origin"
               #origin="ngModel"
               class="form-control js-searchbar-input"

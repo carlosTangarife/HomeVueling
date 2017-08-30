@@ -2,21 +2,34 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/observable/of';
 import 'rxjs/add/operator/map';
+import 'rxjs/add/operator/filter';
 import { MarketList } from './marketList';
 import { STATION_RESENT } from './stationResent';
-import { prueba } from './stationInfo';
-import { Http, Headers, RequestOptions } from '@angular/http';
+import { Http } from '@angular/http';
 import { IStation } from '../../search/components/flight/flight.model';
 
 @Injectable()
 export class DestinationsService {
-  public url = 'https://vueling-json.herokuapp.com/index.php/stations';
   constructor(private _http: Http) { }
 
-  getStationsOrigin(): Observable<IStation[]> {
-    return this._http.get(this.url).map((data) => {
-      return data.json().StationList;
-    });
+  getStationsOrigin(key?: string): Observable<IStation[]> {
+    if (key && key.length > 0) {
+      key = key.toUpperCase();
+    }
+
+    const reg = new RegExp(key);
+    const url = 'https://vueling-json.herokuapp.com/index.php/stations';
+    return this._http
+      .get(url)
+      .map( (data) => data.json().StationList)
+      .map( (stations: IStation[]) => stations.filter( (station) => {
+        if (station.name.toUpperCase().match(key) || station.code.toUpperCase().match(key) || station.countryCode.toUpperCase().match(key) || station.countryName.toUpperCase().match(key)) {
+          return station;
+        }else {
+          return null;
+        }
+      })
+    );
   }
 
   getStationsDestination(iata: string) {
@@ -25,22 +38,5 @@ export class DestinationsService {
 
   getRecentSearch() {
     return Observable.of(STATION_RESENT.stationResent);
-  }
-
-  getStationFilter(key: string) {
-    key = key.toUpperCase();
-    const stationsTemp = [];
-    this.getStationsOrigin().map( (res) => {
-      return res.map((data) => {
-        if (data.name.toUpperCase().indexOf(key) >= 0 || data.code.toUpperCase().indexOf(key) >= 0 || data.countryCode.toUpperCase().indexOf(key) >= 0 || data.countryName.toUpperCase().indexOf(key) >= 0) {
-          stationsTemp.push(data);
-        }
-      })
-    });
-
-    if (stationsTemp.length > 0) {
-     return Observable.of(stationsTemp);
-    }
-    return null;
   }
 }

@@ -1,10 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms/src/forms';
 import { IFlight, IStation } from './flight.model';
-import 'rxjs/add/operator/map';
 import { DestinationsService } from '../../../shared/services/destinations.service';
 import { Observable } from 'rxjs/Observable';
-import { Subscription } from 'rxjs/Subscription';
 
 @Component({
   selector: 'app-flight',
@@ -14,10 +12,11 @@ import { Subscription } from 'rxjs/Subscription';
 export class FlightComponent implements OnInit {
   public stationResent$: Observable<IStation[]>;
   public stations$: Observable<IStation[]>;
-  public endSubscription: Subscription;
   public dataFlight: IFlight;
   public originPopup = false;
-  constructor( public _ds: DestinationsService) {
+  constructor( public _ds: DestinationsService) { }
+
+  ngOnInit() {
     this.dataFlight = {
       origin: {
         code: 'BCN',
@@ -37,11 +36,12 @@ export class FlightComponent implements OnInit {
         totalPassengers: 6
       }
     }
+    this.getStations();
+    this.stationResent$ = this._ds.getRecentSearch();
   }
 
-  ngOnInit() {
-    this.stations$ = this._ds.getStationsOrigin()
-    this.stationResent$ = this._ds.getRecentSearch();
+  getStations(key?: string) {
+      this.stations$ = this._ds.getStationsOrigin(key)
   }
 
   submit(formFlight: NgForm) {
@@ -105,7 +105,6 @@ export class FlightComponent implements OnInit {
   }
 
   totalPassenger() {
-    // tslint:disable-next-line:max-line-length
     this.dataFlight.passenger.totalPassengers = this.dataFlight.passenger.adult + this.dataFlight.passenger.babies + this.dataFlight.passenger.children + this.dataFlight.passenger.extraSeat;
   }
 
@@ -118,11 +117,6 @@ export class FlightComponent implements OnInit {
     this.dataFlight.origin.code = '';
     this.dataFlight.origin.name = '';
     this.togglePopUp();
-  }
-
-  getStationFilter(key: string) {
-    this.stations$ = this._ds.getStationsOrigin();
-    // this.stations$ = this._ds.getStationFilter(key);
   }
 
   originSelected(originSelected: IStation) {
