@@ -41,7 +41,7 @@
         </div>
      </div>
 
-     <div id="form-group--destination" class="form-input destination">
+     <div id="form-group--destination" class="form-input destination" [ngClass]="{'focused':destinationPopup}">
       <label for="destination-input">Destino</label>
       <div class="input-group" (click)="clearInputDestination()">
         <span class="prefix" *ngIf="dataFlight.destination.code">{{dataFlight.destination.code}}</span>
@@ -59,25 +59,23 @@
           <div class="popover-content">Before continiung, you must select your destination</div>
       </div>
 
-      <!-- <div id="destination-sugestion-popup" class="searchbar-popup cities-sugestion-popup destination">
-        <p class="cities-sugestion-popup_title">
-          Búsquedas recientes
-          <span class="erase-label">Borrar</span>
-        </p>
+      <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':destinationPopup}">
+        <p class="cities-sugestion-popup_title">Búsquedas recientes <span class="erase-label">Borrar</span></p>
         <ul class="cities-sugestion-popup_list">
-            <li *ngFor="let resent of stationResent$ | async">
-                <p class="list-item">{{resent?.name}}</p>
-                <p class="list-item">{{resent?.countryName}}</p>
-                <p class="list-item">{{resent?.code}}</p>
-                <p class="list-item"><span class="icon icon-arrow-list"></span></p>
-              </li>
+          <li *ngFor="let resent of destinationsResent$ | async" (click)="destinationSelected(resent)">
+            <p class="list-item">{{resent?.destination.name}}</p>
+            <p class="list-item">{{resent?.destination.countryName}}</p>
+            <p class="list-item">{{resent?.destination.code}}</p>
+            <p class="list-item"><span class="icon icon-arrow-list"></span></p>
+          </li>
         </ul>
+
         <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
         <ul class="cities-sugestion-popup_list">
-          <li *ngFor="let origin of origin$ | async">
-            <p class="list-item">{{origin.name}}</p>
-            <p class="list-item">España</p>
-            <p class="list-item">{{origin.code}}</p>
+          <li *ngFor="let destination of destinations$ | async" (click)="destinationSelected(destination)">
+            <p class="list-item">{{destination?.destination.name}}</p>
+            <p class="list-item">{{destination?.destination.countryName}}</p>
+            <p class="list-item">{{destination?.destination.code}}</p>
           </li>
         </ul>
         <div class="cities-sugestion-popup_legend">
@@ -98,7 +96,7 @@
             </div>
           </div>
         </div>
-      </div> -->
+      </div>
 
     </div>
 

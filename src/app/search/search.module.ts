@@ -6,6 +6,9 @@ import { SEARCH_COMPONENTS } from './index';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
 import { DestinationsService } from '../shared/services/destinations.service';
+import { LoggerService } from '../shared/services/logger.service';
+import { ResourcesService } from '../shared/services/resources.service';
+import { StorageService } from '../shared/services/storage.service';
 
 @NgModule({
   imports: [
@@ -23,7 +26,7 @@ import { DestinationsService } from '../shared/services/destinations.service';
   exports: [
     // ...SEARCH_COMPONENTS
   ],
-  providers: [DestinationsService],
+  providers: [DestinationsService, ResourcesService, LoggerService, StorageService],
   entryComponents: [SEARCH_COMPONENTS]
 })
 export class SearchModule { }
