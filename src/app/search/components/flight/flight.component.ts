@@ -41,7 +41,7 @@ export class FlightComponent implements OnInit {
   }
 
   getStations(key?: string) {
-      this.stations$ = this._ds.getStationsOrigin(key)
+      this.stations$ = this._ds.getStationsOrigin(key);
   }
 
   submit(formFlight: NgForm) {
@@ -116,6 +116,7 @@ export class FlightComponent implements OnInit {
   clearInputOrigin() {
     this.dataFlight.origin.code = '';
     this.dataFlight.origin.name = '';
+    this.getStations();
     this.togglePopUp();
   }
 

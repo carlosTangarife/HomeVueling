@@ -19,7 +19,7 @@ export interface IMarket {
   connection: boolean,
   largefamily: boolean,
   residents: boolean
-}
+};
 
 export interface IMarketList {
   code: IMarket

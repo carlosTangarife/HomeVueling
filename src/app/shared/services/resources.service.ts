@@ -22,14 +22,14 @@ export class ResourcesService {
         return this.retrieveResource(this.keyMarkets, url);
     }
 
-    retrieveResource(key: string, url: string) {
-        const resource = this._storageService.getLocalStorage(key);
+    retrieveResource(key: string, url: string): Observable<any> {
+        const self = this;
+        const resource = this._storageService.getStorage(key);
         if (resource) {
             return of(resource);
         } else {
             return this._http.get(url).map(response => {
-                this._logger.info(response.json());
-                this._storageService.setLocalStorage(key, response.json());
+                self._storageService.setStorage(key, response.json());
                 return response.json();
             });
         }

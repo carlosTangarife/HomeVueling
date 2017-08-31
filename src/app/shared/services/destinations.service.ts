@@ -18,33 +18,23 @@ export class DestinationsService {
       key = key.toUpperCase();
     }
 
-    // const xxxx = this._resourcesService.getStations();
-
-    // xxxx.subscribe((res) => {
-    //   console.log(res);
-    // });
-
     const reg = new RegExp(key);
-    const url = 'https://vueling-json.herokuapp.com/index.php/stations';
-    return this._http
-      .get(url)
-      .map((data) => data.json().StationList)
-      .map((stations: IStation[]) => stations.filter((station) => {
-        if (station.name.toUpperCase().match(key) || station.code.toUpperCase().match(key) || station.countryCode.toUpperCase().match(key) || station.countryName.toUpperCase().match(key)) {
-          return station;
-        } else {
-          return null;
-        }
-      })
-      );
+    return this._resourcesService.getStations()
+      .map(data => data.StationList)
+      .map((stations: IStation[]) => key ? stations
+        .filter(station => station.name.toUpperCase().match(key)
+          || station.code.toUpperCase().match(key)
+          || station.countryCode.toUpperCase().match(key)
+          || station.countryName.toUpperCase().match(key)) : stations);
   }
 
   getStationsDestination(iata: string) {
-    this._resourcesService.getMarkets().subscribe(markets => {
-      markets[iata].map(destination => {
-        console.log(destination);
+    return this._resourcesService.getMarkets()
+      .map(markets => {
+        markets[iata].map(destination => {
+          console.log(destination);
+        });
       });
-    });
     // return Observable.of(MarketList[iata]);
   }
 

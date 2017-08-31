@@ -5,34 +5,34 @@ import { PersistenceService, StorageType } from 'angular-persistence';
 export class StorageService {
     constructor(private _persistenceService: PersistenceService) { }
 
-    public setStorage(key: string, value: any, timeout?: number) {
-        this._persistenceService.set(key, value, { expireAfter: timeout });
+    public setStorage(key: string, value: any, timeout?: number): boolean {
+        return this._persistenceService.set(key, value, { expireAfter: timeout });
     }
 
-    public setLocalStorage(key: string, value: any, timeout?: number) {
-        this._persistenceService.set(key, value, {
+    public setLocalStorage(key: string, value: any, timeout?: number): boolean {
+        return this._persistenceService.set(key, value, {
             type: StorageType.LOCAL,
             expireAfter: timeout
         });
     }
 
-    public setSessionStorage(key: string, value: any, timeout?: number) {
-        this._persistenceService.set(key, value, {
+    public setSessionStorage(key: string, value: any, timeout?: number): boolean {
+        return this._persistenceService.set(key, value, {
             type: StorageType.SESSION,
             expireAfter: timeout
         });
     }
 
-    public getStorage(key: string) {
-        this._persistenceService.get(key);
+    public getStorage(key: string): any {
+        return this._persistenceService.get(key);
     }
 
-    public getLocalStorage(key: string) {
-        this._persistenceService.get(key, StorageType.LOCAL);
+    public getLocalStorage(key: string): any {
+        return this._persistenceService.get(key, StorageType.LOCAL);
     }
 
-    public getSessionStorage(key: string) {
-        this._persistenceService.get(key, StorageType.SESSION);
+    public getSessionStorage(key: string): any {
+        return this._persistenceService.get(key, StorageType.SESSION);
     }
 
     public removeAllStorage() {
@@ -47,16 +47,16 @@ export class StorageService {
         this._persistenceService.removeAll(StorageType.SESSION);
     }
 
-    public removeStorage(key: string) {
-        this._persistenceService.remove(key);
+    public removeStorage(key: string): any {
+        return this._persistenceService.remove(key);
     }
 
-    public removeLocalStorage(key: string) {
-        this._persistenceService.remove(key, StorageType.LOCAL);
+    public removeLocalStorage(key: string): any {
+        return this._persistenceService.remove(key, StorageType.LOCAL);
     }
 
-    public removeSessionStorage(key: string) {
-        this._persistenceService.remove(key, StorageType.SESSION);
+    public removeSessionStorage(key: string): any {
+        return this._persistenceService.remove(key, StorageType.SESSION);
     }
 
     public cleanStorage() {
