@@ -29,27 +29,32 @@ export class DestinationsService {
   }
 
   getStationsDestination(iata: string): Observable<IMarket[]> {
+    if (!iata) {
+      return new Observable();
+    }
     return this._resourcesService.getMarketsByIata(iata)
       .mergeMap((destination: IDestination) => {
         let stations$ = this._resourcesService.getStations()
           .map(data => data.StationList)
           .map((stations: IStation[]) => stations
-              .filter(station => station.code === destination.destination));
+            .filter(station => station.code === destination.destination));
 
-        return Observable.forkJoin(stations$, (station) => {
-          let result: IMarket = {
-              station: {
-                name: station[0].name,
-                code: station[0].code
-              },
-              market: destination
-          };
-          return result;
+        return Observable.forkJoin(stations$, null, (station) => {
+          if (station && station[0]) {
+            let result: IMarket = {
+                code: destination.destination,
+                connection: destination.connection,
+                residents: destination.residents,
+                largefamily: destination.largefamily,
+                name: station[0].name
+            };
+            return result;
+          }
         });
       }).toArray();
   }
 
   getRecentSearch() {
-    return Observable.of(STATION_RESENT.stationResent);
+    return STATION_RESENT.stationResent;
   }
 }
