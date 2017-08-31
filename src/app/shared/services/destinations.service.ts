@@ -7,7 +7,7 @@ import { ResourcesService } from './resources.service';
 import { MarketList } from './marketList';
 import { STATION_RESENT } from './stationResent';
 import { Http } from '@angular/http';
-import { IStation } from '../../search/components/flight/flight.model';
+import { IStation, IMarket, IDestination } from '../../search/components/flight/flight.model';
 
 @Injectable()
 export class DestinationsService {
@@ -28,14 +28,21 @@ export class DestinationsService {
           || station.countryName.toUpperCase().match(key)) : stations);
   }
 
-  getStationsDestination(iata: string) {
+  getStationsDestination(iata: string): Observable<IMarket[]> {
+    const marketsList = this._resourcesService.getStations()
+      .map(data => data.StationList)
+      .map((stations: IStation[]) => stations);
     return this._resourcesService.getMarkets()
-      .map(markets => {
-        markets[iata].map(destination => {
-          console.log(destination);
-        });
+      .map(markets => markets[iata])
+      .map((destinations: IDestination[]) => {
+        return destinations.map(destination => {
+          const market: IMarket = {
+            market: destination,
+            destination: marketsList.map(data => data.find(x => x.code === destination.code))
+          };
+          return market;
+        })
       });
-    // return Observable.of(MarketList[iata]);
   }
 
   getRecentSearch() {
