@@ -20,11 +20,11 @@ export interface IDestination {
   connection: boolean,
   largefamily: boolean,
   residents: boolean,
-  code: string
+  destination: string
 };
 
 export interface IMarket {
-  destination: Observable<IStation>,
+  station: IStation,
   market: IDestination
 };
 

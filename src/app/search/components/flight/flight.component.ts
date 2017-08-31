@@ -114,7 +114,7 @@ export class FlightComponent implements OnInit {
   clearInputDestination() {
     this.dataFlight.destination.code = '';
     this.dataFlight.destination.name = '';
-    this.destinations$ = this._ds.getStationsDestination(this.dataFlight.origin.code);
+    // this.destinations$ = this._ds.getStationsDestination(this.dataFlight.origin.code);
     this.toggleDestinationPopUp();
   }
 
@@ -129,7 +129,9 @@ export class FlightComponent implements OnInit {
     this.dataFlight.origin.name = originSelected.name;
     this.dataFlight.origin.code = originSelected.code;
     this.dataFlight.origin.countryName = originSelected.countryName;
+    debugger;
     this.destinations$ = this._ds.getStationsDestination(originSelected.code);
+    // this._ds.getStationsDestination(originSelected.code).subscribe(res => console.log(res));
     this.togglePopUp();
   }
 

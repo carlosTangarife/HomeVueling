@@ -63,9 +63,9 @@
         <p class="cities-sugestion-popup_title">Búsquedas recientes <span class="erase-label">Borrar</span></p>
         <ul class="cities-sugestion-popup_list">
           <li *ngFor="let resent of destinationsResent$ | async" (click)="destinationSelected(resent)">
-            <p class="list-item">{{resent?.destination.name}}</p>
-            <p class="list-item">{{resent?.destination.countryName}}</p>
-            <p class="list-item">{{resent?.destination.code}}</p>
+            <p class="list-item">{{resent?.station.name}}</p>
+            <p class="list-item">{{resent?.station.countryName}}</p>
+            <p class="list-item">{{resent?.station.code}}</p>
             <p class="list-item"><span class="icon icon-arrow-list"></span></p>
           </li>
         </ul>
@@ -73,9 +73,9 @@
         <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
         <ul class="cities-sugestion-popup_list">
           <li *ngFor="let destination of destinations$ | async" (click)="destinationSelected(destination)">
-            <p class="list-item">{{destination?.destination.name}}</p>
-            <p class="list-item">{{destination?.destination.countryName}}</p>
-            <p class="list-item">{{destination?.destination.code}}</p>
+            <p class="list-item">{{destination?.station.name}}</p>
+            <p class="list-item">{{destination?.station.countryName}}</p>
+            <p class="list-item">{{destination?.station.code}}</p>
           </li>
         </ul>
         <div class="cities-sugestion-popup_legend">

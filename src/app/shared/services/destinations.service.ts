@@ -29,20 +29,24 @@ export class DestinationsService {
   }
 
   getStationsDestination(iata: string): Observable<IMarket[]> {
-    const marketsList = this._resourcesService.getStations()
-      .map(data => data.StationList)
-      .map((stations: IStation[]) => stations);
-    return this._resourcesService.getMarkets()
-      .map(markets => markets[iata])
-      .map((destinations: IDestination[]) => {
-        return destinations.map(destination => {
-          const market: IMarket = {
-            market: destination,
-            destination: marketsList.map(data => data.find(x => x.code === destination.code))
+    return this._resourcesService.getMarketsByIata(iata)
+      .mergeMap((destination: IDestination) => {
+        let stations$ = this._resourcesService.getStations()
+          .map(data => data.StationList)
+          .map((stations: IStation[]) => stations
+              .filter(station => station.code === destination.destination));
+
+        return Observable.forkJoin(stations$, (station) => {
+          let result: IMarket = {
+              station: {
+                name: station[0].name,
+                code: station[0].code
+              },
+              market: destination
           };
-          return market;
-        })
-      });
+          return result;
+        });
+      }).toArray();
   }
 
   getRecentSearch() {
