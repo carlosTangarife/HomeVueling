@@ -7,6 +7,7 @@
   </ul>
 
   <ul class="passengers-popup_main discount">
+
     <li id="discount-list-active" (click)="toggleClassListActive()">
       <p>Descuento Residente o familia numerosa</p>
       <span class="icon icon-arrow-right"></span>
@@ -14,34 +15,19 @@
     <li class="js-discount-item-selected" style="display: list-item;" (click)="toggleClassListActive()">
       <p class="discount-item selected">Fam. Numerosa Especial (10%)</p>
     </li>
+
     <div class="alert alert--icon info">
-      <div class="alert_wrap">
-        <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
-        <p class="alert_wrap_title">Residentes</p>
-        <p class="alert_wrap_message">Durante la reserva se validará tu condición de residente.</p>
-      </div>
-      <div class="alert_wrap">
-        <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
-        <p class="alert_wrap_title">Familia numerosa</p>
-        <p class="alert_wrap_message">Se debe presentar la documentación acreditativa en el aeropuerto.</p>
-      </div>
+        <div class="alert_wrap" *ngFor="let infoItem of infoList">
+          <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
+          <p class="alert_wrap_title">{{infoItem.title}}</p>
+          <p class="alert_wrap_message">{{infoItem.body}}</p>
+        </div>
     </div>
+
   </ul>
   <ul id="discount-list" class="passengers-popup_main discount-list" [ngClass]="{'active':stateListActive}" (click)="toggleClassListActive()">
-    <li>
-      <p class="discount-item js-discount">Residente islas o Ceuta (50%)</p>
-    </li>
-    <li>
-      <p class="discount-item js-discount">Fam. Numerosa General (5%)</p>
-    </li>
-    <li>
-      <p class="discount-item js-discount">Fam. Numerosa Especial (10%)</p>
-    </li>
-    <li>
-      <p class="discount-item js-discount">Fam. Numerosa General Residente (55%)</p>
-    </li>
-    <li>
-      <p class="discount-item js-discount">Fam. Numerosa Especial Residente (60%)</p>
-    </li>
-  </ul>
+      <li *ngFor="let discountItem of discountPassengerList">
+          <p class="discount-item js-discount">{{discountItem.data}} ({{discountItem.discount}}%)</p>
+      </li>
+    </ul>
 </div>
