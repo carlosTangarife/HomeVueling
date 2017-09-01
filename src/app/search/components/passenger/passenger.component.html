@@ -1,50 +1,11 @@
 <div id="passengers-popup" class="searchbar-popup passengers-popup discount">
   <ul class="passengers-popup_main">
-    <li>
-      <div class="passengers-popup_main_description">
-        <p class="title">Adults</p>
-        <label class="label">Since 16 years</label>
-      </div>
-      <div class="passengers-popup_main_counter">
-        <span class="icon icon-rounded-less" (click)="lessAdults()"></span>
-        <div class="number">{{passenger.adult}}</div>
-        <span class="icon icon-rounded-more" (click)="moreAdults()"></span>
-      </div>
-    </li>
-    <li>
-      <div class="passengers-popup_main_description">
-        <p class="title">Children</p>
-        <label class="label">2 to 15 years</label>
-      </div>
-      <div class="passengers-popup_main_counter">
-        <span class="icon icon-rounded-less" (click)="lessChildren()"></span>
-        <div class="number">{{passenger.children}}</div>
-        <span class="icon icon-rounded-more" (click)="moreChildren()"></span>
-      </div>
-    </li>
-    <li>
-      <div class="passengers-popup_main_description">
-        <p class="title">Baby</p>
-        <label class="label">From 7 days to 23 months</label>
-      </div>
-      <div class="passengers-popup_main_counter">
-        <span class="icon icon-rounded-less" (click)="lessBabies()"></span>
-        <div class="number">{{passenger.babies}}</div>
-        <span class="icon icon-rounded-more" (click)="moreBabies()"></span>
-      </div>
-    </li>
-    <li>
-      <div class="passengers-popup_main_description">
-        <p class="title">Extraseat</p>
-        <label class="label"><a href="">+ info</a></label>
-      </div>
-      <div class="passengers-popup_main_counter">
-        <span class="icon icon-rounded-less" (click)="lessExtraSeat()"></span>
-        <div class="number">{{passenger.extraSeat}}</div>
-        <span class="icon icon-rounded-more" (click)="moreExtraSeat()"></span>
-      </div>
-    </li>
+    <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'adult'" [rulAge]="'Since 16 years'" [age]="passenger.adult"></app-type-passenger>
+    <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'children'" [rulAge]="'2 to 15 years'" [age]="passenger.children"></app-type-passenger>
+    <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'babies'" [rulAge]="'From 7 days to 23 months'" [age]="passenger.babies"></app-type-passenger>
+    <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'extraSeat'" [rulAge]="'+ info'" [age]="passenger.extraSeat"></app-type-passenger>
   </ul>
+
   <ul class="passengers-popup_main discount">
     <li id="discount-list-active">
       <p>Descuento Residente o familia numerosa</p>

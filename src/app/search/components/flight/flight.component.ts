@@ -32,11 +32,11 @@ export class FlightComponent implements OnInit {
       going: new Date(),
       return: new Date(17, 8, 15),
       passenger: {
-        adult: 3,
-        children: 3,
+        adult: 1,
+        children: 1,
         babies: 0,
         extraSeat: 0,
-        totalPassengers: 6
+        totalPassengers: 1
       }
     };
     this.getStations();

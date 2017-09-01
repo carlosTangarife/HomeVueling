@@ -9,6 +9,7 @@ import { DestinationsService } from '../shared/services/destinations.service';
 import { LoggerService } from '../shared/services/logger.service';
 import { ResourcesService } from '../shared/services/resources.service';
 import { StorageService } from '../shared/services/storage.service';
+import { TypePassengerComponent } from './components/passenger/type-passenger/type-passenger.component';
 
 @NgModule({
   imports: [
@@ -20,7 +21,8 @@ import { StorageService } from '../shared/services/storage.service';
   declarations: [
     ...SEARCH_COMPONENTS,
     CalendarComponent,
-    PassengerComponent
+    PassengerComponent,
+    TypePassengerComponent
 
   ],
   exports: [
