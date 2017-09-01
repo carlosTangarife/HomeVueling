@@ -51,65 +51,6 @@ export class FlightComponent implements OnInit {
     console.log(formFlight);
   }
 
-  moreAdults() {
-    if (this.dataFlight.passenger.adult < 16) {
-      this.dataFlight.passenger.adult += 1;
-      this.totalPassenger();
-    }
-  }
-
-  lessAdults() {
-    if (this.dataFlight.passenger.adult > 0) {
-      this.dataFlight.passenger.adult -= 1;
-      this.totalPassenger();
-    }
-  }
-
-  moreBabies() {
-    if (this.dataFlight.passenger.babies < 16) {
-      this.dataFlight.passenger.babies += 1;
-      this.totalPassenger();
-    }
-  }
-
-  lessBabies() {
-    if (this.dataFlight.passenger.babies > 0) {
-      this.dataFlight.passenger.babies -= 1;
-      this.totalPassenger();
-    }
-  }
-
-  moreChildren() {
-    if (this.dataFlight.passenger.children < 16) {
-      this.dataFlight.passenger.children += 1;
-      this.totalPassenger();
-    }
-  }
-
-  lessChildren() {
-    if (this.dataFlight.passenger.children > 0) {
-      this.dataFlight.passenger.children -= 1;
-      this.totalPassenger();
-    }
-  }
-
-  moreExtraSeat() {
-    if (this.dataFlight.passenger.extraSeat < 16) {
-      this.dataFlight.passenger.extraSeat += 1;
-      this.totalPassenger();
-    }
-  }
-
-  lessExtraSeat() {
-    if (this.dataFlight.passenger.extraSeat > 0) {
-      this.dataFlight.passenger.extraSeat -= 1;
-      this.totalPassenger();
-    }
-  }
-
-  totalPassenger() {
-    this.dataFlight.passenger.totalPassengers = this.dataFlight.passenger.adult + this.dataFlight.passenger.babies + this.dataFlight.passenger.children + this.dataFlight.passenger.extraSeat;
-  }
 
   clearInputDestination() {
     this.dataFlight.destination.code = '';
@@ -129,8 +70,7 @@ export class FlightComponent implements OnInit {
     this.dataFlight.origin.name = originSelected.name;
     this.dataFlight.origin.code = originSelected.code;
     this.dataFlight.origin.countryName = originSelected.countryName;
-    debugger;
-    this.destinations$ = this._ds.getStationsDestination(originSelected.code);
+    // this.destinations$ = this._ds.getStationsDestination(originSelected.code);
     // this._ds.getStationsDestination(originSelected.code).subscribe(res => console.log(res));
     this.togglePopUp();
   }

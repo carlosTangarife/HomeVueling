@@ -28,8 +28,8 @@ export class DestinationsService {
           || station.countryName.toUpperCase().match(key)) : stations);
   }
 
-  getStationsDestination(iata: string): Observable<IMarket[]> {
-    return this._resourcesService.getMarketsByIata(iata)
+  getStationsDestination(iata: string): void {
+    this._resourcesService.getMarketsByIata(iata)
       .mergeMap((destination: IDestination) => {
         let stations$ = this._resourcesService.getStations()
           .map(data => data.StationList)
@@ -45,8 +45,8 @@ export class DestinationsService {
               market: destination
           };
           return result;
-        });
-      }).toArray();
+        })
+      }).toArray().subscribe((res) => console.log(res));
   }
 
   getRecentSearch() {
