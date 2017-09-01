@@ -64,7 +64,7 @@ export class StationService {
         let cookie: LastStationsSelected = this._cookiesWrapper.getCookie(key);
         if (cookie) {
             return cookie.lastStationsSelected.sort((a, b) =>
-            Date.parse(b.date.toString()) - Date.parse(a.date.toString()));
+                Date.parse(b.date.toString()) - Date.parse(a.date.toString()));
         } else {
             return [];
         }

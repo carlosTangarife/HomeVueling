@@ -48,8 +48,6 @@ export class FlightComponent implements OnInit {
     this.stations = this._configService.environment['stations'];
     this.markets = this._configService.environment['markets'];
     this.getStations();
-    // this.recentOrigins = this._ds.getRecentSearch();
-    // this.recentDestinations = this._ds.getRecentSearch();
     this.recentOrigins = this.getRecentOrigins();
     this.recentDestinations = this.getRecentDestinations();
   }
