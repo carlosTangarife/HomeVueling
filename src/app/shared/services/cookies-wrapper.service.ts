@@ -1,12 +1,8 @@
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { CookieService } from 'angular2-cookie/services/cookies.service';
-import { IFlight } from '../../search/components/flight/flight.model';
+import { CookieService } from 'ngx-cookie';
 
 @Injectable()
-
 export class CookiesWrapper {
-
     constructor(private _cookieService: CookieService) { }
 
     getCookie(key: string): any {

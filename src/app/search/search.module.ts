@@ -10,6 +10,8 @@ import { LoggerService } from '../shared/services/logger.service';
 import { ResourcesService } from '../shared/services/resources.service';
 import { StorageService } from '../shared/services/storage.service';
 import { ConfigService } from '../shared/services/config.service';
+import { StationService } from 'app/shared/services/station.service';
+import { CookiesWrapper } from 'app/shared/services/cookies-wrapper.service';
 
 export function configServiceFactory(config: ConfigService) {
   let obs = config.load();
@@ -34,7 +36,8 @@ export function configServiceFactory(config: ConfigService) {
     // ...SEARCH_COMPONENTS
   ],
   providers: [{ provide: APP_INITIALIZER, useFactory: configServiceFactory, deps: [ConfigService], multi: true },
-    DestinationsService, ResourcesService, LoggerService, StorageService, ConfigService],
+    DestinationsService, ResourcesService, LoggerService, StorageService,
+    ConfigService, CookiesWrapper, StationService, {provide: Number, useValue: 3}],
   entryComponents: [SEARCH_COMPONENTS]
 })
 export class SearchModule { }
