@@ -1,9 +1,9 @@
-<div id="passengers-popup" class="searchbar-popup passengers-popup discount">
+<div id="passengers-popup" class="searchbar-popup passengers-popup discount" [ngClass]="{'show-table': inputPassengerFocused}">
   <ul class="passengers-popup_main">
     <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'adult'" [rulAge]="'Since 16 years'" [age]="passenger.adult"></app-type-passenger>
     <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'children'" [rulAge]="'2 to 15 years'" [age]="passenger.children"></app-type-passenger>
     <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'babies'" [rulAge]="'From 7 days to 23 months'" [age]="passenger.babies"></app-type-passenger>
-    <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'extraSeat'" [rulAge]="'+ info'" [age]="passenger.extraSeat"></app-type-passenger>
+    <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'extraSeat'" [rulAge]="'+ info'" [age]="passenger.extraSeat" [info]="true"></app-type-passenger>
   </ul>
 
   <ul class="passengers-popup_main discount">

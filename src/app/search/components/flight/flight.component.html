@@ -128,18 +128,18 @@
         </div>
       </div>
 
-      <div id="form-group--passengers" class="form-input passengers">
-        <label for="passengers-input">{{dataFlight.passenger.adult}} Adult, {{dataFlight.passenger.children}} Children, {{dataFlight.passenger.babies}} babies</label>
-        <div class="input-group">
-          <input type="text" class="form-control js-searchbar-input" id="passengers-input"
-                 [ngModel]="dataFlight.passenger.totalPassengers"
-                 name="totalPassengers"
-                 placeholder=""
-                 readonly="readonly"
-          >Passengers
-          <span class="icon icon-arrow-down"></span>
-        </div>
-        <app-passenger [passenger]="dataFlight.passenger"></app-passenger>
+      <div id="form-group--passengers" class="form-input passengers" [ngClass]="{'focused':passengerFocused}">
+          <label for="passengers-input" (click)="clickPassenger()">{{dataFlight.passenger.adult}} Adult, {{dataFlight.passenger.children}} Children, {{dataFlight.passenger.babies}} babies</label>
+          <div class="input-group" (click)="clickPassenger()">
+            <input type="text" class="form-control js-searchbar-input " id="passengers-input"
+                  [ngModel]="dataFlight.passenger.totalPassengers"
+                  name="totalPassengers"
+                  placeholder=""
+                  readonly="readonly"
+            >
+            <span class="icon icon-arrow-down"></span>
+          </div>
+        <app-passenger [passenger]="dataFlight.passenger" [inputPassengerFocused]="passengerFocused"></app-passenger>
       </div>
   </div>
 

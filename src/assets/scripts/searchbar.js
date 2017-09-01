@@ -35,11 +35,11 @@ $(document).ready(function(){
       $("#searchbar-overlay").toggleClass("show");
   });
 
-  $("#passengers-input").click(function(){
-      $("#form-group--passengers").toggleClass("focused");
-      $("#passengers-popup").toggleClass("show-table");
-      $("#searchbar-overlay").toggleClass("show");
-  });
+  // $("#passengers-input").click(function(){
+  //     $("#form-group--passengers").toggleClass("focused");
+  //     $("#passengers-popup").toggleClass("show-table");
+  //     $("#searchbar-overlay").toggleClass("show");
+  // });
 
   // $(".js-searchbar-date-input").focus(function(){
   //     $("#form-group--dates").addClass("focused");

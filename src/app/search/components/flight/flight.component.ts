@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms/src/forms';
 import { IFlight, IStation, IMarket, IStationList, IDestination } from './flight.model';
 import { DestinationsService } from 'app/shared/services/destinations.service';
@@ -19,8 +19,11 @@ export class FlightComponent implements OnInit {
   public recentDestinations: IMarket[];
   public destinations: IMarket[];
   public dataFlight: IFlight;
-  public originPopup = false;
-  public destinationPopup = false;
+  public originPopup: boolean = false;
+  public destinationPopup: boolean = false;
+
+  public passengerFocused: boolean = false;
+  @Output() stateOverlay = new EventEmitter<boolean>();
   constructor(private _ds: DestinationsService,
     private _configService: ConfigService,
     private _stationService: StationService) { }
@@ -176,5 +179,10 @@ export class FlightComponent implements OnInit {
     } else {
       this.togglePopUp();
     }
+  }
+
+  clickPassenger() {
+    this.passengerFocused = !this.passengerFocused;
+    this.stateOverlay.emit(this.passengerFocused);
   }
 }

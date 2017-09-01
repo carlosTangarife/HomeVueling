@@ -8,6 +8,7 @@ import { IDataPassenger } from './type-passenger/type-passenger.model';
 })
 export class PassengerComponent implements OnInit {
   @Input() passenger: IPassenger;
+  @Input() inputPassengerFocused: boolean;
   constructor() { }
 
   ngOnInit() {

@@ -11,6 +11,7 @@ export class TypePassengerComponent implements OnInit {
   @Input() label: string;
   @Input() rulAge: string;
   @Input() age: string;
+  @Input() info: boolean;
   @Output() sendInfoToParent = new EventEmitter<IDataPassenger>();
 
   constructor() { }
@@ -19,6 +20,7 @@ export class TypePassengerComponent implements OnInit {
   }
 
   eventParent(less: boolean, more: boolean, typePassenger: string) {
+    alert('holas');
     this.dataPassenger = {
       less: less,
       more: more,

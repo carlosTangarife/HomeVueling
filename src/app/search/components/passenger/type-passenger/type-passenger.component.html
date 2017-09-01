@@ -1,7 +1,11 @@
 <li>
   <div class="passengers-popup_main_description">
     <p class="title">{{label}}</p>
-    <label class="label">{{rulAge}}</label>
+    <label class="label" *ngIf="info; else normalPassenger"><a href="">{{rulAge}}</a></label>
+    <ng-template #normalPassenger>
+      <label class="label">{{rulAge}}</label>
+    </ng-template>
+
   </div>
   <div class="passengers-popup_main_counter">
     <span class="icon icon-rounded-less" (click)="eventParent(true, false, label)"></span>
