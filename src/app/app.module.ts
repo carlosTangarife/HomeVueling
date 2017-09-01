@@ -7,6 +7,7 @@ import { IndexHeaderComponent} from './header/components/index-header/index-head
 import { FooterModule } from './footer/footer.module';
 import { IndexFooterComponent } from './footer/components/index-footer/index-footer.component';
 import { PersistenceModule } from 'angular-persistence';
+import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   imports: [
@@ -14,7 +15,8 @@ import { PersistenceModule } from 'angular-persistence';
     SearchModule,
     HeaderModule,
     FooterModule,
-    PersistenceModule
+    PersistenceModule,
+    CookieModule.forRoot()
   ],
   providers: []
 })

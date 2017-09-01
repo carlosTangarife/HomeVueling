@@ -1,5 +1,3 @@
-import { Observable } from "rxjs/Observable";
-
 export interface IPassenger {
   adult: number,
   children: number,
@@ -16,6 +14,10 @@ export interface IStation {
   countryName?: string
 };
 
+export interface IStationList {
+  StationList: IStation[]
+};
+
 export interface IDestination {
   connection: boolean,
   largefamily: boolean,
@@ -24,8 +26,14 @@ export interface IDestination {
 };
 
 export interface IMarket {
-  station: IStation,
-  market: IDestination
+  macCode?: string,
+  name: string,
+  code: string,
+  countryCode?: string,
+  countryName?: string,
+  connection: boolean,
+  largefamily: boolean,
+  residents: boolean
 };
 
 export interface IFlight {
