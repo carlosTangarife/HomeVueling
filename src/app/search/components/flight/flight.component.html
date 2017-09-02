@@ -6,7 +6,7 @@
           <span class="prefix" *ngIf="dataFlight.origin.code">{{dataFlight.origin.code}}</span>
             <input type="text" id="origin-input"
               [(ngModel)]="dataFlight.origin.name"
-              (keyup)="getStations(origin.value);"
+              (keyup)="filterStations(origin.value);"
               name="origin"
               #origin="ngModel"
               class="form-control js-searchbar-input"
@@ -20,26 +20,29 @@
         </div>
 
         <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':originPopup}">
-           <p class="cities-sugestion-popup_title">Búsquedas recientes <span class="erase-label">Borrar</span></p>
-           <ul class="cities-sugestion-popup_list">
-              <li *ngFor="let resent of recentOrigins" (click)="originSelected(resent)">
-                <p class="list-item">{{resent?.name}}</p>
-                <p class="list-item">{{resent?.countryName}}</p>
-                <p class="list-item">{{resent?.code}}</p>
-                <p class="list-item"><span class="icon icon-arrow-list"></span></p>
-              </li>
-            </ul>
+          <p class="cities-sugestion-popup_title" *ngIf="filterStationsByRecent(true).length > 0">
+            Búsquedas recientes
+            <span class="erase-label" (click)="deleteOrigins()">Borrar</span>
+          </p>
+          <ul class="cities-sugestion-popup_list">
+            <li *ngFor="let origin of filterStationsByRecent(true)" (click)="originSelected(origin)">
+              <p class="list-item">{{origin?.name}}</p>
+              <p class="list-item">{{origin?.countryName}}</p>
+              <p class="list-item">{{origin?.code}}</p>
+              <p class="list-item"><span class="icon icon-arrow-list"></span></p>
+            </li>
+          </ul>
 
-           <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
-           <ul class="cities-sugestion-popup_list">
-              <li *ngFor="let origin of origins" (click)="originSelected(origin)">
-                <p class="list-item">{{origin?.name}}</p>
-                <p class="list-item">{{origin?.countryName}}</p>
-                <p class="list-item">{{origin?.code}}</p>
-              </li>
-            </ul>
+          <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
+          <ul class="cities-sugestion-popup_list">
+            <li *ngFor="let origin of filterStationsByRecent(false)" (click)="originSelected(origin)">
+              <p class="list-item">{{origin?.name}}</p>
+              <p class="list-item">{{origin?.countryName}}</p>
+              <p class="list-item">{{origin?.code}}</p>
+            </li>
+          </ul>
         </div>
-     </div>
+      </div>
 
      <div id="form-group--destination" class="form-input destination" [ngClass]="{'focused':destinationPopup}">
       <label for="destination-input">Destino</label>
@@ -47,7 +50,7 @@
         <span class="prefix" *ngIf="dataFlight.destination.code">{{dataFlight.destination.code}}</span>
         <input type="text" id="destination-input"
               [(ngModel)]="dataFlight.destination.name"
-              (keyup)="getStationsDestination(dataFlight.origin.code, destination.value);"
+              (keyup)="filterDestinations(destination.value);"
               name="destination"
               #destination="ngModel"
               class="form-control js-searchbar-input"
@@ -61,19 +64,22 @@
       </div>
 
       <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':destinationPopup}">
-        <p class="cities-sugestion-popup_title">Búsquedas recientes <span class="erase-label">Borrar</span></p>
+        <p class="cities-sugestion-popup_title" *ngIf="filterDestinationsByRecent(true).length > 0">
+          Búsquedas recientes
+          <span class="erase-label" (click)="delateDestinations()">Borrar</span>
+        </p>
         <ul class="cities-sugestion-popup_list">
-          <li *ngFor="let resent of recentDestinations" (click)="destinationSelected(resent)">
-            <p class="list-item">{{resent?.name}}</p>
-            <p class="list-item">{{resent?.countryName}}</p>
-            <p class="list-item">{{resent?.code}}</p>
+          <li *ngFor="let destination of filterDestinationsByRecent(true)" (click)="destinationSelected(destination)">
+            <p class="list-item">{{destination?.name}}</p>
+            <p class="list-item">{{destination?.countryName}}</p>
+            <p class="list-item">{{destination?.code}}</p>
             <p class="list-item"><span class="icon icon-arrow-list"></span></p>
           </li>
         </ul>
 
         <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
         <ul class="cities-sugestion-popup_list">
-          <li *ngFor="let destination of destinations" (click)="destinationSelected(destination)">
+          <li *ngFor="let destination of filterDestinationsByRecent(false)" (click)="destinationSelected(destination)">
             <p class="list-item">{{destination?.name}}</p>
             <p class="list-item">{{destination?.countryName}}</p>
             <p class="list-item">{{destination?.code}}</p>

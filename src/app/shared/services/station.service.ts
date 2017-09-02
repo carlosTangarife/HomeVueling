@@ -69,4 +69,12 @@ export class StationService {
             return [];
         }
     }
+
+    removeOriginsStations() {
+        this._cookiesWrapper.removeCookie(this.keyOrigin);
+    }
+
+    removeDestinationsStations() {
+        this._cookiesWrapper.removeCookie(this.keyDestination);
+    }
 }

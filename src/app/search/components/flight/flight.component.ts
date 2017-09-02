@@ -13,10 +13,9 @@ export class FlightComponent implements OnInit {
 
   public stations: IStationList;
   public markets: any;
-  public recentOrigins: IStation[];
-  public origins: IStation[];
-  public recentDestinations: IMarket[];
-  public destinations: IMarket[];
+  public marketsIata: IMarket[];
+  public filteredOrigins: IStation[];
+  public filteredDestinations: IMarket[];
   public dataFlight: IFlight;
   public originPopup = false;
   public destinationPopup = false;
@@ -49,61 +48,52 @@ export class FlightComponent implements OnInit {
     this.stations = this._configService.environment['stations'];
     this.markets = this._configService.environment['markets'];
     this.getStations();
-    this.recentOrigins = this.getRecentOrigins();
-    this.recentDestinations = this.getRecentDestinations();
+    this.getMarketsByIata(this.dataFlight.origin.code);
+    this.getDestinations();
   }
 
-  getStations(key?: string) {
-    this.origins = key ? this.filterStations(
-      this.stations.StationList, key.toLowerCase()) : this.stations.StationList;
+  getStations() {
+    let recentOrigins = this.getRecentOrigins();
+    this.filteredOrigins = this.stations.StationList.map(station => {
+      station.isRecent = recentOrigins.includes(station);
+      return station;
+    });
   }
 
-  filterStations(options: IStation[], key: string): IStation[] {
-    return options
-      .filter(opt => opt.name.toLowerCase().match(key)
-        || opt.code.toLowerCase().match(key)
-        || opt.countryCode.toLowerCase().match(key)
-        || opt.countryName.toLowerCase().match(key));
+  filterStationsByRecent(isRecent: boolean) {
+    return this.filteredOrigins.filter(opt => opt.isRecent === isRecent);
   }
 
-  filterMarkets(options: IMarket[], key: string): IMarket[] {
-    return options
-      .filter(opt => opt.name.toLowerCase().match(key)
-        || opt.code.toLowerCase().match(key)
-        || opt.countryCode.toLowerCase().match(key)
-        || opt.countryName.toLowerCase().match(key));
+  filterStations(key?: string) {
+    this.filteredOrigins = key ? this.stations.StationList
+      .filter(opt => opt.name.toLowerCase().match(key.toLowerCase())
+        || opt.code.toLowerCase().match(key.toLowerCase())
+        || opt.countryCode.toLowerCase().match(key.toLowerCase())
+        || opt.countryName.toLowerCase().match(key.toLowerCase())) : this.stations.StationList;
+  }
+
+  filterDestinationsByRecent(isRecent: boolean) {
+    return this.filteredDestinations.filter(opt => opt.isRecent === isRecent);
+  }
+
+  filterDestinations(key?: string) {
+    this.filteredDestinations = key ? this.marketsIata
+      .filter(opt => opt.name.toLowerCase().match(key.toLowerCase())
+        || opt.code.toLowerCase().match(key.toLowerCase())
+        || opt.countryCode.toLowerCase().match(key.toLowerCase())
+        || opt.countryName.toLowerCase().match(key.toLowerCase())) : this.marketsIata;
   }
 
   getRecentOrigins(): IStation[] {
     let cookie = this._stationService.getOriginsStations();
-    return cookie.map(val => {
-      let result = this.stations.StationList.find(station => station.code === val.iataCode);
-      result.isRecent = true;
-      return result;
-    });
+    return cookie.map(val => this.stations.StationList
+      .find(station => station.code === val.iataCode));
   }
 
   getRecentDestinations(): IMarket[] {
     let cookie = this._stationService.getDestinationsStations();
-    return cookie.map(val => this.markets[this.dataFlight.origin.code]
-      .find(station => station.destination === val.iataCode))
-      .map(market => {
-        let station: IStation = this.stations.StationList.find(s => s.code === market.destination);
-        if (station) {
-          let result: IMarket = {
-            code: market.destination,
-            connection: market.connection,
-            residents: market.residents,
-            largefamily: market.largefamily,
-            countryCode: station.countryCode,
-            countryName: station.countryName,
-            macCode: station.macCode,
-            name: station.name,
-            isRecent: true
-          };
-          return result;
-        }
-      }).filter(Boolean);
+    return cookie.map(val => this.marketsIata
+      .find(station => station.code === val.iataCode)).filter(Boolean);
   }
 
   onSubmit(formFlight: NgForm) {
@@ -116,47 +106,50 @@ export class FlightComponent implements OnInit {
   clearInputDestination() {
     this.dataFlight.destination.code = '';
     this.dataFlight.destination.name = '';
-    this.getStationsDestination(this.dataFlight.origin.code)
+    this.getMarketsByIata(this.dataFlight.origin.code)
+    this.getDestinations();
     this.toggleDestinationPopUp();
   }
 
-  getStationsDestination(iata: string, key?: string): IMarket[] {
-    if (!iata) {
-      return [];
-    }
-    let marketsIata = this.markets[iata];
-    let destinations: IMarket[] = marketsIata.map(market => {
-      let station: IStation = this.stations.StationList.find(s => s.code === market.destination);
-      if (station) {
-        let result: IMarket = {
-          code: market.destination,
-          connection: market.connection,
-          residents: market.residents,
-          largefamily: market.largefamily,
-          countryCode: station.countryCode,
-          countryName: station.countryName,
-          macCode: station.macCode,
-          name: station.name
-        };
-        return result;
-      }
-    }).filter(Boolean);
-    return this.destinations = key ? this.filterMarkets(destinations, key.toLowerCase()) : destinations;
+  getDestinations() {
+    let recentDestinations = this.getRecentDestinations();
+    this.filteredDestinations = this.marketsIata.map(station => {
+      station.isRecent = recentDestinations.includes(station);
+      return station;
+    });
+  }
+
+  getMarketsByIata(iata: string) {
+    this.marketsIata = iata && this.markets[iata] ? this.markets[iata]
+      .map(market => {
+        let station: IStation = this.stations.StationList.find(s => s.code === market.destination);
+        if (station) {
+          let result: IMarket = {
+            code: market.destination,
+            connection: market.connection,
+            residents: market.residents,
+            largefamily: market.largefamily,
+            countryCode: station.countryCode,
+            countryName: station.countryName,
+            macCode: station.macCode,
+            name: station.name
+          };
+          return result;
+        }
+      }).filter(Boolean) : this.marketsIata = [];
   }
 
   clearInputOrigin() {
     this.dataFlight.origin.code = '';
     this.dataFlight.origin.name = '';
     this.getStations();
-    this.togglePopUp();
+    this.clearInputDestination();
   }
 
   originSelected(originSelected: IStation) {
     this.dataFlight.origin.name = originSelected.name;
     this.dataFlight.origin.code = originSelected.code;
     this.dataFlight.origin.countryName = originSelected.countryName;
-    // this.destinations$ = this._ds.getStationsDestination(originSelected.code);
-    // this._ds.getStationsDestination(originSelected.code).subscribe(res => console.log(res));
     this.togglePopUp();
     this.clearInputDestination();
   }
@@ -166,6 +159,16 @@ export class FlightComponent implements OnInit {
     this.dataFlight.destination.code = destinationSelected.code;
     this.dataFlight.destination.countryName = destinationSelected.countryName;
     this.toggleDestinationPopUp();
+  }
+
+  deleteOrigins() {
+    this._stationService.removeOriginsStations();
+    this.clearInputOrigin();
+  }
+
+  delateDestinations() {
+    this._stationService.removeDestinationsStations();
+    this.clearInputDestination();
   }
 
   togglePopUp() {
