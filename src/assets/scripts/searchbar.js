@@ -49,12 +49,12 @@ $(document).ready(function(){
 
   // Searchbar Passenger popup
 
-  $("#discount-list-active").click(function(){
-      $(".discount-list").toggleClass("active");
-  });
-  $(".discount-item").click(function(){
-      $("#discount-list").toggleClass("active");
-  });
+  // $("#discount-list-active").click(function(){
+  //     $(".discount-list").toggleClass("active");
+  // });
+  // $(".discount-item").click(function(){
+  //     $("#discount-list").toggleClass("active");
+  // });
   $("#discount-item").click(function(){
       $("#discount-item").addClass("selected");
   });

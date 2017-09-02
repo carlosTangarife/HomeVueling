@@ -7,11 +7,11 @@
   </ul>
 
   <ul class="passengers-popup_main discount">
-    <li id="discount-list-active">
+    <li id="discount-list-active" (click)="toggleClassListActive()">
       <p>Descuento Residente o familia numerosa</p>
       <span class="icon icon-arrow-right"></span>
     </li>
-    <li class="js-discount-item-selected" style="display: list-item;">
+    <li class="js-discount-item-selected" style="display: list-item;" (click)="toggleClassListActive()">
       <p class="discount-item selected">Fam. Numerosa Especial (10%)</p>
     </li>
     <div class="alert alert--icon info">
@@ -27,7 +27,7 @@
       </div>
     </div>
   </ul>
-  <ul id="discount-list" class="passengers-popup_main discount-list">
+  <ul id="discount-list" class="passengers-popup_main discount-list" [ngClass]="{'active':stateListActive}" (click)="toggleClassListActive()">
     <li>
       <p class="discount-item js-discount">Residente islas o Ceuta (50%)</p>
     </li>
@@ -35,7 +35,7 @@
       <p class="discount-item js-discount">Fam. Numerosa General (5%)</p>
     </li>
     <li>
-      <p id="discount-item" class="discount-item js-discount">Fam. Numerosa Especial (10%)</p>
+      <p class="discount-item js-discount">Fam. Numerosa Especial (10%)</p>
     </li>
     <li>
       <p class="discount-item js-discount">Fam. Numerosa General Residente (55%)</p>

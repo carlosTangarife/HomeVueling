@@ -9,7 +9,10 @@ import { IDataPassenger } from './type-passenger/type-passenger.model';
 export class PassengerComponent implements OnInit {
   @Input() passenger: IPassenger;
   @Input() inputPassengerFocused: boolean;
-  constructor() { }
+  public stateListActive: boolean;
+  constructor() {
+    this.stateListActive = false;
+  }
 
   ngOnInit() {
   }
@@ -28,5 +31,9 @@ export class PassengerComponent implements OnInit {
     if (this.passenger.totalPassengers && this.passenger.totalPassengers > 25) {
       window.location.href = 'https://groupsnew.vueling.com/web';
     }
+  }
+
+  toggleClassListActive() {
+    this.stateListActive = !this.stateListActive;
   }
 }

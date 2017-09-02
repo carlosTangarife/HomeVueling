@@ -184,6 +184,6 @@ export class FlightComponent implements OnInit {
 
   clickPassenger() {
     this.passengerFocused = !this.passengerFocused;
-    this.stateOverlay.emit(this.passengerFocused);
+    this.stateOverlay.emit();
   }
 }
