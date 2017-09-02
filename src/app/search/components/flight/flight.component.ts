@@ -1,7 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms/src/forms';
 import { IFlight, IStation, IMarket, IStationList, IDestination } from './flight.model';
-import { DestinationsService } from 'app/shared/services/destinations.service';
 import { Observable } from 'rxjs/Observable';
 import { ConfigService } from 'app/shared/services/config.service';
 import { StationService } from 'app/shared/services/station.service';
@@ -19,14 +18,13 @@ export class FlightComponent implements OnInit {
   public recentDestinations: IMarket[];
   public destinations: IMarket[];
   public dataFlight: IFlight;
-  public originPopup: boolean = false;
-  public destinationPopup: boolean = false;
+  public originPopup = false;
+  public destinationPopup = false;
+  public passengerFocused = false;
 
-  public passengerFocused: boolean = false;
   @Output() stateOverlay = new EventEmitter<boolean>();
-  constructor(private _ds: DestinationsService,
-    private _configService: ConfigService,
-    private _stationService: StationService) { }
+
+  constructor(private _configService: ConfigService, private _stationService: StationService) { }
 
   ngOnInit() {
     this.dataFlight = {
@@ -78,8 +76,11 @@ export class FlightComponent implements OnInit {
 
   getRecentOrigins(): IStation[] {
     let cookie = this._stationService.getOriginsStations();
-    return cookie.map(val => this.stations.StationList
-      .find(station => station.code === val.iataCode));
+    return cookie.map(val => {
+      let result = this.stations.StationList.find(station => station.code === val.iataCode);
+      result.isRecent = true;
+      return result;
+    });
   }
 
   getRecentDestinations(): IMarket[] {
@@ -97,7 +98,8 @@ export class FlightComponent implements OnInit {
             countryCode: station.countryCode,
             countryName: station.countryName,
             macCode: station.macCode,
-            name: station.name
+            name: station.name,
+            isRecent: true
           };
           return result;
         }
@@ -110,7 +112,6 @@ export class FlightComponent implements OnInit {
     console.log(formFlight);
     window.location.href = '/';
   }
-
 
   clearInputDestination() {
     this.dataFlight.destination.code = '';

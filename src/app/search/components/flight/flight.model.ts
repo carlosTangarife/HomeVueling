@@ -11,7 +11,8 @@ export interface IStation {
   name: string,
   code: string,
   countryCode?: string,
-  countryName?: string
+  countryName?: string,
+  isRecent?: boolean
 };
 
 export interface IStationList {
@@ -33,7 +34,8 @@ export interface IMarket {
   countryName?: string,
   connection: boolean,
   largefamily: boolean,
-  residents: boolean
+  residents: boolean,
+  isRecent?: boolean
 };
 
 export interface IFlight {
