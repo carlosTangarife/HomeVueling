@@ -1,9 +1,26 @@
 <div id="passengers-popup" class="searchbar-popup passengers-popup discount" [ngClass]="{'show-table': inputPassengerFocused}">
   <ul class="passengers-popup_main">
-    <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'adult'" [rulAge]="'Since 16 years'" [age]="passenger.adult"></app-type-passenger>
-    <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'children'" [rulAge]="'2 to 15 years'" [age]="passenger.children"></app-type-passenger>
-    <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'babies'" [rulAge]="'From 7 days to 23 months'" [age]="passenger.babies"></app-type-passenger>
-    <app-type-passenger (sendInfoToParent)="operatorPassengers($event)" [label]="'extraSeat'" [rulAge]="'+ info'" [age]="passenger.extraSeat" [info]="true"></app-type-passenger>
+
+    <app-type-passenger [label]="'adult'" [rulAge]="'Since 16 years'" [age]="passenger.adult">
+        <span class="icon icon-rounded-less" (click)="validateAdult(true, 'adult')" click-less></span>
+        <span class="icon icon-rounded-more" (click)="validateAdult(false, 'adult')" click-more></span>
+    </app-type-passenger>
+<!--
+    <app-type-passenger [label]="'children'" [rulAge]="'2 to 15 years'" [age]="passenger.children"></app-type-passenger>
+    <app-type-passenger [label]="'babies'" [rulAge]="'From 7 days to 23 months'" [age]="passenger.babies"></app-type-passenger>
+     -->
+    <app-type-passenger [label]="'extraSeat'" [rulAge]="'+ info'" [age]="passenger.extraSeat" [info]="true">
+        <div *ngIf="disabledBaby; then tagLessWithEventClick else tagLessWithOutEventClick"></div>
+
+        <ng-template #tagLessWithEventClick>
+          <span class="icon icon-rounded-less" (click)="validateBaby(true, 'adult')" click-less></span>
+        </ng-template>
+
+        <ng-template #tagLessWithOutEventClick>
+            <span class="icon icon-rounded-less disabled" click-less></span>
+        </ng-template>
+
+    </app-type-passenger>
   </ul>
 
   <ul class="passengers-popup_main discount">

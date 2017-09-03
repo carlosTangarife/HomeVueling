@@ -12,21 +12,9 @@ export class TypePassengerComponent implements OnInit {
   @Input() rulAge: string;
   @Input() age: string;
   @Input() info: boolean;
-  @Output() sendInfoToParent = new EventEmitter<IDataPassenger>();
 
   constructor() { }
 
   ngOnInit() {
-  }
-
-  eventParent(less: boolean, more: boolean, typePassenger: string) {
-    alert('holas');
-    this.dataPassenger = {
-      less: less,
-      more: more,
-      typePassenger: typePassenger
-    };
-
-    this.sendInfoToParent.emit(this.dataPassenger);
   }
 }

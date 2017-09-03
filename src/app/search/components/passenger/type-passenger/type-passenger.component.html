@@ -8,8 +8,8 @@
 
   </div>
   <div class="passengers-popup_main_counter">
-    <span class="icon icon-rounded-less" (click)="eventParent(true, false, label)"></span>
+    <ng-content select="[click-less]"></ng-content>
     <div class="number">{{age}}</div>
-    <span class="icon icon-rounded-more" (click)="eventParent(false, true, label)"></span>
+    <ng-content select="[click-more]"></ng-content>
   </div>
 </li>

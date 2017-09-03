@@ -17,6 +17,8 @@ export class PassengerComponent implements OnInit {
   public dataPassenger: IDataPassenger;
   public infoList: Array<IInfoList>;
 
+  public disabledBaby: boolean;
+
   constructor() {
     this.stateListActive = false;
     this.discountPassengerList = [
@@ -36,15 +38,6 @@ export class PassengerComponent implements OnInit {
   ngOnInit() {
   }
 
-  operatorPassengers(data: IDataPassenger) {
-    if (data.more && this.passenger[data.typePassenger] < 16) {
-      this.passenger[data.typePassenger] += 1;
-    }else if (data.less && this.passenger[data.typePassenger] > 0) {
-      this.passenger[data.typePassenger] -= 1;
-    }
-    this.totalPassenger();
-  }
-
   totalPassenger() {
     this.passenger.totalPassengers = this.passenger.adult + this.passenger.babies + this.passenger.children + this.passenger.extraSeat;
     if (this.passenger.totalPassengers && this.passenger.totalPassengers > 25) {
@@ -54,5 +47,25 @@ export class PassengerComponent implements OnInit {
 
   toggleClassListActive() {
     this.stateListActive = !this.stateListActive;
+  }
+
+  moreAndLessOperations(state: boolean, typePassenger: string) {
+    if (state) {
+      this.passenger[typePassenger] -= 1;
+    }else {
+      this.passenger[typePassenger] += 1;
+    }
+    this.totalPassenger();
+  }
+
+  validateAdult(state: boolean, typePassenger: string) {
+    this.moreAndLessOperations(state, typePassenger);
+    if (this.passenger.babies <= this.passenger.adult) {
+      this.disabledBaby = true;
+    }
+  }
+
+  validateBaby(state: boolean, typePassenger: string) {
+    this.moreAndLessOperations(state, typePassenger);
   }
 }
