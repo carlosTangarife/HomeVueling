@@ -56,15 +56,18 @@ export class FlightComponent implements OnInit {
     let recentOrigins = this.getRecentOrigins();
     this.filteredOrigins = this.stations.StationList.map(station => {
       station.isRecent = recentOrigins.includes(station);
+      station.order = recentOrigins.indexOf(station);
       return station;
     });
   }
 
   filterStationsByRecent(isRecent: boolean) {
-    return this.filteredOrigins.filter(opt => opt.isRecent === isRecent);
+    let filtered = this.filteredOrigins.filter(opt => opt.isRecent === isRecent);
+    return isRecent ? filtered.sort((a, b) => a.order - b.order) : filtered;
   }
 
   filterStations(key?: string) {
+    this.originPopup = true;
     this.filteredOrigins = key ? this.stations.StationList
       .filter(opt => opt.name.toLowerCase().match(key.toLowerCase())
         || opt.code.toLowerCase().match(key.toLowerCase())
@@ -73,10 +76,12 @@ export class FlightComponent implements OnInit {
   }
 
   filterDestinationsByRecent(isRecent: boolean) {
-    return this.filteredDestinations.filter(opt => opt.isRecent === isRecent);
+    let filtered = this.filteredDestinations.filter(opt => opt.isRecent === isRecent);
+    return isRecent ? filtered.sort((a, b) => a.order - b.order) : filtered;
   }
 
   filterDestinations(key?: string) {
+    this.toggleDestinationPopUp();
     this.filteredDestinations = key ? this.marketsIata
       .filter(opt => opt.name.toLowerCase().match(key.toLowerCase())
         || opt.code.toLowerCase().match(key.toLowerCase())
@@ -115,6 +120,7 @@ export class FlightComponent implements OnInit {
     let recentDestinations = this.getRecentDestinations();
     this.filteredDestinations = this.marketsIata.map(station => {
       station.isRecent = recentDestinations.includes(station);
+      station.order = recentDestinations.indexOf(station);
       return station;
     });
   }

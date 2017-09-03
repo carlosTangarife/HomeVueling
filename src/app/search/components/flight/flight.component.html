@@ -69,17 +69,22 @@
           <span class="erase-label" (click)="delateDestinations()">Borrar</span>
         </p>
         <ul class="cities-sugestion-popup_list">
-          <li *ngFor="let destination of filterDestinationsByRecent(true)" (click)="destinationSelected(destination)">
+          <li *ngFor="let destination of filterDestinationsByRecent(true)" (click)="destinationSelected(destination)"
+              [ngClass]="{'green':destination?.connection}" class="">
             <p class="list-item">{{destination?.name}}</p>
             <p class="list-item">{{destination?.countryName}}</p>
             <p class="list-item">{{destination?.code}}</p>
-            <p class="list-item"><span class="icon icon-arrow-list"></span></p>
+            <p class="list-item"><span class="icon icon-clock">
+              <span class="path1"></span>
+              <span class="path2"></span>
+            </span></p>
           </li>
         </ul>
 
         <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
         <ul class="cities-sugestion-popup_list">
-          <li *ngFor="let destination of filterDestinationsByRecent(false)" (click)="destinationSelected(destination)">
+          <li *ngFor="let destination of filterDestinationsByRecent(false)" (click)="destinationSelected(destination)"
+              [ngClass]="{'green':destination?.connection}" class="">
             <p class="list-item">{{destination?.name}}</p>
             <p class="list-item">{{destination?.countryName}}</p>
             <p class="list-item">{{destination?.code}}</p>
