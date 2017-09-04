@@ -6,7 +6,7 @@
           <span class="prefix" *ngIf="dataFlight.origin.code">{{dataFlight.origin.code}}</span>
             <input type="text" id="origin-input"
               [(ngModel)]="dataFlight.origin.name"
-              (keyup)="_fs.filterStations(originInput.value);"
+              (keyup)="filterStations(originInput.value);"
               name="origin"
               #originInput
               class="form-control js-searchbar-input"
@@ -25,7 +25,7 @@
             <span class="erase-label" (click)="_fs.deleteOrigins()">Borrar</span>
           </p>
           <ul class="cities-sugestion-popup_list">
-            <li *ngFor="let origin of _fs.StationsSource$ | async" (click)="originSelected(origin)">
+            <li *ngFor="let origin of originRecent" (click)="originSelected(origin)">
               <p class="list-item">{{origin?.name}}</p>
               <p class="list-item">{{origin?.countryName}}</p>
               <p class="list-item">{{origin?.code}}</p>
@@ -35,7 +35,7 @@
 
           <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
           <ul class="cities-sugestion-popup_list">
-            <li *ngFor="let origin of _fs.StationsSourceCurrent$  | async" (click)="originSelected(origin)">
+            <li *ngFor="let origin of originCurrent" (click)="originSelected(origin)">
               <p class="list-item">{{origin?.name}}</p>
               <p class="list-item">{{origin?.countryName}}</p>
               <p class="list-item">{{origin?.code}}</p>

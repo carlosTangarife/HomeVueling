@@ -13,19 +13,15 @@ export class FlightService {
   public filteredOrigins: IStation[];
   public filteredDestinations: IMarket[];
 
-  private subjectStations = new BehaviorSubject<IStation[]>(null);
-  public StationsSource$ = this.subjectStations.asObservable();
+  private subjectStations = new BehaviorSubject<IStation[]>(this.filteredOrigins);
+  public sourceRecent$ = this.subjectStations.asObservable();
 
   private subjectStationsCurrent = new BehaviorSubject<IStation[]>(this.filteredOrigins);
-  public StationsSourceCurrent$ = this.subjectStationsCurrent.asObservable();
+  public sourceCurrent$ = this.subjectStationsCurrent.asObservable();
 
   constructor(private _configService: ConfigService, private _stationService: StationService) {
     this.stations = this._configService.environment['stations'];
     this.markets = this._configService.environment['markets'];
-
-    this.getStations();
-    this.getMarketsByIata('BCN');
-    this.getDestinations();
   }
 
   getStations() {
@@ -36,8 +32,6 @@ export class FlightService {
         station.order = recentOrigins.indexOf(station);
         return station;
       });
-    this.recent();
-    this.current();
   }
 
   recent() {
@@ -50,14 +44,12 @@ export class FlightService {
     this.subjectStationsCurrent.next(filterCurrent);
   }
 
-  private filterStations(key?: string) {
-    this.getStations();
+  filterStations(key?: string) {
     this.filteredOrigins = key ? this.filterGeneralStations(this.stations.StationList, key) : this.stations.StationList;
     this.subjectStationsCurrent.next(this.filteredOrigins);
   }
 
   filterDestinationsByRecent(isRecent: boolean) {
-    console.log('-- start filterDestinationsByRecent --');
     let filtered = this.filteredDestinations.filter(opt => opt.isRecent === isRecent);
     return isRecent ? filtered.sort((a, b) => a.order - b.order) : filtered;
   }
@@ -88,13 +80,16 @@ export class FlightService {
                 .filter(Boolean);
   }
 
-  private getDestinations() {
+  getDestinations() {
     let recentDestinations = this.getRecentDestinations();
     this.filteredDestinations = this.marketsIata.map(station => {
       station.isRecent = recentDestinations.includes(station);
       station.order = recentDestinations.indexOf(station);
       return station;
     });
+
+    this.recent();
+    this.current();
   }
 
   getMarketsByIata(iata: string) {
@@ -116,8 +111,6 @@ export class FlightService {
         }
       })
       .filter(Boolean) : this.marketsIata = [];
-
-      this.getDestinations();
   }
 
   private deleteOrigins() {
