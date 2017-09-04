@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { IFlight } from 'app/search/components/flight/flight.model';
 
@@ -14,7 +14,7 @@ export class FlightComponent implements OnInit {
 
   @Output() stateOverlay = new EventEmitter<boolean>();
 
-  constructor() { }
+  constructor(private cdRef: ChangeDetectorRef) { }
 
   ngOnInit() {
     this.dataFlight = {
