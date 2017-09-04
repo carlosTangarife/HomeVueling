@@ -27,6 +27,7 @@ export class StationsSelectorService {
   }
 
   initDestinations(iata: string) {
+    this.originSelected = iata;
     this.getMarketsByIata(iata);
     this.getDestinations();
   }
@@ -121,39 +122,37 @@ export class StationsSelectorService {
   }
 
   clearInputOrigin() {
+    this.originSelected = '';
     this.getStations();
     this.clearInputDestination();
   }
 
-  clearInputDestination(el?) {
+  clearInputDestination() {
     this.getMarketsByIata(this.originSelected)
-    this.toggleDestinationPopUp(el ? el : null);
+    this.toggleDestinationPopup();
   }
 
   selectOrigin(iata: string) {
     this.originSelected = iata;
-    this.togglePopUp();
+    this.togglePopup();
     this.clearInputDestination();
   }
 
   selectDestination() {
-    this.toggleDestinationPopUp();
+    this.toggleDestinationPopup();
   }
 
-  togglePopUp() {
+  togglePopup() {
     this.destinationPopup = false;
     this.originPopup = !this.originPopup;
   }
 
-  toggleDestinationPopUp(el?) {
+  toggleDestinationPopup() {
     if (this.originSelected) {
       this.originPopup = false;
       this.destinationPopup = !this.destinationPopup;
     } else {
-      if (el) {
-        el.focus();
-      }
-      this.togglePopUp();
+      this.togglePopup();
     }
   }
 }

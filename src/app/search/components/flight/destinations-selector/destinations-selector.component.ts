@@ -19,14 +19,8 @@ export class DestinationsSelectorComponent implements OnInit {
   clearInputDestination(el?) {
     this.dataFlight.destination.code = '';
     this.dataFlight.destination.name = '';
-    this._stationsSelectorService.clearInputDestination(el);
-  }
-
-  originSelected(originSelected: IStation) {
-    this.dataFlight.origin.name = originSelected.name;
-    this.dataFlight.origin.code = originSelected.code;
-    this.dataFlight.origin.countryName = originSelected.countryName;
-    this._stationsSelectorService.selectOrigin(this.dataFlight.origin.code);
+    this._stationsSelectorService.clearInputDestination();
+    this.toggleDestinationPopUp(el);
   }
 
   destinationSelected(destinationSelected: IStation) {
@@ -34,5 +28,13 @@ export class DestinationsSelectorComponent implements OnInit {
     this.dataFlight.destination.code = destinationSelected.code;
     this.dataFlight.destination.countryName = destinationSelected.countryName;
     this._stationsSelectorService.selectDestination();
+  }
+
+  toggleDestinationPopUp(el?) {
+    if (this._stationsSelectorService.originPopup) {
+      if (el) {
+        el.focus();
+      }
+    }
   }
 }
