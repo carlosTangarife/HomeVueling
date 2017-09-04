@@ -20,12 +20,12 @@
         </div>
 
         <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':originPopup}">
-          <p class="cities-sugestion-popup_title" *ngIf="_fs.filterStationsByRecent(true).length > 0">
+          <p class="cities-sugestion-popup_title">
             Búsquedas recientes
             <span class="erase-label" (click)="_fs.deleteOrigins()">Borrar</span>
           </p>
           <ul class="cities-sugestion-popup_list">
-            <li *ngFor="let origin of _fs.filterStationsByRecent(true)" (click)="originSelected(origin)">
+            <li *ngFor="let origin of _fs.StationsSource$ | async" (click)="originSelected(origin)">
               <p class="list-item">{{origin?.name}}</p>
               <p class="list-item">{{origin?.countryName}}</p>
               <p class="list-item">{{origin?.code}}</p>
@@ -35,7 +35,7 @@
 
           <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
           <ul class="cities-sugestion-popup_list">
-            <li *ngFor="let origin of _fs.filterStationsByRecent(false)" (click)="originSelected(origin)">
+            <li *ngFor="let origin of _fs.StationsSourceCurrent$  | async" (click)="originSelected(origin)">
               <p class="list-item">{{origin?.name}}</p>
               <p class="list-item">{{origin?.countryName}}</p>
               <p class="list-item">{{origin?.code}}</p>

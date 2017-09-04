@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { NgForm } from '@angular/forms/src/forms';
 import { IFlight, IStation, IMarket, IStationList, IDestination } from './flight.model';
 import { Observable } from 'rxjs/Observable';
@@ -9,7 +9,8 @@ import { FlightService } from '../../../search/components/flight/flight.service'
 @Component({
   selector: 'app-flight',
   templateUrl: './flight.component.html',
-  providers: [FlightService]
+  providers: [FlightService],
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlightComponent implements OnInit {
 
@@ -17,6 +18,7 @@ export class FlightComponent implements OnInit {
   public originPopup = false;
   public destinationPopup = false;
   public passengerFocused = false;
+
 
   @Output() stateOverlay = new EventEmitter<boolean>();
 
