@@ -10,7 +10,6 @@ import { StationService } from 'app/shared/services/station.service';
   templateUrl: './flight.component.html'
 })
 export class FlightComponent implements OnInit {
-
   public stations: IStationList;
   public markets: any;
   public marketsIata: IMarket[];
@@ -81,7 +80,7 @@ export class FlightComponent implements OnInit {
   }
 
   filterDestinations(key?: string) {
-    this.toggleDestinationPopUp();
+    this.destinationPopup = true;
     this.filteredDestinations = key ? this.marketsIata
       .filter(opt => opt.name.toLowerCase().match(key.toLowerCase())
         || opt.code.toLowerCase().match(key.toLowerCase())
@@ -108,12 +107,12 @@ export class FlightComponent implements OnInit {
     window.location.href = '/';
   }
 
-  clearInputDestination() {
+  clearInputDestination(el?) {
     this.dataFlight.destination.code = '';
     this.dataFlight.destination.name = '';
     this.getMarketsByIata(this.dataFlight.origin.code)
     this.getDestinations();
-    this.toggleDestinationPopUp();
+    this.toggleDestinationPopUp(el ? el : null);
   }
 
   getDestinations() {
@@ -172,7 +171,7 @@ export class FlightComponent implements OnInit {
     this.clearInputOrigin();
   }
 
-  delateDestinations() {
+  deleteDestinations() {
     this._stationService.removeDestinationsStations();
     this.clearInputDestination();
   }
@@ -182,11 +181,14 @@ export class FlightComponent implements OnInit {
     this.originPopup = !this.originPopup;
   }
 
-  toggleDestinationPopUp() {
+  toggleDestinationPopUp(el?) {
     if (this.dataFlight.origin.code) {
       this.originPopup = false;
       this.destinationPopup = !this.destinationPopup;
     } else {
+      if (el) {
+        el.focus();
+      }
       this.togglePopUp();
     }
   }
