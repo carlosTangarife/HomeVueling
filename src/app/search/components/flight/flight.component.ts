@@ -8,11 +8,11 @@ import { FlightService } from '../../../search/components/flight/flight.service'
 
 @Component({
   selector: 'app-flight',
-  templateUrl: './flight.component.html'
+  templateUrl: './flight.component.html',
+  providers: [FlightService]
 })
 export class FlightComponent implements OnInit {
-  public stations: IStationList;
-  public markets: any;
+
   public dataFlight: IFlight;
   public originPopup = false;
   public destinationPopup = false;
@@ -20,7 +20,7 @@ export class FlightComponent implements OnInit {
 
   @Output() stateOverlay = new EventEmitter<boolean>();
 
-  constructor(private _configService: ConfigService, private _stationService: StationService, private _flightService: FlightService) { }
+  constructor(protected _fs: FlightService) { }
 
   ngOnInit() {
     this.dataFlight = {
@@ -42,15 +42,14 @@ export class FlightComponent implements OnInit {
         totalPassengers: 1
       }
     };
-    this.stations = this._configService.environment['stations'];
-    this.markets = this._configService.environment['markets'];
-    this._flightService.getStations();
-    this._flightService.getMarketsByIata(this.dataFlight.origin.code);
-    this._flightService.getDestinations();
+
+    this._fs.getStations();
+    this._fs.getMarketsByIata(this.dataFlight.origin.code);
+    this._fs.getDestinations();
   }
 
   onSubmit(formFlight: NgForm) {
-    this._flightService.saveSearch(this.dataFlight);
+    this._fs.saveSearch(this.dataFlight);
     console.log(formFlight);
     window.location.href = '/';
   }
@@ -58,15 +57,15 @@ export class FlightComponent implements OnInit {
   clearInputDestination(el?) {
     this.dataFlight.destination.code = '';
     this.dataFlight.destination.name = '';
-    this._flightService.getMarketsByIata(this.dataFlight.origin.code)
-    this._flightService.getDestinations();
+    this._fs.getMarketsByIata(this.dataFlight.origin.code)
+    this._fs.getDestinations();
     this.toggleDestinationPopUp(el ? el : null);
   }
 
   clearInputOrigin() {
     this.dataFlight.origin.code = '';
     this.dataFlight.origin.name = '';
-    this._flightService.getStations();
+    this._fs.getStations();
     this.clearInputDestination();
   }
 
