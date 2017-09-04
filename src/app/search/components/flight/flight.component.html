@@ -6,9 +6,9 @@
           <span class="prefix" *ngIf="dataFlight.origin.code">{{dataFlight.origin.code}}</span>
             <input type="text" id="origin-input"
               [(ngModel)]="dataFlight.origin.name"
-              (keyup)="filterStations(origin.value);"
+              (keyup)="filterStations(originInput.value);"
               name="origin"
-              #origin="ngModel"
+              #originInput
               class="form-control js-searchbar-input"
               placeholder="Ciudad, país o aeropuerto"
               required
@@ -46,13 +46,13 @@
 
      <div id="form-group--destination" class="form-input destination" [ngClass]="{'focused':destinationPopup}">
       <label for="destination-input">Destino</label>
-      <div class="input-group" (click)="clearInputDestination()">
+      <div class="input-group" (click)="clearInputDestination(originInput)">
         <span class="prefix" *ngIf="dataFlight.destination.code">{{dataFlight.destination.code}}</span>
         <input type="text" id="destination-input"
               [(ngModel)]="dataFlight.destination.name"
-              (keyup)="filterDestinations(destination.value);"
+              (keyup)="filterDestinations(destinationInput.value);"
               name="destination"
-              #destination="ngModel"
+              #destinationInput
               class="form-control js-searchbar-input"
               placeholder="Ciudad, país o aeropuerto"
               required
@@ -66,7 +66,7 @@
       <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':destinationPopup}">
         <p class="cities-sugestion-popup_title" *ngIf="filterDestinationsByRecent(true).length > 0">
           Búsquedas recientes
-          <span class="erase-label" (click)="delateDestinations()">Borrar</span>
+          <span class="erase-label" (click)="deleteDestinations()">Borrar</span>
         </p>
         <ul class="cities-sugestion-popup_list">
           <li *ngFor="let destination of filterDestinationsByRecent(true)" (click)="destinationSelected(destination)"
