@@ -2,8 +2,9 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgForm } from '@angular/forms/src/forms';
 import { IFlight, IStation, IMarket, IStationList, IDestination } from './flight.model';
 import { Observable } from 'rxjs/Observable';
-import { ConfigService } from 'app/shared/services/config.service';
-import { StationService } from 'app/shared/services/station.service';
+import { ConfigService } from '../../../shared/services/config.service';
+import { StationService } from '../../../shared/services/station.service';
+import { FlightService } from '../../../search/components/flight/flight.service';
 
 @Component({
   selector: 'app-flight',
@@ -12,9 +13,6 @@ import { StationService } from 'app/shared/services/station.service';
 export class FlightComponent implements OnInit {
   public stations: IStationList;
   public markets: any;
-  public marketsIata: IMarket[];
-  public filteredOrigins: IStation[];
-  public filteredDestinations: IMarket[];
   public dataFlight: IFlight;
   public originPopup = false;
   public destinationPopup = false;
@@ -22,7 +20,7 @@ export class FlightComponent implements OnInit {
 
   @Output() stateOverlay = new EventEmitter<boolean>();
 
-  constructor(private _configService: ConfigService, private _stationService: StationService) { }
+  constructor(private _configService: ConfigService, private _stationService: StationService, private _flightService: FlightService) { }
 
   ngOnInit() {
     this.dataFlight = {
@@ -46,63 +44,13 @@ export class FlightComponent implements OnInit {
     };
     this.stations = this._configService.environment['stations'];
     this.markets = this._configService.environment['markets'];
-    this.getStations();
-    this.getMarketsByIata(this.dataFlight.origin.code);
-    this.getDestinations();
-  }
-
-  getStations() {
-    let recentOrigins = this.getRecentOrigins();
-    this.filteredOrigins = this.stations.StationList.map(station => {
-      station.isRecent = recentOrigins.includes(station);
-      station.order = recentOrigins.indexOf(station);
-      return station;
-    });
-  }
-
-  filterStationsByRecent(isRecent: boolean) {
-    let filtered = this.filteredOrigins.filter(opt => opt.isRecent === isRecent);
-    return isRecent ? filtered.sort((a, b) => a.order - b.order) : filtered;
-  }
-
-  filterStations(key?: string) {
-    this.originPopup = true;
-    this.filteredOrigins = key ? this.stations.StationList
-      .filter(opt => opt.name.toLowerCase().match(key.toLowerCase())
-        || opt.code.toLowerCase().match(key.toLowerCase())
-        || opt.countryCode.toLowerCase().match(key.toLowerCase())
-        || opt.countryName.toLowerCase().match(key.toLowerCase())) : this.stations.StationList;
-  }
-
-  filterDestinationsByRecent(isRecent: boolean) {
-    let filtered = this.filteredDestinations.filter(opt => opt.isRecent === isRecent);
-    return isRecent ? filtered.sort((a, b) => a.order - b.order) : filtered;
-  }
-
-  filterDestinations(key?: string) {
-    this.destinationPopup = true;
-    this.filteredDestinations = key ? this.marketsIata
-      .filter(opt => opt.name.toLowerCase().match(key.toLowerCase())
-        || opt.code.toLowerCase().match(key.toLowerCase())
-        || opt.countryCode.toLowerCase().match(key.toLowerCase())
-        || opt.countryName.toLowerCase().match(key.toLowerCase())) : this.marketsIata;
-  }
-
-  getRecentOrigins(): IStation[] {
-    let cookie = this._stationService.getOriginsStations();
-    return cookie.map(val => this.stations.StationList
-      .find(station => station.code === val.iataCode));
-  }
-
-  getRecentDestinations(): IMarket[] {
-    let cookie = this._stationService.getDestinationsStations();
-    return cookie.map(val => this.marketsIata
-      .find(station => station.code === val.iataCode)).filter(Boolean);
+    this._flightService.getStations();
+    this._flightService.getMarketsByIata(this.dataFlight.origin.code);
+    this._flightService.getDestinations();
   }
 
   onSubmit(formFlight: NgForm) {
-    this._stationService.saveStationOrigin(this.dataFlight.origin.code);
-    this._stationService.saveStationDestination(this.dataFlight.destination.code);
+    this._flightService.saveSearch(this.dataFlight);
     console.log(formFlight);
     window.location.href = '/';
   }
@@ -110,44 +58,15 @@ export class FlightComponent implements OnInit {
   clearInputDestination(el?) {
     this.dataFlight.destination.code = '';
     this.dataFlight.destination.name = '';
-    this.getMarketsByIata(this.dataFlight.origin.code)
-    this.getDestinations();
+    this._flightService.getMarketsByIata(this.dataFlight.origin.code)
+    this._flightService.getDestinations();
     this.toggleDestinationPopUp(el ? el : null);
-  }
-
-  getDestinations() {
-    let recentDestinations = this.getRecentDestinations();
-    this.filteredDestinations = this.marketsIata.map(station => {
-      station.isRecent = recentDestinations.includes(station);
-      station.order = recentDestinations.indexOf(station);
-      return station;
-    });
-  }
-
-  getMarketsByIata(iata: string) {
-    this.marketsIata = iata && this.markets[iata] ? this.markets[iata]
-      .map(market => {
-        let station: IStation = this.stations.StationList.find(s => s.code === market.destination);
-        if (station) {
-          let result: IMarket = {
-            code: market.destination,
-            connection: market.connection,
-            residents: market.residents,
-            largefamily: market.largefamily,
-            countryCode: station.countryCode,
-            countryName: station.countryName,
-            macCode: station.macCode,
-            name: station.name
-          };
-          return result;
-        }
-      }).filter(Boolean) : this.marketsIata = [];
   }
 
   clearInputOrigin() {
     this.dataFlight.origin.code = '';
     this.dataFlight.origin.name = '';
-    this.getStations();
+    this._flightService.getStations();
     this.clearInputDestination();
   }
 
@@ -164,16 +83,6 @@ export class FlightComponent implements OnInit {
     this.dataFlight.destination.code = destinationSelected.code;
     this.dataFlight.destination.countryName = destinationSelected.countryName;
     this.toggleDestinationPopUp();
-  }
-
-  deleteOrigins() {
-    this._stationService.removeOriginsStations();
-    this.clearInputOrigin();
-  }
-
-  deleteDestinations() {
-    this._stationService.removeDestinationsStations();
-    this.clearInputDestination();
   }
 
   togglePopUp() {
