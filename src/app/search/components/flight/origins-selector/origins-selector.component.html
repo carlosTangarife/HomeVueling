@@ -1,0 +1,36 @@
+<!-- <div id="form-group--origin" [ngClass]="{'focused':originPopup}">
+    <label for="origin-input">Origen</label>
+    <div class="input-group" (click)="clearInputOrigin()">
+      <span class="prefix" *ngIf="dataFlight.origin.code">{{dataFlight.origin.code}}</span>
+      <input type="text" id="origin-input" [(ngModel)]="dataFlight.origin.name" (keyup)="_fs.filterStations(originInput.value);"
+        name="origin" #originInput class="form-control js-searchbar-input" placeholder="Ciudad, país o aeropuerto" required>
+    </div>
+  
+    <div class="popover popover--error" *ngIf="false">
+      <div class="popover-content">Before continiung, you must select your origin.</div>
+    </div>
+  
+    <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':originPopup}">
+      <p class="cities-sugestion-popup_title">
+        Búsquedas recientes
+        <span class="erase-label" (click)="_fs.deleteOrigins()">Borrar</span>
+      </p>
+      <ul class="cities-sugestion-popup_list">
+        <li *ngFor="let origin of _fs.StationsSource$ | async" (click)="originSelected(origin)">
+          <p class="list-item">{{origin?.name}}</p>
+          <p class="list-item">{{origin?.countryName}}</p>
+          <p class="list-item">{{origin?.code}}</p>
+          <p class="list-item"><span class="icon icon-arrow-list"></span></p>
+        </li>
+      </ul>
+  
+      <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
+      <ul class="cities-sugestion-popup_list">
+        <li *ngFor="let origin of _fs.StationsSourceCurrent$  | async" (click)="originSelected(origin)">
+          <p class="list-item">{{origin?.name}}</p>
+          <p class="list-item">{{origin?.countryName}}</p>
+          <p class="list-item">{{origin?.code}}</p>
+        </li>
+      </ul>
+    </div>
+  </div> -->

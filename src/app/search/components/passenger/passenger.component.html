@@ -2,49 +2,47 @@
   <ul class="passengers-popup_main">
 
     <app-type-passenger [label]="'adult'" [rulAge]="'Since 16 years'" [age]="passenger.adult">
-        <span class="icon icon-rounded-less" (click)="validateAdult(true, 'adult')" click-less></span>
-        <span class="icon icon-rounded-more" (click)="validateAdult(false, 'adult')" click-more></span>
+      <span class="icon icon-rounded-less" (click)="validateAdult(true, 'adult')" click-less></span>
+      <span class="icon icon-rounded-more" (click)="validateAdult(false, 'adult')" click-more></span>
     </app-type-passenger>
-<!--
+    <!--
     <app-type-passenger [label]="'children'" [rulAge]="'2 to 15 years'" [age]="passenger.children"></app-type-passenger>
     <app-type-passenger [label]="'babies'" [rulAge]="'From 7 days to 23 months'" [age]="passenger.babies"></app-type-passenger>
      -->
     <app-type-passenger [label]="'extraSeat'" [rulAge]="'+ info'" [age]="passenger.extraSeat" [info]="true">
-        <div *ngIf="disabledBaby; then tagLessWithEventClick else tagLessWithOutEventClick"></div>
+      <div *ngIf="disabledBaby; then tagLessWithEventClick else tagLessWithOutEventClick"></div>
 
-        <ng-template #tagLessWithEventClick>
-          <span class="icon icon-rounded-less" (click)="validateBaby(true, 'adult')" click-less></span>
-        </ng-template>
+      <ng-template #tagLessWithEventClick>
+        <span class="icon icon-rounded-less" (click)="validateBaby(true, 'adult')" click-less></span>
+      </ng-template>
 
-        <ng-template #tagLessWithOutEventClick>
-            <span class="icon icon-rounded-less disabled" click-less></span>
-        </ng-template>
+      <ng-template #tagLessWithOutEventClick>
+        <span class="icon icon-rounded-less disabled" click-less></span>
+      </ng-template>
 
     </app-type-passenger>
   </ul>
 
   <ul class="passengers-popup_main discount">
-
     <li id="discount-list-active" (click)="toggleClassListActive()">
       <p>Descuento Residente o familia numerosa</p>
       <span class="icon icon-arrow-right"></span>
     </li>
-    <li class="js-discount-item-selected" style="display: list-item;" (click)="toggleClassListActive()">
+    <li class="js-discount-item-selected" (click)="toggleClassListActive()">
       <p class="discount-item selected">Fam. Numerosa Especial (10%)</p>
     </li>
-
     <div class="alert alert--icon info">
-        <div class="alert_wrap" *ngFor="let infoItem of infoList">
-          <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
-          <p class="alert_wrap_title">{{infoItem.title}}</p>
-          <p class="alert_wrap_message">{{infoItem.body}}</p>
-        </div>
+      <div class="alert_wrap" *ngFor="let infoItem of infoList">
+        <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
+        <p class="alert_wrap_title">{{infoItem.title}}</p>
+        <p class="alert_wrap_message">{{infoItem.body}}</p>
+      </div>
     </div>
-
   </ul>
+
   <ul id="discount-list" class="passengers-popup_main discount-list" [ngClass]="{'active':stateListActive}" (click)="toggleClassListActive()">
-      <li *ngFor="let discountItem of discountPassengerList">
-          <p class="discount-item js-discount">{{discountItem.data}} ({{discountItem.discount}}%)</p>
-      </li>
-    </ul>
+    <li *ngFor="let discountItem of discountPassengerList">
+      <p class="discount-item js-discount">{{discountItem.data}} ({{discountItem.discount}}%)</p>
+    </li>
+  </ul>
 </div>

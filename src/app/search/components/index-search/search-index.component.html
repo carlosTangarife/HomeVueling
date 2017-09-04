@@ -32,16 +32,16 @@
 
     </ul>
     <div class="tab-content searchbar-main_tab-content">
-      <div id="home" class="tab-pane fade searchbar-main_tab-content_pane search"  [ngClass]="{'in active': isFlight}">
+        <div id="tab-search" class="tab-pane fade searchbar-main_tab-content_pane search" [ngClass]="{'in active': isFlight}">
         <app-flight (stateOverlay)="toggleClassOverlay()"></app-flight>
       </div>
 
-      <div id="menu1" class="tab-pane fade searchbar-main_tab-content_pane check-in" [ngClass]="{'in active': ischeckIn}">
+      <div id="tab-checkin" class="tab-pane fade searchbar-main_tab-content_pane check-in" [ngClass]="{'in active': ischeckIn}">
         <h3 class="title">Check-in online</h3>
         <app-check-in [type]="'check-in'"></app-check-in>
       </div>
 
-      <div id="menu2" class="tab-pane fade searchbar-main_tab-content_pane reservation" [ngClass]="{'in active': isReservation}">
+      <div id="tab-reservation" class="tab-pane fade searchbar-main_tab-content_pane reservation" [ngClass]="{'in active': isReservation}">
         <h3 class="title">Tu reserva</h3>
         <app-check-in [type]="'reservation'"></app-check-in>
       </div>

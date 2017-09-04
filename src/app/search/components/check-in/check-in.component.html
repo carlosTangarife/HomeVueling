@@ -1,32 +1,40 @@
-<div class="container">
-    <strong *ngIf="flagCheckIn">Obten tus tarjetas de embarque para subir al avion. Podras imprimirlas o descargarlas en tu movil.</strong>
-    <br><br>
-    <button type="button" (click)="isEmail()" class="btn" [ngClass]="{'btn-primary': flag, 'btn-default': !flag }" >Email del Comprador</button>
-    <button type="button" (click)="isOrigin()" class="btn" [ngClass]="{'btn-primary': !flag, 'btn-default': flag }">Origen/destino</button>
-
-    <br><br>
-    <form class="form-inline">
-      <div class="form-group">
-        <label for="codigo">Codigo de Reserva:</label><br>
-        <input type="password" class="form-control" id="codigo">
-      </div>
-
-      <div class="form-group" *ngIf="flag">
-        <label for="email">Email del Comprador:</label><br>
-        <input type="email" class="form-control" id="email">
-      </div>
-
-      <!-- <app-station-selector [show]="!flag" [label]="'Origen/Destino'"></app-station-selector> -->
-
-      <div class="form-group" *ngIf="!flag">
-        <label for="vuelta">Fecha del Primer Vuelo</label><br>
-        <input type="date" name="vuelta" class="form-control" />
-      </div>
-
-      <div class="form-group">
-        <label for="Acceder"></label><br>
-        <input type="submit" class="btn btn-primary" value="Acceder" />
-      </div>
-  </form>
-   <br><br>
-</div>
+<div class="pane-wrapper">
+    <p class="tab-pane_lead-in">Obtén tus tarjetas de embarque para subir al avión: podrás imprimirlas o descargarlas en tu móvil.</p>
+    <h3 class="tab-pane_title">
+       <span class="icon-computer"></span> Check-in online
+    </h3>
+    <div class="tab-pane_options-container">
+       <div class="form-checkbox--button">
+          <label>
+          <input type="checkbox" checked hidden>
+          <span>Email del comprador</span>
+          </label>
+       </div>
+       <div class="form-checkbox--button">
+          <label>
+          <input type="checkbox" hidden>
+          <span>Origen/Destino</span>
+          </label>
+       </div>
+    </div>
+    <div class="form">
+       <div class="form-group form-group--check-in">
+          <div class="form-input">
+             <label>Código de reserva</label>
+             <a href="#">¿Qué es?</a>
+             <div class="input-group">
+                <input type="text" id="origin-input" class="form-control js-searchbar-input" placeholder="Ej. XG6LM3">
+             </div>
+          </div>
+          <div class="form-input">
+             <label>Email del comprador </label>
+             <div class="input-group">
+                <input type="text" id="destination-input" class="form-control js-searchbar-input" placeholder="email@vueling.com">
+             </div>
+          </div>
+       </div>
+       <div class="form-action">
+          <a href="#" onclick="return false;" class="mv_button color-darkGrey size-md icon icon-right">Acceder</a>
+       </div>
+    </div>
+ </div>

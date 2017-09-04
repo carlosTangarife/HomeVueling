@@ -13,6 +13,8 @@ import { TypePassengerComponent } from './components/passenger/type-passenger/ty
 import { ConfigService } from '../shared/services/config.service';
 import { StationService } from 'app/shared/services/station.service';
 import { CookiesWrapper } from 'app/shared/services/cookies-wrapper.service';
+import { DestinationsSelectorComponent } from './components/flight/destinations-selector/destinations-selector.component';
+import { OriginsSelectorComponent } from './components/flight/origins-selector/origins-selector.component';
 
 export function configServiceFactory(config: ConfigService) {
   let obs = config.load();
@@ -32,7 +34,9 @@ export function configServiceFactory(config: ConfigService) {
     ...SEARCH_COMPONENTS,
     CalendarComponent,
     PassengerComponent,
-    TypePassengerComponent
+    TypePassengerComponent,
+    DestinationsSelectorComponent,
+    OriginsSelectorComponent
 
   ],
   exports: [

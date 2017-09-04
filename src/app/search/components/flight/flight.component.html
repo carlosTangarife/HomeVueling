@@ -1,133 +1,23 @@
 <form autocomplete="off" #searchFlight="ngForm" class="pane-wrapper" (ngSubmit)="onSubmit(searchFlight)" novalidate>
   <div class="form-group form-group--flight-search">
-     <div id="form-group--origin" class="form-input origin" [ngClass]="{'focused':originPopup}">
-        <label for="origin-input">Origen</label>
-        <div class="input-group" (click)="clearInputOrigin()">
-          <span class="prefix" *ngIf="dataFlight.origin.code">{{dataFlight.origin.code}}</span>
-            <input type="text" id="origin-input"
-              [(ngModel)]="dataFlight.origin.name"
-              (keyup)="_fs.filterStations(originInput.value);"
-              name="origin"
-              #originInput
-              class="form-control js-searchbar-input"
-              placeholder="Ciudad, país o aeropuerto"
-              required
-            >
-        </div>
-
-        <div class="popover popover--error" *ngIf="false">
-          <div class="popover-content">Before continiung, you must select your origin.</div>
-        </div>
-
-        <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':originPopup}">
-          <p class="cities-sugestion-popup_title">
-            Búsquedas recientes
-            <span class="erase-label" (click)="_fs.deleteOrigins()">Borrar</span>
-          </p>
-          <ul class="cities-sugestion-popup_list">
-            <li *ngFor="let origin of _fs.StationsSource$ | async" (click)="originSelected(origin)">
-              <p class="list-item">{{origin?.name}}</p>
-              <p class="list-item">{{origin?.countryName}}</p>
-              <p class="list-item">{{origin?.code}}</p>
-              <p class="list-item"><span class="icon icon-arrow-list"></span></p>
-            </li>
-          </ul>
-
-          <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
-          <ul class="cities-sugestion-popup_list">
-            <li *ngFor="let origin of _fs.StationsSourceCurrent$  | async" (click)="originSelected(origin)">
-              <p class="list-item">{{origin?.name}}</p>
-              <p class="list-item">{{origin?.countryName}}</p>
-              <p class="list-item">{{origin?.code}}</p>
-            </li>
-          </ul>
-        </div>
-      </div>
-
-     <div id="form-group--destination" class="form-input destination" [ngClass]="{'focused':destinationPopup}">
-      <label for="destination-input">Destino</label>
-      <div class="input-group" (click)="clearInputDestination(originInput)">
-        <span class="prefix" *ngIf="dataFlight.destination.code">{{dataFlight.destination.code}}</span>
-        <input type="text" id="destination-input"
-              [(ngModel)]="dataFlight.destination.name"
-              (keyup)="_fs.filterDestinations(destinationInput.value);"
-              name="destination"
-              #destinationInput
-              class="form-control js-searchbar-input"
-              placeholder="Ciudad, país o aeropuerto"
-              required
-        >
-      </div>
-
-      <div class="popover popover--error" *ngIf="false">
-          <div class="popover-content">Before continiung, you must select your destination</div>
-      </div>
-
-      <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':destinationPopup}">
-        <p class="cities-sugestion-popup_title" *ngIf="_fs.filterDestinationsByRecent(true).length > 0">
-          Búsquedas recientes
-          <span class="erase-label" (click)="_fs.deleteDestinations()">Borrar</span>
-        </p>
-        <ul class="cities-sugestion-popup_list">
-          <li *ngFor="let destination of _fs.filterDestinationsByRecent(true)" (click)="destinationSelected(destination)"
-              [ngClass]="{'green':destination?.connection}" class="">
-            <p class="list-item">{{destination?.name}}</p>
-            <p class="list-item">{{destination?.countryName}}</p>
-            <p class="list-item">{{destination?.code}}</p>
-            <p class="list-item"><span class="icon icon-clock">
-              <span class="path1"></span>
-              <span class="path2"></span>
-            </span></p>
-          </li>
-        </ul>
-
-        <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
-        <ul class="cities-sugestion-popup_list">
-          <li *ngFor="let destination of _fs.filterDestinationsByRecent(false)" (click)="destinationSelected(destination)"
-              [ngClass]="{'green':destination?.connection}" class="">
-            <p class="list-item">{{destination?.name}}</p>
-            <p class="list-item">{{destination?.countryName}}</p>
-            <p class="list-item">{{destination?.code}}</p>
-          </li>
-        </ul>
-        <div class="cities-sugestion-popup_legend">
-          <ul>
-            <li>Vuelos directos</li>
-            <li>Vuelos en conexión</li>
-          </ul>
-          <div class="cities-sugestion-popup_legend_actions">
-            <div class="link">
-              <span class="icon icon-arrow-right"></span>
-            <a href="">Mapa de destinos</a>
-          </div>
-          <div class="form-checbox--button color-darkGrey">
-             <label>
-                <input type="checkbox" hidden>
-                <span>Múltiples destinos</span>
-              </label>
-            </div>
-          </div>
-        </div>
-      </div>
-
-    </div>
+    <app-origins-selector class="form-input origin"></app-origins-selector>
+    <app-destinations-selector class="form-input destination"></app-destinations-selector>
 
     <app-calendar class="form-input dates"></app-calendar>
 
     <div id="form-group--passengers" class="form-input passengers" [ngClass]="{'focused':passengerFocused}">
         <label for="passengers-input" (click)="clickPassenger()">{{dataFlight.passenger.adult}} Adult, {{dataFlight.passenger.children}} Children, {{dataFlight.passenger.babies}} babies</label>
         <div class="input-group" (click)="clickPassenger()">
-          <input type="text" class="form-control js-searchbar-input " id="passengers-input"
+          <input type="text" class="form-control js-searchbar-input" id="passengers-input"
                 [ngModel]="dataFlight.passenger.totalPassengers"
                 name="totalPassengers"
-                placeholder=""
+                placeholder="1 pasajero"
                 readonly="readonly"
           >
           <span class="icon icon-arrow-down"></span>
         </div>
       <app-passenger [passenger]="dataFlight.passenger" [inputPassengerFocused]="passengerFocused"></app-passenger>
     </div>
-
   </div>
 
   <div class="form-action">
