@@ -1,19 +1,31 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
-import { FlightService } from 'app/search/components/flight/flight.service';
+import { Component, OnInit, ChangeDetectionStrategy, Input } from '@angular/core';
+import { StationsSelectorService } from 'app/search/components/flight/services/stations-selector.service';
 import { IFlight, IStation } from 'app/search/components/flight/flight.model';
-import { NgForm } from '@angular/forms/src/forms';
 
 @Component({
   selector: 'app-origins-selector',
   templateUrl: './origins-selector.component.html',
-  providers: [FlightService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class OriginsSelectorComponent implements OnInit {
+  @Input() dataFlight: IFlight;
 
-  constructor() { }
+  constructor(private _stationsSelectorService: StationsSelectorService) { }
 
   ngOnInit() {
+    this._stationsSelectorService.initStations();
   }
 
+  clearInputOrigin() {
+    this.dataFlight.origin.code = '';
+    this.dataFlight.origin.name = '';
+    this._stationsSelectorService.clearInputOrigin();
+  }
+
+  originSelected(originSelected: IStation) {
+    this.dataFlight.origin.name = originSelected.name;
+    this.dataFlight.origin.code = originSelected.code;
+    this.dataFlight.origin.countryName = originSelected.countryName;
+    this._stationsSelectorService.selectOrigin(this.dataFlight.origin.code);
+  }
 }

@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { SEARCH_COMPONENTS } from './index';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
-import { DestinationsService } from '../shared/services/destinations.service';
 import { LoggerService } from '../shared/services/logger.service';
 import { ResourcesService } from '../shared/services/resources.service';
 import { StorageService } from '../shared/services/storage.service';
@@ -37,13 +36,12 @@ export function configServiceFactory(config: ConfigService) {
     TypePassengerComponent,
     DestinationsSelectorComponent,
     OriginsSelectorComponent
-
   ],
   exports: [
     // ...SEARCH_COMPONENTS
   ],
   providers: [{ provide: APP_INITIALIZER, useFactory: configServiceFactory, deps: [ConfigService], multi: true },
-    DestinationsService, ResourcesService, LoggerService, StorageService,
+    ResourcesService, LoggerService, StorageService,
     ConfigService, CookiesWrapper, StationService, {provide: Number, useValue: 3}],
   entryComponents: [SEARCH_COMPONENTS]
 })

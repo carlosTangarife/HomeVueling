@@ -1,9 +1,13 @@
-<!-- <div id="form-group--destination" [ngClass]="{'focused':destinationPopup}">
+<div id="form-group--destination" [ngClass]="{'focused':_stationsSelectorService.destinationPopup}">
     <label for="destination-input">Destino</label>
     <div class="input-group" (click)="clearInputDestination(originInput)">
       <span class="prefix" *ngIf="dataFlight.destination.code">{{dataFlight.destination.code}}</span>
-      <input type="text" id="destination-input" [(ngModel)]="dataFlight.destination.name" (keyup)="_fs.filterDestinations(destinationInput.value);"
-        name="destination" #destinationInput class="form-control js-searchbar-input" placeholder="Ciudad, país o aeropuerto"
+      <input type="text" id="destination-input" [(ngModel)]="dataFlight.destination.name"
+        (keyup)="_stationsSelectorService.filterDestinations(destinationInput.value);"
+        name="destination"
+        #destinationInput
+        class="form-control js-searchbar-input"
+        placeholder="Ciudad, país o aeropuerto"
         required>
     </div>
   
@@ -11,14 +15,14 @@
       <div class="popover-content">Before continiung, you must select your destination</div>
     </div>
   
-    <div id="destination-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':destinationPopup}">
-      <p class="cities-sugestion-popup_title" *ngIf="_fs.filterDestinationsByRecent(true).length > 0">
+    <div id="destination-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':_stationsSelectorService.destinationPopup}">
+      <p class="cities-sugestion-popup_title" *ngIf="_stationsSelectorService.filterDestinationsByRecent(true).length > 0">
         Búsquedas recientes
-        <span class="erase-label" (click)="_fs.deleteDestinations()">Borrar</span>
+        <span class="erase-label" (click)="_stationsSelectorService.deleteDestinations()">Borrar</span>
       </p>
       <ul class="cities-sugestion-popup_list">
-        <li *ngFor="let destination of _fs.filterDestinationsByRecent(true)" (click)="destinationSelected(destination)" [ngClass]="{'connection-flight':destination?.connection}"
-          class="">
+        <li *ngFor="let destination of _stationsSelectorService.filterDestinationsByRecent(true)" (click)="destinationSelected(destination)"
+          [ngClass]="{'connection-flight':destination?.connection}">
           <p class="list-item">{{destination?.name}}</p>
           <p class="list-item">{{destination?.countryName}}</p>
           <p class="list-item">{{destination?.code}}</p>
@@ -32,8 +36,8 @@
   
       <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
       <ul class="cities-sugestion-popup_list">
-        <li *ngFor="let destination of _fs.filterDestinationsByRecent(false)" (click)="destinationSelected(destination)" [ngClass]="{'connection-flight':destination?.connection}"
-          class="">
+        <li *ngFor="let destination of _stationsSelectorService.filterDestinationsByRecent(false)" (click)="destinationSelected(destination)"
+          [ngClass]="{'connection-flight':destination?.connection}">
           <p class="list-item">{{destination?.name}}</p>
           <p class="list-item">{{destination?.countryName}}</p>
           <p class="list-item">{{destination?.code}}</p>
@@ -58,4 +62,4 @@
         </div>
       </div>
     </div>
-  </div> -->
+  </div>
