@@ -42,10 +42,6 @@ export class FlightComponent implements OnInit {
         totalPassengers: 1
       }
     };
-
-    this._fs.getStations();
-    this._fs.getMarketsByIata(this.dataFlight.origin.code);
-    this._fs.getDestinations();
   }
 
   onSubmit(formFlight: NgForm) {
@@ -54,20 +50,20 @@ export class FlightComponent implements OnInit {
     window.location.href = '/';
   }
 
-  clearInputDestination(el?) {
-    this.dataFlight.destination.code = '';
-    this.dataFlight.destination.name = '';
-    this._fs.getMarketsByIata(this.dataFlight.origin.code)
-    this._fs.getDestinations();
-    this.toggleDestinationPopUp(el ? el : null);
-  }
-
   clearInputOrigin() {
     this.dataFlight.origin.code = '';
     this.dataFlight.origin.name = '';
     this._fs.getStations();
     this.clearInputDestination();
   }
+
+  clearInputDestination(el?) {
+    this.dataFlight.destination.code = '';
+    this.dataFlight.destination.name = '';
+    this._fs.getMarketsByIata(this.dataFlight.origin.code)
+    this.toggleDestinationPopUp(el ? el : null);
+  }
+
 
   originSelected(originSelected: IStation) {
     this.dataFlight.origin.name = originSelected.name;

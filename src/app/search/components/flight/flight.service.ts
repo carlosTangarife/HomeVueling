@@ -14,6 +14,9 @@ export class FlightService {
   constructor(private _configService: ConfigService, private _stationService: StationService) {
     this.stations = this._configService.environment['stations'];
     this.markets = this._configService.environment['markets'];
+    this.getStations();
+    this.getMarketsByIata('BCN');
+    this.getDestinations();
   }
 
   getStations() {
@@ -32,7 +35,7 @@ export class FlightService {
     return isRecent ? filtered.sort((a, b) => a.order - b.order) : filtered;
   }
 
-  filterStations(key?: string) {
+  private filterStations(key?: string) {
     // this.originPopup = true;
     this.filteredOrigins = key ? this.filterGeneralStations(this.stations.StationList, key) : this.stations.StationList;
   }
@@ -43,26 +46,26 @@ export class FlightService {
     return isRecent ? filtered.sort((a, b) => a.order - b.order) : filtered;
   }
 
-  filterGeneralStations(data: any, key?: string) {
+  private filterGeneralStations(data: any, key?: string) {
     return data.filter(opt => opt.name.toLowerCase().match(key.toLowerCase())
     || opt.code.toLowerCase().match(key.toLowerCase())
     || opt.countryCode.toLowerCase().match(key.toLowerCase())
     || opt.countryName.toLowerCase().match(key.toLowerCase()))
   }
 
-  filterDestinations(key?: string) {
+  private filterDestinations(key?: string) {
     // this.destinationPopup = true;
     this.filteredDestinations = key ? this.filterGeneralStations(this.marketsIata, key) : this.marketsIata;
   }
 
-  getRecentOrigins(): IStation[] {
+  private getRecentOrigins(): IStation[] {
     let cookie = this._stationService.getOriginsStations();
     return cookie
                 .map(val => this.stations.StationList
                 .find(station => station.code === val.iataCode));
   }
 
-  getRecentDestinations(): IMarket[] {
+  private getRecentDestinations(): IMarket[] {
     let cookie = this._stationService.getDestinationsStations();
     return cookie
                 .map(val => this.marketsIata
@@ -70,7 +73,7 @@ export class FlightService {
                 .filter(Boolean);
   }
 
-  getDestinations() {
+  private getDestinations() {
     let recentDestinations = this.getRecentDestinations();
     this.filteredDestinations = this.marketsIata.map(station => {
       station.isRecent = recentDestinations.includes(station);
@@ -98,14 +101,16 @@ export class FlightService {
         }
       })
       .filter(Boolean) : this.marketsIata = [];
+
+      this.getDestinations();
   }
 
-  deleteOrigins() {
+  private deleteOrigins() {
     this._stationService.removeOriginsStations();
     // this.clearInputOrigin();
   }
 
-  deleteDestinations() {
+  private deleteDestinations() {
     this._stationService.removeDestinationsStations();
     // this.clearInputDestination();
   }
