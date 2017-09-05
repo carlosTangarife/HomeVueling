@@ -11,14 +11,19 @@ import { StationsSelectorService } from '../../services/stations-selector.servic
 export class StationsComponent implements OnInit {
   @Input() typeStation: string;
   @Input() dataFlight: any;
+  @Input() dataOrigin: any;
 
   constructor(private _stationsSelectorService: StationsSelectorService) { }
 
   ngOnInit() {
+    this.initStations();
+  }
+
+  initStations() {
     if (this.typeStation === 'origin') {
       this._stationsSelectorService.initStations();
     } else if (this.typeStation === 'destination') {
-      this._stationsSelectorService.initDestinations(this.dataFlight.code);
+      this._stationsSelectorService.initDestinations(this.dataOrigin.code);
     }
   }
 
@@ -26,6 +31,7 @@ export class StationsComponent implements OnInit {
     this.dataFlight.code = '';
     this.dataFlight.name = '';
     this.dataFlight.countryName = '';
+    this.initStations();
     this._stationsSelectorService.togglePopup();
   }
 

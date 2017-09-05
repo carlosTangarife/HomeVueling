@@ -3,6 +3,7 @@
     <div class="input-group" (click)="clearInput()">
       <span class="prefix" *ngIf="dataFlight.code">{{dataFlight.code}}</span>
       <input type="text" id="{{typeStation}}-input"
+        [(ngModel)]="dataFlight.name"
         (keyup)="_stationsSelectorService.filterStationsByKey(typeStation, stationInput.value);"
         #stationInput
         name="{{typeStation}}"

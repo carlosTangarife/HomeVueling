@@ -1,7 +1,8 @@
 <form autocomplete="off" #searchFlight="ngForm" class="pane-wrapper" (ngSubmit)="onSubmit()" novalidate>
   <div class="form-group form-group--flight-search">
     <app-stations class="form-input origin" [dataFlight]="dataFlight.origin" [typeStation]="'origin'"></app-stations>
-    <app-stations class="form-input destination" [dataFlight]="dataFlight.destination" [typeStation]="'destination'"></app-stations>
+    <app-stations class="form-input destination" [dataFlight]="dataFlight.destination"
+      [dataOrigin]="dataFlight.origin" [typeStation]="'destination'"></app-stations>
 
     <app-calendar class="form-input dates"></app-calendar>
 
