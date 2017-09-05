@@ -3,14 +3,9 @@ import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SEARCH_COMPONENTS } from './index';
-import { CalendarComponent } from './components/calendar/calendar.component';
-import { PassengerComponent } from './components/passenger/passenger.component';
-import { StationsComponent } from '../shared/components/stations/stations.component';
-import { PlacesComponent } from '../shared/components/places/places.component';
 import { LoggerService } from '../shared/services/logger.service';
 import { ResourcesService } from '../shared/services/resources.service';
 import { StorageService } from '../shared/services/storage.service';
-import { TypePassengerComponent } from './components/passenger/type-passenger/type-passenger.component';
 import { ConfigService } from '../shared/services/config.service';
 import { StationService } from 'app/shared/services/station.service';
 import { CookiesWrapper } from 'app/shared/services/cookies-wrapper.service';
@@ -29,12 +24,7 @@ export function configServiceFactory(config: ConfigService) {
     HttpModule
   ],
   declarations: [
-    ...SEARCH_COMPONENTS,
-    CalendarComponent,
-    PassengerComponent,
-    TypePassengerComponent,
-    StationsComponent,
-    PlacesComponent
+    ...SEARCH_COMPONENTS
   ],
   exports: [
     // ...SEARCH_COMPONENTS

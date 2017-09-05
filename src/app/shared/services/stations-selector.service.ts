@@ -3,7 +3,6 @@ import { ConfigService } from './config.service';
 import { StationService } from './station.service';
 import { IStation, IMarket, IStationList } from '../../search/components/flight/flight.model';
 import { Subject } from 'rxjs/Subject';
-import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from '../../../environments/environment';
 
 @Injectable()
@@ -14,10 +13,10 @@ export class StationsSelectorService {
   public filteredStations: any;
   public viewPopup = false;
 
-  private subjectRecentStations = new BehaviorSubject<IStation[]>([]);
+  private subjectRecentStations = new Subject<IStation[]>();
   public recentStations$ = this.subjectRecentStations.asObservable();
 
-  private subjectListStations = new BehaviorSubject<IStation[]>([]);
+  private subjectListStations = new Subject<IStation[]>();
   public listStations$ = this.subjectListStations.asObservable();
 
   constructor(private _configService: ConfigService, private _stationService: StationService) {

@@ -4,6 +4,9 @@ import { ReservationComponent } from './components/reservation/reservation.compo
 import { FlightComponent } from './components/flight/flight.component';
 import { PlacesComponent } from '../shared/components/places/places.component';
 import { StationsComponent } from '../shared/components/stations/stations.component';
+import { TypePassengerComponent } from './components/passenger/type-passenger/type-passenger.component';
+import { CalendarComponent } from './components/calendar/calendar.component';
+import { PassengerComponent } from './components/passenger/passenger.component';
 
 export const SEARCH_COMPONENTS = [
   IndexSearchComponent,
@@ -11,5 +14,8 @@ export const SEARCH_COMPONENTS = [
   ReservationComponent,
   FlightComponent,
   PlacesComponent,
-  StationsComponent
+  StationsComponent,
+  CalendarComponent,
+  PassengerComponent,
+  TypePassengerComponent
 ];
