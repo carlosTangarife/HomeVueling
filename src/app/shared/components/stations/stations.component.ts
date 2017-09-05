@@ -1,51 +1,43 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { IStationInfo } from 'app/shared/models/stationInfo.model';
-import { DestinationsService } from '../../services/destinations.service';
+import { IStation } from '../../../search/components/flight/flight.model';
+import { StationsSelectorService } from '../../services/stations-selector.service';
 
 @Component({
   selector: 'app-stations',
   templateUrl: './station.component.html',
-  providers: [DestinationsService]
+  providers: [StationsSelectorService],
+  viewProviders: [StationsComponent]
 })
 export class StationsComponent implements OnInit {
+  @Input() typeStation: string;
+  @Input() dataFlight: any;
 
-  @Input() type: string;
-  @Input() label: string;
-
-  public station: IStationInfo;
-  public focusIn: boolean;
-  public focusOut: boolean;
-
-  public stationRecent$;
-  public stations$;
-  constructor(public _ds: DestinationsService) {}
+  constructor(private _stationsSelectorService: StationsSelectorService) { }
 
   ngOnInit() {
-    if (this.type && this.type.length > 0 &&  this.type === 'origin') {
-      this.stations$ = this._ds.getStationsOrigin();
-      this.stationRecent$ = this._ds.getRecentSearch();
+    if (this.typeStation === 'origin') {
+      this._stationsSelectorService.initStations();
+    } else if (this.typeStation === 'destination') {
+      this._stationsSelectorService.initDestinations(this.dataFlight.code);
     }
   }
 
-  focused() {
-    console.log('focusado');
-      this.focusIn = true;
-      this.focusOut = false;
+  clearInput() {
+    this.dataFlight.code = '';
+    this.dataFlight.name = '';
+    this.dataFlight.countryName = '';
+    this._stationsSelectorService.togglePopup();
   }
 
-  unfocused() {
-    console.log('on-focusado');
-    setTimeout(() => {
-      this.focusOut = true;
-      this.focusIn = false;
-    }, 0)
+  selectStation(station: any) {
+    this.dataFlight.code = station.code;
+    this.dataFlight.name = station.name;
+    this.dataFlight.countryName = station.countryName;
+    this._stationsSelectorService.togglePopup();
   }
 
-  placeSelected(place: IStationInfo) {
-    this.station = place;
-    this.stations$ = this._ds.getStationsDestination(place.iataCode);
-    console.log(this.stations$);
-    this.unfocused();
+  deleteRecentStationsCookie(event) {
+    this._stationsSelectorService.deleteStations(this.typeStation === 'origin');
+    this.clearInput();
   }
 }

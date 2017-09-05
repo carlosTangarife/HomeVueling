@@ -1,13 +1,12 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { IFlight, IStationList } from 'app/search/components/flight/flight.model';
-import { StationsSelectorService } from 'app/search/components/flight/services/stations-selector.service';
+import { IFlight } from 'app/search/components/flight/flight.model';
 import { StationService } from 'app/shared/services/station.service';
+import { environment } from '../../../../environments/environment';
 
 @Component({
   selector: 'app-flight',
   templateUrl: './flight.component.html',
-  providers: [StationsSelectorService],
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlightComponent implements OnInit {
@@ -51,7 +50,7 @@ export class FlightComponent implements OnInit {
   }
 
   saveSearch() {
-    this._stationService.saveStationOrigin(this.dataFlight.origin.code);
-    this._stationService.saveStationDestination(this.dataFlight.destination.code);
+    this._stationService.saveStation(this.dataFlight.origin.code, environment.keyLastSearchOriginCookie);
+    this._stationService.saveStation(this.dataFlight.destination.code, environment.keyLastSearchDestinationCookie);
   }
 }

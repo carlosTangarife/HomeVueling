@@ -4,30 +4,16 @@ import { LastStationsSelected, StationSelected } from '../models/last-search.mod
 
 @Injectable()
 export class StationService {
-    private keyOrigin = 'lastSearchOrigin';
-    private keyDestination = 'lastSearchDestination';
 
     constructor(private _cookiesWrapper: CookiesWrapper, @Optional() private numRecentSearches: number) { }
 
-    saveStationOrigin(origin: string) {
-        let stationSelected: StationSelected = {
-            iataCode: origin,
-            date: new Date()
-        };
-        this.saveStations(stationSelected, this.keyOrigin);
-    }
-
-    saveStationDestination(destination: string) {
-        let stationSelected: StationSelected = {
-            iataCode: destination,
-            date: new Date()
-        };
-        this.saveStations(stationSelected, this.keyDestination);
-    }
-
-    saveStations(stationSelected: StationSelected, key: string) {
+    saveStation(stationCode: string, key: string) {
         let stations: LastStationsSelected = {
             lastStationsSelected: []
+        };
+        let stationSelected: StationSelected = {
+            iataCode: stationCode,
+            date: new Date()
         };
         let cookie = this._cookiesWrapper.getCookie(key);
 
@@ -52,14 +38,6 @@ export class StationService {
         return listStations;
     }
 
-    getOriginsStations(): StationSelected[] {
-        return this.getCookieStations(this.keyOrigin);
-    }
-
-    getDestinationsStations(): StationSelected[] {
-        return this.getCookieStations(this.keyDestination);
-    }
-
     getCookieStations(key: string): StationSelected[] {
         let cookie: LastStationsSelected = this._cookiesWrapper.getCookie(key);
         if (cookie) {
@@ -70,11 +48,7 @@ export class StationService {
         }
     }
 
-    removeOriginsStations() {
-        this._cookiesWrapper.removeCookie(this.keyOrigin);
-    }
-
-    removeDestinationsStations() {
-        this._cookiesWrapper.removeCookie(this.keyDestination);
+    removeStations(key: string) {
+        this._cookiesWrapper.removeCookie(key);
     }
 }

@@ -5,6 +5,8 @@ import { HttpModule } from '@angular/http';
 import { SEARCH_COMPONENTS } from './index';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
+import { StationsComponent } from '../shared/components/stations/stations.component';
+import { PlacesComponent } from '../shared/components/places/places.component';
 import { LoggerService } from '../shared/services/logger.service';
 import { ResourcesService } from '../shared/services/resources.service';
 import { StorageService } from '../shared/services/storage.service';
@@ -12,15 +14,12 @@ import { TypePassengerComponent } from './components/passenger/type-passenger/ty
 import { ConfigService } from '../shared/services/config.service';
 import { StationService } from 'app/shared/services/station.service';
 import { CookiesWrapper } from 'app/shared/services/cookies-wrapper.service';
-import { DestinationsSelectorComponent } from './components/flight/destinations-selector/destinations-selector.component';
-import { OriginsSelectorComponent } from './components/flight/origins-selector/origins-selector.component';
 
 export function configServiceFactory(config: ConfigService) {
   let obs = config.load();
 
   return () => obs;
 }
-
 
 @NgModule({
   imports: [
@@ -34,8 +33,8 @@ export function configServiceFactory(config: ConfigService) {
     CalendarComponent,
     PassengerComponent,
     TypePassengerComponent,
-    DestinationsSelectorComponent,
-    OriginsSelectorComponent
+    StationsComponent,
+    PlacesComponent
   ],
   exports: [
     // ...SEARCH_COMPONENTS

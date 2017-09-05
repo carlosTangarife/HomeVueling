@@ -1,12 +1,19 @@
-<p class="cities-sugestion-popup_title">Búsquedas recientes</p>
+<p class="cities-sugestion-popup_title" *ngIf="hasRecentStations()">
+  {{label}}
+  <span class="erase-label" *ngIf="type === 'recents'"
+    (click)="deleteRecentStations()">Borrar</span>
+</p>
 <ul class="cities-sugestion-popup_list">
-  <li *ngFor="let place of places | async" (click)="sendCode(place)">
-    <p class="list-item">{{place?.name}}</p>
-    <p class="list-item">{{place?.country}}</p>
-    <p class="list-item">{{place?.code}}</p>
+  <li *ngFor="let station of data | async"
+    (click)="stationSelected(station)"
+    [ngClass]="{'connection-flight':station?.connection}">
+    <p class="list-item">{{station?.name}}</p>
+    <p class="list-item">{{station?.countryName}}</p>
+    <p class="list-item">{{station?.code}}</p>
     <p class="list-item">
-      <span class="{{place?.claseCss}} icon">
-        <span *ngFor="let y of totalPaths(place?.paths)" class="path{{y}}"></span>
+      <span class="icon icon-clock">
+        <span class="path1"></span>
+        <span class="path2"></span>
       </span>
     </p>
   </li>

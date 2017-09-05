@@ -1,37 +1,33 @@
-import {
-  Component,
-  OnInit,
-  Input,
-  Output,
-  EventEmitter
-
-} from '@angular/core';
-import { IStationInfo } from 'app/shared/models/stationInfo.model';
-import { Observable } from 'rxjs/Observable';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
   selector: 'app-places',
-  templateUrl: './places.component.html',
-  styles: []
-
+  templateUrl: './places.component.html'
 })
 export class PlacesComponent implements OnInit {
-  @Input() places: Observable<IStationInfo[]>;
-  @Output() placeSelected: EventEmitter<IStationInfo> = new EventEmitter();
+  @Input() label: string;
+  @Input() data: any;
+  @Input() type: string;
+  @Output() selectedEvent: EventEmitter<any> = new EventEmitter();
+  @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
+
+  public dataLength: number;
+
   constructor() {}
 
   ngOnInit() {
+    this.data.subscribe((value) => this.dataLength = value.length)
   }
 
-  totalPaths(lenght: number) {
-    const res = [];
-    for (let i = 1; i < lenght + 1; i++) {
-        res.push(i);
-      }
-      return res;
+  hasRecentStations(): boolean {
+    return this.type === 'recents' ? this.dataLength > 0 : true;
   }
 
-  sendCode(station: IStationInfo) {
-      this.placeSelected.emit(station);
+  deleteRecentStations() {
+    this.deleteEvent.emit();
+  }
+
+  stationSelected(station: any) {
+    this.selectedEvent.emit(station);
   }
 }

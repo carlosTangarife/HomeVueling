@@ -1,24 +1,42 @@
-<div id="form-group--{{type}}" [ngClass]="{'focused':focusIn}">
-  <label for="usr">{{label}}</label>
-  <div class="input-group">
-      <ng-container *ngIf="station?.code"><span class="prefix">{{station?.code}}</span></ng-container>
-
-      <input
-        type="text"
-        id="{{type}}-input"
+<div id="form-group--{{typeStation}}" [ngClass]="{'focused':_stationsSelectorService.viewPopup}">
+    <label for="{{typeStation}}-input">Origen</label>
+    <div class="input-group" (click)="clearInput()">
+      <span class="prefix" *ngIf="dataFlight.code">{{dataFlight.code}}</span>
+      <input type="text" id="{{typeStation}}-input"
+        (keyup)="_stationsSelectorService.filterStationsByKey(typeStation, stationInput.value);"
+        #stationInput
+        name="{{typeStation}}"
         class="form-control js-searchbar-input"
-        placeholder="Ciudad, país o aeropuerto"
-        [value]="station?.name"
-      >
+        placeholder="Ciudad, país o aeropuerto" required>
+    </div>
+  
+    <div class="popover popover--error" *ngIf="false">
+      <div class="popover-content">Before continiung, you must select your origin.</div>
+    </div>
+  
+    <div id="{{typeStation}}-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':_stationsSelectorService.viewPopup}">
+      <app-places [data]="_stationsSelectorService.recentStations$" [label]="'Busquedas Recientes'"
+        [type]="'recents'" (selectedEvent)="selectStation($event)"
+        (deleteEvent)="deleteRecentStationsCookie($event)"></app-places>
+      <app-places [data]="_stationsSelectorService.listStations$" [label]="'Todos los destinos'"
+        (selectedEvent)="selectStation($event)"></app-places>
+      <div class="cities-sugestion-popup_legend" *ngIf="typeStation==='destination'">
+        <ul>
+          <li>Vuelos directos</li>
+          <li class="connection-flight">Vuelos en conexión</li>
+        </ul>
+        <div class="cities-sugestion-popup_legend_actions">
+          <div class="link">
+            <span class="icon icon-arrow-right"></span>
+            <a href="">Mapa de destinos</a>
+          </div>
+          <div class="form-checkbox--button color-darkGrey">
+            <label>
+              <input type="checkbox" hidden>
+              <span>Múltiples destinos</span>
+            </label>
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-
-  <div
-    id="{{type}}-sugestion-popup"
-    class="searchbar-popup cities-sugestion-popup"
-    [ngStyle]="{'display':focusIn === true ? 'block' : 'none'}"
-  >
-
-  <app-places [places]="stationRecent$" *ngIf="stationRecent$" (placeSelected)="placeSelected($event)"></app-places>
-  <app-places [places]="stations$" *ngIf="stations$" (placeSelected)="placeSelected($event)"></app-places>
-  </div>
-</div>

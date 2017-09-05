@@ -22,33 +22,15 @@ export class ResourcesService {
         return this.retrieveResource(this.keyMarkets, url);
     }
 
-    getMarketsByIata(iata: string) {
-        const url = 'https://vueling-json.herokuapp.com/index.php/markets';
-        return this.retrieveResourceByIata(iata, this.keyMarkets + iata, url);
-    }
-
-    retrieveResource(key: string, url: string): Observable<any> {
+    private retrieveResource(key: string, url: string): Observable<any> {
         const self = this;
-        const resource = this._storageService.getStorage(key);
+        const resource = this._storageService.getLocalStorage(key);
         if (resource) {
             return of(resource);
         } else {
             return this._http.get(url).map(response => {
-                self._storageService.setStorage(key, response.json());
+                self._storageService.setLocalStorage(key, response.json());
                 return response.json();
-            });
-        }
-    }
-
-    retrieveResourceByIata(iata: string, key: string, url: string): Observable<any> {
-        const self = this;
-        const resource = this._storageService.getStorage(key);
-        if (resource) {
-            return of(resource);
-        } else {
-            return this._http.get(url).mergeMap(response => {
-                self._storageService.setStorage(key, response.json()[iata]);
-                return response.json()[iata];
             });
         }
     }
