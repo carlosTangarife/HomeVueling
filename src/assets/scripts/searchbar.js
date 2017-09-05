@@ -23,17 +23,17 @@ $(document).ready(function(){
 
   // Searchbar Popups
 
-  $("#origin-input").click(function(){
-      // $("#form-group--origin").toggleClass("focused");
-      // $("#origin-sugestion-popup").toggleClass("show");
-      $("#searchbar-overlay").toggleClass("show");
-  });
+//   $("#origin-input").click(function(){
+//       $("#form-group--origin").toggleClass("focused");
+//       $("#origin-sugestion-popup").toggleClass("show");
+//       $("#searchbar-overlay").toggleClass("show");
+//   });
 
-  $("#destination-input").click(function(){
-      $("#form-group--destination").toggleClass("focused");
-      $("#destination-sugestion-popup").toggleClass("show");
-      $("#searchbar-overlay").toggleClass("show");
-  });
+//   $("#destination-input").click(function(){
+//       $("#form-group--destination").toggleClass("focused");
+//       $("#destination-sugestion-popup").toggleClass("show");
+//       $("#searchbar-overlay").toggleClass("show");
+//   });
 
   // $("#passengers-input").click(function(){
   //     $("#form-group--passengers").toggleClass("focused");

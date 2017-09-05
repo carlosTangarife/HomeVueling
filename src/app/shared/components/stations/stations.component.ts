@@ -1,4 +1,4 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef, Renderer2 } from '@angular/core';
 import { IStation } from '../../../search/components/flight/flight.model';
 import { StationsSelectorService } from '../../services/stations-selector.service';
 
@@ -9,41 +9,80 @@ import { StationsSelectorService } from '../../services/stations-selector.servic
   viewProviders: [StationsComponent]
 })
 export class StationsComponent implements OnInit {
+  @ViewChild('stationInput') stationInput: ElementRef;
   @Input() typeStation: string;
   @Input() dataFlight: any;
-  @Input() dataOrigin: any;
+  @Output() selectedOrigin: EventEmitter<any> = new EventEmitter();
+  @Output() clickDestination: EventEmitter<any> = new EventEmitter();
 
-  constructor(private _stationsSelectorService: StationsSelectorService) { }
+  public originCode: string;
+  public isOrigin: boolean;
+
+  constructor(private _stationsSelectorService: StationsSelectorService, private renderer: Renderer2) { }
 
   ngOnInit() {
-    this.initStations();
+    this.originCode = this.dataFlight.code;
+    this.isOrigin = this.typeStation === 'origin';
+    this.initSelector();
   }
 
-  initStations() {
-    if (this.typeStation === 'origin') {
+  initSelector() {
+    if (this.isOrigin) {
       this._stationsSelectorService.initStations();
-    } else if (this.typeStation === 'destination') {
-      this._stationsSelectorService.initDestinations(this.dataOrigin.code);
+    } else {
+      this._stationsSelectorService.initDestinations(this.originCode);
     }
   }
 
   clearInput() {
-    this.dataFlight.code = '';
-    this.dataFlight.name = '';
-    this.dataFlight.countryName = '';
-    this.initStations();
-    this._stationsSelectorService.togglePopup();
+    this.clearData();
+    this.initSelector();
+    if (this.isOrigin) {
+      this.selectedOrigin.emit({code: this.dataFlight.code, element: this.stationInput});
+      this.showPopupOrigin();
+    } else {
+      this.clickDestination.emit(this.stationInput);
+      this.showPopupDestination();
+    }
   }
 
   selectStation(station: any) {
     this.dataFlight.code = station.code;
     this.dataFlight.name = station.name;
     this.dataFlight.countryName = station.countryName;
+    this.selectedOrigin.emit({code: station.code, element: this.stationInput});
     this._stationsSelectorService.togglePopup();
   }
 
   deleteRecentStationsCookie(event) {
     this._stationsSelectorService.deleteStations(this.typeStation === 'origin');
     this.clearInput();
+  }
+
+  loadDestinations(event: any) {
+    this.originCode = event.code;
+    this.initSelector();
+    this.showPopupDestination();
+  }
+
+  showPopupOrigin(element?: any) {
+    if (!this.dataFlight.code) {
+      this._stationsSelectorService.togglePopup();
+    }
+  }
+
+  showPopupDestination() {
+    if (this.originCode) {
+      this._stationsSelectorService.togglePopup();
+    } else {
+      this.clearData();
+      this._stationsSelectorService.hidePopup();
+    }
+  }
+
+  clearData() {
+    this.dataFlight.code = '';
+    this.dataFlight.name = '';
+    this.dataFlight.countryName = '';
   }
 }

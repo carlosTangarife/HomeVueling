@@ -102,6 +102,18 @@ export class StationsSelectorService {
     this._stationService.removeStations(keyCookie);
   }
 
+  togglePopup() {
+    this.viewPopup = !this.viewPopup;
+  }
+
+  hidePopup() {
+    this.viewPopup = false;
+  }
+
+  showPopup() {
+    this.viewPopup = true;
+  }
+
   // clearInputOrigin() {
   //   this.originSelected = '';
   //   this.getStations();
@@ -122,10 +134,6 @@ export class StationsSelectorService {
   // selectDestination() {
   //   this.toggleDestinationPopup();
   // }
-
-  togglePopup() {
-    this.viewPopup = !this.viewPopup;
-  }
 
   // toggleDestinationPopup() {
   //   if (this.originSelected) {
