@@ -1,4 +1,4 @@
-<div id="form-group--{{typeStation}}" [ngClass]="{'focused':_stationsSelectorService.viewPopup}">
+<div id="form-group--{{typeStation}}">
     <label for="{{typeStation}}-input">Origen</label>
     <div class="input-group" (click)="clearInput()">
       <span class="prefix" *ngIf="dataFlight.code">{{dataFlight.code}}</span>

@@ -12,6 +12,8 @@ import { environment } from '../../../../environments/environment';
 export class FlightComponent implements OnInit {
   public dataFlight: IFlight;
   public passengerFocused = false;
+  public isFocusedOrigin: boolean;
+  public isFocusedDestination: boolean;
 
   @Output() stateOverlay = new EventEmitter<boolean>();
 
