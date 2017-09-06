@@ -3,10 +3,11 @@ import { CheckInComponent } from './components/check-in/check-in.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { FlightComponent } from './components/flight/flight.component';
 import { PlacesComponent } from '../shared/components/places/places.component';
-import { StationsComponent } from '../shared/components/stations/stations.component';
 import { TypePassengerComponent } from './components/passenger/type-passenger/type-passenger.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
+import { DestinationSelectorComponent } from '../shared/components/destination-selector/destination-selector.component';
+import { OriginSelectorComponent } from '../shared/components/origin-selector/origin-selector.component';
 
 export const SEARCH_COMPONENTS = [
   IndexSearchComponent,
@@ -14,8 +15,9 @@ export const SEARCH_COMPONENTS = [
   ReservationComponent,
   FlightComponent,
   PlacesComponent,
-  StationsComponent,
   CalendarComponent,
   PassengerComponent,
-  TypePassengerComponent
+  TypePassengerComponent,
+  DestinationSelectorComponent,
+  OriginSelectorComponent
 ];

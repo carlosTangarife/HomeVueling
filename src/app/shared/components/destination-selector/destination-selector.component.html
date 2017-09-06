@@ -1,0 +1,43 @@
+<div id="form-group--destination">
+  <label for="destination-input">Destino</label>
+  <div class="input-group" (click)="clearInput()">
+    <span class="prefix" *ngIf="dataFlight.destination.code">{{dataFlight.destination.code}}</span>
+    <input type="text" id="destination-input"
+      [(ngModel)]="dataFlight.destination.name"
+      (keyup)="filterStationsByKey(destinationInput.value)"
+      #destinationInput
+      name="destination"
+      class="form-control js-searchbar-input"
+      placeholder="Ciudad, país o aeropuerto" required>
+  </div>
+
+  <div class="popover popover--error" *ngIf="false">
+    <div class="popover-content">Before continiung, you must select your destination.</div>
+  </div>
+
+  <div id="destinationInput-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':_selectorService.viewPopup}">
+    <app-places [data]="_selectorService.recentStations$" [label]="'Busquedas Recientes'"
+      [type]="'recents'" (selectedEvent)="selectStation($event)"
+      (deleteEvent)="deleteRecentStationsCookie($event)"></app-places>
+    <app-places [data]="_selectorService.listStations$" [label]="'Todos los destinos'"
+      (selectedEvent)="selectStation($event)"></app-places>
+    <div class="cities-sugestion-popup_legend">
+      <ul>
+        <li>Vuelos directos</li>
+        <li class="connection-flight">Vuelos en conexión</li>
+      </ul>
+      <div class="cities-sugestion-popup_legend_actions">
+        <div class="link">
+          <span class="icon icon-arrow-right"></span>
+          <a href="">Mapa de destinos</a>
+        </div>
+        <div class="form-checkbox--button color-darkGrey">
+          <label>
+            <input type="checkbox" hidden>
+            <span>Múltiples destinos</span>
+          </label>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

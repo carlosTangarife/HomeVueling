@@ -18,7 +18,8 @@ import { CookieModule } from 'ngx-cookie';
     PersistenceModule,
     CookieModule.forRoot()
   ],
-  providers: []
+  providers: [],
+  declarations: []
 })
 
 export class AppModule {

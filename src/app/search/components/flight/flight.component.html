@@ -1,13 +1,12 @@
 <form autocomplete="off" #searchFlight="ngForm" class="pane-wrapper" (ngSubmit)="onSubmit()" novalidate>
   <div class="form-group form-group--flight-search">
-    <app-stations class="form-input origin" [dataFlight]="dataFlight.origin" [typeStation]="'origin'"
-      (selectedOrigin)="destination.loadDestinations($event)"
-      (isFocused)="isFocusedOrigin=$event" [ngClass]="{'focused':isFocusedOrigin}" #origin></app-stations>
+    <app-origin-selector class="form-input origin" [dataFlight]="dataFlight.origin"
+      (selectedOrigin)="destination.loadDestinations()"
+      (isFocused)="isFocusedOrigin=$event" [ngClass]="{'focused':isFocusedOrigin}" #origin></app-origin-selector>
     
-    <app-stations class="form-input destination" [dataFlight]="dataFlight.destination"
-      [typeStation]="'destination'" #destination
-      (clickDestination)="origin.showPopupOrigin($event)"
-      (isFocused)="isFocusedDestination=$event" [ngClass]="{'focused':isFocusedDestination}"></app-stations>
+    <app-destination-selector class="form-input destination" [dataFlight]="dataFlight"
+      (clickDestination)="origin.showPopupOrigin($event)" #destination
+      (isFocused)="isFocusedDestination=$event" [ngClass]="{'focused':isFocusedDestination}"></app-destination-selector>
 
     <app-calendar class="form-input dates"></app-calendar>
 

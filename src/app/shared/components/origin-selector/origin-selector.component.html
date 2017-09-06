@@ -1,0 +1,25 @@
+<div id="form-group--origin">
+  <label for="origin-input">Origen</label>
+  <div class="input-group" (click)="clearInput()">
+    <span class="prefix" *ngIf="dataFlight.code">{{dataFlight.code}}</span>
+    <input type="text" id="origin-input"
+      [(ngModel)]="dataFlight.name"
+      (keyup)="filterStationsByKey(originInput.value)"
+      #originInput
+      name="origin"
+      class="form-control js-searchbar-input"
+      placeholder="Ciudad, país o aeropuerto" required>
+  </div>
+
+  <div class="popover popover--error" *ngIf="false">
+    <div class="popover-content">Before continiung, you must select your origin.</div>
+  </div>
+
+  <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':_selectorService.viewPopup}">
+    <app-places [data]="_selectorService.recentStations$" [label]="'Busquedas Recientes'"
+      [type]="'recents'" (selectedEvent)="selectStation($event)"
+      (deleteEvent)="deleteRecentStationsCookie($event)"></app-places>
+    <app-places [data]="_selectorService.listStations$" [label]="'Todos los destinos'"
+      (selectedEvent)="selectStation($event)"></app-places>
+  </div>
+</div>

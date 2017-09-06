@@ -1,7 +1,7 @@
 import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
-import { IFlight } from 'app/search/components/flight/flight.model';
-import { StationService } from 'app/shared/services/station.service';
+import { IFlight } from '../../../search/components/flight/flight.model';
+import { StationService } from '../../../shared/services/station.service';
 import { environment } from '../../../../environments/environment';
 
 @Component({
