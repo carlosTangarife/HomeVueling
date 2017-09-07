@@ -7,43 +7,40 @@
   <img class="searchbar-bg-image" src="./assets/images/search/bg2.jpg" alt="">
   <div id="searchbar" class="searchbar-main container">
     <ul class="nav nav-tabs searchbar-main_tabs">
-
-      <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--search" [ngClass]="{'active': isFlight}">
+      <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--search" *ngIf="searcherConfig.FlightSearch.IsEnabled" [ngClass]="{'active': isFlight}">
         <div class="tab" data-toggle="tab" href="#home" (click)="stateTag(true, false, false)">
-          <p><span class="icon icon-plane"></span>Vuelos</p>
+          <p><span class="icon icon-plane"></span>{{'flights' | dictionary}}</p>
           <ul>
-            <li><span class="icon icon-building"></span><a href="http://hotel.vueling.com/?label=vlng-tab-home&lang=en">Hoteles</a></li>
-            <li><span class="icon icon-car"></span><a href="http://cars.vueling.com/en/#searchcars">Coches</a></li>
+            <li><span class="icon icon-building"></span><a href="http://hotel.vueling.com/?label=vlng-tab-home&lang=en">{{'hotels' | dictionary}}</a></li>
+            <li><span class="icon icon-car"></span><a href="http://cars.vueling.com/en/#searchcars">{{'cars' | dictionary}}</a></li>
           </ul>
         </div>
       </li>
 
-      <li class="searchbar-main_tabs_tab  searchbar-main_tabs_tab--check-in" [ngClass]="{'active': ischeckIn}">
+      <li class="searchbar-main_tabs_tab  searchbar-main_tabs_tab--check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'active': ischeckIn}">
         <a class="tab" data-toggle="tab" href="#menu1" (click)="stateTag(false, true, false)">
-          <p><span class="icon icon-computer"></span>Check-in online</p>
+          <p><span class="icon icon-computer"></span>{{'checkinOnline' | dictionary}}</p>
         </a>
       </li>
 
-      <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--reservation"  [ngClass]="{'active': isReservation}">
+      <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--reservation" *ngIf="searcherConfig.YourBooking.IsEnabled" [ngClass]="{'active': isReservation}">
         <a class="tab" data-toggle="tab" href="#menu2" (click)="stateTag(false, false, true)">
-          <p><span class="icon icon-settings"></span>Tu reserva</p>
+          <p><span class="icon icon-settings"></span>{{'checkinOnline' | dictionary}}</p>
         </a>
       </li>
 
     </ul>
     <div class="tab-content searchbar-main_tab-content">
-        <div id="tab-search" class="tab-pane fade searchbar-main_tab-content_pane search" [ngClass]="{'in active': isFlight}">
-        <app-flight (stateOverlay)="toggleClassOverlay()"></app-flight>
+      <div id="tab-search" class="tab-pane fade searchbar-main_tab-content_pane search" *ngIf="searcherConfig.FlightSearch.IsEnabled" [ngClass]="{'in active': isFlight}">
+        <form app-flight (stateOverlay)="toggleClassOverlay()" autocomplete="off" class="pane-wrapper" novalidate></form>
       </div>
 
-      <div id="tab-checkin" class="tab-pane fade searchbar-main_tab-content_pane check-in" [ngClass]="{'in active': ischeckIn}">
-        <h3 class="title">Check-in online</h3>
-        <app-check-in [type]="'check-in'"></app-check-in>
+      <div id="tab-checkin" class="tab-pane fade searchbar-main_tab-content_pane check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'in active': ischeckIn}">
+        <div app-check-in class="pane-wrapper"></div>
       </div>
 
-      <div id="tab-reservation" class="tab-pane fade searchbar-main_tab-content_pane reservation" [ngClass]="{'in active': isReservation}">
-        <h3 class="title">Tu reserva</h3>
-        <app-check-in [type]="'reservation'"></app-check-in>
+      <div id="tab-reservation" class="tab-pane fade searchbar-main_tab-content_pane reservation" *ngIf="searcherConfig.YourBooking.IsEnabled" [ngClass]="{'in active': isReservation}">
+        <div app-reservation class="pane-wrapper"></div>
       </div>
     </div>
   </div>

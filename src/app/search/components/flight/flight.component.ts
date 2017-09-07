@@ -5,7 +5,7 @@ import { StationService } from '../../../shared/services/station.service';
 import { environment } from '../../../../environments/environment';
 
 @Component({
-  selector: 'app-flight',
+  selector: '[app-flight]',
   templateUrl: './flight.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -35,9 +35,8 @@ export class FlightComponent implements OnInit {
     // window.location.href = '/';
   }
 
-
   saveSearch() {
-    this._stationService.saveStation(this.dataFlight.origin.code, environment.keyLastSearchOriginCookie);
-    this._stationService.saveStation(this.dataFlight.destination.code, environment.keyLastSearchDestinationCookie);
+    this._stationService.saveStation(this.dataFlight.origin.code, environment.keyLastSearchOriginCookie, true);
+    this._stationService.saveStation(this.dataFlight.destination.code, environment.keyLastSearchDestinationCookie, false);
   }
 }

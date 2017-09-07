@@ -9,6 +9,8 @@ import { Observable } from 'rxjs/Observable';
 export class ResourcesService {
     private keyStations = 'stations';
     private keyMarkets = 'markets';
+    private keyTexts = 'texts';
+    private keyConfiguration = 'configuration';
 
     constructor(private _logger: LoggerService, private _storageService: StorageService, private _http: Http) { }
 
@@ -20,6 +22,16 @@ export class ResourcesService {
     getMarkets() {
         const url = 'https://vueling-json.herokuapp.com/index.php/markets';
         return this.retrieveResource(this.keyMarkets, url);
+    }
+
+    getTexts() {
+        const url = 'http://local.vuelingtest.com/umbraco/api/configuration/GetSearcherTexts';
+        return this.retrieveResource(this.keyTexts, url);
+    }
+
+    getConfiguration() {
+        const url = 'http://local.vuelingtest.com/umbraco/api/configuration/GetConfigurationSearch';
+        return this.retrieveResource(this.keyConfiguration, url);
     }
 
     private retrieveResource(key: string, url: string): Observable<any> {
