@@ -20,6 +20,7 @@ export class DiscountPassengerComponent implements OnInit {
   isLargeFamily: boolean;
 
   constructor() {
+    this.selected = false;
     this.isResident = false;
     this.isLargeFamily = false;
   }
