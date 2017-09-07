@@ -2,8 +2,8 @@
   <p>Descuento Residente o familia numerosa</p>
   <span class="icon icon-arrow-right"></span>
 </li>
-<li class="js-discount-item-selected">
-  <p class="discount-item" [ngClass]="{'selected':selected}">{{typeDiscountSelected?.data}} ({{typeDiscountSelected?.discount}}%) </p>
+<li  *ngIf="selected" [style.display]="selected ? 'list-item' : 'none' ">
+  <p class="discount-item" [ngClass]="{'selected':selected}">{{ typeDiscountSelected?.data }} {{ typeDiscountSelected?.discount | discountPassenger }} </p>
 </li>
 <div class="alert alert--icon info">
   <div class="alert_wrap" *ngIf="isResident">
