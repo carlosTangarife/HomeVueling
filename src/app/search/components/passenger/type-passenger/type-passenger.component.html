@@ -1,11 +1,9 @@
-<li>
-  <div class="passengers-popup_main_description">
-    <p class="title">{{typePassengerList?.label}}</p>
-    <label class="label"><a href="">{{typePassengerList?.rulAge}}</a></label>
-  </div>
-  <div class="passengers-popup_main_counter">
-      <span class="icon icon-rounded-less" (click)="_tp.lessPassenger(typePassengerList?.type)"></span>
-      <div class="number">{{_tp.passenger[typePassengerList.type]}}</div>
-      <span class="icon icon-rounded-more" (click)="_tp.morePassenger(typePassengerList?.type)"></span>
-  </div>
-</li>
+<div class="passengers-popup_main_description">
+  <p class="title">{{typePassengerList?.label}}</p>
+  <label class="label"><a href="">{{typePassengerList?.rulAge}}</a></label>
+</div>
+<div class="passengers-popup_main_counter">
+    <span class="icon icon-rounded-less" (click)="_tp.lessPassenger(typePassengerList?.type)"></span>
+    <div class="number">{{_tp.passenger[typePassengerList.type]}}</div>
+    <span class="icon icon-rounded-more" (click)="_tp.morePassenger(typePassengerList?.type)"></span>
+</div>

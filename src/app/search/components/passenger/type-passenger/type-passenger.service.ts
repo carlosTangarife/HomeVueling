@@ -8,7 +8,9 @@ export class TypePassengerService {
   private subjectTotalPassenger = new Subject<IPassenger>();
   public passenger$ = this.subjectTotalPassenger.asObservable();
 
-  constructor() {
+  constructor() {}
+
+  initService() {
     this.passenger = {
       adult : 1,
       babies : 0,
@@ -16,6 +18,8 @@ export class TypePassengerService {
       extraSeat: 0,
       totalPassengers: 0
     }
+
+    this.totalPassenger();
   }
 
   morePassenger(typePassenger?: string) {

@@ -9,7 +9,7 @@
       (isFocused)="isFocusedDestination=$event" [ngClass]="{'focused':isFocusedDestination}"></app-destination-selector>
 
     <app-calendar class="form-input dates"></app-calendar>
-    <app-passenger class="form-input passengers"></app-passenger>
+    <div id="form-group--passengers" class="form-input passengers" app-passenger></div>
   </div>
 
   <div class="form-action">

@@ -13,7 +13,7 @@ export class OriginSelectorComponent implements OnInit {
   @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
   @Output() isFocused: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private _selectorService: SelectorService) { }
+  constructor(public _selectorService: SelectorService) { }
 
   ngOnInit() {
     this._selectorService.loadListStations(true);

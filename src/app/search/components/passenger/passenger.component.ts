@@ -4,11 +4,13 @@ import { IDiscountListPassengers, IDiscountPassenger, IInfoList } from './passen
 import { ITypePassengerList, IPassenger } from './type-passenger/type-passenger.model';
 
 @Component({
-  selector: 'app-passenger',
+  // tslint:disable-next-line:component-selector
+  selector: '[app-passenger]',
   templateUrl: './passenger.component.html'
 })
 export class PassengerComponent implements OnInit {
   public passengers: IPassenger;
+  public isResident: boolean;
   public isShowPassengers: boolean;
   public infoList: Array<IInfoList>;
   public isShowDiscountList: boolean;
@@ -18,6 +20,7 @@ export class PassengerComponent implements OnInit {
   public discountListPassenger: IDiscountListPassengers;
 
   constructor() {
+    this.isResident = false;
     this.discountListPassenger = {
       residentIslaCeuta: {
         data: 'Residente islas o Ceuta',

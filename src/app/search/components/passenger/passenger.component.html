@@ -1,34 +1,28 @@
-<div id="form-group--passengers">
+<label (click)="togglePassengers()">{{passengers?.adult}} Adult, {{passengers?.children}} Children, {{passengers?.babies}} babies </label>
+<div class="input-group" (click)="togglePassengers()">
+  <input type="text" class="form-control js-searchbar-input" id="passengers-input" placeholder="0 pasajeros" [ngModel]="passengers?.totalPassengers" readonly="readonly">
+  <span class="icon icon-arrow-down"></span>
+</div>
 
-    <label (click)="togglePassengers()">{{passengers?.adult}} Adult, {{passengers?.children}} Children, {{passengers?.babies}} babies </label>
-    <div class="input-group" (click)="togglePassengers()">
-      <input type="text" class="form-control js-searchbar-input" id="passengers-input" placeholder="0 pasajeros" [ngModel]="passengers?.totalPassengers" readonly="readonly">
-      <span class="icon icon-arrow-down"></span>
-    </div>
+<div id="passengers-popup" class="searchbar-popup passengers-popup" [ngClass]="{'show-table':isShowPassengers, 'discount': isResident}">
+  <ul class="passengers-popup_main">
+    <li app-type-passenger
+      *ngFor="let typePassenger of typePassengerList"
+      [typePassengerList]="typePassenger"
+      (eventPassengers)="setPassenger($event)">
+    </li>
+  </ul>
 
-  <div id="passengers-popup" class="searchbar-popup passengers-popup discount" [ngClass]="{'show-table':isShowPassengers}">
-    <ul class="passengers-popup_main">
-      <app-type-passenger
-        *ngFor="let typePassenger of typePassengerList"
-        [typePassengerList]="typePassenger"
-        (eventPassengers)="setPassenger($event)"
-        >
-      </app-type-passenger>
-    </ul>
+  <ul app-discount-passenger *ngIf ="isResident"
+    class="passengers-popup_main discount"
+    (click)="toggleDiscountList()"
+    [typeDiscountSelected]="discountPassengers"
+    [selected]="discountPassengersSelected">
+  </ul>
 
-    <app-discount-passenger
-      class="passengers-popup_main discount"
-      (click)="toggleDiscountList()"
-      [typeDiscountSelected]="discountPassengers"
-      [selected]="discountPassengersSelected"
-      >
-    </app-discount-passenger>
-
-    <app-discount-list-passenger class="passengers-popup_main discount-list"
-      [ngClass]="{'active':isShowDiscountList}"
-      (eventToggleDiscountList)="toggleDiscountList($event)"
-      [discountListPassengers]="discountListPassenger">
-    </app-discount-list-passenger>
-
-  </div>
+  <ul app-discount-list-passenger *ngIf ="isResident" class="passengers-popup_main discount-list"
+    [ngClass]="{'active':isShowDiscountList}"
+    (eventToggleDiscountList)="toggleDiscountList($event)"
+    [discountListPassengers]="discountListPassenger">
+  </ul>
 </div>

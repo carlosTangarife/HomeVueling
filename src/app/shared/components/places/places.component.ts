@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 
 @Component({
-  selector: 'app-places',
+  selector: '[app-places]',
   templateUrl: './places.component.html'
 })
 export class PlacesComponent implements OnInit {
