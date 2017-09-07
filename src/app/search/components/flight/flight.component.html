@@ -1,22 +1,40 @@
 <div class="form-group form-group--flight-search">
-  <div app-origin-selector id="form-group--origin" class="form-input origin" [dataFlight]="dataFlight.origin"
-    (selectedOrigin)="destination.loadDestinations()"
-    (isFocused)="isFocusedOrigin=$event" [ngClass]="{'focused':isFocusedOrigin}" #origin></div>
+  <div app-origin-selector
+      id="form-group--origin"
+      class="form-input origin"
+      #origin
+      (click)="clickInput()"
+      [dataFlight]="dataFlight.origin"
+      [ngClass]="{'focused':isFocusedOrigin}"
+      (isFocused)="isFocusedOrigin=$event"
+      (selectedOrigin)="destination.loadDestinations()">
+  </div>
 
   <div app-destination-selector
       id="form-group--destination"
       class="form-input destination"
       #destination
+      (click)="clickInput()"
       [ngClass]="{'focused':isFocusedDestination}"
       [dataFlight]="dataFlight"
       (outStation)="passenger.setResidentAndLargeFamily($event)"
       (isFocused)="isFocusedDestination=$event"
       (clickDestination)="origin.showPopupOrigin($event)">
-</div>
+  </div>
 
-  <div app-calendar id="form-group--dates" class="form-input dates"></div>
+  <div app-calendar
+      id="form-group--dates"
+      class="form-input dates"
+      (click)="clickInput()">
+  </div>
 
-  <div app-passenger #passenger id="form-group--passengers" class="form-input passengers"></div>
+  <div app-passenger
+      id="form-group--passengers"
+      #passenger
+      class="form-input passengers"
+      (click)="clickInput()">
+  </div>
+
 </div>
 
 <div class="form-action">

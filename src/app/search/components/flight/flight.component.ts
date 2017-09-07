@@ -1,4 +1,4 @@
-import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { IFlight } from '../../../search/components/flight/flight.model';
 import { StationService } from '../../../shared/services/station.service';
@@ -10,6 +10,10 @@ import { environment } from '../../../../environments/environment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlightComponent implements OnInit {
+
+  @Output()
+  stateOverlay = new EventEmitter<void>();
+
   public dataFlight: IFlight;
   public isFocusedOrigin: boolean;
   public isFocusedDestination: boolean;
@@ -33,6 +37,10 @@ export class FlightComponent implements OnInit {
   onSubmit() {
     this.saveSearch();
     // window.location.href = '/';
+  }
+
+  clickInput() {
+    this.stateOverlay.next();
   }
 
   saveSearch() {
