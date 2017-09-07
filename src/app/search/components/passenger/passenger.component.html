@@ -4,7 +4,7 @@
   <span class="icon icon-arrow-down"></span>
 </div>
 
-<div id="passengers-popup" class="searchbar-popup passengers-popup" [ngClass]="{'show-table':isShowPassengers, 'discount': isResident}">
+<div id="passengers-popup" class="searchbar-popup passengers-popup" [ngClass]="{'show-table':isShowPassengers, 'discount': (isResident || isLargeFamily)}">
   <ul class="passengers-popup_main">
     <li app-type-passenger
       *ngFor="let typePassenger of typePassengerList"
@@ -13,16 +13,21 @@
     </li>
   </ul>
 
-  <ul app-discount-passenger *ngIf ="isResident"
+  <ul app-discount-passenger *ngIf ="isResident || isLargeFamily"
     class="passengers-popup_main discount"
     (click)="toggleDiscountList()"
     [typeDiscountSelected]="discountPassengers"
-    [selected]="discountPassengersSelected">
+    [selected]="discountPassengersSelected"
+    [isResident]="isResident"
+    [isLargeFamily]="isLargeFamily"
+    >
   </ul>
 
-  <ul app-discount-list-passenger *ngIf ="isResident" class="passengers-popup_main discount-list"
+  <ul app-discount-list-passenger *ngIf ="isResident || isLargeFamily" class="passengers-popup_main discount-list"
     [ngClass]="{'active':isShowDiscountList}"
     (eventToggleDiscountList)="toggleDiscountList($event)"
-    [discountListPassengers]="discountListPassenger">
+    [discountListPassengers]="discountListPassenger"
+    [isResident]="isResident"
+    [isLargeFamily]="isLargeFamily">
   </ul>
 </div>

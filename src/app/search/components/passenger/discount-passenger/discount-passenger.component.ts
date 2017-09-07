@@ -13,7 +13,16 @@ export class DiscountPassengerComponent implements OnInit {
   @Input()
   selected: boolean;
 
-  constructor() { }
+  @Input()
+  isResident: boolean;
+
+  @Input()
+  isLargeFamily: boolean;
+
+  constructor() {
+    this.isResident = false;
+    this.isLargeFamily = false;
+  }
 
   ngOnInit() {
   }

@@ -4,12 +4,19 @@
       (selectedOrigin)="destination.loadDestinations()"
       (isFocused)="isFocusedOrigin=$event" [ngClass]="{'focused':isFocusedOrigin}" #origin></app-origin-selector>
 
-    <app-destination-selector class="form-input destination" [dataFlight]="dataFlight"
-      (clickDestination)="origin.showPopupOrigin($event)" #destination
-      (isFocused)="isFocusedDestination=$event" [ngClass]="{'focused':isFocusedDestination}"></app-destination-selector>
+    <app-destination-selector
+      class="form-input destination"
+      #destination
+      [ngClass]="{'focused':isFocusedDestination}"
+      [dataFlight]="dataFlight"
+      (isFocused)="isFocusedDestination=$event"
+      (outStation)="prueba.setPrueba($event)"
+      (clickDestination)="origin.showPopupOrigin($event)">
+    </app-destination-selector>
 
     <app-calendar class="form-input dates"></app-calendar>
-    <div id="form-group--passengers" class="form-input passengers" app-passenger></div>
+
+    <div app-passenger #prueba id="form-group--passengers" class="form-input passengers"></div>
   </div>
 
   <div class="form-action">

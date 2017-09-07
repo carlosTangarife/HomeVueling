@@ -9,10 +9,20 @@ export class DiscountListPassengerComponent implements OnInit {
 
   @Output()
   eventToggleDiscountList = new EventEmitter<IDiscountPassenger>();
+
   @Input()
   discountListPassengers: IDiscountListPassengers;
 
-  constructor() { }
+  @Input()
+  isResident: boolean;
+
+  @Input()
+  isLargeFamily: boolean;
+
+  constructor() {
+    this.isResident = false
+    this.isLargeFamily = false
+  }
 
   ngOnInit() {
   }

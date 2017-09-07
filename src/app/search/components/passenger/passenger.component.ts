@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { IDataPassenger } from './type-passenger/type-passenger.model';
+import { IMarket } from '../flight/flight.model';
 import { IDiscountListPassengers, IDiscountPassenger, IInfoList } from './passenger.model';
 import { ITypePassengerList, IPassenger } from './type-passenger/type-passenger.model';
 
@@ -9,11 +10,13 @@ import { ITypePassengerList, IPassenger } from './type-passenger/type-passenger.
   templateUrl: './passenger.component.html'
 })
 export class PassengerComponent implements OnInit {
-  public passengers: IPassenger;
   public isResident: boolean;
+  public isLargeFamily: boolean;
+  public passengers: IPassenger;
   public isShowPassengers: boolean;
   public infoList: Array<IInfoList>;
   public isShowDiscountList: boolean;
+  public destinationSelected: IMarket;
   public discountPassengersSelected: boolean;
   public discountPassengers: IDiscountPassenger;
   public typePassengerList: Array<ITypePassengerList>;
@@ -21,6 +24,7 @@ export class PassengerComponent implements OnInit {
 
   constructor() {
     this.isResident = false;
+    this.isLargeFamily = false;
     this.discountListPassenger = {
       residentIslaCeuta: {
         data: 'Residente islas o Ceuta',
@@ -54,9 +58,15 @@ export class PassengerComponent implements OnInit {
     this.typePassengerList = [
       {label: 'Adult', rulAge: 'Since 16 years', type: 'adult', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' },
       {label: 'Children', rulAge: '2 to 15 years', type: 'children', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' },
-      {label: 'Baby', rulAge: 'From 7 days to 23 months', type: 'babies', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' },
+      {label: 'Baby', rulAge: 'From 7 days to 23 m..', type: 'babies', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' },
       {label: 'ExtraSeat', rulAge: '+ info', type: 'extraSeat', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' }
     ]
+  }
+
+  setPrueba(destination: IMarket) {
+    debugger;
+    this.isResident = destination.residents;
+    this.isLargeFamily = destination.largefamily;
   }
 
   togglePassengers() {
@@ -64,6 +74,7 @@ export class PassengerComponent implements OnInit {
   }
 
   toggleDiscountList(discountPassengers?: IDiscountPassenger) {
+    debugger;
     this.discountPassengers = discountPassengers;
 
     if (this.discountPassengers) {

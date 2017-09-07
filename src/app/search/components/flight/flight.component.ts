@@ -21,7 +21,8 @@ export class FlightComponent implements OnInit {
       origin: {
         code: 'BCN',
         name: 'Barcelona'
-      },
+      }
+      ,
       destination: {
         code: 'MAD',
         name: 'Madrid'

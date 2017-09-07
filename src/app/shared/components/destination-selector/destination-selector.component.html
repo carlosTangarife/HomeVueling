@@ -1,9 +1,9 @@
 <div id="form-group--destination">
   <label for="destination-input" class="form-input_label">Destino</label>
   <div class="input-group" (click)="clearInput()">
-    <span class="prefix" *ngIf="dataFlight.destination.code">{{dataFlight.destination.code}}</span>
+    <span class="prefix" *ngIf="dataFlight.destination?.code">{{dataFlight.destination?.code}}</span>
     <input type="text" id="destination-input"
-      [(ngModel)]="dataFlight.destination.name"
+      [ngModel]="dataFlight.destination?.name"
       (keyup)="filterStationsByKey(destinationInput.value)"
       #destinationInput
       name="destination"

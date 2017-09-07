@@ -6,12 +6,12 @@
   <p class="discount-item" [ngClass]="{'selected':selected}">{{typeDiscountSelected?.data}} ({{typeDiscountSelected?.discount}}%) </p>
 </li>
 <div class="alert alert--icon info">
-  <div class="alert_wrap">
+  <div class="alert_wrap" *ngIf="isResident">
     <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
     <p class="alert_wrap_title">Residentes</p>
     <p class="alert_wrap_message">Durante la reserva se validará tu condición de residente.</p>
   </div>
-  <div class="alert_wrap">
+  <div class="alert_wrap" *ngIf="isLargeFamily">
     <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
     <p class="alert_wrap_title">Familia numerosa</p>
     <p class="alert_wrap_message">Se debe presentar la documentación acreditativa en el aeropuerto.</p>

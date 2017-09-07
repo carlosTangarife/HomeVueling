@@ -1,15 +1,15 @@
-<li (click)="toggleDiscountList(discountListPassengers.residentIslaCeuta)">
+<li (click)="toggleDiscountList(discountListPassengers.residentIslaCeuta)" *ngIf="isResident">
   <p class="discount-item js-discount">{{discountListPassengers.residentIslaCeuta.data}} ({{discountListPassengers.residentIslaCeuta.discount}}%)</p>
 </li>
-<li (click)="toggleDiscountList(discountListPassengers.famNumGeneral)">
+<li (click)="toggleDiscountList(discountListPassengers.famNumGeneral)"  *ngIf="!isResident || isLargeFamily">
   <p class="discount-item js-discount">{{discountListPassengers.famNumGeneral.data}} ({{discountListPassengers.famNumGeneral.discount}}%)</p>
 </li>
-<li (click)="toggleDiscountList(discountListPassengers.famNumEspecial)">
+<li (click)="toggleDiscountList(discountListPassengers.famNumEspecial)" *ngIf="!isResident || isLargeFamily">
   <p class="discount-item js-discount">{{discountListPassengers.famNumEspecial.data}} ({{discountListPassengers.famNumEspecial.discount}}%))</p>
 </li>
-<li (click)="toggleDiscountList(discountListPassengers.famNumGeneralResident)">
+<li (click)="toggleDiscountList(discountListPassengers.famNumGeneralResident)" *ngIf="isResident && isLargeFamily">
   <p class="discount-item js-discount">{{discountListPassengers.famNumGeneralResident.data}} ({{discountListPassengers.famNumGeneralResident.discount}}%)</p>
 </li>
-<li (click)="toggleDiscountList(discountListPassengers.famNumEspecialResident)">
+<li (click)="toggleDiscountList(discountListPassengers.famNumEspecialResident)" *ngIf="isResident && isLargeFamily">
   <p class="discount-item js-discount">{{discountListPassengers.famNumEspecialResident.data}} ({{discountListPassengers.famNumEspecialResident.discount}}%)</p>
 </li>

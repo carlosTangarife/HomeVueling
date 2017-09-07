@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { IFlight } from '../../../search/components/flight/flight.model';
+import { IFlight, IMarket } from '../../../search/components/flight/flight.model';
 import { SelectorService } from '../../services/selector.service';
 import { ConfigService } from '../../services/config.service';
 
@@ -9,10 +9,20 @@ import { ConfigService } from '../../services/config.service';
   providers: [SelectorService]
 })
 export class DestinationSelectorComponent implements OnInit {
-  @ViewChild('destinationInput') destinationInput: ElementRef;
-  @Input() dataFlight: IFlight;
-  @Output() clickDestination: EventEmitter<any> = new EventEmitter();
-  @Output() isFocused: EventEmitter<boolean> = new EventEmitter();
+  @ViewChild('destinationInput')
+  destinationInput: ElementRef;
+
+  @Input()
+  dataFlight: IFlight;
+
+  @Output()
+  clickDestination: EventEmitter<any> = new EventEmitter();
+
+  @Output()
+  isFocused: EventEmitter<boolean> = new EventEmitter();
+
+  @Output()
+  outStation: EventEmitter<IMarket> = new EventEmitter();
 
   constructor(public _selectorService: SelectorService) { }
 
@@ -36,6 +46,8 @@ export class DestinationSelectorComponent implements OnInit {
     this.dataFlight.destination.countryName = station.countryName;
     this._selectorService.togglePopup();
     this.isFocused.emit(this._selectorService.viewPopup);
+    /*TODO*/
+    this.outStation.emit(station);
   }
 
   deleteRecentStationsCookie(event) {
