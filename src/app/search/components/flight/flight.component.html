@@ -9,14 +9,14 @@
       #destination
       [ngClass]="{'focused':isFocusedDestination}"
       [dataFlight]="dataFlight"
-      (outStation)="prueba.setPrueba($event)"
+      (outStation)="passenger.setResidentAndLargeFamily($event)"
       (isFocused)="isFocusedDestination=$event"
       (clickDestination)="origin.showPopupOrigin($event)">
 </div>
 
   <div app-calendar id="form-group--dates" class="form-input dates"></div>
 
-  <div app-passenger id="form-group--passengers" class="form-input passengers"></div>
+  <div app-passenger #passenger id="form-group--passengers" class="form-input passengers"></div>
 </div>
 
 <div class="form-action">

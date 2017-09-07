@@ -64,7 +64,7 @@ export class PassengerComponent implements OnInit {
     ]
   }
 
-  setPrueba(destination: IMarket) {
+  setResidentAndLargeFamily(destination: IMarket) {
     this.isResident = destination.residents;
     this.isLargeFamily = destination.largefamily;
   }

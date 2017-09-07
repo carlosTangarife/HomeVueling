@@ -6,7 +6,7 @@ import { ConfigService } from '../services/config.service';
 import { StationService } from '../services/station.service';
 import { CookiesWrapper } from '../services/cookies-wrapper.service';
 
-function configServiceFactory(config: ConfigService) {
+export function configServiceFactory(config: ConfigService) {
     let obs = config.load();
 
     return () => obs;
