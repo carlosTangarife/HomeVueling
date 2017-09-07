@@ -25,11 +25,13 @@ export class ConfigService {
         return dictionary ? dictionary.Value : '';
     }
 
-    retrieveConfigSearches(): number {
+    getConfigFlightSearches(isOrigin: boolean): number {
         let config = this.environment['configuration'];
         let result = 3;
         try {
-            result = config.Stations.RecentSearches.InOrigin;
+            result = isOrigin
+                ? config.Stations.RecentSearches.InOrigin
+                : config.Stations.RecentSearches.InDestination;
         } catch (e) {
             console.log((<Error>e).message);
         }

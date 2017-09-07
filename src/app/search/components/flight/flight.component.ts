@@ -35,7 +35,7 @@ export class FlightComponent implements OnInit {
   }
 
   saveSearch() {
-    this._stationService.saveStation(this.dataFlight.origin.code, environment.keyLastSearchOriginCookie);
-    this._stationService.saveStation(this.dataFlight.destination.code, environment.keyLastSearchDestinationCookie);
+    this._stationService.saveStation(this.dataFlight.origin.code, environment.keyLastSearchOriginCookie, true);
+    this._stationService.saveStation(this.dataFlight.destination.code, environment.keyLastSearchDestinationCookie, false);
   }
 }
