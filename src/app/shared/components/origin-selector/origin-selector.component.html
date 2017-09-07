@@ -15,10 +15,18 @@
   <div class="popover-content">Before continiung, you must select your origin.</div>
 </div>
 
-<div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':_selectorService.viewPopup}">
-  <div app-places [data]="_selectorService.recentStations$" [label]="'recentSearchs'"
-    [type]="'recents'" (selectedEvent)="selectStation($event)"
-    (deleteEvent)="deleteRecentStationsCookie($event)"></div>
-  <div app-places [data]="_selectorService.listStations$" [label]="'allAirports'"
-    (selectedEvent)="selectStation($event)"></div>
+<div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup " [ngClass]="{'show':_selectorService.viewPopup}">
+  <div app-places
+      [type]="'recents'"
+      [label]="'recentSearchs'"
+      [data]="_selectorService.recentStations$"
+      (selectedEvent)="selectStation($event)"
+      (deleteEvent)="deleteRecentStationsCookie($event)">
+  </div>
+
+  <div app-places
+      [label]="'allAirports'"
+      [data]="_selectorService.listStations$"
+      (selectedEvent)="selectStation($event)">
+  </div>
 </div>

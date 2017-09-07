@@ -33,4 +33,8 @@ export class IndexSearchComponent implements OnInit {
       this.showOverlay = !this.showOverlay;
   }
 
+  hideOverlay() {
+    this.toggleClassOverlay();
+  }
+
 }
