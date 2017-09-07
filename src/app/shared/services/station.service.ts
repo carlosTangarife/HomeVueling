@@ -1,11 +1,12 @@
-import { Injectable, OnInit, Optional } from '@angular/core';
+import { Injectable, Inject } from '@angular/core';
 import { CookiesWrapper } from './cookies-wrapper.service';
 import { LastStationsSelected, StationSelected } from '../models/last-search.model';
+import { NUM_RECENT_SEARCHES } from '../consts/injections';
 
 @Injectable()
 export class StationService {
 
-    constructor(private _cookiesWrapper: CookiesWrapper, @Optional() private numRecentSearches: number) { }
+    constructor(private _cookiesWrapper: CookiesWrapper, @Inject(NUM_RECENT_SEARCHES) private _numRecentSearches: number) { }
 
     saveStation(stationCode: string, key: string) {
         let stations: LastStationsSelected = {
@@ -29,7 +30,7 @@ export class StationService {
         let exist = listStations.lastStationsSelected.find(function (s) { return s.iataCode === station.iataCode });
         if (exist) {
             exist.date = new Date();
-        } else if (listStations.lastStationsSelected.length < this.numRecentSearches) {
+        } else if (listStations.lastStationsSelected.length < this._numRecentSearches) {
             listStations.lastStationsSelected.push(station);
         } else {
             let minStation = listStations.lastStationsSelected.reduce(function (prev, curr) { return prev.date < curr.date ? prev : curr; });

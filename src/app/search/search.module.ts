@@ -1,23 +1,12 @@
-import { NgModule, APP_INITIALIZER } from '@angular/core';
+import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SEARCH_COMPONENTS } from './index';
-import { LoggerService } from '../shared/services/logger.service';
-import { ResourcesService } from '../shared/services/resources.service';
-import { StorageService } from '../shared/services/storage.service';
-import { ConfigService } from '../shared/services/config.service';
-import { StationService } from 'app/shared/services/station.service';
-import { CookiesWrapper } from 'app/shared/services/cookies-wrapper.service';
+import { NUM_RECENT_SEARCHES_PROV } from '../shared/consts/injections';
+import { SHARED_SERVICES, APP_INITIALIZER_PROV } from '../shared/consts/services';
 import { FocusDirective } from './focus.directive';
-import { TypePassengerService } from './components/passenger/type-passenger/type-passenger.service';
 import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
-
-export function configServiceFactory(config: ConfigService) {
-  let obs = config.load();
-
-  return () => obs;
-}
 
 @NgModule({
   imports: [
@@ -34,9 +23,11 @@ export function configServiceFactory(config: ConfigService) {
   exports: [
     // ...SEARCH_COMPONENTS
   ],
-  providers: [{ provide: APP_INITIALIZER, useFactory: configServiceFactory, deps: [ConfigService], multi: true },
-    ResourcesService, LoggerService, StorageService,
-    ConfigService, CookiesWrapper, StationService, {provide: Number, useValue: 3}, TypePassengerService],
+  providers: [
+    APP_INITIALIZER_PROV,
+    ...SHARED_SERVICES,
+    NUM_RECENT_SEARCHES_PROV
+  ],
   entryComponents: [SEARCH_COMPONENTS]
 })
 export class SearchModule { }

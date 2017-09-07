@@ -2,11 +2,12 @@ import { Component, OnInit, Input } from '@angular/core';
 import { IDataPassenger } from './type-passenger/type-passenger.model';
 import { IDiscountListPassengers, IDiscountPassenger, IInfoList } from './passenger.model';
 import { ITypePassengerList, IPassenger } from './type-passenger/type-passenger.model';
+import { TypePassengerService } from './type-passenger/type-passenger.service';
 
 @Component({
-  // tslint:disable-next-line:component-selector
   selector: '[app-passenger]',
-  templateUrl: './passenger.component.html'
+  templateUrl: './passenger.component.html',
+  providers: [ TypePassengerService ]
 })
 export class PassengerComponent implements OnInit {
   public passengers: IPassenger;

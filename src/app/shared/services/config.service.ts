@@ -24,4 +24,15 @@ export class ConfigService {
         let dictionary = this.environment['texts'].find(dic => dic.Key === key);
         return dictionary ? dictionary.Value : '';
     }
+
+    retrieveConfigSearches(): number {
+        let config = this.environment['configuration'];
+        let result = 3;
+        try {
+            result = config.Stations.RecentSearches.InOrigin;
+        } catch (e) {
+            console.log((<Error>e).message);
+        }
+        return result;
+    }
 }
