@@ -19,4 +19,9 @@ export class ConfigService {
         return loadStations.toPromise() && loadMarkets.toPromise()
             && loadTexts.toPromise() && loadConfiguration.toPromise();
     }
+
+    getDictionary(key: string): string {
+        let dictionary = this.environment['texts'].find(dic => dic.Key === key);
+        return dictionary ? dictionary.Value : '';
+    }
 }

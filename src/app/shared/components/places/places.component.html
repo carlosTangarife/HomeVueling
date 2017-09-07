@@ -1,7 +1,7 @@
 <p class="cities-sugestion-popup_title" *ngIf="hasRecentStations()">
-  {{label}}
+  {{label | dictionary}}
   <span class="erase-label" *ngIf="type === 'recents'"
-    (click)="deleteRecentStations()">Borrar</span>
+    (click)="deleteRecentStations()">{{'erase' | dictionary}}</span>
 </p>
 <ul class="cities-sugestion-popup_list">
   <li *ngFor="let station of data | async"

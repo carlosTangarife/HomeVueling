@@ -11,7 +11,7 @@ import { StationService } from 'app/shared/services/station.service';
 import { CookiesWrapper } from 'app/shared/services/cookies-wrapper.service';
 import { FocusDirective } from './focus.directive';
 import { TypePassengerService } from './components/passenger/type-passenger/type-passenger.service';
-
+import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
 
 export function configServiceFactory(config: ConfigService) {
   let obs = config.load();
@@ -28,7 +28,8 @@ export function configServiceFactory(config: ConfigService) {
   ],
   declarations: [
     ...SEARCH_COMPONENTS,
-    FocusDirective
+    FocusDirective,
+    DictionaryPipe
   ],
   exports: [
     // ...SEARCH_COMPONENTS

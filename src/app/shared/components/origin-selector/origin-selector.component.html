@@ -1,5 +1,5 @@
 
-<label for="origin-input" class="form-input_label">Origen</label>
+<label for="origin-input" class="form-input_label">{{'origin' | dictionary}}</label>
 <div class="input-group" (click)="clearInput()">
   <span class="prefix" *ngIf="dataFlight.code">{{dataFlight.code}}</span>
   <input type="text" id="origin-input"
@@ -8,7 +8,7 @@
     #originInput
     name="origin"
     class="form-control js-searchbar-input"
-    placeholder="Ciudad, país o aeropuerto" required>
+    placeholder="{{'originPlaceholder' | dictionary}}" required>
 </div>
 
 <div class="popover popover--error" *ngIf="false">
@@ -16,9 +16,9 @@
 </div>
 
 <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':_selectorService.viewPopup}">
-  <div app-places [data]="_selectorService.recentStations$" [label]="'Busquedas Recientes'"
+  <div app-places [data]="_selectorService.recentStations$" [label]="'recentSearchs'"
     [type]="'recents'" (selectedEvent)="selectStation($event)"
     (deleteEvent)="deleteRecentStationsCookie($event)"></div>
-  <div app-places [data]="_selectorService.listStations$" [label]="'Todos los destinos'"
+  <div app-places [data]="_selectorService.listStations$" [label]="'allAirports'"
     (selectedEvent)="selectStation($event)"></div>
 </div>

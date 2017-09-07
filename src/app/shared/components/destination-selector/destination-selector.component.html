@@ -1,5 +1,5 @@
 
-<label for="destination-input" class="form-input_label">Destino</label>
+<label for="destination-input" class="form-input_label">{{'destination' | dictionary}}</label>
 <div class="input-group" (click)="clearInput()">
   <span class="prefix" *ngIf="dataFlight.destination.code">{{dataFlight.destination.code}}</span>
   <input type="text" id="destination-input"
@@ -8,7 +8,7 @@
     #destinationInput
     name="destination"
     class="form-control js-searchbar-input"
-    placeholder="Ciudad, país o aeropuerto" required>
+    placeholder="{{'destinationPlaceholder' | dictionary}}" required>
 </div>
 
 <div class="popover popover--error" *ngIf="false">
@@ -16,25 +16,25 @@
 </div>
 
 <div id="destinationInput-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':_selectorService.viewPopup}">
-  <div app-places [data]="_selectorService.recentStations$" [label]="'Busquedas Recientes'"
+  <div app-places [data]="_selectorService.recentStations$" [label]="'recentSearchs'"
     [type]="'recents'" (selectedEvent)="selectStation($event)"
     (deleteEvent)="deleteRecentStationsCookie($event)"></div>
-  <div app-places [data]="_selectorService.listStations$" [label]="'Todos los destinos'"
+  <div app-places [data]="_selectorService.listStations$" [label]="'allAirports'"
     (selectedEvent)="selectStation($event)"></div>
   <div class="cities-sugestion-popup_legend">
     <ul>
       <li>Vuelos directos</li>
-      <li class="connection-flight">Vuelos en conexión</li>
+      <li class="connection-flight">{{'connectionFlights' | dictionary}}</li>
     </ul>
     <div class="cities-sugestion-popup_legend_actions">
       <div class="link">
         <span class="icon icon-arrow-right"></span>
-        <a href="">Mapa de destinos</a>
+        <a href="">{{'destinationMap' | dictionary}}</a>
       </div>
       <div class="form-checkbox--button color-darkGrey">
         <label>
           <input type="checkbox" hidden>
-          <span>Múltiples destinos</span>
+          <span>{{'multicity' | dictionary}}</span>
         </label>
       </div>
     </div>
