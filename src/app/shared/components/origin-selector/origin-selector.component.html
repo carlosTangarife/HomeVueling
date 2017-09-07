@@ -1,25 +1,24 @@
-<div id="form-group--origin">
-  <label for="origin-input" class="form-input_label">Origen</label>
-  <div class="input-group" (click)="clearInput()">
-    <span class="prefix" *ngIf="dataFlight.code">{{dataFlight.code}}</span>
-    <input type="text" id="origin-input"
-      [(ngModel)]="dataFlight.name"
-      (keyup)="filterStationsByKey(originInput.value)"
-      #originInput
-      name="origin"
-      class="form-control js-searchbar-input"
-      placeholder="Ciudad, país o aeropuerto" required>
-  </div>
 
-  <div class="popover popover--error" *ngIf="false">
-    <div class="popover-content">Before continiung, you must select your origin.</div>
-  </div>
+<label for="origin-input" class="form-input_label">Origen</label>
+<div class="input-group" (click)="clearInput()">
+  <span class="prefix" *ngIf="dataFlight.code">{{dataFlight.code}}</span>
+  <input type="text" id="origin-input"
+    [(ngModel)]="dataFlight.name"
+    (keyup)="filterStationsByKey(originInput.value)"
+    #originInput
+    name="origin"
+    class="form-control js-searchbar-input"
+    placeholder="Ciudad, país o aeropuerto" required>
+</div>
 
-  <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':_selectorService.viewPopup}">
-    <div app-places [data]="_selectorService.recentStations$" [label]="'Busquedas Recientes'"
-      [type]="'recents'" (selectedEvent)="selectStation($event)"
-      (deleteEvent)="deleteRecentStationsCookie($event)"></div>
-    <div app-places [data]="_selectorService.listStations$" [label]="'Todos los destinos'"
-      (selectedEvent)="selectStation($event)"></div>
-  </div>
+<div class="popover popover--error" *ngIf="false">
+  <div class="popover-content">Before continiung, you must select your origin.</div>
+</div>
+
+<div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':_selectorService.viewPopup}">
+  <div app-places [data]="_selectorService.recentStations$" [label]="'Busquedas Recientes'"
+    [type]="'recents'" (selectedEvent)="selectStation($event)"
+    (deleteEvent)="deleteRecentStationsCookie($event)"></div>
+  <div app-places [data]="_selectorService.listStations$" [label]="'Todos los destinos'"
+    (selectedEvent)="selectStation($event)"></div>
 </div>

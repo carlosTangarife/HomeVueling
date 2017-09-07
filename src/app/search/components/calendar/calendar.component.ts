@@ -1,9 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-calendar',
+  selector: '[app-calendar]',
   template: `
-  <div id="form-group--dates">
     <div class="col col-md-6">
       <label>Ida</label>
       <div class="input-group">
@@ -20,8 +19,7 @@ import { Component, OnInit } from '@angular/core';
           <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
         </div>
       </div>
-    </div>
-  </div>`
+    </div>`
 })
 export class CalendarComponent implements OnInit {
 

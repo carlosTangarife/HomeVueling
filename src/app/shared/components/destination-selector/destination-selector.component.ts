@@ -4,7 +4,7 @@ import { SelectorService } from '../../services/selector.service';
 import { ConfigService } from '../../services/config.service';
 
 @Component({
-  selector: 'app-destination-selector',
+  selector: '[app-destination-selector]',
   templateUrl: './destination-selector.component.html',
   providers: [SelectorService]
 })

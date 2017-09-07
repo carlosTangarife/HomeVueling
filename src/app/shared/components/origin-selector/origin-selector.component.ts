@@ -3,7 +3,7 @@ import { SelectorService } from '../../services/selector.service';
 import { IStation } from '../../../search/components/flight/flight.model';
 
 @Component({
-  selector: 'app-origin-selector',
+  selector: '[app-origin-selector]',
   templateUrl: './origin-selector.component.html',
   providers: [SelectorService]
 })
