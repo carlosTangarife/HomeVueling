@@ -1,15 +1,11 @@
 <li>
   <div class="passengers-popup_main_description">
-    <p class="title">{{label}}</p>
-    <label class="label" *ngIf="info; else normalPassenger"><a href="">{{rulAge}}</a></label>
-    <ng-template #normalPassenger>
-      <label class="label">{{rulAge}}</label>
-    </ng-template>
-
+    <p class="title">{{typePassengerList?.label}}</p>
+    <label class="label"><a href="">{{typePassengerList?.rulAge}}</a></label>
   </div>
   <div class="passengers-popup_main_counter">
-    <ng-content select="[click-less]"></ng-content>
-    <div class="number">{{age}}</div>
-    <ng-content select="[click-more]"></ng-content>
+      <span class="icon icon-rounded-less" (click)="_tp.lessPassenger(typePassengerList?.type)"></span>
+      <div class="number">{{_tp.passenger[typePassengerList.type]}}</div>
+      <span class="icon icon-rounded-more" (click)="_tp.morePassenger(typePassengerList?.type)"></span>
   </div>
 </li>

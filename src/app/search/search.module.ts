@@ -9,6 +9,9 @@ import { StorageService } from '../shared/services/storage.service';
 import { ConfigService } from '../shared/services/config.service';
 import { StationService } from 'app/shared/services/station.service';
 import { CookiesWrapper } from 'app/shared/services/cookies-wrapper.service';
+import { FocusDirective } from './focus.directive';
+import { TypePassengerService } from './components/passenger/type-passenger/type-passenger.service';
+
 
 export function configServiceFactory(config: ConfigService) {
   let obs = config.load();
@@ -24,14 +27,15 @@ export function configServiceFactory(config: ConfigService) {
     HttpModule
   ],
   declarations: [
-    ...SEARCH_COMPONENTS
+    ...SEARCH_COMPONENTS,
+    FocusDirective
   ],
   exports: [
     // ...SEARCH_COMPONENTS
   ],
   providers: [{ provide: APP_INITIALIZER, useFactory: configServiceFactory, deps: [ConfigService], multi: true },
     ResourcesService, LoggerService, StorageService,
-    ConfigService, CookiesWrapper, StationService, {provide: Number, useValue: 3}],
+    ConfigService, CookiesWrapper, StationService, {provide: Number, useValue: 3}, TypePassengerService],
   entryComponents: [SEARCH_COMPONENTS]
 })
 export class SearchModule { }

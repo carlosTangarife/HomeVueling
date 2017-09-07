@@ -1,11 +1,3 @@
-export interface IPassenger {
-  adult: number,
-  children: number,
-  babies: number,
-  extraSeat: number,
-  totalPassengers: number
-};
-
 export interface IStation {
   macCode?: string,
   name: string,
@@ -41,9 +33,8 @@ export interface IMarket {
 };
 
 export interface IFlight {
-  origin: IStation,
-  destination: IStation,
-  going: Date,
-  return: Date,
-  passenger: IPassenger
+  origin?: IStation,
+  destination?: IStation,
+  going?: Date,
+  return?: Date,
 };

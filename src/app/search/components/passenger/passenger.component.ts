@@ -1,71 +1,77 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IPassenger } from '../../../search/components/flight/flight.model';
 import { IDataPassenger } from './type-passenger/type-passenger.model';
-import { IDiscountPassengerList, IInfoList } from './passenger.model'
+import { IDiscountListPassengers, IDiscountPassenger, IInfoList } from './passenger.model';
+import { ITypePassengerList, IPassenger } from './type-passenger/type-passenger.model';
 
 @Component({
   selector: 'app-passenger',
   templateUrl: './passenger.component.html'
 })
 export class PassengerComponent implements OnInit {
-  @Input() passenger: IPassenger;
-  @Input() inputPassengerFocused: boolean;
-
-  public stateListActive: boolean;
-
-  public discountPassengerList: Array<IDiscountPassengerList>;
-  public dataPassenger: IDataPassenger;
+  public passengers: IPassenger;
+  public isShowPassengers: boolean;
   public infoList: Array<IInfoList>;
-
-  public disabledBaby: boolean;
+  public isShowDiscountList: boolean;
+  public discountPassengersSelected: boolean;
+  public discountPassengers: IDiscountPassenger;
+  public typePassengerList: Array<ITypePassengerList>;
+  public discountListPassenger: IDiscountListPassengers;
 
   constructor() {
-    this.stateListActive = false;
-    this.discountPassengerList = [
-        {data: 'Residente islas o Ceuta', discount: 50},
-        {data: 'Fam. Numerosa General', discount: 5},
-        {data: 'Fam. Numerosa Especial', discount: 10},
-        {data: 'Fam. Numerosa General Residente', discount: 55},
-        {data: 'Fam. Numerosa Especial Residente', discount: 60},
-      ];
+    this.discountListPassenger = {
+      residentIslaCeuta: {
+        data: 'Residente islas o Ceuta',
+        discount: 50
+      },
+      famNumGeneral: {
+        data: 'Fam. Numerosa General',
+        discount: 5
+      },
+      famNumEspecial: {
+        data: 'Fam. Numerosa Especial',
+        discount: 10
+      },
+      famNumGeneralResident: {
+        data: 'Fam. Numerosa General Residente',
+        discount: 55
+      },
+      famNumEspecialResident: {
+        data: 'Fam. Numerosa Especial Residente',
+        discount: 60
+      }
+    };
 
     this.infoList = [
         {title: 'Residentes', body: 'Durante la reserva se validará tu condición de residente'},
         {title: 'Familia numerosa', body: 'Se debe presentar la documentación acreditativa en el aeropuerto.'}
     ];
-  }
+ }
 
   ngOnInit() {
+    this.typePassengerList = [
+      {label: 'Adult', rulAge: 'Since 16 years', type: 'adult', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' },
+      {label: 'Children', rulAge: '2 to 15 years', type: 'children', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' },
+      {label: 'Baby', rulAge: 'From 7 days to 23 months', type: 'babies', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' },
+      {label: 'ExtraSeat', rulAge: '+ info', type: 'extraSeat', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' }
+    ]
   }
 
-  totalPassenger() {
-    this.passenger.totalPassengers = this.passenger.adult + this.passenger.babies + this.passenger.children + this.passenger.extraSeat;
-    if (this.passenger.totalPassengers && this.passenger.totalPassengers > 25) {
-      window.location.href = 'https://groupsnew.vueling.com/web';
+  togglePassengers() {
+    this.isShowPassengers = !this.isShowPassengers
+  }
+
+  toggleDiscountList(discountPassengers?: IDiscountPassenger) {
+    this.discountPassengers = discountPassengers;
+
+    if (this.discountPassengers) {
+      this.discountPassengersSelected = true;
     }
+
+    console.log(discountPassengers)
+    this.isShowDiscountList = !this.isShowDiscountList;
   }
 
-  toggleClassListActive() {
-    this.stateListActive = !this.stateListActive;
-  }
-
-  moreAndLessOperations(state: boolean, typePassenger: string) {
-    if (state) {
-      this.passenger[typePassenger] -= 1;
-    }else {
-      this.passenger[typePassenger] += 1;
-    }
-    this.totalPassenger();
-  }
-
-  validateAdult(state: boolean, typePassenger: string) {
-    this.moreAndLessOperations(state, typePassenger);
-    if (this.passenger.babies <= this.passenger.adult) {
-      this.disabledBaby = true;
-    }
-  }
-
-  validateBaby(state: boolean, typePassenger: string) {
-    this.moreAndLessOperations(state, typePassenger);
+  setPassenger(passenger: IPassenger) {
+    this.passengers = passenger;
   }
 }

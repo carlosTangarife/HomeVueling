@@ -1,48 +1,34 @@
-<div id="passengers-popup" class="searchbar-popup passengers-popup discount" [ngClass]="{'show-table': inputPassengerFocused}">
-  <ul class="passengers-popup_main">
+<div id="form-group--passengers">
 
-    <app-type-passenger [label]="'adult'" [rulAge]="'Since 16 years'" [age]="passenger.adult">
-      <span class="icon icon-rounded-less" (click)="validateAdult(true, 'adult')" click-less></span>
-      <span class="icon icon-rounded-more" (click)="validateAdult(false, 'adult')" click-more></span>
-    </app-type-passenger>
-    <!--
-    <app-type-passenger [label]="'children'" [rulAge]="'2 to 15 years'" [age]="passenger.children"></app-type-passenger>
-    <app-type-passenger [label]="'babies'" [rulAge]="'From 7 days to 23 months'" [age]="passenger.babies"></app-type-passenger>
-     -->
-    <app-type-passenger [label]="'extraSeat'" [rulAge]="'+ info'" [age]="passenger.extraSeat" [info]="true">
-      <div *ngIf="disabledBaby; then tagLessWithEventClick else tagLessWithOutEventClick"></div>
-
-      <ng-template #tagLessWithEventClick>
-        <span class="icon icon-rounded-less" (click)="validateBaby(true, 'adult')" click-less></span>
-      </ng-template>
-
-      <ng-template #tagLessWithOutEventClick>
-        <span class="icon icon-rounded-less disabled" click-less></span>
-      </ng-template>
-
-    </app-type-passenger>
-  </ul>
-
-  <ul class="passengers-popup_main discount">
-    <li id="discount-list-active" (click)="toggleClassListActive()">
-      <p>Descuento Residente o familia numerosa</p>
-      <span class="icon icon-arrow-right"></span>
-    </li>
-    <li class="js-discount-item-selected" (click)="toggleClassListActive()">
-      <p class="discount-item selected">Fam. Numerosa Especial (10%)</p>
-    </li>
-    <div class="alert alert--icon info">
-      <div class="alert_wrap" *ngFor="let infoItem of infoList">
-        <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
-        <p class="alert_wrap_title">{{infoItem.title}}</p>
-        <p class="alert_wrap_message">{{infoItem.body}}</p>
-      </div>
+    <label (click)="togglePassengers()">{{passengers?.adult}} Adult, {{passengers?.children}} Children, {{passengers?.babies}} babies </label>
+    <div class="input-group" (click)="togglePassengers()">
+      <input type="text" class="form-control js-searchbar-input" id="passengers-input" placeholder="0 pasajeros" [ngModel]="passengers?.totalPassengers" readonly="readonly">
+      <span class="icon icon-arrow-down"></span>
     </div>
-  </ul>
 
-  <ul id="discount-list" class="passengers-popup_main discount-list" [ngClass]="{'active':stateListActive}" (click)="toggleClassListActive()">
-    <li *ngFor="let discountItem of discountPassengerList">
-      <p class="discount-item js-discount">{{discountItem.data}} ({{discountItem.discount}}%)</p>
-    </li>
-  </ul>
+  <div id="passengers-popup" class="searchbar-popup passengers-popup discount" [ngClass]="{'show-table':isShowPassengers}">
+    <ul class="passengers-popup_main">
+      <app-type-passenger
+        *ngFor="let typePassenger of typePassengerList"
+        [typePassengerList]="typePassenger"
+        (eventPassengers)="setPassenger($event)"
+        >
+      </app-type-passenger>
+    </ul>
+
+    <app-discount-passenger
+      class="passengers-popup_main discount"
+      (click)="toggleDiscountList()"
+      [typeDiscountSelected]="discountPassengers"
+      [selected]="discountPassengersSelected"
+      >
+    </app-discount-passenger>
+
+    <app-discount-list-passenger class="passengers-popup_main discount-list"
+      [ngClass]="{'active':isShowDiscountList}"
+      (eventToggleDiscountList)="toggleDiscountList($event)"
+      [discountListPassengers]="discountListPassenger">
+    </app-discount-list-passenger>
+
+  </div>
 </div>

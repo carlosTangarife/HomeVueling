@@ -14,7 +14,7 @@ export class DestinationSelectorComponent implements OnInit {
   @Output() clickDestination: EventEmitter<any> = new EventEmitter();
   @Output() isFocused: EventEmitter<boolean> = new EventEmitter();
 
-  constructor(private _selectorService: SelectorService) { }
+  constructor(public _selectorService: SelectorService) { }
 
   ngOnInit() {
     this._selectorService.getMarketsByIata(this.dataFlight.origin.code);

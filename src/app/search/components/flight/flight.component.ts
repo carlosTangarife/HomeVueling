@@ -1,4 +1,4 @@
-import { Component, OnInit, Output, EventEmitter, ChangeDetectionStrategy } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { IFlight } from '../../../search/components/flight/flight.model';
 import { StationService } from '../../../shared/services/station.service';
@@ -11,11 +11,8 @@ import { environment } from '../../../../environments/environment';
 })
 export class FlightComponent implements OnInit {
   public dataFlight: IFlight;
-  public passengerFocused = false;
   public isFocusedOrigin: boolean;
   public isFocusedDestination: boolean;
-
-  @Output() stateOverlay = new EventEmitter<boolean>();
 
   constructor(private _stationService: StationService) { }
 
@@ -28,15 +25,6 @@ export class FlightComponent implements OnInit {
       destination: {
         code: 'MAD',
         name: 'Madrid'
-      },
-      going: new Date(),
-      return: new Date(17, 8, 15),
-      passenger: {
-        adult: 1,
-        children: 1,
-        babies: 0,
-        extraSeat: 0,
-        totalPassengers: 1
       }
     };
   }
@@ -46,10 +34,6 @@ export class FlightComponent implements OnInit {
     // window.location.href = '/';
   }
 
-  clickPassenger() {
-    this.passengerFocused = !this.passengerFocused;
-    this.stateOverlay.emit();
-  }
 
   saveSearch() {
     this._stationService.saveStation(this.dataFlight.origin.code, environment.keyLastSearchOriginCookie);

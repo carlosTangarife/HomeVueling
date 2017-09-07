@@ -3,26 +3,13 @@
     <app-origin-selector class="form-input origin" [dataFlight]="dataFlight.origin"
       (selectedOrigin)="destination.loadDestinations()"
       (isFocused)="isFocusedOrigin=$event" [ngClass]="{'focused':isFocusedOrigin}" #origin></app-origin-selector>
-    
+
     <app-destination-selector class="form-input destination" [dataFlight]="dataFlight"
       (clickDestination)="origin.showPopupOrigin($event)" #destination
       (isFocused)="isFocusedDestination=$event" [ngClass]="{'focused':isFocusedDestination}"></app-destination-selector>
 
     <app-calendar class="form-input dates"></app-calendar>
-
-    <div id="form-group--passengers" class="form-input passengers" [ngClass]="{'focused':passengerFocused}">
-        <label for="passengers-input" (click)="clickPassenger()">{{dataFlight.passenger.adult}} Adult, {{dataFlight.passenger.children}} Children, {{dataFlight.passenger.babies}} babies</label>
-        <div class="input-group" (click)="clickPassenger()">
-          <input type="text" class="form-control js-searchbar-input" id="passengers-input"
-                [ngModel]="dataFlight.passenger.totalPassengers"
-                name="totalPassengers"
-                placeholder="1 pasajero"
-                readonly="readonly"
-          >
-          <span class="icon icon-arrow-down"></span>
-        </div>
-      <app-passenger [passenger]="dataFlight.passenger" [inputPassengerFocused]="passengerFocused"></app-passenger>
-    </div>
+    <app-passenger class="form-input passengers"></app-passenger>
   </div>
 
   <div class="form-action">
