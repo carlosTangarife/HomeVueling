@@ -64,7 +64,6 @@ export class PassengerComponent implements OnInit {
   }
 
   setPrueba(destination: IMarket) {
-    debugger;
     this.isResident = destination.residents;
     this.isLargeFamily = destination.largefamily;
   }
@@ -74,15 +73,13 @@ export class PassengerComponent implements OnInit {
   }
 
   toggleDiscountList(discountPassengers?: IDiscountPassenger) {
-    debugger;
+    this.isShowDiscountList = !this.isShowDiscountList;
+
     this.discountPassengers = discountPassengers;
 
     if (this.discountPassengers) {
       this.discountPassengersSelected = true;
     }
-
-    console.log(discountPassengers)
-    this.isShowDiscountList = !this.isShowDiscountList;
   }
 
   setPassenger(passenger: IPassenger) {
