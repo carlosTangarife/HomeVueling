@@ -10,7 +10,7 @@ export class IndexSearchComponent implements OnInit {
   isFlight: boolean;
   ischeckIn: boolean;
   isReservation: boolean;
-  showOverlay: boolean;
+  isOverlay: boolean;
 
   constructor(private _configService: ConfigService) {
     this.searcherConfig = this._configService.environment['configuration'];
@@ -20,7 +20,7 @@ export class IndexSearchComponent implements OnInit {
     this.isFlight = true;
     this.ischeckIn = false;
     this.isReservation = false;
-    this.showOverlay = false;
+    this.isOverlay = false;
   }
 
   stateTag(isFlight: boolean, ischeckIn: boolean, isReservation: boolean) {
@@ -30,11 +30,14 @@ export class IndexSearchComponent implements OnInit {
   }
 
   toggleClassOverlay() {
-      this.showOverlay = !this.showOverlay;
+    this.isOverlay = !this.isOverlay;
+  }
+
+  showOverlay() {
+    this.isOverlay = true;
   }
 
   hideOverlay() {
-    this.toggleClassOverlay();
+    this.isOverlay = false;
   }
-
 }
