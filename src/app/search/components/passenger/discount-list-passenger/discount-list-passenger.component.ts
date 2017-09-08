@@ -7,6 +7,8 @@ import { IDiscountListPassengers, IDiscountPassenger } from '../passenger.model'
 })
 export class DiscountListPassengerComponent implements OnInit {
 
+  public discountActiveSelected: any;
+
   @Output()
   eventToggleDiscountList = new EventEmitter<IDiscountPassenger>();
 
@@ -22,12 +24,14 @@ export class DiscountListPassengerComponent implements OnInit {
   constructor() {
     this.isResident = false
     this.isLargeFamily = false
+    this.discountActiveSelected = null;
   }
 
   ngOnInit() {
   }
 
   toggleDiscountList(discountPassengers: IDiscountPassenger) {
+    this.discountActiveSelected = discountPassengers;
     this.eventToggleDiscountList.next(discountPassengers);
   }
 
