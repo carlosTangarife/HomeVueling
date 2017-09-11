@@ -1,26 +1,24 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IDataPassenger } from './type-passenger/type-passenger.model';
-import { IMarket } from '../flight/flight.model';
+import { IMarket, IPassengers, IDataPassenger, ITypePassenger } from '../flight/flight.model';
 import { IDiscountListPassengers, IDiscountPassenger, IInfoList } from './passenger.model';
-import { ITypePassengerList, IPassenger } from './type-passenger/type-passenger.model';
-import { TypePassengerService } from './type-passenger/type-passenger.service';
 
 @Component({
   selector: '[app-passenger]',
-  templateUrl: './passenger.component.html',
-  providers: [ TypePassengerService ]
+  templateUrl: './passenger.component.html'
 })
 export class PassengerComponent implements OnInit {
+  @Input()
+  public passengers: IPassengers;
+
   public isResident: boolean;
   public isLargeFamily: boolean;
-  public passengers: IPassenger;
   public isShowPassengers: boolean;
   public infoList: Array<IInfoList>;
   public isShowDiscountList: boolean;
   public destinationSelected: IMarket;
   public discountPassengersSelected: boolean;
   public discountPassengers: IDiscountPassenger;
-  public typePassengerList: Array<ITypePassengerList>;
+  public typePassengerList: Array<ITypePassenger>;
   public discountListPassenger: IDiscountListPassengers;
 
   constructor() {
@@ -57,10 +55,10 @@ export class PassengerComponent implements OnInit {
 
   ngOnInit() {
     this.typePassengerList = [
-      {label: 'Adult', rulAge: 'Since 16 years', type: 'adult', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' },
-      {label: 'Children', rulAge: '2 to 15 years', type: 'children', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' },
-      {label: 'Baby', rulAge: 'From 7 days to 23 m..', type: 'babies', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' },
-      {label: 'ExtraSeat', rulAge: '+ info', type: 'extraSeat', iconLess: 'icon icon-rounded-less', iconMore: 'icon icon-rounded-more' }
+      {label: 'adults', rulAge: 'adultCaption', type: 'adults', data: { minus: true, plus: true, value: this.passengers.adults } },
+      {label: 'children', rulAge: 'childrenCaption', type: 'children', data: { minus: false, plus: true, value: this.passengers.children } },
+      {label: 'infants', rulAge: 'infantCaption', type: 'infants', data: { minus: false, plus: true, value: this.passengers.infants } },
+      {label: 'extraseat', rulAge: 'plusMoreInfo', type: 'extraSeat', data: { minus: false, plus: true, value: this.passengers.extraSeat } }
     ]
   }
 
@@ -83,7 +81,11 @@ export class PassengerComponent implements OnInit {
     }
   }
 
-  setPassenger(passenger: IPassenger) {
-    this.passengers = passenger;
+  getLabelPassengers(): string {
+    return this.passengers.totalPassengers === 1 ? 'passenger' : 'passengers';
+  }
+
+  changePassenger(event) {
+    console.log(this.passengers)
   }
 }

@@ -1,6 +1,9 @@
-<label (click)="togglePassengers()">{{passengers?.adult}} Adult, {{passengers?.children}} Children, {{passengers?.babies}} babies </label>
+<label (click)="togglePassengers()">{{passengers?.adults}} {{adults | dictionary}}, {{passengers?.children}} {{children | dictionary}}, {{passengers?.infants}} {{infants | dictionary}}</label>
 <div class="input-group" (click)="togglePassengers()">
-  <input type="text" class="form-control" id="passengers-input" placeholder="0 pasajeros" [ngModel]="passengers?.totalPassengers" readonly="readonly">
+  <input type="text" class="form-control"
+    id="passengers-input"
+    placeholder="{{passengers?.totalPassengers}} {{getLabelPassengers() | dictionary}}"
+    readonly="readonly">
   <span class="icon icon-arrow-down"></span>
 </div>
 
@@ -8,8 +11,9 @@
   <ul class="passengers-popup_main">
     <li app-type-passenger
       *ngFor="let typePassenger of typePassengerList"
-      [typePassengerList]="typePassenger"
-      (eventPassengers)="setPassenger($event)">
+      [typePassenger]="typePassenger"
+      [passengers]="passengers"
+      (changePassenger)="changePassenger($event)">
     </li>
   </ul>
 
@@ -19,8 +23,7 @@
     [typeDiscountSelected]="discountPassengers"
     [selected]="discountPassengersSelected"
     [isResident]="isResident"
-    [isLargeFamily]="isLargeFamily"
-    >
+    [isLargeFamily]="isLargeFamily" >
   </ul>
 
   <ul app-discount-list-passenger *ngIf ="isResident || isLargeFamily" class="passengers-popup_main discount-list"
@@ -28,6 +31,6 @@
     (eventToggleDiscountList)="toggleDiscountList($event)"
     [discountListPassengers]="discountListPassenger"
     [isResident]="isResident"
-    [isLargeFamily]="isLargeFamily">
+    [isLargeFamily]="isLargeFamily" >
   </ul>
 </div>

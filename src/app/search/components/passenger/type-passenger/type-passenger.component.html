@@ -1,9 +1,8 @@
 <div class="passengers-popup_main_description">
-  <p class="title">{{typePassengerList?.label}}</p>
-  <label class="label"><a href="">{{typePassengerList?.rulAge}}</a></label>
+  <p class="title">{{typePassenger?.label | dictionary}}</p>
+  <label class="label"><a href="">{{typePassenger?.rulAge | dictionary}}</a></label>
 </div>
-<div class="passengers-popup_main_counter">
-    <span class="icon icon-rounded-less" (click)="_tp.lessPassenger(typePassengerList?.type)"></span>
-    <div class="number">{{_tp.passenger[typePassengerList.type]}}</div>
-    <span class="icon icon-rounded-more" (click)="_tp.morePassenger(typePassengerList?.type)"></span>
+<div app-minus-plus class="passengers-popup_main_counter"
+  (changeValue)="changeValue($event)"
+  [data]="typePassenger.data" >
 </div>

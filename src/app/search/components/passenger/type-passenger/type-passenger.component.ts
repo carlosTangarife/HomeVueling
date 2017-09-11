@@ -1,30 +1,26 @@
-import { Component, OnInit, Input, EventEmitter, Output, AfterContentInit } from '@angular/core';
-import { ITypePassengerList, IPassenger } from './type-passenger.model';
-import { TypePassengerService } from './type-passenger.service';
-
-import { Subject } from 'rxjs/Subject';
-import { Subscription } from 'rxjs/Subscription';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { ITypePassenger, IPassengers } from '../../flight/flight.model';
 
 @Component({
   selector: '[app-type-passenger]',
   templateUrl: './type-passenger.component.html'
 })
 export class TypePassengerComponent implements OnInit {
+  @Input()
+  typePassenger: ITypePassenger;
 
-  @Input() typePassengerList: ITypePassengerList;
+  @Input()
+  passengers: IPassengers;
 
-  @Output() eventPassengers = new EventEmitter<IPassenger>();
+  @Output()
+  changePassenger = new EventEmitter<any>();
 
-  constructor(public _tp: TypePassengerService) { }
+  constructor() { }
 
-  ngOnInit() {
+  ngOnInit() { }
 
-    // this will call the service and subscribe and detect all the changes that occurred in the passenger data model
-    this._tp.passenger$.subscribe(passengers => {
-      this.eventPassengers.next(passengers);
-    });
-
-    // this method initializes the data contract and calls the observer to emit the real state of the data model of passangers
-    this._tp.initService();
+  changeValue(value: number) {
+    this.passengers[this.typePassenger.type] = value;
+    this.changePassenger.emit();
   }
 }

@@ -3,6 +3,7 @@ import { CheckInComponent } from './components/check-in/check-in.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { FlightComponent } from './components/flight/flight.component';
 import { PlacesComponent } from '../shared/components/places/places.component';
+import { MinusPlusComponent } from '../shared/components/minus-plus/minus-plus.component';
 import { TypePassengerComponent } from './components/passenger/type-passenger/type-passenger.component';
 import { CalendarComponent } from './components/calendar/calendar.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
@@ -23,5 +24,6 @@ export const SEARCH_COMPONENTS = [
   DestinationSelectorComponent,
   OriginSelectorComponent,
   DiscountPassengerComponent,
-  DiscountListPassengerComponent
+  DiscountListPassengerComponent,
+  MinusPlusComponent
 ];

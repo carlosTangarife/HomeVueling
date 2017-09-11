@@ -3,7 +3,6 @@ import { StationService } from './station.service';
 import { ConfigService } from './config.service';
 import { Subject } from 'rxjs/Subject';
 import { environment } from '../../../environments/environment';
-import { StationsSelectorService } from './stations-selector.service';
 import { IStation, IMarket, IStationList } from '../../search/components/flight/flight.model';
 
 @Injectable()

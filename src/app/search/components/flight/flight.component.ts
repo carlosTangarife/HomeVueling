@@ -25,11 +25,17 @@ export class FlightComponent implements OnInit {
       origin: {
         code: 'BCN',
         name: 'Barcelona'
-      }
-      ,
+      },
       destination: {
         code: 'MAD',
         name: 'Madrid'
+      },
+      passengers: {
+        adults : 1,
+        infants : 0,
+        children: 0,
+        extraSeat: 0,
+        totalPassengers: 0
       }
     };
   }

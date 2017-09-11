@@ -32,9 +32,37 @@ export interface IMarket {
   order?: number
 };
 
+export interface IPassengers {
+  adults: number,
+  children: number,
+  infants: number,
+  extraSeat: number,
+  totalPassengers: number
+};
+
 export interface IFlight {
   origin?: IStation,
   destination?: IStation,
   going?: Date,
   return?: Date,
+  passengers: IPassengers
+};
+
+export interface IDataPassenger {
+  less: boolean,
+  more: boolean,
+  typePassenger: string
+};
+
+export interface ITypePassenger {
+  label: string,
+  rulAge: string,
+  type: string,
+  data: IDataMinusPlus
+};
+
+export interface IDataMinusPlus {
+  minus: boolean,
+  plus: boolean,
+  value: number
 };

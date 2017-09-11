@@ -1,0 +1,3 @@
+<span class="icon icon-rounded-less" (click)="decrease()" [ngClass]="{'disabled':!data.minus}"></span>
+<div class="number">{{_minusPlusService.value}}</div>
+<span class="icon icon-rounded-more" (click)="increase()" [ngClass]="{'disabled':!data.plus}"></span>
