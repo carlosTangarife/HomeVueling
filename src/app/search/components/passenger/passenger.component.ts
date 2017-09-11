@@ -1,7 +1,7 @@
 import { PassengerService } from './passenger.service';
 import { Component, OnInit, Input } from '@angular/core';
-import { IMarket, IPassengers, IDataPassenger, ITypePassenger } from '../flight/flight.model';
-import { IDiscountListPassengers, IDiscountPassenger, IInfoList } from './passenger.model';
+import { IMarket, IPassengers } from '../flight/flight.model';
+import { IDiscountPassenger } from './passenger.model';
 
 @Component({
   selector: '[app-passenger]',
@@ -15,24 +15,14 @@ export class PassengerComponent implements OnInit {
   public isResident: boolean;
   public isLargeFamily: boolean;
   public isShowPassengers: boolean;
-  public infoList: Array<IInfoList>;
   public isShowDiscountList: boolean;
   public destinationSelected: IMarket;
   public discountPassengersSelected: boolean;
   public discountPassengers: IDiscountPassenger;
-  public typePassengerList: Array<ITypePassenger>;
-  public discountListPassenger: IDiscountListPassengers;
 
   constructor(public passengerService: PassengerService) {
     this.isResident = false;
     this.isLargeFamily = false;
-    this.discountListPassenger = {
-      residentIslaCeuta: 'Residente islas o Ceuta (50%)',
-      famNumGeneral: 'Fam. Numerosa General (5%)',
-      famNumEspecial: 'Fam. Numerosa Especial (10%)',
-      famNumGeneralResident: 'Fam. Numerosa General Residente (55%)',
-      famNumEspecialResident: 'Fam. Numerosa Especial Residente (60%)'
-    };
  }
 
   ngOnInit() {
