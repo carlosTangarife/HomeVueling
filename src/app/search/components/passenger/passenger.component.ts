@@ -1,10 +1,12 @@
+import { PassengerService } from './passenger.service';
 import { Component, OnInit, Input } from '@angular/core';
 import { IMarket, IPassengers, IDataPassenger, ITypePassenger } from '../flight/flight.model';
 import { IDiscountListPassengers, IDiscountPassenger, IInfoList } from './passenger.model';
 
 @Component({
   selector: '[app-passenger]',
-  templateUrl: './passenger.component.html'
+  templateUrl: './passenger.component.html',
+  providers: [PassengerService]
 })
 export class PassengerComponent implements OnInit {
   @Input()
@@ -21,7 +23,7 @@ export class PassengerComponent implements OnInit {
   public typePassengerList: Array<ITypePassenger>;
   public discountListPassenger: IDiscountListPassengers;
 
-  constructor() {
+  constructor(public passengerService: PassengerService) {
     this.isResident = false;
     this.isLargeFamily = false;
     this.discountListPassenger = {
@@ -46,20 +48,10 @@ export class PassengerComponent implements OnInit {
         discount: 60
       }
     };
-
-    this.infoList = [
-        {title: 'Residentes', body: 'Durante la reserva se validará tu condición de residente'},
-        {title: 'Familia numerosa', body: 'Se debe presentar la documentación acreditativa en el aeropuerto.'}
-    ];
  }
 
   ngOnInit() {
-    this.typePassengerList = [
-      {label: 'adults', rulAge: 'adultCaption', type: 'adults', data: { minus: true, plus: true, value: this.passengers.adults } },
-      {label: 'children', rulAge: 'childrenCaption', type: 'children', data: { minus: false, plus: true, value: this.passengers.children } },
-      {label: 'infants', rulAge: 'infantCaption', type: 'infants', data: { minus: false, plus: true, value: this.passengers.infants } },
-      {label: 'extraseat', rulAge: 'plusMoreInfo', type: 'extraSeat', data: { minus: false, plus: true, value: this.passengers.extraSeat } }
-    ]
+    this.passengerService.validatePassenger(this.passengers);
   }
 
   setResidentAndLargeFamily(destination: IMarket) {
@@ -86,6 +78,7 @@ export class PassengerComponent implements OnInit {
   }
 
   changePassenger(event) {
-    console.log(this.passengers)
+    this.passengerService.validatePassenger(this.passengers);
+    console.log(this.passengers);
   }
 }

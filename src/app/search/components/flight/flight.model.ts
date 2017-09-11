@@ -58,7 +58,7 @@ export interface ITypePassenger {
   label: string,
   rulAge: string,
   type: string,
-  data: IDataMinusPlus
+  data?: IDataMinusPlus
 };
 
 export interface IDataMinusPlus {

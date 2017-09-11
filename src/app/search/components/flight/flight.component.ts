@@ -35,14 +35,13 @@ export class FlightComponent implements OnInit {
         infants : 0,
         children: 0,
         extraSeat: 0,
-        totalPassengers: 0
+        totalPassengers: 1
       }
     };
   }
 
   onSubmit() {
     this.saveSearch();
-    // window.location.href = '/';
   }
 
   clickInput() {

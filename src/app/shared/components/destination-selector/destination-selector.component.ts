@@ -46,7 +46,6 @@ export class DestinationSelectorComponent implements OnInit {
     this.dataFlight.destination.countryName = station.countryName;
     this._selectorService.togglePopup();
     this.isFocused.emit(this._selectorService.viewPopup);
-    /*TODO*/
     this.outStation.emit(station);
   }
 

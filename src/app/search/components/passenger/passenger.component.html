@@ -1,8 +1,9 @@
-<label (click)="togglePassengers()">{{passengers?.adults}} {{adults | dictionary}}, {{passengers?.children}} {{children | dictionary}}, {{passengers?.infants}} {{infants | dictionary}}</label>
+<label (click)="togglePassengers()">{{passengers?.adults}} {{'adults' | dictionary}}, {{passengers?.children}} {{'children' | dictionary}}, {{passengers?.infants}} {{'infants' | dictionary}}</label>
 <div class="input-group" (click)="togglePassengers()">
   <input type="text" class="form-control"
     id="passengers-input"
     placeholder="{{passengers?.totalPassengers}} {{getLabelPassengers() | dictionary}}"
+    [ngModel]="passengers.totalPassengers"
     readonly="readonly">
   <span class="icon icon-arrow-down"></span>
 </div>
@@ -10,7 +11,7 @@
 <div id="passengers-popup" class="searchbar-popup passengers-popup" [ngClass]="{'show-table':isShowPassengers, 'discount': (isResident || isLargeFamily)}">
   <ul class="passengers-popup_main">
     <li app-type-passenger
-      *ngFor="let typePassenger of typePassengerList"
+      *ngFor="let typePassenger of passengerService.typePassengerList"
       [typePassenger]="typePassenger"
       [passengers]="passengers"
       (changePassenger)="changePassenger($event)">
