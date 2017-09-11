@@ -6,7 +6,6 @@ import { SEARCH_COMPONENTS } from './index';
 import { SHARED_SERVICES, APP_INITIALIZER_PROV } from '../shared/consts/services';
 import { FocusDirective } from './focus.directive';
 import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
-import { DiscountPassengerPipe } from './components/passenger/discount-passenger/discount-passenger.pipe'
 
 @NgModule({
   imports: [
@@ -18,7 +17,6 @@ import { DiscountPassengerPipe } from './components/passenger/discount-passenger
   declarations: [
     ...SEARCH_COMPONENTS,
     FocusDirective,
-    DiscountPassengerPipe,
     DictionaryPipe
   ],
   exports: [

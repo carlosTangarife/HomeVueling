@@ -22,7 +22,7 @@
     </li>
   </ul>
 
-  <ul app-discount-passenger *ngIf ="isResident || isLargeFamily"
+  <ul app-discount *ngIf ="isResident || isLargeFamily"
     class="passengers-popup_main discount"
     (click)="toggleDiscountList()"
     [typeDiscountSelected]="discountPassengers"
@@ -31,7 +31,7 @@
     [isLargeFamily]="isLargeFamily" >
   </ul>
 
-  <ul app-discount-list-passenger *ngIf ="isResident || isLargeFamily" class="passengers-popup_main discount-list"
+  <ul app-discount-list *ngIf ="isResident || isLargeFamily" class="passengers-popup_main discount-list"
     [ngClass]="{'active':isShowDiscountList}"
     (eventToggleDiscountList)="toggleDiscountList($event)"
     [discountListPassengers]="discountListPassenger"

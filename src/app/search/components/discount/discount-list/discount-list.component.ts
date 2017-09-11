@@ -1,11 +1,11 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { IDiscountListPassengers, IDiscountPassenger } from '../passenger.model';
+import { IDiscountListPassengers, IDiscountPassenger } from '../../passenger/passenger.model';
 
 @Component({
-  selector: '[app-discount-list-passenger]',
-  templateUrl: './discount-list-passenger.component.html'
+  selector: '[app-discount-list]',
+  templateUrl: './discount-list.component.html'
 })
-export class DiscountListPassengerComponent implements OnInit {
+export class DiscountListComponent implements OnInit {
 
   public discountActiveSelected: string;
   public discountListPassenger: IDiscountListPassengers;

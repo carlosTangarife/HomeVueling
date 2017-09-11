@@ -1,11 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IDiscountPassenger } from '../passenger.model';
+import { IDiscountPassenger } from '../passenger/passenger.model';
 
 @Component({
-  selector: '[app-discount-passenger]',
-  templateUrl: './discount-passenger.component.html'
+  selector: '[app-discount]',
+  templateUrl: './discount.component.html'
 })
-export class DiscountPassengerComponent implements OnInit {
+export class DiscountComponent implements OnInit {
 
   @Input()
   typeDiscountSelected: IDiscountPassenger;

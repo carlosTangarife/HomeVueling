@@ -9,8 +9,8 @@ import { CalendarComponent } from './components/calendar/calendar.component';
 import { PassengerComponent } from './components/passenger/passenger.component';
 import { DestinationSelectorComponent } from '../shared/components/destination-selector/destination-selector.component';
 import { OriginSelectorComponent } from '../shared/components/origin-selector/origin-selector.component';
-import { DiscountPassengerComponent } from './components/passenger/discount-passenger/discount-passenger.component';
-import { DiscountListPassengerComponent } from './components/passenger/discount-list-passenger/discount-list-passenger.component';
+import { DiscountComponent } from './components/discount/discount.component';
+import { DiscountListComponent } from './components/discount/discount-list/discount-list.component';
 
 export const SEARCH_COMPONENTS = [
   IndexSearchComponent,
@@ -23,7 +23,7 @@ export const SEARCH_COMPONENTS = [
   TypePassengerComponent,
   DestinationSelectorComponent,
   OriginSelectorComponent,
-  DiscountPassengerComponent,
-  DiscountListPassengerComponent,
+  DiscountComponent,
+  DiscountListComponent,
   MinusPlusComponent
 ];
