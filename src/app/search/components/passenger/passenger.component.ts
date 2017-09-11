@@ -18,7 +18,7 @@ export class PassengerComponent implements OnInit {
   public isShowDiscountList: boolean;
   public destinationSelected: IMarket;
   public discountPassengersSelected: boolean;
-  public discountPassengers: IDiscountPassenger;
+  public discountPassengers: string;
 
   constructor(public passengerService: PassengerService) {
     this.isResident = false;
@@ -38,7 +38,7 @@ export class PassengerComponent implements OnInit {
     this.isShowPassengers = !this.isShowPassengers
   }
 
-  toggleDiscountList(discountPassengers?: IDiscountPassenger) {
+  toggleDiscountList(discountPassengers?: string) {
     this.isShowDiscountList = !this.isShowDiscountList;
 
     this.discountPassengers = discountPassengers;
