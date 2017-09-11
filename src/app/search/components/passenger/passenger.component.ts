@@ -27,26 +27,11 @@ export class PassengerComponent implements OnInit {
     this.isResident = false;
     this.isLargeFamily = false;
     this.discountListPassenger = {
-      residentIslaCeuta: {
-        data: 'Residente islas o Ceuta',
-        discount: 50
-      },
-      famNumGeneral: {
-        data: 'Fam. Numerosa General',
-        discount: 5
-      },
-      famNumEspecial: {
-        data: 'Fam. Numerosa Especial',
-        discount: 10
-      },
-      famNumGeneralResident: {
-        data: 'Fam. Numerosa General Residente',
-        discount: 55
-      },
-      famNumEspecialResident: {
-        data: 'Fam. Numerosa Especial Residente',
-        discount: 60
-      }
+      residentIslaCeuta: 'Residente islas o Ceuta (50%)',
+      famNumGeneral: 'Fam. Numerosa General (5%)',
+      famNumEspecial: 'Fam. Numerosa Especial (10%)',
+      famNumGeneralResident: 'Fam. Numerosa General Residente (55%)',
+      famNumEspecialResident: 'Fam. Numerosa Especial Residente (60%)'
     };
  }
 

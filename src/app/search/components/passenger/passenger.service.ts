@@ -1,3 +1,4 @@
+import { IRulesPassenger } from '../../../shared/models/rules-passenger.model';
 import { ITypePassenger } from '../flight/flight.model';
 import { IPassengers } from '../flight/flight.model';
 import { ConfigService } from '../../../shared/services/config.service';
@@ -5,7 +6,7 @@ import { Injectable } from '@angular/core';
 
 @Injectable()
 export class PassengerService {
-  private configPassenger: any;
+  private configPassenger: IRulesPassenger;
   public typePassengerList: Array<ITypePassenger>;
 
   constructor(private _configService: ConfigService) {
@@ -20,74 +21,74 @@ export class PassengerService {
   }
 
   validatePassenger(passenger: IPassengers) {
-    this.ruleAdults(passenger.adults);
-    this.ruleInfants(passenger.infants, passenger.adults);
-    this.ruleChildren(passenger.children, passenger.adults);
+    this.ruleAdults(passenger);
+    this.ruleChildren(passenger);
+    this.ruleInfants(passenger);
     this.ruleExtraSeat(passenger);
     this.rulePassenger(passenger);
   }
 
-  private ruleAdults(adult: number) {
-    if (adult > this.configPassenger.adults.min && adult < this.configPassenger.adults.max) {
+  private ruleAdults(passenger: IPassengers) {
+    if (passenger.adults > this.configPassenger.adults.min && passenger.adults < this.configPassenger.adults.max) {
       this.typePassengerList[0].data = {
         minus : true,
         plus: true,
-        value: adult
+        value: passenger.adults
       }
-    }else if (adult === this.configPassenger.adults.min) {
+    }else if (passenger.adults === this.configPassenger.adults.min) {
       this.typePassengerList[0].data = {
         minus : false,
         plus: true,
-        value: adult
+        value: passenger.adults
       }
     }
   }
 
-  private ruleInfants(infants: number, adult: number) {
+  private ruleChildren(passenger: IPassengers) {
+    let max = (passenger.adults > 0) ? this.configPassenger.children.maxWhenAdults : this.configPassenger.children.max;
+
+    if (passenger.children > this.configPassenger.children.min && passenger.children < max) {
+      this.typePassengerList[1].data = {
+        minus : true,
+        plus: true,
+        value: passenger.children
+      }
+    }else if (passenger.children === this.configPassenger.children.min) {
+      this.typePassengerList[1].data = {
+        minus : false,
+        plus: true,
+        value: passenger.children
+      }
+    }else if (passenger.children === max) {
+      this.typePassengerList[1].data = {
+        minus : true,
+        plus: false,
+        value: passenger.children
+      }
+    }
+  }
+
+  private ruleInfants(passenger: IPassengers) {
     let maxInfants = this.configPassenger.infants.max;
-    let max = (adult > maxInfants) ? maxInfants : adult;
+    let max = (passenger.adults > maxInfants) ? maxInfants : passenger.adults;
 
-    if (infants > this.configPassenger.infants.min && infants < max) {
+    if (passenger.infants > this.configPassenger.infants.min && passenger.infants < max) {
       this.typePassengerList[2].data = {
         minus : true,
         plus: true,
-        value: infants
+        value: passenger.infants
       }
-    }else if (infants === this.configPassenger.infants.min) {
+    }else if (passenger.infants === this.configPassenger.infants.min) {
       this.typePassengerList[2].data = {
         minus : false,
         plus: true,
-        value: infants
+        value: passenger.infants
       }
-    }else if (infants === max) {
+    }else if (passenger.infants === max) {
       this.typePassengerList[2].data = {
         minus : true,
         plus: false,
-        value: infants
-      }
-    }
-  }
-
-  private ruleChildren(children: number, adult: number) {
-    let max = (adult > 0) ? this.configPassenger.children.maxWhenAdults : this.configPassenger.children.max;
-
-    if (children > this.configPassenger.children.min && children < max) {
-      this.typePassengerList[1].data = {
-        minus : true,
-        plus: true,
-        value: children
-      }
-    }else if (children === this.configPassenger.children.min) {
-      this.typePassengerList[1].data = {
-        minus : false,
-        plus: true,
-        value: children
-      }
-    }else if (children === max) {
-      this.typePassengerList[1].data = {
-        minus : true,
-        plus: false,
-        value: children
+        value: passenger.infants
       }
     }
   }

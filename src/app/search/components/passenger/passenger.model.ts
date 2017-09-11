@@ -4,11 +4,11 @@ export interface IDiscountPassenger {
 }
 
 export interface IDiscountListPassengers {
-  residentIslaCeuta: IDiscountPassenger,
-  famNumGeneral: IDiscountPassenger,
-  famNumEspecial: IDiscountPassenger,
-  famNumGeneralResident: IDiscountPassenger,
-  famNumEspecialResident: IDiscountPassenger
+  residentIslaCeuta: string,
+  famNumGeneral: string,
+  famNumEspecial: string,
+  famNumGeneralResident: string,
+  famNumEspecialResident: string
 }
 
 export interface IInfoList {

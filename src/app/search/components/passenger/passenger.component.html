@@ -1,4 +1,8 @@
-<label (click)="togglePassengers()">{{passengers?.adults}} {{'adults' | dictionary}}, {{passengers?.children}} {{'children' | dictionary}}, {{passengers?.infants}} {{'infants' | dictionary}}</label>
+<label (click)="togglePassengers()">
+  {{passengers?.adults}} {{'adults' | dictionary}},
+  {{passengers?.children}} {{'children' | dictionary}},
+  {{passengers?.infants}} {{'infants' | dictionary}}
+</label>
 <div class="input-group" (click)="togglePassengers()">
   <input type="text" class="form-control"
     id="passengers-input"
