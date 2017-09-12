@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ElementRef, ViewChild } from '@angular/core';
 import { SelectorService } from '../../services/selector.service';
-import { IStation } from '../../../search/components/flight/flight.model';
+import { IStation } from '../../models/station.model';
 
 @Component({
   selector: '[app-origin-selector]',

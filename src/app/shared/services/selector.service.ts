@@ -3,7 +3,7 @@ import { StationService } from './station.service';
 import { ConfigService } from './config.service';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from '../../../environments/environment';
-import { IStation, IMarket, IStationList } from '../../search/components/flight/flight.model';
+import { IStation, IMarket, IStationList } from '../models/station.model';
 
 @Injectable()
 export class SelectorService {
@@ -69,13 +69,13 @@ export class SelectorService {
                 if (station) {
                     let result: IMarket = {
                         code: market.destination,
-                        connection: market.connection,
-                        residents: market.residents,
-                        largefamily: market.largefamily,
                         countryCode: station.countryCode,
                         countryName: station.countryName,
                         macCode: station.macCode,
-                        name: station.name
+                        name: station.name,
+                        connection: market.connection,
+                        residents: market.residents,
+                        largefamily: market.largefamily
                     };
                     return result;
                 }

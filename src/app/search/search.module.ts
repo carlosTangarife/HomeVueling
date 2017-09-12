@@ -4,7 +4,6 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { SEARCH_COMPONENTS } from './index';
 import { SHARED_SERVICES, APP_INITIALIZER_PROV } from '../shared/consts/services';
-import { FocusDirective } from './focus.directive';
 import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
 
 
@@ -17,7 +16,6 @@ import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
   ],
   declarations: [
     ...SEARCH_COMPONENTS,
-    FocusDirective,
     DictionaryPipe
   ],
   exports: [

@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { ITypePassenger, IPassengers } from '../../flight/flight.model';
+import { ITypePassenger } from '../../../models/passenger.model';
+import { IPassengers } from '../../../models/passenger.model';
 
 @Component({
   selector: '[app-type-passenger]',
@@ -26,5 +27,9 @@ export class TypePassengerComponent implements OnInit {
 
   changeOtherValue(value: number) {
     this.passengers[this.typePassenger.type] = value;
+  }
+
+  isExtraSeat(): boolean {
+    return this.typePassenger.type === 'extraSeat';
   }
 }

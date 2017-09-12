@@ -1,4 +1,3 @@
-import { IRulesPassenger } from '../models/rules-passenger.model';
 import { Injectable } from '@angular/core';
 import { ResourcesService } from './resources.service';
 
@@ -51,31 +50,7 @@ export class ConfigService {
     return result;
   }
 
-  getConfigPassengers(): IRulesPassenger {
-    let rulesPassenger: IRulesPassenger = {
-      extraSeatEnabled: true,
-      residentsLargeFamilyEnabled: true,
-      max: 24,
-      min: 1,
-      urlmax: 'https://groupsnew.vueling.com/web',
-      adults: {
-        max: 24,
-        min: 0
-      },
-      children: {
-        max: 6,
-        min: 0,
-        maxWhenAdults: 12
-      },
-      infants: {
-        max: 16,
-        min: 0
-      },
-      extras: {
-        max: 6,
-        min: 0
-      }
-    }
-    return rulesPassenger;
+  getConfigPassengers(): any {
+    return this.environment['configuration'].FlightSearch.Pax;
   }
 }

@@ -1,7 +1,7 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
-import { PassengerService } from './passenger.service';
-import { IMarket, IPassengers } from '../flight/flight.model';
-import { IDiscountPassenger } from './passenger.model';
+import { PassengerService } from '../../services/passenger.service';
+import { IPassengers } from '../../models/passenger.model';
+import { IMarket } from '../../../shared/models/station.model';
 
 @Component({
   selector: '[app-passenger]',
@@ -19,7 +19,6 @@ export class PassengerComponent implements OnInit {
   public isLargeFamily: boolean;
   public isShowPassengers: boolean;
   public isShowDiscountList: boolean;
-  public destinationSelected: IMarket;
   public discountPassengersSelected: boolean;
   public discountPassengers: string;
 
@@ -33,8 +32,10 @@ export class PassengerComponent implements OnInit {
   }
 
   setResidentAndLargeFamily(destination: IMarket) {
-    this.isResident = destination.residents;
-    this.isLargeFamily = destination.largefamily;
+    if (this.passengerService.isDiscountEnabled()) {
+      this.isResident = destination.residents;
+      this.isLargeFamily = destination.largefamily;
+    }
   }
 
   togglePassengers() {
@@ -49,14 +50,14 @@ export class PassengerComponent implements OnInit {
       this.discountPassengers = discountPassengers.text;
       if (discountPassengers.show === true) {
         this.discountPassengersSelected = true;
-      }else {
+      } else {
         this.discountPassengersSelected = false;
       }
     }
   }
 
   getLabelPassengers(): string {
-    return this.passengers.totalPassengers === 1 ? 'passenger' : 'passengers';
+    return this.passengers.TotalPassengers === 1 ? 'passenger' : 'passengers';
   }
 
   changePassenger(event) {

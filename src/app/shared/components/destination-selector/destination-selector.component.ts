@@ -1,5 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { IFlight, IMarket } from '../../../search/components/flight/flight.model';
+import { IFlight } from '../../../search/models/flight.model';
+import { IMarket } from '../../models/station.model';
 import { SelectorService } from '../../services/selector.service';
 import { ConfigService } from '../../services/config.service';
 
