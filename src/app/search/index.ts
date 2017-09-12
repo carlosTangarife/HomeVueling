@@ -1,3 +1,4 @@
+import { DatePickerComponent } from '../shared/components/date-picker/date-picker.component';
 import { IndexSearchComponent } from './components/index-search/search-index.component';
 import { CheckInComponent } from './components/check-in/check-in.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
@@ -25,5 +26,6 @@ export const SEARCH_COMPONENTS = [
   OriginSelectorComponent,
   DiscountComponent,
   DiscountListComponent,
-  MinusPlusComponent
+  MinusPlusComponent,
+  DatePickerComponent
 ];

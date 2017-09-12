@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ConfigService } from '../../../shared/services/config.service';
 
 @Component({
@@ -6,11 +6,12 @@ import { ConfigService } from '../../../shared/services/config.service';
   templateUrl: './search-index.component.html'
 })
 export class IndexSearchComponent implements OnInit {
-  searcherConfig: any;
+
   isFlight: boolean;
   ischeckIn: boolean;
-  isReservation: boolean;
   isOverlay: boolean;
+  searcherConfig: any;
+  isReservation: boolean;
 
   constructor(private _configService: ConfigService) {
     this.searcherConfig = this._configService.environment['configuration'];

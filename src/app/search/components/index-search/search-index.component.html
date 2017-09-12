@@ -42,6 +42,19 @@
       <div id="tab-reservation" class="tab-pane fade searchbar-main_tab-content_pane reservation" *ngIf="searcherConfig.YourBooking.IsEnabled" [ngClass]="{'in active': isReservation}">
         <div app-reservation class="pane-wrapper"></div>
       </div>
+
+      <div app-date-picker [typeDatePicker]="'going'"
+          id="js-origin-flight-datepiker-going"
+          class="searchbar-datepicker">
+      </div>
+
+      <div app-date-picker [typeDatePicker]="'comeBack'"
+        id="js-origin-flight-datepiker-comeBack"
+        class="searchbar-datepicker">
+      </div>
+
     </div>
   </div>
 </div>
+
+
