@@ -6,7 +6,7 @@ import { IPassengerRules, IMaxAndMinRule } from '../models/rules-passenger.model
 import { IPassengers, ITypePassenger } from '../models/passenger.model';
 import { TYPE_PAX_LIST } from '../consts/passenger';
 import { TYPE_PASSENGER } from '../enums/type-passenger.enum'
-import { RulesPax } from 'app/search/services/rules';
+import { RulesPax } from './rules-passenger';
 
 @Injectable()
 export class PassengerService {

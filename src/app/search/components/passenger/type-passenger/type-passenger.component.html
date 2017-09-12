@@ -1,7 +1,7 @@
 <div class="passengers-popup_main_description">
   <p class="title">{{typePassenger?.label | dictionary}}</p>
-  <label class="label" *ngIf="!isExtraSeat()">{{typePassenger?.rulAge | dictionary}}</label>
-  <label class="label" *ngIf="isExtraSeat()"><a href="">{{typePassenger?.rulAge | dictionary}}</a></label>
+  <label class="label" *ngIf="!isExtraSeat()">{{typePassenger?.ruleAge | dictionary}}</label>
+  <label class="label" *ngIf="isExtraSeat()"><a href="">{{typePassenger?.ruleAge | dictionary}}</a></label>
 </div>
 <div app-minus-plus class="passengers-popup_main_counter"
   (changeValue)="changeValue($event)"
