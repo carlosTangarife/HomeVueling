@@ -1,18 +1,19 @@
-export interface IRulesPassenger {
-  extraSeatEnabled?: boolean;
-  residentsLargeFamilyEnabled?: boolean;
-  max: number;
-  min: number;
-  urlmax: string;
-  adults: IMaxAndMinRule,
-  children: IMaxAndMinRule,
-  infants: IMaxAndMinRule,
-  extras: IMaxAndMinRule
+export interface IPassengerRules {
+  ExtraSeatEnabled?: boolean;
+  ResidentsLargeFamilyEnabled?: boolean;
+  Max: number;
+  Min: number;
+  UrlMax: string;
+  Adults: IMaxAndMinRule,
+  Children: IMaxAndMinRule,
+  Infants: IMaxAndMinRule,
+  ExtraSeat: IMaxAndMinRule
 };
 
 export interface IMaxAndMinRule {
-  max: number,
-  min: number,
-  maxWhenAdults?: number,
-  dependent?: string[]
+  Max: number,
+  Min: number,
+  Default: number,
+  MaxWhenAdults?: number,
+  Dependent?: string[]
 };

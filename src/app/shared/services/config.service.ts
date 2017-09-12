@@ -51,31 +51,6 @@ export class ConfigService {
   }
 
   getConfigPassengers(): any {
-    return {
-      extraSeatEnabled: true,
-      residentsLargeFamilyEnabled: true,
-      max: 24,
-      min: 1,
-      urlmax: 'https://groupsnew.vueling.com/web',
-      adults: {
-        max: 24,
-        min: 0
-      },
-      children: {
-        max: 6,
-        min: 0,
-        maxWhenAdults: 12
-      },
-      infants: {
-        max: 16,
-        min: 0,
-        dependent: ['adults']
-      },
-      extras: {
-        max: 6,
-        min: 0,
-        dependent: ['adults', 'children']
-      }
-    };
+    return this.environment['configuration'].FlightSearch.Pax;
   }
 }

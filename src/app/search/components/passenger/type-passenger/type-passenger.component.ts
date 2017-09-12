@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ITypePassenger } from '../../../models/passenger.model';
 import { IPassengers } from '../../../models/passenger.model';
+import { TYPE_PASSENGER } from '../../../enums/type-passenger.enum';
 
 @Component({
   selector: '[app-type-passenger]',
@@ -30,6 +31,6 @@ export class TypePassengerComponent implements OnInit {
   }
 
   isExtraSeat(): boolean {
-    return this.typePassenger.type === 'extraSeat';
+    return this.typePassenger.type === TYPE_PASSENGER[TYPE_PASSENGER.ExtraSeat];
   }
 }

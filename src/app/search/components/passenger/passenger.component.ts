@@ -32,8 +32,10 @@ export class PassengerComponent implements OnInit {
   }
 
   setResidentAndLargeFamily(destination: IMarket) {
-    this.isResident = destination.residents;
-    this.isLargeFamily = destination.largefamily;
+    if (this.passengerService.isDiscountEnabled()) {
+      this.isResident = destination.residents;
+      this.isLargeFamily = destination.largefamily;
+    }
   }
 
   togglePassengers() {
@@ -55,7 +57,19 @@ export class PassengerComponent implements OnInit {
   }
 
   getLabelPassengers(): string {
-    return this.passengers.totalPassengers === 1 ? 'passenger' : 'passengers';
+    return this.passengers.TotalPassengers === 1 ? 'passenger' : 'passengers';
+  }
+
+  getLabelAdults(): string {
+    return this.passengers.Adults === 1 ? 'adult' : 'adults';
+  }
+
+  getLabelChildren(): string {
+    return this.passengers.Children === 1 ? 'child' : 'children';
+  }
+
+  getLabelInfants(): string {
+    return this.passengers.Infants === 1 ? 'infant' : 'infants';
   }
 
   changePassenger(event) {
