@@ -38,13 +38,16 @@ export class PassengerComponent implements OnInit {
     this.isShowPassengers = !this.isShowPassengers
   }
 
-  toggleDiscountList(discountPassengers?: string) {
+  toggleDiscountList(discountPassengers?: any) {
     this.isShowDiscountList = !this.isShowDiscountList;
 
-    this.discountPassengers = discountPassengers;
-
-    if (this.discountPassengers) {
-      this.discountPassengersSelected = true;
+    if (discountPassengers) {
+      this.discountPassengers = discountPassengers.text;
+      if (discountPassengers.show === true) {
+        this.discountPassengersSelected = true;
+      }else {
+        this.discountPassengersSelected = false;
+      }
     }
   }
 

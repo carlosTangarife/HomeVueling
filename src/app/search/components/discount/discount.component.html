@@ -3,7 +3,7 @@
   <span class="icon icon-arrow-right"></span>
 </li>
 <li  *ngIf="selected" [style.display]="selected ? 'list-item' : 'none' ">
-  <p class="discount-item" [ngClass]="{'selected':selected}">{{ typeDiscountSelected?.data }}</p>
+  <p class="discount-item" [ngClass]="{'selected':selected}">{{ typeDiscountSelected | dictionary }}</p>
 </li>
 <div class="alert alert--icon info">
   <div class="alert_wrap" *ngIf="isResident">
