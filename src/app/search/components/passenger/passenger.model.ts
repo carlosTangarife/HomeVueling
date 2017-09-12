@@ -10,8 +10,3 @@ export interface IDiscountListPassengers {
   famNumGeneralResident: string,
   famNumEspecialResident: string
 }
-
-export interface IInfoList {
-  title: string,
-  body: string
-}

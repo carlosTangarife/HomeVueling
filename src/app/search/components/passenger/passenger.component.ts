@@ -1,5 +1,5 @@
+import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { PassengerService } from './passenger.service';
-import { Component, OnInit, Input } from '@angular/core';
 import { IMarket, IPassengers } from '../flight/flight.model';
 import { IDiscountPassenger } from './passenger.model';
 
@@ -12,6 +12,9 @@ export class PassengerComponent implements OnInit {
   @Input()
   public passengers: IPassengers;
 
+  @Output()
+  isFocused: EventEmitter<boolean> = new EventEmitter();
+
   public isResident: boolean;
   public isLargeFamily: boolean;
   public isShowPassengers: boolean;
@@ -23,7 +26,7 @@ export class PassengerComponent implements OnInit {
   constructor(public passengerService: PassengerService) {
     this.isResident = false;
     this.isLargeFamily = false;
- }
+  }
 
   ngOnInit() {
     this.passengerService.validatePassenger(this.passengers);
@@ -36,6 +39,7 @@ export class PassengerComponent implements OnInit {
 
   togglePassengers() {
     this.isShowPassengers = !this.isShowPassengers
+    this.isFocused.emit(this.isShowPassengers);
   }
 
   toggleDiscountList(discountPassengers?: any) {

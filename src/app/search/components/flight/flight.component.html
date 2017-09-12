@@ -32,7 +32,9 @@
       id="form-group--passengers"
       #passenger
       class="form-input passengers"
+      [ngClass]="{'focused':isFocusedPassengers}"
       (click)="clickInput()"
+      (isFocused)="isFocusedPassengers=$event"
       [passengers]="dataFlight.passengers">
   </div>
 
