@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs/Observable';
+
 export interface IStation {
   macCode?: string,
   name: string,
@@ -64,5 +66,5 @@ export interface ITypePassenger {
 export interface IDataMinusPlus {
   minus: boolean,
   plus: boolean,
-  value: number
+  value: Observable<number>
 };

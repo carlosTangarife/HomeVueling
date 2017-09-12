@@ -3,14 +3,24 @@ import { ConfigService } from '../../../shared/services/config.service';
 import { IRulesPassenger } from '../../../shared/models/rules-passenger.model';
 import { ITypePassenger } from '../flight/flight.model';
 import { IPassengers } from '../flight/flight.model';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { Observable } from 'rxjs/Observable';
 
 @Injectable()
 export class PassengerService {
   private configPassenger: IRulesPassenger;
+  private values: any;
   private typePassengerList: ITypePassenger[];
-  private typePassengerListSubject = new Subject<ITypePassenger[]>();
+  private typePassengerListSubject = new BehaviorSubject<ITypePassenger[]>(this.typePassengerList);
   public typePassengerList$ = this.typePassengerListSubject.asObservable();
+  private adultsSubject = new BehaviorSubject<number>(1);
+  public adults$ = this.adultsSubject.asObservable();
+  private childrenSubject = new BehaviorSubject<number>(0);
+  public children$ = this.childrenSubject.asObservable();
+  private infantsSubject = new BehaviorSubject<number>(0);
+  public infants$ = this.infantsSubject.asObservable();
+  private extraSeatSubject = new BehaviorSubject<number>(0);
+  public extraSeat$ = this.extraSeatSubject.asObservable();
 
   constructor(private _configService: ConfigService) {
     this.configPassenger = this._configService.getConfigPassengers();
@@ -21,6 +31,13 @@ export class PassengerService {
       {label: 'infants', rulAge: 'infantCaption', type: 'infants'},
       {label: 'extraseat', rulAge: 'plusMoreInfo', type: 'extraSeat'}
     ]
+
+    this.values = {
+      adults: { subject: this.adultsSubject, observer: this.adults$ },
+      children: { subject: this.childrenSubject, observer: this.children$ },
+      infants: { subject: this.infantsSubject, observer: this.infants$ },
+      extraSeat: { subject: this.extraSeatSubject, observer: this.extraSeat$ },
+    }
   }
 
   validatePassenger(passenger: IPassengers) {
@@ -29,8 +46,6 @@ export class PassengerService {
     this.ruleInfants(passenger);
     this.ruleExtraSeat(passenger);
     this.rulePassenger(passenger);
-
-    this.typePassengerListSubject.next(this.typePassengerList);
   }
 
   private ruleAdults(passenger: IPassengers) {
@@ -69,10 +84,12 @@ export class PassengerService {
   private ruleValidate(value: number, min: number, max: number, key: string) {
     let index = this.typePassengerList.findIndex(x => x.type === key);
     value = (value > max) ? max : value;
+    this.values[key].subject.next(value);
     this.typePassengerList[index].data = {
       minus : value > min,
       plus: value < max,
-      value: value
+      value: this.values[key].observer
     };
+    this.typePassengerListSubject.next(this.typePassengerList);
   }
 }

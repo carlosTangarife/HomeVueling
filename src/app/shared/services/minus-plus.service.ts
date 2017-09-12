@@ -1,10 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class MinusPlusService {
   public value: number;
-  private subjectValue = new Subject<number>();
+  private subjectValue = new BehaviorSubject<number>(this.value);
   public value$ = this.subjectValue.asObservable();
 
   constructor() {}

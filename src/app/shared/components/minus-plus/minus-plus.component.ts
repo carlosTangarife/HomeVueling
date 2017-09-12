@@ -14,25 +14,29 @@ export class MinusPlusComponent implements OnInit {
   @Output()
   changeValue = new EventEmitter<number>();
 
-  constructor(public _minusPlusService: MinusPlusService) { }
+  @Output()
+  changeOtherValue = new EventEmitter<number>();
+
+  constructor(public minusPlusService: MinusPlusService) { }
 
   ngOnInit() {
-    this._minusPlusService.initService(this.data.value);
-
-    this._minusPlusService.value$.subscribe(val => {
-      this.changeValue.emit(val);
+    this.data.value.subscribe(val => {
+      this.minusPlusService.initService(val);
+      this.changeOtherValue.emit(this.minusPlusService.value);
     });
   }
 
   increase() {
     if (this.data.plus) {
-      this._minusPlusService.increase();
+      this.minusPlusService.increase();
+      this.changeValue.emit(this.minusPlusService.value);
     }
   }
 
   decrease() {
     if (this.data.minus) {
-      this._minusPlusService.decrease();
+      this.minusPlusService.decrease();
+      this.changeValue.emit(this.minusPlusService.value);
     }
   }
 }

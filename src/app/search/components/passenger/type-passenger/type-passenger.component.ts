@@ -17,10 +17,14 @@ export class TypePassengerComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { console.log(this.typePassenger); }
+  ngOnInit() { }
 
   changeValue(value: number) {
     this.passengers[this.typePassenger.type] = value;
     this.changePassenger.emit();
+  }
+
+  changeOtherValue(value: number) {
+    this.passengers[this.typePassenger.type] = value;
   }
 }

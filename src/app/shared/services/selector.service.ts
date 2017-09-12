@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { StationService } from './station.service';
 import { ConfigService } from './config.service';
-import { Subject } from 'rxjs/Subject';
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from '../../../environments/environment';
 import { IStation, IMarket, IStationList } from '../../search/components/flight/flight.model';
 
@@ -14,10 +14,10 @@ export class SelectorService {
     public filteredStations: any;
     public viewPopup = false;
 
-    private subjectRecentStations = new Subject<any>();
+    private subjectRecentStations = new BehaviorSubject<any>(this.filteredStations);
     public recentStations$ = this.subjectRecentStations.asObservable();
 
-    private subjectListStations = new Subject<any>();
+    private subjectListStations = new BehaviorSubject<any>(this.filteredStations);
     public listStations$ = this.subjectListStations.asObservable();
 
     constructor(private _configService: ConfigService, private _stationService: StationService) {
