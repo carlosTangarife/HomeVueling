@@ -60,6 +60,18 @@ export class PassengerComponent implements OnInit {
     return this.passengers.TotalPassengers === 1 ? 'passenger' : 'passengers';
   }
 
+  getLabelAdults(): string {
+    return this.passengers.Adults === 1 ? 'adult' : 'adults';
+  }
+
+  getLabelChildren(): string {
+    return this.passengers.Children === 1 ? 'child' : 'children';
+  }
+
+  getLabelInfants(): string {
+    return this.passengers.Infants === 1 ? 'infant' : 'infants';
+  }
+
   changePassenger(event) {
     this.passengerService.validatePassenger(this.passengers);
   }
