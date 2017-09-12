@@ -17,7 +17,7 @@ export class TypePassengerComponent implements OnInit {
 
   constructor() { }
 
-  ngOnInit() { }
+  ngOnInit() { console.log(this.typePassenger); }
 
   changeValue(value: number) {
     this.passengers[this.typePassenger.type] = value;

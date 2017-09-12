@@ -1,13 +1,16 @@
+import { Injectable } from '@angular/core';
+import { ConfigService } from '../../../shared/services/config.service';
 import { IRulesPassenger } from '../../../shared/models/rules-passenger.model';
 import { ITypePassenger } from '../flight/flight.model';
 import { IPassengers } from '../flight/flight.model';
-import { ConfigService } from '../../../shared/services/config.service';
-import { Injectable } from '@angular/core';
+import { Subject } from 'rxjs/Subject';
 
 @Injectable()
 export class PassengerService {
   private configPassenger: IRulesPassenger;
-  public typePassengerList: Array<ITypePassenger>;
+  private typePassengerList: ITypePassenger[];
+  private typePassengerListSubject = new Subject<ITypePassenger[]>();
+  public typePassengerList$ = this.typePassengerListSubject.asObservable();
 
   constructor(private _configService: ConfigService) {
     this.configPassenger = this._configService.getConfigPassengers();
@@ -26,71 +29,25 @@ export class PassengerService {
     this.ruleInfants(passenger);
     this.ruleExtraSeat(passenger);
     this.rulePassenger(passenger);
+
+    this.typePassengerListSubject.next(this.typePassengerList);
   }
 
   private ruleAdults(passenger: IPassengers) {
-    if (passenger.adults > this.configPassenger.adults.min && passenger.adults < this.configPassenger.adults.max) {
-      this.typePassengerList[0].data = {
-        minus : true,
-        plus: true,
-        value: passenger.adults
-      }
-    }else if (passenger.adults === this.configPassenger.adults.min) {
-      this.typePassengerList[0].data = {
-        minus : false,
-        plus: true,
-        value: passenger.adults
-      }
-    }
+    this.ruleValidate(passenger.adults, this.configPassenger.adults.min, this.configPassenger.adults.max, 'adults');
   }
 
   private ruleChildren(passenger: IPassengers) {
     let max = (passenger.adults > 0) ? this.configPassenger.children.maxWhenAdults : this.configPassenger.children.max;
 
-    if (passenger.children > this.configPassenger.children.min && passenger.children < max) {
-      this.typePassengerList[1].data = {
-        minus : true,
-        plus: true,
-        value: passenger.children
-      }
-    }else if (passenger.children === this.configPassenger.children.min) {
-      this.typePassengerList[1].data = {
-        minus : false,
-        plus: true,
-        value: passenger.children
-      }
-    }else if (passenger.children === max) {
-      this.typePassengerList[1].data = {
-        minus : true,
-        plus: false,
-        value: passenger.children
-      }
-    }
+    this.ruleValidate(passenger.children, this.configPassenger.children.min, max, 'children');
   }
 
   private ruleInfants(passenger: IPassengers) {
     let maxInfants = this.configPassenger.infants.max;
     let max = (passenger.adults > maxInfants) ? maxInfants : passenger.adults;
 
-    if (passenger.infants > this.configPassenger.infants.min && passenger.infants < max) {
-      this.typePassengerList[2].data = {
-        minus : true,
-        plus: true,
-        value: passenger.infants
-      }
-    }else if (passenger.infants === this.configPassenger.infants.min) {
-      this.typePassengerList[2].data = {
-        minus : false,
-        plus: true,
-        value: passenger.infants
-      }
-    }else if (passenger.infants === max) {
-      this.typePassengerList[2].data = {
-        minus : true,
-        plus: false,
-        value: passenger.infants
-      }
-    }
+    this.ruleValidate(passenger.infants, this.configPassenger.infants.min, max, 'infants');
   }
 
   private ruleExtraSeat(passenger: IPassengers) {
@@ -98,25 +55,7 @@ export class PassengerService {
     let pax = passenger.adults + passenger.children;
     let max = (pax > maxExtraSeat) ? maxExtraSeat : pax;
 
-    if (passenger.extraSeat > this.configPassenger.extras.min && passenger.extraSeat < max) {
-      this.typePassengerList[3].data = {
-        minus : true,
-        plus: true,
-        value: passenger.extraSeat
-      }
-    }else if (passenger.extraSeat === this.configPassenger.extras.min) {
-      this.typePassengerList[3].data = {
-        minus : false,
-        plus: true,
-        value: passenger.extraSeat
-      }
-    }else if (passenger.extraSeat === max) {
-      this.typePassengerList[3].data = {
-        minus : true,
-        plus: false,
-        value: passenger.extraSeat
-      }
-    }
+    this.ruleValidate(passenger.extraSeat, this.configPassenger.extras.min, max, 'extraSeat');
   }
 
   private rulePassenger(passenger) {
@@ -125,5 +64,15 @@ export class PassengerService {
     if (passenger.totalPassengers > this.configPassenger.max) {
       window.location.href = this.configPassenger.urlmax;
     }
+  }
+
+  private ruleValidate(value: number, min: number, max: number, key: string) {
+    let index = this.typePassengerList.findIndex(x => x.type === key);
+    value = (value > max) ? max : value;
+    this.typePassengerList[index].data = {
+      minus : value > min,
+      plus: value < max,
+      value: value
+    };
   }
 }

@@ -15,7 +15,7 @@
 <div id="passengers-popup" class="searchbar-popup passengers-popup" [ngClass]="{'show-table':isShowPassengers, 'discount': (isResident || isLargeFamily)}">
   <ul class="passengers-popup_main">
     <li app-type-passenger
-      *ngFor="let typePassenger of passengerService.typePassengerList"
+      *ngFor="let typePassenger of passengerService.typePassengerList$ | async"
       [typePassenger]="typePassenger"
       [passengers]="passengers"
       (changePassenger)="changePassenger($event)">

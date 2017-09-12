@@ -54,6 +54,5 @@ export class PassengerComponent implements OnInit {
 
   changePassenger(event) {
     this.passengerService.validatePassenger(this.passengers);
-    console.log(this.passengers);
   }
 }
