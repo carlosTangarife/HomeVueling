@@ -32,8 +32,10 @@ export class PassengerComponent implements OnInit {
   }
 
   setResidentAndLargeFamily(destination: IMarket) {
-    this.isResident = destination.residents;
-    this.isLargeFamily = destination.largefamily;
+    if (this.passengerService.isDiscountEnabled()) {
+      this.isResident = destination.residents;
+      this.isLargeFamily = destination.largefamily;
+    }
   }
 
   togglePassengers() {

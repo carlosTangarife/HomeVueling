@@ -53,12 +53,25 @@ export class PassengerService {
     this.rulePassenger(passenger);
   }
 
+  isDiscountEnabled(): boolean {
+    return this.configPassenger.ResidentsLargeFamilyEnabled;
+  }
+
   private initTypePassengers() {
     this.typePassengerList = TYPE_PAX_LIST;
     if (!this.configPassenger.ExtraSeatEnabled) {
       let index = this.typePassengerList.findIndex(x => x.type === TYPE_PASSENGER[TYPE_PASSENGER.ExtraSeat]);
       this.typePassengerList.splice(index, 1);
     }
+  }
+
+  private initValues() {
+    this.values = {
+      Adults: { subject: this.adultsSubject, observer: this.adults$ },
+      Children: { subject: this.childrenSubject, observer: this.children$ },
+      Infants: { subject: this.infantsSubject, observer: this.infants$ },
+      ExtraSeat: { subject: this.extraSeatSubject, observer: this.extraSeat$ },
+    };
   }
 
   private initObservables() {
@@ -76,15 +89,6 @@ export class PassengerService {
 
     this.typePassengerListSubject = new BehaviorSubject<ITypePassenger[]>(this.typePassengerList);
     this.typePassengerList$ = this.typePassengerListSubject.asObservable();
-  }
-
-  private initValues() {
-    this.values = {
-      Adults: { subject: this.adultsSubject, observer: this.adults$ },
-      Children: { subject: this.childrenSubject, observer: this.children$ },
-      Infants: { subject: this.infantsSubject, observer: this.infants$ },
-      ExtraSeat: { subject: this.extraSeatSubject, observer: this.extraSeat$ },
-    };
   }
 
   private rulePassenger(passenger) {
