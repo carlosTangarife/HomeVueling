@@ -16,13 +16,14 @@
         </label>
     </div>
 </div>
-<div class="form">
+
+<div *ngIf="isOrigin == false" class="form">
     <div class="form-group form-group--check-in">
         <div class="form-input">
             <label>Código de reserva</label>
             <a href="#">¿Qué es?</a>
-            <div class="input-group">
-            <input type="text" id="origin-input" class="form-control js-searchbar-input" placeholder="Ej. XG6LM3">
+            <div class="input-group">            
+            <input type="text" id="origin-input" class="form-control js-searchbar-input" [ngModel]="codeBook" placeholder="Ej. XG6LM3" required>            
             </div>
         </div>
         <div class="form-input">
@@ -36,3 +37,43 @@
         <a href="#" onclick="return false;" class="mv_button color-darkGrey size-md icon icon-right">Acceder</a>
     </div>
 </div>
+
+<div *ngIf="isOrigin == true" class="form">
+        <div class="form-group form-group--destinations">
+          <div class="form-input reservation-code">
+            <label>Código de reserva</label>
+            <a href="#">¿Qué es?</a>
+            <div class="input-group">
+              <input type="text" id="origin-input" class="form-control js-searchbar-input" placeholder="Ej. XG6LM3">
+            </div>
+          </div>
+          <div class="form-input">
+            <label>Aeropuerto origen/destino</label>
+            <div class="input-group">
+              <input type="text" id="destination-input" class="form-control js-searchbar-input" placeholder="email@vueling.com">
+            </div>
+          </div>
+          <div class="form-input dates">
+            <div class="col col-md-6">
+              <label>Fecha del primer vuelo</label>
+              <div class="input-group">
+                <input type="text" class="form-control js-searchbar-input js-searchbar-date-input hasDatepicker" placeholder="DD/MM/YY" readonly="readonly">
+                <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+              </div>
+            </div>
+            <div class="col col-md-6">
+              <div class="form-checkbox--button">
+               <label>
+                 <input class="js-multiple-destinations" type="checkbox" hidden="">
+                 <span>Mi vuelo es mañana</span>
+               </label>
+              </div>
+            </div>
+          </div>
+        </div>
+</div>
+
+
+
+
+
