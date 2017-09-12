@@ -29,6 +29,8 @@ export class DestinationSelectorComponent implements OnInit {
   ngOnInit() {
     this._selectorService.getMarketsByIata(this.dataFlight.origin.code);
     this._selectorService.loadListStations(false);
+    let destination = this._selectorService.getDestination(this.dataFlight.destination.code);
+    destination ? this.outStation.emit(destination) : this.clearData();
   }
 
   clearInput() {

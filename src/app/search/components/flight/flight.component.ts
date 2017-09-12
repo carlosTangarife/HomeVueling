@@ -23,8 +23,8 @@ export class FlightComponent implements OnInit {
   ngOnInit() {
     this.dataFlight = {
       origin: {
-        code: 'BCN',
-        name: 'Barcelona'
+        code: 'ALC',
+        name: 'Alicante'
       },
       destination: {
         code: 'MAD',

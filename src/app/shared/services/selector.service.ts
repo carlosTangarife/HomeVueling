@@ -42,6 +42,10 @@ export class SelectorService {
         this.filterStations(false);
     }
 
+    getDestination(iata: string): IMarket {
+        return this.marketsIata.find(market => market.code === iata);
+    }
+
     filterStations(byRecent: boolean) {
         let filtered = this.filteredStations.filter(opt => opt.isRecent === byRecent);
         if (byRecent) {
