@@ -4,7 +4,8 @@ import { Observable } from 'rxjs/Observable';
 import { ConfigService } from '../../shared/services/config.service';
 import { IRulesPassenger, IMaxAndMinRule } from '../models/rules-passenger.model';
 import { IPassengers, ITypePassenger } from '../models/passenger.model';
-import { TYPE_PAX_LIST, TYPE_PASSENGER } from '../consts/passenger';
+import { TYPE_PAX_LIST } from '../consts/passenger';
+import { TYPE_PASSENGER } from '../enums/type-passenger.enum'
 
 @Injectable()
 export class PassengerService {
@@ -63,22 +64,22 @@ export class PassengerService {
   }
 
   private ruleAdults(passenger: IPassengers, rule: IMaxAndMinRule) {
-    this.ruleValidate(passenger.adults, rule.min, rule.max, TYPE_PASSENGER.adults.toString());
+    this.ruleValidate(passenger.adults, rule.min, rule.max, TYPE_PASSENGER[TYPE_PASSENGER.adults]);
   }
 
   private ruleChildren(passenger: IPassengers, rule: IMaxAndMinRule) {
     let max = (rule.maxWhenAdults && passenger.adults > 0) ? rule.maxWhenAdults : rule.max;
-    this.ruleValidate(passenger.children, rule.min, max, TYPE_PASSENGER.children.toString());
+    this.ruleValidate(passenger.children, rule.min, max, TYPE_PASSENGER[TYPE_PASSENGER.children]);
   }
 
   private ruleInfants(passenger: IPassengers, rule: IMaxAndMinRule) {
     let max = this.getRuleMax(passenger, rule);
-    this.ruleValidate(passenger.infants, rule.min, max, TYPE_PASSENGER.infants.toString());
+    this.ruleValidate(passenger.infants, rule.min, max, TYPE_PASSENGER[TYPE_PASSENGER.infants]);
   }
 
   private ruleExtraSeat(passenger: IPassengers, rule: IMaxAndMinRule) {
     let max = this.getRuleMax(passenger, rule);
-    this.ruleValidate(passenger.extraSeat, rule.min, max, TYPE_PASSENGER.extraSeat.toString());
+    this.ruleValidate(passenger.extraSeat, rule.min, max, TYPE_PASSENGER[TYPE_PASSENGER.extraSeat]);
   }
 
   private rulePassenger(passenger) {
