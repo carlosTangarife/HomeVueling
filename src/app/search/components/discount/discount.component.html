@@ -1,5 +1,5 @@
 <li id="discount-list-active">
-  <p>Descuento Residente o familia numerosa</p>
+  <p>{{'titleDiscount' | dictionary}}</p>
   <span class="icon icon-arrow-right"></span>
 </li>
 <li  *ngIf="selected" [style.display]="selected ? 'list-item' : 'none' ">
@@ -8,12 +8,12 @@
 <div class="alert alert--icon info">
   <div class="alert_wrap" *ngIf="isResident">
     <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
-    <p class="alert_wrap_title">Residentes</p>
-    <p class="alert_wrap_message">Durante la reserva se validará tu condición de residente.</p>
+    <p class="alert_wrap_title">{{'titleDiscountResident' | dictionary}}</p>
+    <p class="alert_wrap_message">{{'bodyDiscountResident' | dictionary}}</p>
   </div>
   <div class="alert_wrap" *ngIf="isLargeFamily">
     <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
-    <p class="alert_wrap_title">Familia numerosa</p>
-    <p class="alert_wrap_message">Se debe presentar la documentación acreditativa en el aeropuerto.</p>
+    <p class="alert_wrap_title">{{'titleDiscountFamilyLarg' | dictionary}} </p>
+    <p class="alert_wrap_message">{{'bodyDiscountFamilyLarg' | dictionary}}</p>
   </div>
 </div>

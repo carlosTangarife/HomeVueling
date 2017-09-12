@@ -11,14 +11,19 @@ export class PassengerService {
   private configPassenger: IRulesPassenger;
   private values: any;
   private typePassengerList: ITypePassenger[];
+
   private typePassengerListSubject = new BehaviorSubject<ITypePassenger[]>(this.typePassengerList);
   public typePassengerList$ = this.typePassengerListSubject.asObservable();
+
   private adultsSubject = new BehaviorSubject<number>(1);
   public adults$ = this.adultsSubject.asObservable();
+
   private childrenSubject = new BehaviorSubject<number>(0);
   public children$ = this.childrenSubject.asObservable();
+
   private infantsSubject = new BehaviorSubject<number>(0);
   public infants$ = this.infantsSubject.asObservable();
+
   private extraSeatSubject = new BehaviorSubject<number>(0);
   public extraSeat$ = this.extraSeatSubject.asObservable();
 
