@@ -32,11 +32,11 @@ export class FlightComponent implements OnInit {
         name: 'Madrid'
       },
       passengers: {
-        adults : 1,
-        infants : 0,
-        children: 0,
-        extraSeat: 0,
-        totalPassengers: 1
+        Adults : 1,
+        Infants : 0,
+        Children: 0,
+        ExtraSeat: 0,
+        TotalPassengers: 1
       }
     };
   }

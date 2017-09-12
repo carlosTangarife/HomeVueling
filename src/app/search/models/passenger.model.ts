@@ -1,11 +1,11 @@
 import { IDataMinusPlus } from '../../shared/models/minus-plus.model';
 
 export interface IPassengers {
-    adults: number,
-    children: number,
-    infants: number,
-    extraSeat: number,
-    totalPassengers: number
+    Adults: number,
+    Children: number,
+    Infants: number,
+    ExtraSeat: number,
+    TotalPassengers: number
 };
 
 export interface ITypePassenger {

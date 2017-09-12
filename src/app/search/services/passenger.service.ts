@@ -2,16 +2,18 @@ import { Injectable } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Observable } from 'rxjs/Observable';
 import { ConfigService } from '../../shared/services/config.service';
-import { IRulesPassenger, IMaxAndMinRule } from '../models/rules-passenger.model';
+import { IPassengerRules, IMaxAndMinRule } from '../models/rules-passenger.model';
 import { IPassengers, ITypePassenger } from '../models/passenger.model';
 import { TYPE_PAX_LIST } from '../consts/passenger';
 import { TYPE_PASSENGER } from '../enums/type-passenger.enum'
+import { RulesPax } from 'app/search/services/rules';
 
 @Injectable()
 export class PassengerService {
   private values: any;
-  private configPassenger: IRulesPassenger;
+  private configPassenger: IPassengerRules;
   private typePassengerList: ITypePassenger[];
+  private rulePax: RulesPax.IRulePassenger;
 
   private typePassengerListSubject: BehaviorSubject<ITypePassenger[]>;
   public typePassengerList$: Observable<ITypePassenger[]>;
@@ -30,85 +32,65 @@ export class PassengerService {
 
   constructor(private _configService: ConfigService) {
     this.configPassenger = this._configService.getConfigPassengers();
-    this.typePassengerList = TYPE_PAX_LIST;
+    this.initTypePassengers();
+    this.initObservables();
+    this.initValues();
+  }
 
-    this.adultsSubject = new BehaviorSubject<number>(this.configPassenger.adults.min);
+  validatePassenger(passenger: IPassengers) {
+    this.typePassengerList.forEach(type => {
+      let name = type.type + 'Rule';
+      this.rulePax = new RulesPax[name];
+      let data = this.rulePax.validate(passenger, this.configPassenger[type.type]);
+      this.values[type.type].subject.next(data.value);
+      type.data = {
+        minus : data.minus,
+        plus: data.plus,
+        value: this.values[type.type].observer
+      };
+      this.typePassengerListSubject.next(this.typePassengerList);
+    });
+    this.rulePassenger(passenger);
+  }
+
+  private initTypePassengers() {
+    this.typePassengerList = TYPE_PAX_LIST;
+    if (!this.configPassenger.ExtraSeatEnabled) {
+      let index = this.typePassengerList.findIndex(x => x.type === TYPE_PASSENGER[TYPE_PASSENGER.ExtraSeat]);
+      this.typePassengerList.splice(index, 1);
+    }
+  }
+
+  private initObservables() {
+    this.adultsSubject = new BehaviorSubject<number>(this.configPassenger.Adults.Min);
     this.adults$ = this.adultsSubject.asObservable();
 
-    this.childrenSubject = new BehaviorSubject<number>(this.configPassenger.children.min);
+    this.childrenSubject = new BehaviorSubject<number>(this.configPassenger.Children.Min);
     this.children$ = this.childrenSubject.asObservable();
 
-    this.infantsSubject = new BehaviorSubject<number>(this.configPassenger.infants.min);
+    this.infantsSubject = new BehaviorSubject<number>(this.configPassenger.Infants.Min);
     this.infants$ = this.infantsSubject.asObservable();
 
-    this.extraSeatSubject = new BehaviorSubject<number>(this.configPassenger.extras.min);
+    this.extraSeatSubject = new BehaviorSubject<number>(this.configPassenger.ExtraSeat.Min);
     this.extraSeat$ = this.extraSeatSubject.asObservable();
 
     this.typePassengerListSubject = new BehaviorSubject<ITypePassenger[]>(this.typePassengerList);
     this.typePassengerList$ = this.typePassengerListSubject.asObservable();
+  }
 
+  private initValues() {
     this.values = {
-      adults: { subject: this.adultsSubject, observer: this.adults$ },
-      children: { subject: this.childrenSubject, observer: this.children$ },
-      infants: { subject: this.infantsSubject, observer: this.infants$ },
-      extraSeat: { subject: this.extraSeatSubject, observer: this.extraSeat$ },
-    }
-  }
-
-  validatePassenger(passenger: IPassengers) {
-    this.ruleAdults(passenger, this.configPassenger.adults);
-    this.ruleChildren(passenger, this.configPassenger.children);
-    this.ruleInfants(passenger, this.configPassenger.infants);
-    this.ruleExtraSeat(passenger, this.configPassenger.extras);
-    this.rulePassenger(passenger);
-  }
-
-  private ruleAdults(passenger: IPassengers, rule: IMaxAndMinRule) {
-    this.ruleValidate(passenger.adults, rule.min, rule.max, TYPE_PASSENGER[TYPE_PASSENGER.adults]);
-  }
-
-  private ruleChildren(passenger: IPassengers, rule: IMaxAndMinRule) {
-    let max = (rule.maxWhenAdults && passenger.adults > 0) ? rule.maxWhenAdults : rule.max;
-    this.ruleValidate(passenger.children, rule.min, max, TYPE_PASSENGER[TYPE_PASSENGER.children]);
-  }
-
-  private ruleInfants(passenger: IPassengers, rule: IMaxAndMinRule) {
-    let max = this.getRuleMax(passenger, rule);
-    this.ruleValidate(passenger.infants, rule.min, max, TYPE_PASSENGER[TYPE_PASSENGER.infants]);
-  }
-
-  private ruleExtraSeat(passenger: IPassengers, rule: IMaxAndMinRule) {
-    let max = this.getRuleMax(passenger, rule);
-    this.ruleValidate(passenger.extraSeat, rule.min, max, TYPE_PASSENGER[TYPE_PASSENGER.extraSeat]);
+      Adults: { subject: this.adultsSubject, observer: this.adults$ },
+      Children: { subject: this.childrenSubject, observer: this.children$ },
+      Infants: { subject: this.infantsSubject, observer: this.infants$ },
+      ExtraSeat: { subject: this.extraSeatSubject, observer: this.extraSeat$ },
+    };
   }
 
   private rulePassenger(passenger) {
-    passenger.totalPassengers = passenger.adults + passenger.children;
-    if (passenger.totalPassengers > this.configPassenger.max) {
-      window.location.href = this.configPassenger.urlmax;
+    passenger.TotalPassengers = passenger.Adults + passenger.Children;
+    if (passenger.TotalPassengers > this.configPassenger.Max) {
+      window.location.href = this.configPassenger.UrlMax;
     }
-  }
-
-  private ruleValidate(value: number, min: number, max: number, key: string) {
-    let index = this.typePassengerList.findIndex(x => x.type === key);
-    value = (value > max) ? max : value;
-    this.values[key].subject.next(value);
-    this.typePassengerList[index].data = {
-      minus : value > min,
-      plus: value < max,
-      value: this.values[key].observer
-    };
-    this.typePassengerListSubject.next(this.typePassengerList);
-  }
-
-  private getRuleMax(passenger: IPassengers, rule: IMaxAndMinRule): number {
-    let pax = rule.max + 1;
-    if (rule.dependent) {
-      pax = 0;
-      rule.dependent.forEach(type => {
-        pax += passenger[type];
-      });
-    }
-    return (pax > rule.max) ? rule.max : pax;
   }
 }

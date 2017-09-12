@@ -3,17 +3,17 @@
   <span class="icon icon-arrow-right"></span>
 </li>
 <li  *ngIf="selected" [style.display]="selected ? 'list-item' : 'none' ">
-  <p class="discount-item" [ngClass]="{'selected':selected}">{{ typeDiscountSelected | dictionary }}</p>
+  <p class="discount-item" [ngClass]="{'selected':selected}">{{typeDiscountSelected | dictionary}}</p>
 </li>
 <div class="alert alert--icon info">
   <div class="alert_wrap" *ngIf="isResident">
     <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
-    <p class="alert_wrap_title">{{'titleDiscountResident' | dictionary}}</p>
-    <p class="alert_wrap_message">{{'bodyDiscountResident' | dictionary}}</p>
+    <p class="alert_wrap_title">{{'residents' | dictionary}}</p>
+    <p class="alert_wrap_message">{{'residentsCaption' | dictionary}}</p>
   </div>
   <div class="alert_wrap" *ngIf="isLargeFamily">
     <span class="icon icon-info"><span class="path1"></span><span class="path2"></span></span>
-    <p class="alert_wrap_title">{{'titleDiscountFamilyLarg' | dictionary}} </p>
-    <p class="alert_wrap_message">{{'bodyDiscountFamilyLarg' | dictionary}}</p>
+    <p class="alert_wrap_title">{{'largeFamily' | dictionary}} </p>
+    <p class="alert_wrap_message">{{'largeFamilyCaption' | dictionary}}</p>
   </div>
 </div>

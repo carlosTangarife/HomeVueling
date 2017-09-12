@@ -55,7 +55,7 @@ export class PassengerComponent implements OnInit {
   }
 
   getLabelPassengers(): string {
-    return this.passengers.totalPassengers === 1 ? 'passenger' : 'passengers';
+    return this.passengers.TotalPassengers === 1 ? 'passenger' : 'passengers';
   }
 
   changePassenger(event) {

@@ -1,12 +1,12 @@
 <label (click)="togglePassengers()">
-  {{passengers?.adults}} {{'adults' | dictionary}},
-  {{passengers?.children}} {{'children' | dictionary}},
-  {{passengers?.infants}} {{'infants' | dictionary}}
+  {{passengers?.Adults}} {{'adults' | dictionary}},
+  {{passengers?.Children}} {{'children' | dictionary}},
+  {{passengers?.Infants}} {{'infants' | dictionary}}
 </label>
 <div class="input-group" (click)="togglePassengers()">
   <input type="text" class="form-control"
     id="passengers-input"
-    placeholder="{{passengers?.totalPassengers}} {{getLabelPassengers() | dictionary}}"
+    placeholder="{{passengers?.TotalPassengers}} {{getLabelPassengers() | dictionary}}"
     readonly="readonly">
   <span class="icon icon-arrow-down"></span>
 </div>
