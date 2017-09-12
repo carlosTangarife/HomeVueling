@@ -1,4 +1,3 @@
-import { IRulesPassenger } from '../models/rules-passenger.model';
 import { Injectable } from '@angular/core';
 import { ResourcesService } from './resources.service';
 
@@ -51,8 +50,8 @@ export class ConfigService {
     return result;
   }
 
-  getConfigPassengers(): IRulesPassenger {
-    let rulesPassenger: IRulesPassenger = {
+  getConfigPassengers(): any {
+    return {
       extraSeatEnabled: true,
       residentsLargeFamilyEnabled: true,
       max: 24,
@@ -69,13 +68,14 @@ export class ConfigService {
       },
       infants: {
         max: 16,
-        min: 0
+        min: 0,
+        dependent: ['adults']
       },
       extras: {
         max: 6,
-        min: 0
+        min: 0,
+        dependent: ['adults', 'children']
       }
-    }
-    return rulesPassenger;
+    };
   }
 }

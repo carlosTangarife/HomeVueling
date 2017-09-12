@@ -1,13 +1,13 @@
 import { BrowserModule, DOCUMENT } from '@angular/platform-browser';
 import { NgModule, Inject, ApplicationRef } from '@angular/core';
+import { PersistenceModule } from 'angular-persistence';
+import { CookieModule } from 'ngx-cookie';
 import { SearchModule } from './search/search.module';
 import { IndexSearchComponent } from './search/components/index-search/search-index.component';
 import { HeaderModule } from './header/header.module';
 import { IndexHeaderComponent} from './header/components/index-header/index-header.component';
 import { FooterModule } from './footer/footer.module';
 import { IndexFooterComponent } from './footer/components/index-footer/index-footer.component';
-import { PersistenceModule } from 'angular-persistence';
-import { CookieModule } from 'ngx-cookie';
 
 @NgModule({
   imports: [

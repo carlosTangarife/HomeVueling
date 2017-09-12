@@ -1,6 +1,6 @@
 import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { MinusPlusService } from '../../services/minus-plus.service';
-import { IDataMinusPlus } from '../../../search/components/flight/flight.model';
+import { IDataMinusPlus } from '../../models/minus-plus.model';
 
 @Component({
   selector: '[app-minus-plus]',

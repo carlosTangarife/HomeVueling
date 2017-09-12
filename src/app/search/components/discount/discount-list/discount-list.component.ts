@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter, Input } from '@angular/core';
-import { IDiscountListPassengers, IDiscountPassenger } from '../../passenger/passenger.model';
+import { IDiscountListPassengers } from '../../../models/discount.model';
 
 @Component({
   selector: '[app-discount-list]',
