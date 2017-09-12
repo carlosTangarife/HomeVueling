@@ -1,5 +1,4 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { IDiscountPassenger } from '../passenger/passenger.model';
 
 @Component({
   selector: '[app-discount]',
@@ -8,7 +7,7 @@ import { IDiscountPassenger } from '../passenger/passenger.model';
 export class DiscountComponent implements OnInit {
 
   @Input()
-  typeDiscountSelected: IDiscountPassenger;
+  typeDiscountSelected: string;
 
   @Input()
   selected: boolean;

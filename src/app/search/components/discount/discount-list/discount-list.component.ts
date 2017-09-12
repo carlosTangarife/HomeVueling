@@ -11,10 +11,7 @@ export class DiscountListComponent implements OnInit {
   public discountListPassenger: IDiscountListPassengers;
 
   @Output()
-  eventToggleDiscountList = new EventEmitter<string>();
-
-  @Input()
-  discountListPassengers: string;
+  eventToggleDiscountList = new EventEmitter<any>();
 
   @Input()
   isResident: boolean;
@@ -32,8 +29,17 @@ export class DiscountListComponent implements OnInit {
   }
 
   toggleDiscountList(discountPassengers: string) {
-    this.discountActiveSelected = discountPassengers;
-    this.eventToggleDiscountList.next(discountPassengers);
+    let show: boolean;
+    /**igual */
+    if (this.discountActiveSelected === discountPassengers) {
+      this.discountActiveSelected = '';
+      show = false;
+    /**Diferente */
+    }else {
+      this.discountActiveSelected = discountPassengers
+      show = true;
+    }
+    this.eventToggleDiscountList.next({text: discountPassengers, show: show});
   }
 
 }
