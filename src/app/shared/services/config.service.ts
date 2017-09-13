@@ -53,4 +53,8 @@ export class ConfigService {
   getConfigPassengers(): any {
     return this.environment['configuration'].FlightSearch.Pax;
   }
+
+  getConfigDiscount(): any {
+    return this.environment['configuration'].FlightSearch.Discount;
+  }
 }

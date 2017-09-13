@@ -1,16 +1,13 @@
-import { Component, OnInit, Input } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ChangeDetectionStrategy, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: '[app-discount]',
-  templateUrl: './discount.component.html'
+  templateUrl: './discount.component.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DiscountComponent implements OnInit {
-
   @Input()
   typeDiscountSelected: string;
-
-  @Input()
-  selected: boolean;
 
   @Input()
   isResident: boolean;
@@ -18,8 +15,10 @@ export class DiscountComponent implements OnInit {
   @Input()
   isLargeFamily: boolean;
 
-  constructor() {
-    this.selected = false;
+  @Output()
+  eventToggleDiscountList = new EventEmitter<any>();
+
+  constructor(private cdRef: ChangeDetectorRef) {
     this.isResident = false;
     this.isLargeFamily = false;
   }
@@ -27,4 +26,19 @@ export class DiscountComponent implements OnInit {
   ngOnInit() {
   }
 
+  typeSelected(): boolean {
+    return this.typeDiscountSelected ? true : false;
+  }
+
+  toggleDiscountList() {
+    this.eventToggleDiscountList.emit();
+  }
+
+  titleDiscount(): string {
+    if (this.isResident && this.isLargeFamily) {
+      return 'titleDiscount';
+    } else {
+      return this.isResident ? 'titleDiscountResident' : 'titleDiscountLargeFamily';
+    }
+  }
 }

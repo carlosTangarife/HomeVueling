@@ -37,6 +37,9 @@ export class FlightComponent implements OnInit {
         Children: 0,
         ExtraSeat: 0,
         TotalPassengers: 1
+      },
+      discount: {
+        value: ''
       }
     };
   }
