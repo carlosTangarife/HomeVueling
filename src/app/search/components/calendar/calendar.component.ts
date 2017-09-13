@@ -1,38 +1,28 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+
 declare var jQuery: any;
 declare var $: any;
+
 @Component({
   selector: '[app-calendar]',
   templateUrl: './calendar.component.html'
 })
-export class CalendarComponent {
 
+export class CalendarComponent implements OnInit {
+
+  constructor() {}
+
+  ngOnInit() { }
 
   toggleDatePicker(typeDatePicker: string) {
     if (typeDatePicker === 'going') {
+      $('#js-origin-flight-datepiker-comeBack').removeClass('show');
       $('#js-origin-flight-datepiker-going').addClass('show');
       $('#oneWay-going').prop('checked', true);
-      $('#js-origin-flight-datepiker-comeBack').removeClass('show');
     } else {
-      $('#js-origin-flight-datepiker-comeBack').addClass('show');
       $('#js-origin-flight-datepiker-going').removeClass('show');
+      $('#js-origin-flight-datepiker-comeBack').addClass('show');
+      $('#roundTrip-comeBack').prop('checked', true);
     }
   }
 }
-
-function toggleRoundTrip() {
-  $('.js-add-date-range-to').toggleClass('activate');
-  $('.js-date-range-to').toggleClass('activate');
-}
-
-$('#roundTrip-going').on( 'change', function() {
-  if ( $(this).is(':checked') ) {
-    toggleRoundTrip();
-  }
-});
-
-$('#oneWay-going').on( 'change', function() {
-  if ( $(this).is(':checked') ) {
-    toggleRoundTrip();
-  }
-});

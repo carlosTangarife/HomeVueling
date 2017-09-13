@@ -11,9 +11,26 @@ $(document).ready(function(){
       onSelect: function() {
         var dateObject = $(this).datepicker('getDate');
         $(".js-searchbar-date-input-going").val($.datepicker.formatDate('dd/mm/yy', dateObject));
+
+        if ( $('#roundTrip-going').is(':checked') ) {
+          $('#js-origin-flight-datepiker-going').removeClass('show');
+        }
+
+        if ( $('#oneWay-going').is(':checked') ) {
+          $('#js-origin-flight-datepiker-going').removeClass('show');
+        }
+      }
+    });
+
+
+    $('#roundTrip-going').on( 'change', function() {
+      if ( $(this).is(':checked') ) {
+        $('.js-add-date-range-to').toggleClass('activate');
+        $('.js-date-range-to').toggleClass('activate');
       }
     });
   });
+
 
   $(function() {
     $( "#comeBack" ).datepicker({
@@ -24,8 +41,28 @@ $(document).ready(function(){
       onSelect: function() {
         var dateObject = $(this).datepicker('getDate');
         $(".js-searchbar-date-input-comeBack").val($.datepicker.formatDate('dd/mm/yy', dateObject));
+        if ( $('#roundTrip-comeBack').is(':checked') ) {
+          $('#js-origin-flight-datepiker-comeBack').removeClass('show');
+        }
       }
     });
+
+    $('#oneWay-going').on( 'change', function() {
+      if ( $(this).is(':checked') ) {
+        $('.js-add-date-range-to').toggleClass('activate');
+        $('.js-date-range-to').toggleClass('activate');
+      }
+    });
+
+    /*a */
+    $('#oneWay-comeBack').on( 'change', function() {
+      if ( $(this).is(':checked') ) {
+        $('.js-add-date-range-to').toggleClass('activate');
+        $('.js-date-range-to').toggleClass('activate');
+        $('#js-origin-flight-datepiker-comeBack').removeClass('show');
+      }
+    });
+
   });
 
   var searchnav = $('#searchbar');
