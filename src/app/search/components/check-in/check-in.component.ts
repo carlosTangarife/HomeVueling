@@ -15,15 +15,15 @@ export class CheckInComponent implements OnInit {
     public isOrigin: boolean;  
 
 
-    @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
+  @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
     
 
-  constructor(public checkInService : CheckInService, public _selectorService : SelectorService) {
+  constructor(public checkInService : CheckInService, public selectorService : SelectorService) {
     this.isOrigin = false;
    }
 
   ngOnInit() {        
-    this._selectorService.loadListStations(true);    
+    this.selectorService.loadStations();    
     this.codeBook = this.checkInService.getCodeBooking('ABC123');    
   }
 

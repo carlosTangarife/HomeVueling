@@ -26,6 +26,11 @@ export class SelectorService {
         this.marketsIata = [];
     }
 
+    loadStations() {
+        this.filteredStations = this.stations.StationList;
+        this.subjectListStations.next(this.filteredStations);
+    }
+
     loadListStations(isOrigin: boolean) {
         this.listStations = isOrigin ? this.stations.StationList : this.marketsIata;
         this.getStations(isOrigin);
