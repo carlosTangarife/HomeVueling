@@ -1,27 +1,38 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
 import { CheckInService } from "./check-in.service";
+import { SelectorService } from "../../../shared/services/selector.service";
+import { ICheckIn } from "../../models/check-in.model";
+import { IStation } from "../../../shared/models/station.model";
 
 @Component({
   selector: '[app-check-in]',
   templateUrl: './check-in.component.html',
-  providers: [CheckInService]
+  providers: [CheckInService, SelectorService]
 })
 export class CheckInComponent implements OnInit {
     public codeBook: string;
     public email: string;
-    public isOrigin: boolean;
+    public isOrigin: boolean;  
 
-  constructor(public checkInService : CheckInService) {
-    this.isOrigin = true;
+
+    @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
+    
+
+  constructor(public checkInService : CheckInService, public _selectorService : SelectorService) {
+    this.isOrigin = false;
    }
 
-  ngOnInit() {
-    this.codeBook = this.checkInService.getCodeBooking('ABC123');        
+  ngOnInit() {        
+    this._selectorService.loadListStations(true);    
+    this.codeBook = this.checkInService.getCodeBooking('ABC123');    
   }
 
-  /*changeChekIn(){
-    this.
-  }*/
+  changeTypeChekIn(value){
+    this.isOrigin = value;
+  }  
 
- 
+  stationSelected(station: any) {
+    this.selectedOrigin.emit(station);
+  }  
+  
 }

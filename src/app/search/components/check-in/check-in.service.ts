@@ -1,5 +1,5 @@
 import { Injectable } from "@angular/core";
-
+import { ICheckIn } from "../../models/check-in.model";
 
 Injectable()
 export class CheckInService{
@@ -11,7 +11,10 @@ export class CheckInService{
         return this.codeBooking = code;
     }
 
-    saveCheckIn(code: string, email: string){
-        
-    }
+    saveCheckIn(codeChekIn: string, email: string){
+        let checkin : ICheckIn = {
+          Code: codeChekIn,
+          Email: email
+        };
+      }
 }

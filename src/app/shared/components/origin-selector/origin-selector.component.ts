@@ -27,7 +27,7 @@ export class OriginSelectorComponent implements OnInit {
     this.isFocused.emit(this._selectorService.viewPopup);
   }
 
-  selectStation(station: any) {
+  selectStation(station: any) {    
     this.dataFlight.code = station.code;
     this.dataFlight.name = station.name;
     this.dataFlight.countryName = station.countryName;
