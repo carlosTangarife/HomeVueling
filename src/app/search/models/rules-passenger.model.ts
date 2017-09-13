@@ -1,6 +1,4 @@
 export interface IPassengerRules {
-  ExtraSeatEnabled?: boolean;
-  ResidentsLargeFamilyEnabled?: boolean;
   Max: number;
   Min: number;
   UrlMax: string;
@@ -11,6 +9,7 @@ export interface IPassengerRules {
 };
 
 export interface IMaxAndMinRule {
+  IsEnabled: boolean,
   Max: number,
   Min: number,
   Default: number,

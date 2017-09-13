@@ -1,7 +1,8 @@
-export interface IDiscountListPassengers {
-  residentIslaCeuta: string,
-  famNumGeneral: string,
-  famNumEspecial: string,
-  famNumGeneralResident: string,
-  famNumEspecialResident: string
+export interface IDiscountConfig {
+  IsEnabled: boolean,
+  Options: string[]
+};
+
+export interface IDiscount {
+  value: string
 };

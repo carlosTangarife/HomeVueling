@@ -1,40 +1,45 @@
 import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
 import { PassengerService } from '../../services/passenger.service';
+import { DiscountService } from '../../services/discount.service';
 import { IPassengers } from '../../models/passenger.model';
+import { IDiscount } from '../../models/discount.model';
 import { IMarket } from '../../../shared/models/station.model';
 
 @Component({
   selector: '[app-passenger]',
   templateUrl: './passenger.component.html',
-  providers: [PassengerService]
+  providers: [PassengerService, DiscountService]
 })
 export class PassengerComponent implements OnInit {
   @Input()
   public passengers: IPassengers;
 
+  @Input()
+  public discount: IDiscount;
+
   @Output()
-  isFocused: EventEmitter<boolean> = new EventEmitter();
+  isFocused = new EventEmitter<boolean>();
 
   public isResident: boolean;
   public isLargeFamily: boolean;
   public isShowPassengers: boolean;
   public isShowDiscountList: boolean;
-  public discountPassengersSelected: boolean;
-  public discountPassengers: string;
 
-  constructor(public passengerService: PassengerService) {
+  constructor(public passengerService: PassengerService, public discountService: DiscountService) {
     this.isResident = false;
     this.isLargeFamily = false;
   }
 
   ngOnInit() {
     this.passengerService.validatePassenger(this.passengers);
+    this.discountService.setDiscountList(this.isResident, this.isLargeFamily);
   }
 
   setResidentAndLargeFamily(destination: IMarket) {
-    if (this.passengerService.isDiscountEnabled()) {
+    if (this.discountService.isDiscountEnabled()) {
       this.isResident = destination.residents;
       this.isLargeFamily = destination.largefamily;
+      this.discountService.setDiscountList(this.isResident, this.isLargeFamily);
     }
   }
 
@@ -43,16 +48,11 @@ export class PassengerComponent implements OnInit {
     this.isFocused.emit(this.isShowPassengers);
   }
 
-  toggleDiscountList(discountPassengers?: any) {
+  toggleDiscountList(discountSelected?: string) {
     this.isShowDiscountList = !this.isShowDiscountList;
 
-    if (discountPassengers) {
-      this.discountPassengers = discountPassengers.text;
-      if (discountPassengers.show === true) {
-        this.discountPassengersSelected = true;
-      } else {
-        this.discountPassengersSelected = false;
-      }
+    if (typeof discountSelected !== 'undefined') {
+      this.discount.value = discountSelected;
     }
   }
 

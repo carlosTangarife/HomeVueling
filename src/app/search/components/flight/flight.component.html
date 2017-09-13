@@ -1,46 +1,45 @@
 <div class="form-group form-group--flight-search">
-  <div app-origin-selector
-      id="form-group--origin"
-      class="form-input origin"
-      #origin
-      (click)="clickInput()"
-      [dataFlight]="dataFlight.origin"
-      [ngClass]="{'focused':isFocusedOrigin}"
-      (isFocused)="isFocusedOrigin=$event"
-      (selectedOrigin)="destination.loadDestinations()">
-  </div>
+    <div app-origin-selector
+        id="form-group--origin"
+        class="form-input origin"
+        #origin
+        (click)="clickInput()"
+        [dataFlight]="dataFlight.origin"
+        [ngClass]="{'focused':isFocusedOrigin}"
+        (isFocused)="isFocusedOrigin=$event"
+        (selectedOrigin)="destination.loadDestinations()">
+    </div>
 
-  <div app-destination-selector
-      id="form-group--destination"
-      class="form-input destination"
-      #destination
-      (click)="clickInput()"
-      [ngClass]="{'focused':isFocusedDestination}"
-      [dataFlight]="dataFlight"
-      (outStation)="passenger.setResidentAndLargeFamily($event)"
-      (isFocused)="isFocusedDestination=$event"
-      (clickDestination)="origin.showPopupOrigin($event)">
-  </div>
+    <div app-destination-selector
+        id="form-group--destination"
+        class="form-input destination"
+        #destination
+        (click)="clickInput()"
+        [ngClass]="{'focused':isFocusedDestination}"
+        [dataFlight]="dataFlight"
+        (outStation)="passenger.setResidentAndLargeFamily($event)"
+        (isFocused)="isFocusedDestination=$event"
+        (clickDestination)="origin.showPopupOrigin($event)">
+    </div>
 
-  <div app-calendar
-      id="form-group--dates"
-      class="form-input dates js-second-flight">
-  </div>
+    <div app-calendar
+        id="form-group--dates"
+        class="form-input dates js-second-flight">
+    </div>
 
-  <div app-passenger
-      id="form-group--passengers"
-      #passenger
-      class="form-input passengers"
-      [ngClass]="{'focused':isFocusedPassengers}"
-      (click)="clickInput()"
-      (isFocused)="isFocusedPassengers=$event"
-      [passengers]="dataFlight.passengers">
-  </div>
-
+    <div app-passenger
+        id="form-group--passengers"
+        #passenger
+        class="form-input passengers"
+        [ngClass]="{'focused':isFocusedPassengers}"
+        (click)="clickInput()"
+        (isFocused)="isFocusedPassengers=$event"
+        [passengers]="dataFlight.passengers"
+        [discount]="dataFlight.discount">
+    </div>
 </div>
 
-
-  <div class="form-action">
+<div class="form-action">
     <button class="mv_button color-darkGrey size-md icon icon-right" (click)="onSubmit()">{{'search' | dictionary}}</button>
-  </div>
+</div>
 

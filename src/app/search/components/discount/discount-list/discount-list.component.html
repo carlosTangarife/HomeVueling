@@ -1,18 +1,4 @@
-<li (click)="toggleDiscountList('residentsOption')" *ngIf="isResident">
-    <p class="discount-item" [ngClass]="{'selected': discountActiveSelected == 'residentsOption'}">{{'residentsOption' | dictionary}}</p>
-  </li>
-  <li (click)="toggleDiscountList('largeFamilyGeneral')"  *ngIf="!isResident || isLargeFamily">
-    <p class="discount-item" [ngClass]="{'selected': discountActiveSelected == 'largeFamilyGeneral'}">{{'largeFamilyGeneral' | dictionary}}</p>
-  </li>
-  <li (click)="toggleDiscountList('largeFamilySpecial')" *ngIf="!isResident || isLargeFamily">
-    <p class="discount-item" [ngClass]="{'selected': discountActiveSelected == 'largeFamilySpecial'}">{{'largeFamilySpecial' | dictionary}}</p>
-  </li>
-  <li (click)="toggleDiscountList('largeFamilyGeneralResident')" *ngIf="isResident && isLargeFamily">
-    <p class="discount-item" [ngClass]="{'selected': discountActiveSelected == 'largeFamilyGeneralResident'}">{{'largeFamilyGeneralResident' | dictionary}}</p>
-  </li>
-  <li (click)="toggleDiscountList('largeFamilySpecialResident')" *ngIf="isResident && isLargeFamily">
-    <p class="discount-item" [ngClass]="{'selected': discountActiveSelected == 'largeFamilySpecialResident'}">{{'largeFamilySpecialResident' | dictionary}}</p>
-  </li>
-  <li (click)="toggleDiscountList('noDiscountOption')">
-      <p class="discount-item" [ngClass]="{'selected': discountActiveSelected == 'noDiscountOption'}">{{'noDiscountOption' | dictionary}}</p>
-  </li>
+<li *ngFor="let typeDiscount of typeDiscountList | async" 
+  (click)="toggleDiscountList(typeDiscount)">
+  <p class="discount-item" [ngClass]="{'selected': discountSelected == typeDiscount}">{{typeDiscount | dictionary}}</p>
+</li>

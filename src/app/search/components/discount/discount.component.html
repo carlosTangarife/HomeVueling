@@ -1,9 +1,10 @@
-<li id="discount-list-active">
-  <p>{{'titleDiscount' | dictionary}}</p>
+<li id="discount-list-active" (click)="toggleDiscountList()">
+  <p>{{titleDiscount() | dictionary}}</p>
   <span class="icon icon-arrow-right"></span>
 </li>
-<li  *ngIf="selected" [style.display]="selected ? 'list-item' : 'none' ">
-  <p class="discount-item" [ngClass]="{'selected':selected}">{{typeDiscountSelected | dictionary}}</p>
+<li (click)="toggleDiscountList()" 
+  [style.display]="typeSelected() ? 'list-item' : 'none' ">
+  <p class="discount-item" [ngClass]="{'selected': typeSelected()}">{{typeDiscountSelected | dictionary}}</p>
 </li>
 <div class="alert alert--icon info">
   <div class="alert_wrap" *ngIf="isResident">

@@ -53,16 +53,17 @@ export class PassengerService {
     this.rulePassenger(passenger);
   }
 
-  isDiscountEnabled(): boolean {
-    return this.configPassenger.ResidentsLargeFamilyEnabled;
-  }
-
   private initTypePassengers() {
+    let indexes: number[] = [];
     this.typePassengerList = TYPE_PAX_LIST;
-    if (!this.configPassenger.ExtraSeatEnabled) {
-      let index = this.typePassengerList.findIndex(x => x.type === TYPE_PASSENGER[TYPE_PASSENGER.ExtraSeat]);
+    TYPE_PAX_LIST.forEach((type, index) => {
+      if (!this.configPassenger[type.type].IsEnabled) {
+        indexes.push(index);
+      }
+    });
+    indexes.forEach(index => {
       this.typePassengerList.splice(index, 1);
-    }
+    });
   }
 
   private initValues() {
