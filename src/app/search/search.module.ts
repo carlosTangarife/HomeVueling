@@ -6,6 +6,7 @@ import { SEARCH_COMPONENTS } from './index';
 import { SHARED_SERVICES, APP_INITIALIZER_PROV } from '../shared/consts/services';
 import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
 
+
 @NgModule({
   imports: [
     CommonModule,

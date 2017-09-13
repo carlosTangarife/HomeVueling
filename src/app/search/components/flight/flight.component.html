@@ -24,8 +24,7 @@
 
   <div app-calendar
       id="form-group--dates"
-      class="form-input dates"
-      (click)="clickInput()">
+      class="form-input dates js-second-flight">
   </div>
 
   <div app-passenger
@@ -40,6 +39,8 @@
 
 </div>
 
-<div class="form-action">
-  <button class="mv_button color-darkGrey size-md icon icon-right" (click)="onSubmit()">{{'search' | dictionary}}</button>
-</div>
+
+  <div class="form-action">
+    <button class="mv_button color-darkGrey size-md icon icon-right" (click)="onSubmit()">{{'search' | dictionary}}</button>
+  </div>
+
