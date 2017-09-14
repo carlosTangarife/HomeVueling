@@ -1,0 +1,33 @@
+<div app-origin-selector
+  id="form-group--origin"
+  class="form-input origin js-second-flight"
+  #originMulti
+  (click)="clickInput()"
+  [dataFlight]="dataFlight.origin"
+  [ngClass]="{'focused':isFocusedOrigin}"
+  (isFocused)="isFocusedOrigin=$event"
+  (selectedOrigin)="destinationMulti.loadDestinations()">
+</div>
+
+<div app-destination-selector
+  id="form-group--destination"
+  class="form-input destination js-second-flight"
+  #destinationMulti
+  (click)="clickInput()"
+  [ngClass]="{'focused':isFocusedDestination}"
+  [dataFlight]="dataFlight"
+  [isMulticity]="isMulticity"
+  (isFocused)="isFocusedDestination=$event"
+  (clickDestination)="originMulti.showPopupOrigin($event)"
+  (clickMulticity)="clickMulticity($event)">
+</div>
+
+<div app-calendar
+  id="form-group--dates"
+  class="form-input dates js-second-flight">
+</div>
+
+<div class="aditional-flight js-remove-aditional-flight" (click)="clickMulticity()">
+  <span class="icon icon-delete-flight"></span>
+  <a>Eiminar vuelo 2</a>
+</div>

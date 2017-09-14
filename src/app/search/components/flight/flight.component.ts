@@ -10,7 +10,6 @@ import { environment } from '../../../../environments/environment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlightComponent implements OnInit {
-
   @Output()
   stateOverlay = new EventEmitter<void>();
 
@@ -32,6 +31,16 @@ export class FlightComponent implements OnInit {
         code: 'MAD',
         name: 'Madrid'
       },
+      multi: {
+        origin: {
+          code: 'BCN',
+          name: 'Barcelona'
+        },
+        destination: {
+          code: 'LAX',
+          name: 'Los Ángeles'
+        }
+      },
       passengers: {
         Adults : 1,
         Infants : 0,
@@ -50,7 +59,7 @@ export class FlightComponent implements OnInit {
   }
 
   clickInput() {
-    this.stateOverlay.next();
+    this.stateOverlay.emit();
   }
 
   clickMulticity(multicity: boolean) {

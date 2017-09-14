@@ -14,12 +14,14 @@ import { DestinationSelectorComponent } from '../shared/components/destination-s
 import { OriginSelectorComponent } from '../shared/components/origin-selector/origin-selector.component';
 import { DiscountComponent } from './components/discount/discount.component';
 import { DiscountListComponent } from './components/discount/discount-list/discount-list.component';
+import { MulticityComponent } from './components/multicity/multicity.component';
 
 export const SEARCH_COMPONENTS = [
   IndexSearchComponent,
   CheckInComponent,
   ReservationComponent,
   FlightComponent,
+  MulticityComponent,
   ListIconLinkComponent,
   IconComponent,
   PlacesComponent,
