@@ -13,13 +13,14 @@ export class CheckInComponent implements OnInit {
     public codeBook: string;
     public email: string;
     public isOrigin: boolean;  
+    public isShowStation: boolean;
+    public station: IStation;
 
-
-  @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
-    
+  @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();    
 
   constructor(public checkInService : CheckInService, public selectorService : SelectorService) {
     this.isOrigin = false;
+    this.isShowStation = false;
    }
 
   ngOnInit() {        
@@ -27,12 +28,16 @@ export class CheckInComponent implements OnInit {
     this.codeBook = this.checkInService.getCodeBooking('ABC123');    
   }
 
-  changeTypeChekIn(value){
+  changeTypeCheckIn(value){
     this.isOrigin = value;
   }  
 
-  stationSelected(station: any) {
-    this.selectedOrigin.emit(station);
+  showStation(station: any){
+    this.isShowStation = !this.isShowStation;
+  }
+
+  stationSelected(station: any) {       
+    this.station= station.name;   
   }  
   
 }

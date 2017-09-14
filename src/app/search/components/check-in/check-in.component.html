@@ -4,13 +4,13 @@
 </h3>
 
 <div class="tab-pane_options-container">
-   <div class="form-checkbox--button" (click)="changeTypeChekIn(false)">
+   <div class="form-checkbox--button" (click)="changeTypeCheckIn(false)">
       <label>
       <input type="checkbox" checked hidden>
       <span>Email del comprador</span>
       </label>
    </div>
-   <div class="form-checkbox--button" (click)="changeTypeChekIn(true)">
+   <div class="form-checkbox--button" (click)="changeTypeCheckIn(true)">
       <label>
       <input type="checkbox" hidden>
       <span>Origen/Destino</span>
@@ -49,15 +49,17 @@
         <div class="form-input">
           <label>Aeropuerto origen/destino</label>
           <div class="input-group">
-            <input type="text" id="destination-input"  class="form-control js-searchbar-input"
-             placeholder="email@vueling.com">
+            <input type="text" id="destination-input" (click)="showStation()" class="form-control js-searchbar-input"
+             placeholder="email@vueling.com" [(ngModel)]="station">
+             
           </div>
-        </div>
-        
-        <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup show">
-          <div app-places
-              [label]="'allAirports'"
-              [data]="selectorService.listStations$">
+          <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" 
+          [ngClass]="{'show': isShowStation}" (click)="showStation(station)">
+            <div app-places
+                [label]="'allAirports'"
+                [data]="selectorService.listStations$"
+                (selectedEvent)="stationSelected($event)">
+            </div>
           </div>
         </div>
 
