@@ -8,44 +8,51 @@ import { IStation } from '../../models/station.model';
   providers: [SelectorService]
 })
 export class OriginSelectorComponent implements OnInit {
-  @ViewChild('originInput') originInput: ElementRef;
-  @Input() dataFlight: IStation;
-  @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
-  @Output() isFocused: EventEmitter<boolean> = new EventEmitter();
+  @ViewChild('originInput')
+  originInput: ElementRef;
 
-  constructor(public _selectorService: SelectorService) { }
+  @Input()
+  dataFlight: IStation;
+
+  @Output()
+  selectedOrigin: EventEmitter<string> = new EventEmitter();
+
+  @Output()
+  isFocused: EventEmitter<boolean> = new EventEmitter();
+
+  constructor(public selectorService: SelectorService) { }
 
   ngOnInit() {
-    this._selectorService.loadListStations(true);
+    this.selectorService.loadListStations(true);
   }
 
   clearInput() {
     this.clearData();
-    this._selectorService.loadListStations(true);
+    this.selectorService.loadListStations(true);
     this.selectedOrigin.emit();
     this.showPopupOrigin();
-    this.isFocused.emit(this._selectorService.viewPopup);
+    this.isFocused.emit(this.selectorService.viewPopup);
   }
 
-  selectStation(station: any) {    
+  selectStation(station: any) {
     this.dataFlight.code = station.code;
     this.dataFlight.name = station.name;
     this.dataFlight.countryName = station.countryName;
     this.selectedOrigin.emit();
-    this._selectorService.togglePopup();
-    this.isFocused.emit(this._selectorService.viewPopup);
+    this.selectorService.togglePopup();
+    this.isFocused.emit(this.selectorService.viewPopup);
   }
 
   deleteRecentStationsCookie(event) {
-    this._selectorService.deleteStations(true);
+    this.selectorService.deleteStations(true);
     this.clearInput();
   }
 
   showPopupOrigin() {
     if (!this.dataFlight.code) {
       this.originInput.nativeElement.focus();
-      this._selectorService.togglePopup();
-      this.isFocused.emit(this._selectorService.viewPopup);
+      this.selectorService.togglePopup();
+      this.isFocused.emit(this.selectorService.viewPopup);
     }
   }
 
@@ -56,7 +63,7 @@ export class OriginSelectorComponent implements OnInit {
   }
 
   filterStationsByKey(key: string) {
-    this._selectorService.filterStationsByKey(true, key);
-    this.isFocused.emit(this._selectorService.viewPopup);
+    this.selectorService.filterStationsByKey(true, key);
+    this.isFocused.emit(this.selectorService.viewPopup);
   }
 }

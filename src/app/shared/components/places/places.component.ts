@@ -7,7 +7,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 export class PlacesComponent implements OnInit {
   @Input() label: string;
   @Input() data: any;
-  @Input() type: string;
+  @Input() showErase: boolean;
   @Output() selectedEvent: EventEmitter<any> = new EventEmitter();
   @Output() deleteEvent: EventEmitter<any> = new EventEmitter();
 
@@ -16,11 +16,7 @@ export class PlacesComponent implements OnInit {
   constructor() {}
 
   ngOnInit() {
-    this.data.subscribe((value) => this.dataLength = value.length)
-  }
-
-  hasRecentStations(): boolean {
-    return this.type === 'recents' ? this.dataLength > 0 : true;
+    this.data.subscribe((value) => this.dataLength = value.length);
   }
 
   deleteRecentStations() {

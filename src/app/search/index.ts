@@ -3,6 +3,8 @@ import { IndexSearchComponent } from './components/index-search/search-index.com
 import { CheckInComponent } from './components/check-in/check-in.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { FlightComponent } from './components/flight/flight.component';
+import { ListIconLinkComponent } from '../shared/components/list-icon-link/list-icon-link.component';
+import { IconComponent } from '../shared/components/icon/icon.component';
 import { PlacesComponent } from '../shared/components/places/places.component';
 import { MinusPlusComponent } from '../shared/components/minus-plus/minus-plus.component';
 import { TypePassengerComponent } from './components/passenger/type-passenger/type-passenger.component';
@@ -18,6 +20,8 @@ export const SEARCH_COMPONENTS = [
   CheckInComponent,
   ReservationComponent,
   FlightComponent,
+  ListIconLinkComponent,
+  IconComponent,
   PlacesComponent,
   CalendarComponent,
   PassengerComponent,

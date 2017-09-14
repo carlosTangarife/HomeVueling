@@ -5,12 +5,14 @@ import { LastStationsSelected, StationSelected } from '../models/last-search.mod
 
 @Injectable()
 export class StationService {
+    configStations: any;
     numRecentSearchesOrigin: number;
     numRecentSearchesDestination: number;
 
     constructor(private _cookiesWrapper: CookiesWrapper, private _configService: ConfigService) {
-        this.numRecentSearchesOrigin = this._configService.getConfigFlightSearches(true);
-        this.numRecentSearchesDestination = this._configService.getConfigFlightSearches(false);
+        this.configStations = this._configService.getConfigStations();
+        this.numRecentSearchesOrigin = this.configStations.RecentSearches.InOrigin;
+        this.numRecentSearchesDestination = this.configStations.RecentSearches.InDestination;
     }
 
     saveStation(stationCode: string, key: string, isOrigin: boolean) {
@@ -46,8 +48,16 @@ export class StationService {
         this._cookiesWrapper.removeCookie(key);
     }
 
+    showErase(): boolean {
+        return this.configStations.RecentSearches.DeleteOptionEnabled;
+    }
+
+    showMapLink(): boolean {
+        return this.configStations.DestinationsMapLinkEnabled;
+    }
+
     private orderStations(listStations: LastStationsSelected, station: StationSelected, numStations: number): LastStationsSelected {
-        let exist = listStations.lastStationsSelected.find(function (s) { return s.iataCode === station.iataCode });
+        let exist = listStations.lastStationsSelected.find(s => s.iataCode === station.iataCode);
         if (exist) {
             exist.date = new Date();
         } else if (listStations.lastStationsSelected.length < numStations) {

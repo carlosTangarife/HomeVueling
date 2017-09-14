@@ -1,0 +1,4 @@
+<li *ngFor="let iconLink of listIconLink">
+  <span app-icon class="icon {{iconLink.Icon.Class}}" [icon]="iconLink.Icon"></span>
+  <a href="{{iconLink.Link}}">{{iconLink.Label | lowercase | dictionary}}</a>
+</li>

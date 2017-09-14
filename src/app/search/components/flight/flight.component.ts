@@ -18,6 +18,7 @@ export class FlightComponent implements OnInit {
   public isFocusedOrigin: boolean;
   public isFocusedDestination: boolean;
   public isFocusedPassengers: boolean;
+  public isMulticity: boolean;
 
   constructor(private _stationService: StationService) { }
 
@@ -50,6 +51,10 @@ export class FlightComponent implements OnInit {
 
   clickInput() {
     this.stateOverlay.next();
+  }
+
+  clickMulticity(multicity: boolean) {
+    this.isMulticity = multicity;
   }
 
   saveSearch() {

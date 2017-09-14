@@ -15,26 +15,39 @@
   <div class="popover-content">Before continiung, you must select your destination.</div>
 </div>
 
-<div id="destinationInput-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show':_selectorService.viewPopup}">
-  <div app-places [data]="_selectorService.recentStations$" [label]="'recentSearchs'"
-    [type]="'recents'" (selectedEvent)="selectStation($event)"
-    (deleteEvent)="deleteRecentStationsCookie($event)"></div>
-  <div app-places [data]="_selectorService.listStations$" [label]="'allAirports'"
-    (selectedEvent)="selectStation($event)"></div>
+<div id="destinationInput-sugestion-popup"
+    class="searchbar-popup cities-sugestion-popup"
+    [ngClass]="{'show':selectorService.viewPopup}" >
+
+  <div app-places *ngIf="selectorService.hasRecentStations()"
+    [showErase]="selectorService.showErase()"
+    [data]="selectorService.recentStations$"
+    [label]="'recentSearchs'"
+    (selectedEvent)="selectStation($event)"
+    (deleteEvent)="deleteRecentStationsCookie($event)">
+  </div>
+
+  <div app-places
+    [showErase]="false"
+    [data]="selectorService.listStations$"
+    [label]="'allAirports'"
+    (selectedEvent)="selectStation($event)">
+  </div>
+
   <div class="cities-sugestion-popup_legend">
     <ul>
-      <li>Vuelos directos</li>
+      <li>{{'directFlights' | dictionary}}</li>
       <li class="connection-flight">{{'connectionFlights' | dictionary}}</li>
     </ul>
     <div class="cities-sugestion-popup_legend_actions">
-      <div class="link">
+      <div class="link" *ngIf="selectorService.showMapLink()">
         <span class="icon icon-arrow-right"></span>
         <a href="">{{'destinationMap' | dictionary}}</a>
       </div>
-      <div class="form-checkbox--button color-darkGrey">
+      <div class="form-checkbox--button color-darkGrey" *ngIf="selectorService.showMulticity()">
         <label>
-          <input type="checkbox" hidden>
-          <span>{{'multicity' | dictionary}}</span>
+          <input type="checkbox" [checked]="multicity" #multicityBtn hidden>
+          <span (click)="toogleMulticity()">{{'multicity' | dictionary}}</span>
         </label>
       </div>
     </div>

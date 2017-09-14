@@ -12,21 +12,25 @@
 </div>
 
 <div class="popover popover--error" *ngIf="false">
-  <div class="popover-content">Before continiung, you must select your origin.</div>
+  <div class="popover-content">Antes de continuar, debes seleccionar un origen.</div>
 </div>
 
-<div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup " [ngClass]="{'show':_selectorService.viewPopup}">
-  <div app-places
-      [type]="'recents'"
+<div id="origin-sugestion-popup"
+  class="searchbar-popup cities-sugestion-popup"
+  [ngClass]="{'show':selectorService.viewPopup}" >
+
+  <div app-places *ngIf="selectorService.hasRecentStations()"
+      [showErase]="selectorService.showErase()"
       [label]="'recentSearchs'"
-      [data]="_selectorService.recentStations$"
+      [data]="selectorService.recentStations$"
       (selectedEvent)="selectStation($event)"
       (deleteEvent)="deleteRecentStationsCookie($event)">
   </div>
 
   <div app-places
+      [showErase]="false"
       [label]="'allAirports'"
-      [data]="_selectorService.listStations$"
+      [data]="selectorService.listStations$"
       (selectedEvent)="selectStation($event)">
   </div>
 </div>

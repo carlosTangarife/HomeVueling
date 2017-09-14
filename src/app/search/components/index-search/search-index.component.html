@@ -9,23 +9,24 @@
     <ul class="nav nav-tabs searchbar-main_tabs">
       <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--search" *ngIf="searcherConfig.FlightSearch.IsEnabled" [ngClass]="{'active': isFlight}">
         <div class="tab" data-toggle="tab" href="#home" (click)="stateTag(true, false, false)">
-          <p><span class="icon icon-plane"></span>{{'flights' | dictionary}}</p>
-          <ul>
-            <li><span class="icon icon-building"></span><a href="http://hotel.vueling.com/?label=vlng-tab-home&lang=en">{{'hotels' | dictionary}}</a></li>
-            <li><span class="icon icon-car"></span><a href="http://cars.vueling.com/en/#searchcars">{{'cars' | dictionary}}</a></li>
-          </ul>
+          <p><span app-icon class="icon {{searcherConfig.FlightSearch.Icon.Class}}"
+            [icon]="searcherConfig.FlightSearch.Icon"></span>{{'flights' | dictionary}}
+          </p>
+          <ul app-list-icon-link [listIconLink]="listIconLink"></ul>
         </div>
       </li>
 
       <li class="searchbar-main_tabs_tab  searchbar-main_tabs_tab--check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'active': ischeckIn}">
         <a class="tab" data-toggle="tab" href="#menu1" (click)="stateTag(false, true, false)">
-          <p><span class="icon icon-computer"></span>{{'checkinOnline' | dictionary}}</p>
+          <p><span app-icon class="icon {{searcherConfig.Checkin.Icon.Class}}"
+            [icon]="searcherConfig.Checkin.Icon"></span>{{'checkinOnline' | dictionary}}</p>
         </a>
       </li>
 
       <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--reservation" *ngIf="searcherConfig.YourBooking.IsEnabled" [ngClass]="{'active': isReservation}">
         <a class="tab" data-toggle="tab" href="#menu2" (click)="stateTag(false, false, true)">
-          <p><span class="icon icon-settings"></span>{{'yourBooking' | dictionary}}</p>
+          <p><span app-icon class="icon {{searcherConfig.YourBooking.Icon.Class}}"
+            [icon]="searcherConfig.YourBooking.Icon"></span>{{'yourBooking' | dictionary}}</p>
         </a>
       </li>
 

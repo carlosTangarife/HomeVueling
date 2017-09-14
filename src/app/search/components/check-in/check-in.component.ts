@@ -1,8 +1,8 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { CheckInService } from "./check-in.service";
-import { SelectorService } from "../../../shared/services/selector.service";
-import { ICheckIn } from "../../models/check-in.model";
-import { IStation } from "../../../shared/models/station.model";
+import { CheckInService } from './check-in.service';
+import { SelectorService } from '../../../shared/services/selector.service';
+import { ICheckIn } from '../../models/check-in.model';
+import { IStation } from '../../../shared/models/station.model';
 
 @Component({
   selector: '[app-check-in]',
@@ -30,7 +30,7 @@ export class CheckInComponent implements OnInit {
 
   changeTypeCheckIn(value){
     this.isOrigin = value;
-  }  
+  }
 
   showStation(station: any){
     this.isShowStation = !this.isShowStation;
