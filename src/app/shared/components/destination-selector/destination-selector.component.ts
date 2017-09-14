@@ -25,52 +25,58 @@ export class DestinationSelectorComponent implements OnInit {
   @Output()
   outStation: EventEmitter<IMarket> = new EventEmitter();
 
-  constructor(public _selectorService: SelectorService) { }
+  @Output()
+  clickMulticity: EventEmitter<boolean> = new EventEmitter();
+
+  public multicity: boolean;
+
+  constructor(public selectorService: SelectorService) { }
 
   ngOnInit() {
-    this._selectorService.getMarketsByIata(this.dataFlight.origin.code);
-    this._selectorService.loadListStations(false);
-    let destination = this._selectorService.getDestination(this.dataFlight.destination.code);
+    this.multicity = false;
+    this.selectorService.getMarketsByIata(this.dataFlight.origin.code);
+    this.selectorService.loadListStations(false);
+    let destination = this.selectorService.getDestination(this.dataFlight.destination.code);
     destination ? this.outStation.emit(destination) : this.clearData();
   }
 
   clearInput() {
     this.clearData();
-    this._selectorService.getMarketsByIata(this.dataFlight.origin.code);
-    this._selectorService.loadListStations(false);
+    this.selectorService.getMarketsByIata(this.dataFlight.origin.code);
+    this.selectorService.loadListStations(false);
     this.clickDestination.emit();
     this.showPopupDestination();
-    this.isFocused.emit(this._selectorService.viewPopup);
+    this.isFocused.emit(this.selectorService.viewPopup);
   }
 
   selectStation(station: any) {
     this.dataFlight.destination.code = station.code;
     this.dataFlight.destination.name = station.name;
     this.dataFlight.destination.countryName = station.countryName;
-    this._selectorService.togglePopup();
-    this.isFocused.emit(this._selectorService.viewPopup);
+    this.selectorService.togglePopup();
+    this.isFocused.emit(this.selectorService.viewPopup);
     this.outStation.emit(station);
   }
 
   deleteRecentStationsCookie(event) {
-    this._selectorService.deleteStations(false);
+    this.selectorService.deleteStations(false);
     this.clearInput();
   }
 
   loadDestinations() {
-    this._selectorService.getMarketsByIata(this.dataFlight.origin.code)
-    this._selectorService.loadListStations(false);
+    this.selectorService.getMarketsByIata(this.dataFlight.origin.code)
+    this.selectorService.loadListStations(false);
     this.showPopupDestination();
-    this.isFocused.emit(this._selectorService.viewPopup);
+    this.isFocused.emit(this.selectorService.viewPopup);
   }
 
   showPopupDestination() {
     if (this.dataFlight.origin.code) {
       this.destinationInput.nativeElement.focus();
-      this._selectorService.togglePopup();
+      this.selectorService.togglePopup();
     } else {
       this.clearData();
-      this._selectorService.hidePopup();
+      this.selectorService.hidePopup();
     }
   }
 
@@ -81,7 +87,12 @@ export class DestinationSelectorComponent implements OnInit {
   }
 
   filterStationsByKey(key?: string) {
-    this._selectorService.filterStationsByKey(false, key ? key : null);
-    this.isFocused.emit(this._selectorService.viewPopup);
+    this.selectorService.filterStationsByKey(false, key ? key : null);
+    this.isFocused.emit(this.selectorService.viewPopup);
+  }
+
+  toogleMulticity() {
+    this.multicity = !this.multicity;
+    this.clickMulticity.emit(this.multicity);
   }
 }

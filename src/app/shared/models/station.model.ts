@@ -1,3 +1,5 @@
+import { IIcon } from './commons.model';
+
 export interface IStation {
     macCode?: string,
     name: string,
@@ -6,8 +8,7 @@ export interface IStation {
     countryName?: string,
     isRecent?: boolean,
     order?: number,
-    claseCss?: string,
-    paths?: number
+    icon?: IIcon
 };
 
 export interface IStationList {

@@ -19,7 +19,8 @@
         [dataFlight]="dataFlight"
         (outStation)="passenger.setResidentAndLargeFamily($event)"
         (isFocused)="isFocusedDestination=$event"
-        (clickDestination)="origin.showPopupOrigin($event)">
+        (clickDestination)="origin.showPopupOrigin($event)"
+        (clickMulticity)="clickMulticity($event)">
     </div>
 
     <div app-calendar
@@ -36,6 +37,213 @@
         (isFocused)="isFocusedPassengers=$event"
         [passengers]="dataFlight.passengers"
         [discount]="dataFlight.discount">
+    </div>
+</div>
+
+<div class="form-group form-group--flight-search hide js-second-flight-container" [ngClass]="{'hide': !isMulticity}">
+    <div id="form-group--origin" class="form-input origin js-second-flight">
+        <label class="form-input_label">Origen</label>
+        <div class="input-group">
+            <input type="text" id="origin-input" class="form-control js-searchbar-input" id="destino" placeholder="Ciudad, país o aeropuerto">
+        </div>
+        <!-- <div class="popover popover--error">
+            <div class="popover-content">Antes de continuar, debes seleccionar un origen.</div>
+          </div> -->
+        <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup">
+            <p class="cities-sugestion-popup_title">Búsquedas recientes</p>
+            <ul class="cities-sugestion-popup_list">
+                <li>
+                    <p class="list-item">Barcelona</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">BCN</p>
+                    <p class="list-item"><span class="icon icon-arrow-list"></span></p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                    <p class="list-item">
+                        <span class="icon icon-clock"><span class="path1"></span><span class="path2"></span></span>
+                    </p>
+                </li>
+            </ul>
+            <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
+            <ul class="cities-sugestion-popup_list">
+                <li>
+                    <p class="list-item">Barcelona</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">BCN</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div id="form-group--destination" class="form-input destination js-second-flight">
+        <label class="form-input_label">Destino</label>
+        <div class="input-group">
+            <span class="prefix">BCN</span>
+            <input type="text" id="destination-input" class="form-control js-searchbar-input" id="destino" placeholder="Ciudad, país o aeropuerto">
+        </div>
+        <div id="destination-sugestion-popup" class="searchbar-popup cities-sugestion-popup destination">
+            <p class="cities-sugestion-popup_title">
+                Búsquedas recientes
+                <span class="erase-label">Borrar</span>
+            </p>
+            <ul class="cities-sugestion-popup_list">
+                <li class="connection-flight">
+                    <p class="list-item">Barcelona</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">BCN</p>
+                    <p class="list-item"><span class="icon icon-arrow-list"></span></p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                    <p class="list-item">
+                        <span class="icon icon-clock"><span class="path1"></span><span class="path2"></span></span>
+                    </p>
+                </li>
+            </ul>
+            <p class="cities-sugestion-popup_title">Todos los aeropuertos</p>
+            <ul class="cities-sugestion-popup_list">
+                <li>
+                    <p class="list-item">Barcelona</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">BCN</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li class="connection-flight">
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+                <li>
+                    <p class="list-item">A coruña</p>
+                    <p class="list-item">España</p>
+                    <p class="list-item">LCG</p>
+                </li>
+            </ul>
+            <div class="cities-sugestion-popup_legend">
+                <ul>
+                    <li>Vuelos directos</li>
+                    <li class="connection-flight">Vuelos en conexión</li>
+                </ul>
+                <div class="cities-sugestion-popup_legend_actions">
+                    <div class="link">
+                        <span class="icon icon-arrow-right"></span>
+                        <a href="">Mapa de destinos</a>
+                    </div>
+                    <div class="form-checbox--button color-darkGrey">
+                        <label>
+                    <input type="checkbox" hidden>
+                    <span>Múltiples destinos</span>
+                    </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="form-group--dates" class="form-input dates js-second-flight">
+        <div class="col col-md-6">
+            <label class="form-input_label">Ida</label>
+            <div class="input-group">
+                <input type="text" class="form-control js-searchbar-input js-searchbar-date-input" placeholder="DD/MM/YY" readonly="readonly">
+                <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+            </div>
+        </div>
+        <div class="col col-md-6">
+            <a class="activate js-add-date-range-to">Añadir vuelta</a>
+            <div class="date-range-to js-date-range-to">
+                <label class="form-input_label">Vuelta</label>
+                <div class="input-group">
+                    <input type="text" class="form-control js-searchbar-input js-searchbar-date-input" placeholder="DD/MM/YY" readonly="readonly">
+                    <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="aditional-flight js-remove-aditional-flight">
+        <span class="icon icon-delete-flight"></span>
+        <a>Eiminar vuelo 2</a>
     </div>
 </div>
 

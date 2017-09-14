@@ -37,17 +37,8 @@ export class ConfigService {
     return dictionary ? dictionary.Value : '';
   }
 
-  getConfigFlightSearches(isOrigin: boolean): number {
-    let config = this.environment['configuration'];
-    let result = 3;
-    try {
-      result = isOrigin
-        ? config.Stations.RecentSearches.InOrigin
-        : config.Stations.RecentSearches.InDestination;
-    } catch (e) {
-      console.log((<Error>e).message);
-    }
-    return result;
+  getConfigStations(): any {
+    return this.environment['configuration'].FlightSearch.Stations;
   }
 
   getConfigPassengers(): any {
@@ -56,5 +47,19 @@ export class ConfigService {
 
   getConfigDiscount(): any {
     return this.environment['configuration'].FlightSearch.Discount;
+  }
+
+  getIconGeo(): any {
+    let config = this.environment['configuration'].FlightSearch.Stations;
+    return config.IconGeolocalization;
+  }
+
+  getIconRecent(): any {
+    let config = this.getConfigStations();
+    return config.RecentSearches.Icon;
+  }
+
+  multicityEnabled(): boolean {
+    return this.environment['configuration'].FlightSearch.MultiCityEnabled;
   }
 }

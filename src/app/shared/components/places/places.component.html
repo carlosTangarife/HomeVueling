@@ -1,6 +1,6 @@
-<p class="cities-sugestion-popup_title" *ngIf="hasRecentStations()">
+<p class="cities-sugestion-popup_title">
   {{label | dictionary}}
-  <span class="erase-label" *ngIf="type === 'recents'"
+  <span class="erase-label" *ngIf="showErase"
     (click)="deleteRecentStations()">{{'erase' | dictionary}}</span>
 </p>
 <ul class="cities-sugestion-popup_list">
@@ -10,11 +10,9 @@
     <p class="list-item">{{station?.name}}</p>
     <p class="list-item">{{station?.countryName}}</p>
     <p class="list-item">{{station?.code}}</p>
-    <p class="list-item">
-      <span class="icon icon-clock">
-        <span class="path1"></span>
-        <span class="path2"></span>
-      </span>
+    <p class="list-item" *ngIf="station.icon">
+      <span app-icon class="icon {{station.icon.Class}}"
+        [icon]="station.icon"></span>
     </p>
   </li>
 </ul>

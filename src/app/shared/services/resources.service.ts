@@ -25,14 +25,14 @@ export class ResourcesService {
     }
 
     getTexts() {
-        // const url = 'http://local.vuelingtest.com/umbraco/api/configuration/GetSearcherTexts';
-        const url = 'https://vueling-json.herokuapp.com/index.php/GetSearcherTexts';
+        const url = 'http://local.vuelingtest.com/umbraco/api/configuration/GetSearcherTexts';
+        // const url = 'https://vueling-json.herokuapp.com/index.php/GetSearcherTexts';
         return this.retrieveResource(this.keyTexts, url);
     }
 
     getConfiguration() {
-        // const url = 'http://local.vuelingtest.com/umbraco/api/configuration/GetConfigurationSearch/1177';
-        const url = 'https://vueling-json.herokuapp.com/index.php/GetConfigurationSearch';
+        const url = 'http://local.vuelingtest.com/umbraco/api/configuration/GetConfigurationSearch/1177';
+        // const url = 'https://vueling-json.herokuapp.com/index.php/GetConfigurationSearch';
         return this.retrieveResource(this.keyConfiguration, url);
     }
 
