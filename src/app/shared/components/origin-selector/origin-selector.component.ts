@@ -8,10 +8,17 @@ import { IStation } from '../../models/station.model';
   providers: [SelectorService]
 })
 export class OriginSelectorComponent implements OnInit {
-  @ViewChild('originInput') originInput: ElementRef;
-  @Input() dataFlight: IStation;
-  @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
-  @Output() isFocused: EventEmitter<boolean> = new EventEmitter();
+  @ViewChild('originInput')
+  originInput: ElementRef;
+
+  @Input()
+  dataFlight: IStation;
+
+  @Output()
+  selectedOrigin: EventEmitter<string> = new EventEmitter();
+
+  @Output()
+  isFocused: EventEmitter<boolean> = new EventEmitter();
 
   constructor(public selectorService: SelectorService) { }
 

@@ -51,8 +51,24 @@ export class SelectorService {
         this.filterStations(false);
     }
 
-    getDestination(iata: string): IMarket {
-        return this.marketsIata.find(market => market.code === iata);
+    isResidentsFamily(iata: string): any {
+        let destination = this.marketsIata.find(market => market.code === iata);
+        if (destination) {
+            return {
+                isResident: destination.residents,
+                isLargeFamily: destination.largefamily
+            };
+        } else if (this.marketsIata && this.marketsIata.length > 0) {
+            return {
+                isResident: this.marketsIata.some(market => market.residents),
+                isLargeFamily: this.marketsIata.some(market => market.largefamily)
+            };
+        } else {
+            return {
+                isResident: false,
+                isLargeFamily: false
+            };
+        }
     }
 
     filterStations(byRecent: boolean) {
@@ -93,7 +109,7 @@ export class SelectorService {
 
     filterStationsByKey(isOrigin: boolean, key?: string) {
         this.showPopup();
-        this.filteredStations = key ? this.listStations.filter(opt => this.existOption(opt, key)) : this.listStations;
+        this.filteredStations = key ? this.listStations.filter(opt => this.existOption(opt, key.toLowerCase())) : this.listStations;
         this.filterStations(true);
         this.filterStations(false);
     }

@@ -3,7 +3,6 @@ import { PassengerService } from '../../services/passenger.service';
 import { DiscountService } from '../../services/discount.service';
 import { IPassengers } from '../../models/passenger.model';
 import { IDiscount } from '../../models/discount.model';
-import { IMarket } from '../../../shared/models/station.model';
 
 @Component({
   selector: '[app-passenger]',
@@ -35,10 +34,10 @@ export class PassengerComponent implements OnInit {
     this.discountService.setDiscountList(this.isResident, this.isLargeFamily);
   }
 
-  setResidentAndLargeFamily(destination: IMarket) {
+  setResidentAndLargeFamily(data: any) {
     if (this.discountService.isDiscountEnabled()) {
-      this.isResident = destination.residents;
-      this.isLargeFamily = destination.largefamily;
+      this.isResident = data.isResident;
+      this.isLargeFamily = data.isLargeFamily;
       this.discountService.setDiscountList(this.isResident, this.isLargeFamily);
     }
   }

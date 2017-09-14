@@ -23,7 +23,7 @@ export class DestinationSelectorComponent implements OnInit {
   isFocused: EventEmitter<boolean> = new EventEmitter();
 
   @Output()
-  outStation: EventEmitter<IMarket> = new EventEmitter();
+  outStation: EventEmitter<any> = new EventEmitter();
 
   @Output()
   clickMulticity: EventEmitter<boolean> = new EventEmitter();
@@ -36,8 +36,8 @@ export class DestinationSelectorComponent implements OnInit {
     this.multicity = false;
     this.selectorService.getMarketsByIata(this.dataFlight.origin.code);
     this.selectorService.loadListStations(false);
-    let destination = this.selectorService.getDestination(this.dataFlight.destination.code);
-    destination ? this.outStation.emit(destination) : this.clearData();
+    let data = this.selectorService.isResidentsFamily(this.dataFlight.destination.code);
+    this.outStation.emit(data);
   }
 
   clearInput() {
@@ -47,6 +47,8 @@ export class DestinationSelectorComponent implements OnInit {
     this.clickDestination.emit();
     this.showPopupDestination();
     this.isFocused.emit(this.selectorService.viewPopup);
+    let data = this.selectorService.isResidentsFamily(this.dataFlight.destination.code);
+    this.outStation.emit(data);
   }
 
   selectStation(station: any) {
@@ -55,7 +57,8 @@ export class DestinationSelectorComponent implements OnInit {
     this.dataFlight.destination.countryName = station.countryName;
     this.selectorService.togglePopup();
     this.isFocused.emit(this.selectorService.viewPopup);
-    this.outStation.emit(station);
+    let data = this.selectorService.isResidentsFamily(this.dataFlight.destination.code);
+    this.outStation.emit(data);
   }
 
   deleteRecentStationsCookie(event) {
@@ -68,6 +71,8 @@ export class DestinationSelectorComponent implements OnInit {
     this.selectorService.loadListStations(false);
     this.showPopupDestination();
     this.isFocused.emit(this.selectorService.viewPopup);
+    let data = this.selectorService.isResidentsFamily(this.dataFlight.destination.code);
+    this.outStation.emit(data);
   }
 
   showPopupDestination() {

@@ -17,10 +17,10 @@
         (click)="clickInput()"
         [ngClass]="{'focused':isFocusedDestination}"
         [dataFlight]="dataFlight"
-        (outStation)="passenger.setResidentAndLargeFamily($event)"
         (isFocused)="isFocusedDestination=$event"
         (clickDestination)="origin.showPopupOrigin($event)"
-        (clickMulticity)="clickMulticity($event)">
+        (clickMulticity)="clickMulticity($event)"
+        (outStation)="passenger.setResidentAndLargeFamily($event)">
     </div>
 
     <div app-calendar
@@ -33,10 +33,10 @@
         #passenger
         class="form-input passengers"
         [ngClass]="{'focused':isFocusedPassengers}"
-        (click)="clickInput()"
-        (isFocused)="isFocusedPassengers=$event"
         [passengers]="dataFlight.passengers"
-        [discount]="dataFlight.discount">
+        [discount]="dataFlight.discount"
+        (click)="clickInput()"
+        (isFocused)="isFocusedPassengers=$event">
     </div>
 </div>
 
