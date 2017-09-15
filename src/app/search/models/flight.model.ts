@@ -13,6 +13,7 @@ export interface IFlight {
 };
 
 export interface IMulti {
+  isActive: boolean,
   origin?: IStation,
   destination?: IStation,
   going?: Date

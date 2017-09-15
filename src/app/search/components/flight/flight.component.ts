@@ -1,8 +1,9 @@
-import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, ViewChild } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { IFlight } from '../../models/flight.model';
 import { StationService } from '../../../shared/services/station.service';
 import { environment } from '../../../../environments/environment';
+import { DestinationSelectorComponent } from '../../../shared/components/destination-selector/destination-selector.component';
 
 @Component({
   selector: '[app-flight]',
@@ -10,6 +11,9 @@ import { environment } from '../../../../environments/environment';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class FlightComponent implements OnInit {
+  @ViewChild('destination')
+  destination: DestinationSelectorComponent;
+
   @Output()
   stateOverlay = new EventEmitter<void>();
 
@@ -17,7 +21,6 @@ export class FlightComponent implements OnInit {
   public isFocusedOrigin: boolean;
   public isFocusedDestination: boolean;
   public isFocusedPassengers: boolean;
-  public isMulticity: boolean;
 
   constructor(private _stationService: StationService) { }
 
@@ -32,6 +35,7 @@ export class FlightComponent implements OnInit {
         name: 'Madrid'
       },
       multi: {
+        isActive: false,
         origin: {
           code: 'BCN',
           name: 'Barcelona'
@@ -63,7 +67,13 @@ export class FlightComponent implements OnInit {
   }
 
   clickMulticity(multicity: boolean) {
-    this.isMulticity = multicity;
+    this.dataFlight.multi.isActive = multicity;
+  }
+
+  removeMulticity(multicity: boolean) {
+    this.clickMulticity(multicity);
+    this.destination.showPopupDestination();
+    this.destination.isFocused.emit(this.destination.selectorService.viewPopup);
   }
 
   saveSearch() {
