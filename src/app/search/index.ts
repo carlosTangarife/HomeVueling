@@ -15,6 +15,7 @@ import { OriginSelectorComponent } from '../shared/components/origin-selector/or
 import { DiscountComponent } from './components/discount/discount.component';
 import { DiscountListComponent } from './components/discount/discount-list/discount-list.component';
 import { MulticityComponent } from './components/multicity/multicity.component';
+import { CalendarOptionsComponent } from '../shared/components/calendar-options/calendar-options.component';
 
 export const SEARCH_COMPONENTS = [
   IndexSearchComponent,
@@ -33,5 +34,6 @@ export const SEARCH_COMPONENTS = [
   DiscountComponent,
   DiscountListComponent,
   MinusPlusComponent,
-  DatePickerComponent
+  DatePickerComponent,
+  CalendarOptionsComponent
 ];
