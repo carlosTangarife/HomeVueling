@@ -1,3 +1,5 @@
+<div app-check-in-error *ngIf="submit==false"> </div>
+
 <p class="tab-pane_lead-in">Obtén tus tarjetas de embarque para subir al avión: podrás imprimirlas o descargarlas en tu móvil.</p>
 <h3 class="tab-pane_title">
    <span class="icon-computer"></span> Check-in online
@@ -24,15 +26,20 @@
          <label>Código de reserva</label>
          <a href="#">¿Qué es?</a>
          <div class="input-group">            
-            <input type="text" id="origin-input" class="form-control js-searchbar-input" [ngModel]="codeBook" placeholder="Ej. XG6LM3" required>            
-         </div>
+            <input type="text" id="origin-input" class="form-control js-searchbar-input" [ngModel]="codeBook" placeholder="Ej. XG6LM3" required>                     
+        </div>
       </div>
-      <div class="form-input">
+    <div class="form-input">
          <label>Email del comprador </label>         
-            <input type="text" id="destination-input" class="form-control js-searchbar-input" placeholder="email@vueling.com">         
+            <input type="text" id="destination-input" class="form-control js-searchbar-input" name="email"
+            ngModel #email="ngModel" no-spaces
+            placeholder="email@vueling.com"> 
+            <div class="popover popover--error" *ngIf="email.errors">
+              <div class="popover-content">No se permiten espacios en blanco.</div>
+            </div>           
       </div>
         <div class="form-action">
-          <a href="#" onclick="return false;" class="mv_button color-darkGrey size-md icon icon-right">Acceder</a>
+          <a href="#" (click)="onSubmit()" class="mv_button color-darkGrey size-md icon icon-right">Acceder</a>
         </div>
    </div>
 </div>
@@ -50,7 +57,7 @@
           <label>Aeropuerto origen/destino</label>
           <div class="input-group">
             <input type="text" id="destination-input" (click)="showStation()" class="form-control js-searchbar-input"
-             placeholder="email@vueling.com" [(ngModel)]="station">
+             placeholder="Ciudad" [(ngModel)]="station">
              
           </div>
           <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" 
@@ -82,9 +89,8 @@
         </div>
       </div>
       <div class="form-action">
-        <a href="#" onclick="return false;" class="mv_button color-darkGrey size-md icon icon-right">Acceder</a>
+        <a href="#" (click)="onSubmit()" class="mv_button color-darkGrey size-md icon icon-right">Acceder</a>
       </div>
-    </div>
+</div>
   
-
 

@@ -39,7 +39,7 @@
       <li>{{'directFlights' | dictionary}}</li>
       <li class="connection-flight">{{'connectionFlights' | dictionary}}</li>
     </ul>
-    <div class="cities-sugestion-popup_legend_actions" *ngIf="!isMulticity">
+    <div class="cities-sugestion-popup_legend_actions" *ngIf="!dataFlight?.isActive">
       <div class="link" *ngIf="selectorService.showMapLink()">
         <span class="icon icon-arrow-right"></span>
         <a href="">{{'destinationMap' | dictionary}}</a>
@@ -47,7 +47,7 @@
       <div class="form-checkbox--button color-darkGrey" *ngIf="selectorService.showMulticity()">
         <label>
           <input type="checkbox" #multicityBtn hidden>
-          <span (click)="toogleMulticity()">{{'multicity' | dictionary}}</span>
+          <span class="js-multiple-destinations" (click)="toogleMulticity()">{{'multicity' | dictionary}}</span>
         </label>
       </div>
     </div>

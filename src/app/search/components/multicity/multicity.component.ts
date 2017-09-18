@@ -9,9 +9,6 @@ export class MulticityComponent implements OnInit {
   @Input()
   dataFlight: IMulti;
 
-  @Input()
-  isMulticity: boolean;
-
   @Output()
   stateOverlay = new EventEmitter<void>();
 

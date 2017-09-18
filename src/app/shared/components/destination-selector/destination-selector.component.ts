@@ -19,9 +19,6 @@ export class DestinationSelectorComponent implements OnInit {
   @Input()
   dataFlight: IFlight;
 
-  @Input()
-  isMulticity: boolean;
-
   @Output()
   clickDestination: EventEmitter<any> = new EventEmitter();
 
@@ -52,6 +49,11 @@ export class DestinationSelectorComponent implements OnInit {
     this.isFocused.emit(this.selectorService.viewPopup);
     let data = this.selectorService.isResidentsFamily(this.dataFlight.destination.code);
     this.outStation.emit(data);
+    if (this.dataFlight.multi) {
+      if (this.dataFlight.multi.isActive !== this.multicityBtn.nativeElement.checked) {
+        this.multicityBtn.nativeElement.click();
+      }
+    }
   }
 
   selectStation(station: any) {

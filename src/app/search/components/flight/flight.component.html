@@ -1,21 +1,21 @@
 <div class="form-group form-group--flight-search">
     <div app-origin-selector
         id="form-group--origin"
-        class="form-input origin"
         #origin
+        class="form-input origin"
+        [ngClass]="{'focused':isFocusedOrigin}"
         (click)="clickInput()"
         [dataFlight]="dataFlight.origin"
-        [ngClass]="{'focused':isFocusedOrigin}"
         (isFocused)="isFocusedOrigin=$event"
         (selectedOrigin)="destination.loadDestinations()">
     </div>
 
     <div app-destination-selector
         id="form-group--destination"
-        class="form-input destination"
         #destination
-        (click)="clickInput()"
+        class="form-input destination"
         [ngClass]="{'focused':isFocusedDestination}"
+        (click)="clickInput()"
         [dataFlight]="dataFlight"
         (isFocused)="isFocusedDestination=$event"
         (clickDestination)="origin.showPopupOrigin($event)"
@@ -42,12 +42,11 @@
     </div>
 </div>
 
-<div app-multicity
+<div app-multicity *ngIf="dataFlight.multi.isActive"
     class="form-group form-group--flight-search hide js-second-flight-container"
-    [ngClass]="{'hide': !isMulticity}"
+    [ngClass]="{'hide': !dataFlight.multi.isActive}"
     [dataFlight]="dataFlight.multi"
-    [isMulticity]="isMulticity"
-    (removeMulticity)="clickMulticity($event)">
+    (removeMulticity)="removeMulticity($event)">
 </div>
 
 <div class="form-action">
