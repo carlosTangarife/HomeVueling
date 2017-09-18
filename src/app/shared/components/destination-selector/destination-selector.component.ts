@@ -13,6 +13,9 @@ export class DestinationSelectorComponent implements OnInit {
   @ViewChild('destinationInput')
   destinationInput: ElementRef;
 
+  @ViewChild('multicityBtn')
+  multicityBtn: ElementRef;
+
   @Input()
   dataFlight: IFlight;
 
@@ -28,12 +31,9 @@ export class DestinationSelectorComponent implements OnInit {
   @Output()
   clickMulticity: EventEmitter<boolean> = new EventEmitter();
 
-  public multicity: boolean;
-
   constructor(public selectorService: SelectorService) { }
 
   ngOnInit() {
-    this.multicity = false;
     this.selectorService.getMarketsByIata(this.dataFlight.origin.code);
     this.selectorService.loadListStations(false);
     let data = this.selectorService.isResidentsFamily(this.dataFlight.destination.code);
@@ -49,6 +49,11 @@ export class DestinationSelectorComponent implements OnInit {
     this.isFocused.emit(this.selectorService.viewPopup);
     let data = this.selectorService.isResidentsFamily(this.dataFlight.destination.code);
     this.outStation.emit(data);
+    if (this.dataFlight.multi) {
+      if (this.dataFlight.multi.isActive !== this.multicityBtn.nativeElement.checked) {
+        this.multicityBtn.nativeElement.click();
+      }
+    }
   }
 
   selectStation(station: any) {
@@ -97,7 +102,8 @@ export class DestinationSelectorComponent implements OnInit {
   }
 
   toogleMulticity() {
-    this.multicity = !this.multicity;
-    this.clickMulticity.emit(this.multicity);
+    this.showPopupDestination();
+    this.isFocused.emit(this.selectorService.viewPopup);
+    this.clickMulticity.emit(!this.multicityBtn.nativeElement.checked);
   }
 }
