@@ -56,7 +56,7 @@ export class FlightComponent implements OnInit {
         value: ''
       },
       going: new Date(),
-      return: new Date().getDate() + 7
+      return: new Date()
     };
   }
 
