@@ -44,15 +44,10 @@
         <div app-reservation class="pane-wrapper"></div>
       </div>
 
-      <div app-date-picker [typeDatePicker]="'going'"
-        id="js-origin-flight-datepiker-going"
-        class="searchbar-datepicker">
-    </div>
-
-      <div app-date-picker [typeDatePicker]="'comeBack'"
-        id="js-origin-flight-datepiker-comeBack"
-        class="searchbar-datepicker">
-      </div>
+      <app-calendar-options class="searchbar-datepicker show">
+        <div id="vyCalendarGoing"></div>
+        <div id="vyCalendarComeBack"></div>
+      </app-calendar-options>
 
     </div>
   </div>

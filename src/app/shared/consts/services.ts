@@ -1,3 +1,4 @@
+import { CalendarService } from './../services/calendar.service';
 import { APP_INITIALIZER } from '@angular/core';
 import { LoggerService } from '../services/logger.service';
 import { ResourcesService } from '../services/resources.service';
@@ -22,5 +23,6 @@ export const SHARED_SERVICES = [
     StorageService,
     ConfigService,
     CookiesWrapper,
-    StationService
+    StationService,
+    CalendarService
 ];
