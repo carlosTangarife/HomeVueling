@@ -22,12 +22,16 @@ export class DiscountListComponent implements OnInit {
   }
 
   toggleDiscountList(discountKey: string) {
+    this.selectDiscount(discountKey);
+    this.eventToggleDiscountList.emit(this.discountSelected);
+  }
+
+  selectDiscount(discountKey: string) {
     if (this.discountSelected === discountKey
       || discountKey === TYPE_DISCOUNT[TYPE_DISCOUNT.noresfam]) {
       this.discountSelected = '';
     } else {
       this.discountSelected = discountKey
     }
-    this.eventToggleDiscountList.emit(this.discountSelected);
   }
 }

@@ -29,8 +29,9 @@
     (eventToggleDiscountList)="toggleDiscountList($event)" >
   </ul>
 
-  <ul app-discount-list *ngIf ="isResident || isLargeFamily"
-    class="passengers-popup_main discount-list"
+  <ul app-discount-list class="passengers-popup_main discount-list"
+    #discountList
+    *ngIf="isResident || isLargeFamily"
     [ngClass]="{'active':isShowDiscountList}"
     [typeDiscountList]="discountService.typeDiscountList$"
     (eventToggleDiscountList)="toggleDiscountList($event)" >

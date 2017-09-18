@@ -8,7 +8,7 @@ import { TYPE_DISCOUNT } from '../enums/type-discount.enum';
 @Injectable()
 export class DiscountService {
   private configDiscount: IDiscountConfig;
-  private typeDiscountList: string[];
+  public typeDiscountList: string[];
 
   private typeDiscountListSubject: BehaviorSubject<string[]>;
   public typeDiscountList$: Observable<string[]>;
