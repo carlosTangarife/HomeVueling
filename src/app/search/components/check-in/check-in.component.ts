@@ -4,7 +4,10 @@ import { SelectorService } from '../../../shared/services/selector.service';
 import { ICheckIn } from '../../models/check-in.model';
 import { IStation } from '../../../shared/models/station.model';
 import { environment } from '../../../../environments/environment';
+<<<<<<< HEAD
 
+=======
+>>>>>>> a35fb5ee33ebdd801402ea42860574eb0a2213ac
 
 @Component({
   selector: '[app-check-in]',
@@ -55,5 +58,8 @@ export class CheckInComponent implements OnInit {
   onSubmit() {
     this.submit = !this.submit;
   }
+<<<<<<< HEAD
 
+=======
+>>>>>>> a35fb5ee33ebdd801402ea42860574eb0a2213ac
 }

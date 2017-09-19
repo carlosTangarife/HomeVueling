@@ -42,7 +42,6 @@ export class CalendarComponent implements OnInit {
       dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
     };
  }
-
   ngOnInit() {}
 
   toggleDatePickerGoing() {
@@ -71,23 +70,16 @@ export class CalendarComponent implements OnInit {
       rangeSelect: true,
       numberOfMonths: 3,
       minDate: self.minDateAux || 0,
-      beforeShow: function(input, inst ) {
-        $('.searchbar-datepicker #vyCalendarComeBack .ui-datepicker-calendar td').mouseenter(function() {
-          alert('hola2');
-        });
-      },
+      beforeShow: self.calendarBeforeShow,
       beforeShowDay: function (date) {
         date.setHours(0, 0, 0, 0);
         let maxDate = self.dateComeBack;
-
         if (date.getTime() === self.dateGoing.valueOf()) {
           return [true, 'ui-state-active'];
         }
-
         if (date > self.dateGoing && date <= self.dateComeBack ) {
           return [true, 'ui-state-active'];
         }
-
         return [true, ''];
       },
       onSelect: function () {
@@ -103,4 +95,27 @@ export class CalendarComponent implements OnInit {
   addComeBack() {
     this.calendarService.roundTrip();
   }
+
+  calendarBeforeShow(input, inst) {
+    $(this).find('.ui-datepicker td').off();
+    $(this).find('.ui-datepicker').on('mouseenter', 'td', function() {
+      $(this).parent().addClass('finalRow');
+      $('.finalRow').parents('.ui-datepicker-group-last').parent().find('.ui-datepicker-group-middle').find('tr').last().addClass('finalRowRangeOtherTable');
+      $('.finalRow').parents('.ui-datepicker-group-last').parent().find('.ui-datepicker-group-first').find('tr').last().addClass('finalRowRangeOtherTable');
+      $('.finalRow').parents('.ui-datepicker-group-middle').parent().find('.ui-datepicker-group-first').find('tr').last().addClass('finalRowRangeOtherTable');
+      $('.finalRowRangeOtherTable').find('td:not(.ui-datepicker-unselectable)').addClass('ui-state-active');
+      $('.finalRowRangeOtherTable').prevAll().find('td:not(.ui-datepicker-unselectable)').addClass('ui-state-active');
+      $('.finalRow').prevAll().find('td:not(.ui-datepicker-unselectable)').addClass('ui-state-active');
+      $(this).prevAll('td:not(.ui-datepicker-unselectable)').addClass('ui-state-active');
+    });
+    $(this).find('.ui-datepicker').on('mouseleave', 'td', function() {
+      $(this).parent().removeClass('finalRow');
+      $('#vyCalendarComeBack .ui-datepicker td').removeClass('ui-state-active');
+      $('.finalRowRange').removeClass('finalRowRange').find('.ui-state-active').removeClass('ui-state-active');
+      $('.finalRowRangeOtherTable').removeClass('finalRowRangeOtherTable').find('.ui-state-active').removeClass('ui-state-active');
+    });
+    $(this).datepicker('refresh');
+  }
 }
+
+

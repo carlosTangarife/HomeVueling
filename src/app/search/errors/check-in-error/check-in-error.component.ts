@@ -18,18 +18,18 @@ export class CheckInErrorComponent implements OnInit {
     this.countryCode = 'ES';
     this.submit = false;
     this.countryInfo = [
-      {countryCode: "DE", name: "Alemania"},
-      {countryCode: "AU", name: "Austria"},
-      {countryCode: "BE", name: "Bélgica"},
-      {countryCode: "ES", name: "España"},
-      {countryCode: "FR", name: "Francia"},
-      {countryCode: "NL", name: "Holanda"},
-      {countryCode: "IT", name: "Italia"},
-      {countryCode: "PT", name: "Portugal"},
-      {countryCode: "GB", name: "Reino Unido"},
-      {countryCode: "RU", name: "Rusia"},
-      {countryCode: "SW", name: "Suiza"},
-      {countryCode: "WW", name: "Resto del mundo"}
+      {countryCode: 'DE', name: 'Alemania'},
+      {countryCode: 'AU', name: 'Austria'},
+      {countryCode: 'BE', name: 'Bélgica'},
+      {countryCode: 'ES', name: 'España'},
+      {countryCode: 'FR', name: 'Francia'},
+      {countryCode: 'NL', name: 'Holanda'},
+      {countryCode: 'IT', name: 'Italia'},
+      {countryCode: 'PT', name: 'Portugal'},
+      {countryCode: 'GB', name: 'Reino Unido'},
+      {countryCode: 'RU', name: 'Rusia'},
+      {countryCode: 'SW', name: 'Suiza'},
+      {countryCode: 'WW', name: 'Resto del mundo'}
     ];
 
    }
@@ -42,9 +42,18 @@ export class CheckInErrorComponent implements OnInit {
     this.submit = !this.submit;
   }
 
+<<<<<<< HEAD
   onChange() {
      this.result = this.selectorService.loadContactPhones(this.countryCode);
+=======
+  onChange(newValue) {
+    console.log(newValue);
+    this.selectDevice = newValue;
+>>>>>>> a35fb5ee33ebdd801402ea42860574eb0a2213ac
   }
 }
 
+  getContactPhones(code: string) {
 
+  }
+}
