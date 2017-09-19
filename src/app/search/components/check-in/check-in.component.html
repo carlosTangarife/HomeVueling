@@ -31,13 +31,14 @@
       </div>
     <div class="form-input">
          <label>Email del comprador </label>         
-            <input type="text" id="destination-input" class="form-control js-searchbar-input" name="email"
-            ngModel #email="ngModel" no-spaces
+            <input type="text" id="destination-input" name="email" class="form-control js-searchbar-input" 
+            required minlength="4" ngModel #email="ngModel"
             placeholder="email@vueling.com"> 
-            <div class="popover popover--error" *ngIf="email.errors">
-              <div class="popover-content">No se permiten espacios en blanco.</div>
-            </div>           
-      </div>
+            <div class="popover popover--error" *ngIf="email.invalid && (email.dirty || email.touched)">
+              <div class="popover-content" *ngIf="email.errors.required">El campo es requerido.</div>
+              <div class="popover-content" *ngIf="email.errors.minlength">Debe tener 4 caracteres minimo.</div>               
+            </div>                                   
+    </div>
         <div class="form-action">
           <a href="#" (click)="onSubmit()" class="mv_button color-darkGrey size-md icon icon-right">Acceder</a>
         </div>
@@ -50,14 +51,14 @@
           <label>Código de reserva</label>
           <a href="#">¿Qué es?</a>
           <div class="input-group">
-            <input type="text" id="origin-input" class="form-control js-searchbar-input" [ngModel]="codeBook" placeholder="Ej. XG6LM3">
+            <input type="text" id="origin-input" class="form-control js-searchbar-input" [ngModel]="codeBook" placeholder="Ej. XG6LM3" required>
           </div>
         </div>
         <div class="form-input">
           <label>Aeropuerto origen/destino</label>
           <div class="input-group">
             <input type="text" id="destination-input" (click)="showStation()" class="form-control js-searchbar-input"
-             placeholder="Ciudad" [(ngModel)]="station">
+             placeholder="Ciudad" [(ngModel)]="station" required>
              
           </div>
           <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" 

@@ -6,7 +6,7 @@ import { HttpModule } from '@angular/http';
 import { SEARCH_COMPONENTS } from './index';
 import { SHARED_SERVICES, APP_INITIALIZER_PROV } from '../shared/consts/services';
 import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
-import { NoSpaces } from "./components/check-in/validations.directive";
+
 
 
 @NgModule({
@@ -19,8 +19,7 @@ import { NoSpaces } from "./components/check-in/validations.directive";
   declarations: [
     ...SEARCH_COMPONENTS,
     DictionaryPipe,
-    NoSpaces,
-    CheckInErrorComponent, 
+    CheckInErrorComponent
   ],
   exports: [
     // ...SEARCH_COMPONENTS
