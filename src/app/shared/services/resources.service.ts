@@ -11,6 +11,7 @@ export class ResourcesService {
     private keyMarkets = 'markets';
     private keyTexts = 'texts';
     private keyConfiguration = 'configuration';
+    private keyContactPhones = 'contactphones';
 
     constructor(private _logger: LoggerService, private _storageService: StorageService, private _http: Http) { }
 
@@ -34,6 +35,11 @@ export class ResourcesService {
         // const url = 'http://local.vuelingtest.com/umbraco/api/configuration/GetConfigurationSearch/1177';
         const url = 'https://vueling-json.herokuapp.com/index.php/GetConfigurationSearch';
         return this.retrieveResource(this.keyConfiguration, url);
+    }
+
+    getContactPhones(){
+        const url = 'https://vueling-json.herokuapp.com/index.php/GetContactPhones';
+        return this.retrieveResource(this.keyContactPhones, url);
     }
 
     private retrieveResource(key: string, url: string): Observable<any> {
