@@ -1,4 +1,3 @@
-import { CheckInErrorComponent } from './errors/check-in-error/check-in-error.component';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -6,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { SEARCH_COMPONENTS } from './index';
 import { SHARED_SERVICES, APP_INITIALIZER_PROV } from '../shared/consts/services';
 import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
-
 
 @NgModule({
   imports: [
@@ -17,8 +15,7 @@ import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
   ],
   declarations: [
     ...SEARCH_COMPONENTS,
-    DictionaryPipe,
-    CheckInErrorComponent
+    DictionaryPipe
   ],
   exports: [
     // ...SEARCH_COMPONENTS

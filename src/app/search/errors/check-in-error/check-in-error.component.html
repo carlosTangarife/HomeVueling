@@ -9,16 +9,18 @@
         </div>
         <div class="col-md-3">
           <div class="selectwrap">
-            <select [ngModel]="selectedDevice" (ngModelChange)="onChange($event)"> 
-              <option *ngFor="let country of countryInfo" [value]="country"> {{country.name}} </option>
-            </select>           
+            <select [(ngModel)]="countryCode" name="value" #value="ngModel" class="form-control" (ngModelChange)="onChange()">
+              <option *ngFor="let country of countryInfo" [ngValue]="country.countryCode" >
+                {{country.name}} 
+              </option>
+            </select>
           </div>
         </div>
         <div class="col-md-2">
-          <p>aaaaaaaaaa</p>
+          <p>{{result?.TextPhoneInfo.phoneNumber}}</p>
         </div>
         <div class="col-md-4">
-          <p>0-24 h todos los días (Atención personalizada 9 -21 h).</p>
+          <p>{{result?.TextPhoneInfo.phoneInfoFirst}} {{result?.TextPhoneInfo.phoneInfoLast}} </p>          
         </div>
       </div>
     </div>

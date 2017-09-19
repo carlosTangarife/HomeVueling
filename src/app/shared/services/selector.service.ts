@@ -35,8 +35,7 @@ export class SelectorService {
         this.contact = this._configService.environment['contactphones'];
     }
 
-    loadContactPhones(iata: string){
-        debugger;      
+    loadContactPhones(iata: string){                  
         let cont = this.contact.phonesServices.find(x => x.CountryCode == iata)
         if(cont){
             let result: IContactPhones = {

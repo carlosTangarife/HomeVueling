@@ -44,7 +44,8 @@ export class PassengerComponent implements OnInit {
       this.isLargeFamily = data.isLargeFamily;
       this.discountService.setDiscountList(this.isResident, this.isLargeFamily);
     }
-    if (this.discount && !this.discountService.typeDiscountList.includes(this.discount.value)) {
+    if (this.discountList && this.discount
+        && !this.discountService.typeDiscountList.includes(this.discount.value)) {
       this.discount.value = '';
       this.discountList.discountSelected = '';
     }
