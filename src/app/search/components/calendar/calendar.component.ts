@@ -22,7 +22,7 @@ export class CalendarComponent implements OnInit {
 
   public isComeBack: boolean;
 
-  public dateComeBackAux: Date;
+  public minDateAux: Date;
 
   public customParams: Object;
 
@@ -43,7 +43,7 @@ export class CalendarComponent implements OnInit {
     };
  }
 
-  ngOnInit() { }
+  ngOnInit() {}
 
   toggleDatePickerGoing() {
     let self = this;
@@ -54,8 +54,10 @@ export class CalendarComponent implements OnInit {
       onSelect: function() {
         let dateSelected = $(this).datepicker('getDate');
         self.dateGoing = dateSelected;
-        self.dateComeBackAux = dateSelected;
+        self.minDateAux = dateSelected
         $('#inputGoing').val($.datepicker.formatDate('dd/mm/y', dateSelected));
+        self.dateComeBack = new Date(self.dateGoing.getFullYear(), self.dateGoing.getMonth(), self.dateGoing.getDate() + 7 )
+        $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', self.dateComeBack))
         $('#vyCalendarGoing').datepicker('destroy');
       }
     });
@@ -66,9 +68,27 @@ export class CalendarComponent implements OnInit {
     let self = this;
     $('#vyCalendarGoing').datepicker('destroy');
     $('#vyCalendarComeBack').datepicker({
+      rangeSelect: true,
       numberOfMonths: 3,
-      minDate: self.dateComeBackAux || 0,
-      onSelect: function() {
+      minDate: self.minDateAux || 0,
+      beforeShow: function(input, inst ) {
+        alert('holassss');
+      },
+      beforeShowDay: function (date) {
+        date.setHours(0, 0, 0, 0);
+        let maxDate = self.dateComeBack;
+
+        if (date.getTime() === self.dateGoing.valueOf()) {
+          return [true, 'ui-state-active'];
+        }
+
+        if (date > self.dateGoing && date <= self.dateComeBack ) {
+          return [true, 'ui-state-active'];
+        }
+
+        return [true, ''];
+      },
+      onSelect: function () {
         let dateSelected = $(this).datepicker('getDate');
         self.dateComeBack = dateSelected;
         $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', dateSelected))
