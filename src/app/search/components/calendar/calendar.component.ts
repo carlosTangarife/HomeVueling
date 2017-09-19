@@ -72,7 +72,9 @@ export class CalendarComponent implements OnInit {
       numberOfMonths: 3,
       minDate: self.minDateAux || 0,
       beforeShow: function(input, inst ) {
-        alert('holassss');
+        $('.searchbar-datepicker #vyCalendarComeBack .ui-datepicker-calendar td').mouseenter(function() {
+          alert('hola2');
+        });
       },
       beforeShowDay: function (date) {
         date.setHours(0, 0, 0, 0);
