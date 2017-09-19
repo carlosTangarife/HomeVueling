@@ -14,7 +14,6 @@ export class CheckInErrorComponent implements OnInit {
   public result: IContactPhones;
 
   constructor(public selectorService: SelectorService) {
-
     this.countryCode = 'ES';
     this.submit = false;
     this.countryInfo = [
@@ -31,8 +30,7 @@ export class CheckInErrorComponent implements OnInit {
       {countryCode: 'SW', name: 'Suiza'},
       {countryCode: 'WW', name: 'Resto del mundo'}
     ];
-
-   }
+  }
 
   ngOnInit() {
     this.selectorService.loadContactPhones(this.countryCode);
@@ -42,18 +40,7 @@ export class CheckInErrorComponent implements OnInit {
     this.submit = !this.submit;
   }
 
-<<<<<<< HEAD
   onChange() {
      this.result = this.selectorService.loadContactPhones(this.countryCode);
-=======
-  onChange(newValue) {
-    console.log(newValue);
-    this.selectDevice = newValue;
->>>>>>> a35fb5ee33ebdd801402ea42860574eb0a2213ac
-  }
-}
-
-  getContactPhones(code: string) {
-
   }
 }

@@ -5,7 +5,6 @@ import { HttpModule } from '@angular/http';
 import { SEARCH_COMPONENTS } from './index';
 import { SHARED_SERVICES, APP_INITIALIZER_PROV } from '../shared/consts/services';
 import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
-import { CheckInErrorComponent } from '../search/errors/check-in-error/check-in-error.component';
 
 @NgModule({
   imports: [
@@ -16,8 +15,7 @@ import { CheckInErrorComponent } from '../search/errors/check-in-error/check-in-
   ],
   declarations: [
     ...SEARCH_COMPONENTS,
-    DictionaryPipe,
-    CheckInErrorComponent
+    DictionaryPipe
   ],
   exports: [
     // ...SEARCH_COMPONENTS
