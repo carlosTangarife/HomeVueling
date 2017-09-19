@@ -1,6 +1,9 @@
 <div class="searcbar-datepicker_title">
-  <p class="title">
+  <p class="title" *ngIf="calendarService.isGoing$ | async">
     <span class="icon icon-plane-right"></span> Selecciona fecha de ida
+  </p>
+  <p class="title" *ngIf="calendarService.iscomeBack$ | async">
+    <span class="icon icon-plane-left"></span> Selecciona fecha de vuelta
   </p>
   <ul class="options">
     <li>
