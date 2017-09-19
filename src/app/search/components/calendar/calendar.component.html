@@ -1,17 +1,35 @@
-<div class="col col-md-6" (click)="toggleDatePicker('going')">
+<div class="col col-md-6" (click)="toggleDatePickerGoing()">
   <label class="form-input_label">Ida</label>
   <div class="input-group">
-    <input type="text" class="form-control js-searchbar-input js-searchbar-date-input-going" placeholder="DD/MM/YY" readonly="readonly">
+    <input
+      [ngModel]="dateGoing | date:'dd/MM/yy'"
+      id="inputGoing"
+      type="text"
+      class="form-control js-searchbar-input js-searchbar-date-input-going"
+      placeholder="DD/MM/YY"
+      readonly="readonly">
     <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
   </div>
 </div>
 
 <div class="col col-md-6">
-  <a class="activate js-add-date-range-to">Añadir vuelta</a>
-  <div class="date-range-to js-date-range-to" (click)="toggleDatePicker('comeBack')">
+
+  <a class="js-add-date-range-to"
+    (click)="addComeBack()"
+    [ngClass]="{'activate': calendarService.isOneWay$ | async}">
+    Añadir vuelta
+  </a>
+
+  <div class="date-range-to js-date-range-to" (click)="toggleDatePickerComeBack()" [ngClass]="{'activate': calendarService.isRoundTrip$ | async}">
     <label class="form-input_label">Vuelta</label>
     <div class="input-group">
-      <input type="text" class="form-control js-searchbar-input js-searchbar-date-input-comeBack" placeholder="DD/MM/YY" readonly="readonly">
+      <input
+        [ngModel]="dateComeBack | date:'dd/MM/yy'"
+        id="inputComeBack"
+        type="text"
+        class="form-control js-searchbar-input js-searchbar-date-input-comeBack"
+        placeholder="DD/MM/YY"
+        readonly="readonly">
       <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
     </div>
   </div>

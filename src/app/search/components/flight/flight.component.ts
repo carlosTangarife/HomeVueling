@@ -54,12 +54,15 @@ export class FlightComponent implements OnInit {
       },
       discount: {
         value: ''
-      }
+      },
+      going: new Date(),
+      return: new Date()
     };
   }
 
   onSubmit() {
     this.saveSearch();
+    console.log(this.dataFlight);
   }
 
   clickInput() {

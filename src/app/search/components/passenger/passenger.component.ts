@@ -1,8 +1,9 @@
-import { Component, OnInit, Input, EventEmitter, Output } from '@angular/core';
+import { Component, OnInit, Input, EventEmitter, Output, ViewChild } from '@angular/core';
 import { PassengerService } from '../../services/passenger.service';
 import { DiscountService } from '../../services/discount.service';
 import { IPassengers } from '../../models/passenger.model';
 import { IDiscount } from '../../models/discount.model';
+import { DiscountListComponent } from '../discount/discount-list/discount-list.component';
 
 @Component({
   selector: '[app-passenger]',
@@ -10,6 +11,9 @@ import { IDiscount } from '../../models/discount.model';
   providers: [PassengerService, DiscountService]
 })
 export class PassengerComponent implements OnInit {
+  @ViewChild('discountList')
+  discountList: DiscountListComponent;
+
   @Input()
   public passengers: IPassengers;
 
@@ -39,6 +43,10 @@ export class PassengerComponent implements OnInit {
       this.isResident = data.isResident;
       this.isLargeFamily = data.isLargeFamily;
       this.discountService.setDiscountList(this.isResident, this.isLargeFamily);
+    }
+    if (this.discount && !this.discountService.typeDiscountList.includes(this.discount.value)) {
+      this.discount.value = '';
+      this.discountList.discountSelected = '';
     }
   }
 

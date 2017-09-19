@@ -1,0 +1,35 @@
+<div class="searcbar-datepicker_title">
+  <p class="title">
+    <span class="icon icon-plane-right"></span> Selecciona día
+  </p>
+  <ul class="options">
+    <li>
+      <input
+        id="roudTrip"
+        type="radio"
+        name="flight-option"
+        value="ida-vuelta"
+        [checked]="calendarService.isRoundTrip$ | async"
+        (change)="changeRoundTrip()"
+      >
+      <label for="roundTrip">Ida y vuelta</label>
+    </li>
+
+    <li>
+      <input
+        id="oneWay"
+        type="radio"
+        name="flight-option"
+        value="ida"
+        [checked]="calendarService.isOneWay$ | async"
+        (change)="changeOneWay()"
+      >
+      <label for="oneWay">Solo ida</label>
+    </li>
+  </ul>
+</div>
+<ng-content></ng-content>
+<div class="searcbar-datepicker_legend">
+  <p class="legend-item">Hoy</p>
+  <p class="legend-item selection">Tu selección</p>
+</div>
