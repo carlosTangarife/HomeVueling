@@ -44,7 +44,7 @@
         <div app-reservation class="pane-wrapper"></div>
       </div>
 
-      <app-calendar-options class="searchbar-datepicker show">
+      <app-calendar-options class="searchbar-datepicker" [ngClass]="{'show': calendarService.isShowDatePicker$ | async}">
         <div id="vyCalendarGoing"></div>
         <div id="vyCalendarComeBack"></div>
       </app-calendar-options>
