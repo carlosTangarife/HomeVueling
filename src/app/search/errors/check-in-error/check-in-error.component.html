@@ -9,24 +9,13 @@
         </div>
         <div class="col-md-3">
           <div class="selectwrap">
-            <select id="ES" selected="selected" class="input select">
-              <option value="DE"> Alemania</option>
-              <option value="AU"> Austria</option>
-              <option value="BE"> Bélgica</option>
-              <option value="ES"> España</option>
-              <option value="FR"> Francia</option>
-              <option value="NL"> Holanda</option>
-              <option value="IT"> Italia</option>
-              <option value="PT"> Portugal</option>
-              <option value="GB"> Reino Unido</option>
-              <option value="RU"> Rusia</option>
-              <option value="SW"> Suiza</option>
-              <option value="WW"> Resto del mundo</option>
-            </select>
+            <select [ngModel]="selectedDevice" (ngModelChange)="onChange($event)"> 
+              <option *ngFor="let country of countryInfo" [value]="country"> {{country.name}} </option>
+            </select>           
           </div>
         </div>
         <div class="col-md-2">
-          <p>902808005</p>
+          <p>aaaaaaaaaa</p>
         </div>
         <div class="col-md-4">
           <p>0-24 h todos los días (Atención personalizada 9 -21 h).</p>

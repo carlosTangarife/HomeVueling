@@ -5,6 +5,7 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { environment } from '../../../environments/environment';
 import { IStation, IMarket, IStationList } from '../models/station.model';
 import { IIcon } from '../models/commons.model';
+import { IContactPhonesType, IContactPhones } from "../../search/models/contact-phones.model";
 
 @Injectable()
 export class SelectorService {
@@ -16,12 +17,14 @@ export class SelectorService {
     public viewPopup = false;
     public iconGeo: IIcon;
     public iconRecent: IIcon;
+    public contactPhones: IContactPhonesType;
+    public contact: any;
 
     private subjectRecentStations = new BehaviorSubject<any>(this.filteredStations);
     public recentStations$ = this.subjectRecentStations.asObservable();
 
     private subjectListStations = new BehaviorSubject<any>(this.filteredStations);
-    public listStations$ = this.subjectListStations.asObservable();
+    public listStations$ = this.subjectListStations.asObservable();   
 
     constructor(private _configService: ConfigService, private _stationService: StationService) {
         this.stations = this._configService.environment['stations'];
@@ -29,7 +32,25 @@ export class SelectorService {
         this.marketsIata = [];
         this.iconGeo = this._configService.getIconGeo();
         this.iconRecent = this._configService.getIconRecent();
+        this.contact = this._configService.environment['contactphones'];
     }
+
+    loadContactPhones(iata: string){
+        debugger;      
+        let cont = this.contact.phonesServices.find(x => x.CountryCode == iata)
+        if(cont){
+            let result: IContactPhones = {
+                CountryCode: cont.CountryCode,
+                TextPhoneInfo:{
+                    phoneNumber: cont.TextPhoneInfo.phoneNumber, 
+                    phoneInfoFirst: cont.TextPhoneInfo.phoneInfoFirst, 
+                    phoneInfoLast: cont.TextPhoneInfo.phoneInfoLast
+                }                       
+            };
+            console.log(result);
+             return result;       
+        }
+    }     
 
     loadStations() {
         this.filteredStations = this.stations.StationList;

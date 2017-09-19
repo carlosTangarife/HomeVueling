@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { IContactPhones } from "../../models/contact-phones.model";
+import { ConfigService } from "../../../shared/services/config.service";
+import { SelectorService } from "../../../shared/services/selector.service";
 
 @Component({
   selector: '[app-check-in-error]',
@@ -6,16 +9,46 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CheckInErrorComponent implements OnInit {
   public submit: boolean;
+  public countryInfo: Array<Object>;   
+  public selectDevice: Object;
   
-  constructor() {
-    this.submit = false;
+  constructor(public selectorService: SelectorService) {
+    this.submit = false;    
+    this.countryInfo= [
+      {countryCode: "DE", name: "Alemania"},
+      {countryCode: "AU", name: "Austria"},
+      {countryCode: "BE", name: "Bélgica"},
+      {countryCode: "ES", name: "España"},
+      {countryCode: "FR", name: "Francia"},
+      {countryCode: "NL", name: "Holanda"},
+      {countryCode: "IT", name: "Italia"},
+      {countryCode: "PT", name: "Portugal"},
+      {countryCode: "GB", name: "Reino Unido"},
+      {countryCode: "RU", name: "Rusia"},
+      {countryCode: "SW", name: "Suiza"},
+      {countryCode: "WW", name: "Resto del mundo"}
+    ];
+    this.selectDevice = this.countryInfo[3];
+        
    }
 
   ngOnInit() {
+    debugger;
+    this.selectorService.loadContactPhones('BE');
   }
 
   onSubmit(){    
     this.submit = !this.submit;
   }
 
-}
+  onChange(newValue){
+    console.log(newValue);
+    this.selectDevice = newValue; 
+  }
+
+  getContactPhones(code: string){          
+      
+    }  
+  }
+
+

@@ -23,12 +23,17 @@ export class ConfigService {
       .getConfiguration()
       .map(res => (this.environment['configuration'] = res))
       .share();
+    let loadContactPhones = this._resourcesService
+      .getContactPhones()
+      .map(res => (this.environment['contactphones'] = res))
+      .share();
 
     return (
       loadStations.toPromise() &&
       loadMarkets.toPromise() &&
       loadTexts.toPromise() &&
-      loadConfiguration.toPromise()
+      loadConfiguration.toPromise() &&
+      loadContactPhones.toPromise()
     );
   }
 
