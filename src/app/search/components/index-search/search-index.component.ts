@@ -1,6 +1,7 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ConfigService } from '../../../shared/services/config.service';
 import { IIconLink } from '../../../shared/models/commons.model';
+import { CalendarService } from '../../../shared/services/calendar.service';
 
 @Component({
   selector: 'app-index-search',
@@ -14,7 +15,7 @@ export class IndexSearchComponent implements OnInit {
   listIconLink: IIconLink[];
   isReservation: boolean;
 
-  constructor(private _configService: ConfigService) {
+  constructor(private _configService: ConfigService, public calendarService: CalendarService) {
     this.searcherConfig = this._configService.environment['configuration'];
     this.listIconLink = [];
     let tabsLink = this.searcherConfig.FlightSearch.Tab;

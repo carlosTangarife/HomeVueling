@@ -20,14 +20,11 @@ export class CalendarComponent implements OnInit {
   @Input()
   dateComeBack: Date;
 
-  public isComeBack: boolean;
-
   public minDateAux: Date;
-
-  public customParams: Object;
-
-  public isRoundTrip: boolean;
   public isOneWay: boolean;
+  public isComeBack: boolean;
+  public customParams: Object;
+  public isRoundTrip: boolean;
 
   constructor( public calendarService: CalendarService) {
 
@@ -45,11 +42,13 @@ export class CalendarComponent implements OnInit {
   ngOnInit() {}
 
   toggleDatePickerGoing() {
+    this.calendarService.onGoing();
     let self = this;
     $('#vyCalendarComeBack').datepicker('destroy');
     $('#vyCalendarGoing').datepicker({
       minDate: 0,
       numberOfMonths: 3,
+      showAnim: 'fade',
       onSelect: function() {
         let dateSelected = $(this).datepicker('getDate');
         self.dateGoing = dateSelected;
@@ -58,18 +57,21 @@ export class CalendarComponent implements OnInit {
         self.dateComeBack = new Date(self.dateGoing.getFullYear(), self.dateGoing.getMonth(), self.dateGoing.getDate() + 7 )
         $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', self.dateComeBack))
         $('#vyCalendarGoing').datepicker('destroy');
+        self.calendarService.toggleShowDatePicker();
       }
     });
     $('#vyCalendarGoing').datepicker('setDate', self.dateGoing);
   }
 
   toggleDatePickerComeBack() {
+    this.calendarService.onComeBack();
     let self = this;
     $('#vyCalendarGoing').datepicker('destroy');
     $('#vyCalendarComeBack').datepicker({
       rangeSelect: true,
       numberOfMonths: 3,
       minDate: self.minDateAux || 0,
+      showAnim: 'fade',
       beforeShow: self.calendarBeforeShow,
       beforeShowDay: function (date) {
         date.setHours(0, 0, 0, 0);
@@ -87,6 +89,7 @@ export class CalendarComponent implements OnInit {
         self.dateComeBack = dateSelected;
         $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', dateSelected))
         $('#vyCalendarComeBack').datepicker('destroy');
+        self.calendarService.toggleShowDatePicker();
       }
     });
     $('#vyCalendarComeBack').datepicker('setDate', self.dateComeBack);
