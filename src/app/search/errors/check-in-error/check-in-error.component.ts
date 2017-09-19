@@ -33,7 +33,7 @@ export class CheckInErrorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.selectorService.loadContactPhones(this.countryCode);
+    this.result = this.selectorService.loadContactPhones(this.countryCode);
   }
 
   onSubmit() {
