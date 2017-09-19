@@ -1,5 +1,6 @@
 export const environment = {
   production: true,
   keyLastSearchOriginCookie: 'lastSearchOrigin',
-  keyLastSearchDestinationCookie: 'lastSearchDestination'
+  keyLastSearchDestinationCookie: 'lastSearchDestination',
+  keyCheckInCookie: 'checkinTest'
 };
