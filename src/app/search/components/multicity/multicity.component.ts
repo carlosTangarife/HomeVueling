@@ -30,7 +30,4 @@ export class MulticityComponent implements OnInit {
   clickMulticity() {
     this.removeMulticity.emit(false);
   }
-  xxx(event: any) {
-    return false;
-  }
 }
