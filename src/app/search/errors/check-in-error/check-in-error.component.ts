@@ -8,11 +8,14 @@ import { SelectorService } from "../../../shared/services/selector.service";
   templateUrl: './check-in-error.component.html'  
 })
 export class CheckInErrorComponent implements OnInit {
-  public submit: boolean;
+  public submit: boolean;  
   public countryInfo: Array<Object>;   
-  public selectDevice: Object;
+  public countryCode: string;
+  public result: IContactPhones;
   
   constructor(public selectorService: SelectorService) {
+
+    this.countryCode = 'ES';
     this.submit = false;    
     this.countryInfo= [
       {countryCode: "DE", name: "Alemania"},
@@ -27,23 +30,20 @@ export class CheckInErrorComponent implements OnInit {
       {countryCode: "RU", name: "Rusia"},
       {countryCode: "SW", name: "Suiza"},
       {countryCode: "WW", name: "Resto del mundo"}
-    ];
-    this.selectDevice = this.countryInfo[3];
+    ];    
         
    }
 
   ngOnInit() {
-    debugger;
-    this.selectorService.loadContactPhones('BE');
+    this.selectorService.loadContactPhones(this.countryCode);
   }
 
   onSubmit(){    
     this.submit = !this.submit;
   }
 
-  onChange(newValue){
-    console.log(newValue);
-    this.selectDevice = newValue; 
+  onChange(){    
+     this.result= this.selectorService.loadContactPhones(this.countryCode);
   }
 
   getContactPhones(code: string){          
