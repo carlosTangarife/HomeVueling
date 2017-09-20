@@ -39,7 +39,7 @@
       <li>{{'directFlights' | dictionary}}</li>
       <li class="connection-flight">{{'connectionFlights' | dictionary}}</li>
     </ul>
-    <div class="cities-sugestion-popup_legend_actions" *ngIf="!dataFlight?.multi.isActive">
+    <div class="cities-sugestion-popup_legend_actions" *ngIf="!dataFlight?.isActive">
       <div class="link" *ngIf="selectorService.showMapLink()">
         <span class="icon icon-arrow-right"></span>
         <a href="">{{'destinationMap' | dictionary}}</a>

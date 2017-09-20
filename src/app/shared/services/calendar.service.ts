@@ -29,7 +29,6 @@ export class CalendarService {
 
     // Service message states
     oneWay() {
-      debugger;
       if (this.isComeBack) {
         this.toggleShowDatePicker();
       }
@@ -65,7 +64,6 @@ export class CalendarService {
     }
 
     toggleShowDatePicker() {
-      debugger;
       this.isShowDatePicker = !this.isShowDatePicker;
       this.subjectIsShowDatePicker.next(this.isShowDatePicker);
     }
