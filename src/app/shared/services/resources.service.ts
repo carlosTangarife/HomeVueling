@@ -18,7 +18,7 @@ export class ResourcesService {
     private keyContactPhones = 'contactphones';
     private keyDisabledDays = 'disabledDays';
 
-    constructor(private _logger: LoggerService, private _storageService: StorageService, private _http: Http, private jsonp: Jsonp) { }
+    constructor(private logger: LoggerService, private storageService: StorageService, private http: Http, private jsonp: Jsonp) { }
 
     getStations() {
         const url = 'https://vueling-json.herokuapp.com/index.php/stations';
@@ -63,25 +63,25 @@ export class ResourcesService {
 
     private retrieveResource(key: string, url: string): Observable<any> {
         const self = this;
-        const resource = this._storageService.getLocalStorage(key);
+        const resource = this.storageService.getLocalStorage(key);
         if (resource) {
             return of(resource);
         } else {
-            return this._http.get(url).map(response => {
-                self._storageService.setLocalStorage(key, response.json());
+            return this.http.get(url).map(response => {
+                self.storageService.setLocalStorage(key, response.json());
                 return response.json();
             });
         }
     }
 
     private retrieveResourceJsonp(key: string, url: string, options?: RequestOptions): Observable<any> {
-      const resource = this._storageService.getLocalStorage(key);
+      const resource = this.storageService.getLocalStorage(key);
       if (resource) {
           return of(resource);
       } else {
           return this.jsonp.get(url, options)
           .map((response) => {
-              this._storageService.setLocalStorage(key, response.json());
+              this.storageService.setLocalStorage(key, response.json());
               return response.json();
           })
           .catch((error: any) => Observable.throw(error.json().error || 'Server error'));

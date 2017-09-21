@@ -1,9 +1,7 @@
-import { URLSearchParams, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
 
 /*Local Services */
 import { environment } from '../../../environments/environment';
-import { ResourcesService } from './resources.service';
 import { StationService } from './station.service';
 import { ConfigService } from './config.service';
 
@@ -14,7 +12,6 @@ import { map } from 'rxjs/Operator/map'
 /*Models using interface */
 import { IContactPhonesType, IContactPhones } from '../../search/models/contact-phones.model';
 import { IStation, IMarket, IStationList } from '../models/station.model';
-import { IFlight } from '../../search/models/flight.model';
 import { IIcon } from '../models/commons.model';
 
 @Injectable()
@@ -29,7 +26,6 @@ export class SelectorService {
     public iconRecent: IIcon;
     public contactPhones: IContactPhonesType;
     public contact: any;
-    public fligthDisabledDays: Array<string>;
 
     private subjectRecentStations = new BehaviorSubject<any>(this.filteredStations);
     public recentStations$ = this.subjectRecentStations.asObservable();
@@ -37,13 +33,13 @@ export class SelectorService {
     private subjectListStations = new BehaviorSubject<any>(this.filteredStations);
     public listStations$ = this.subjectListStations.asObservable();
 
-    constructor(private _configService: ConfigService, private _stationService: StationService, private _resourcesService: ResourcesService) {
-        this.stations = this._configService.environment['stations'];
-        this.markets = this._configService.environment['markets'];
+    constructor(private configService: ConfigService, private _stationService: StationService) {
+        this.stations = this.configService.environment['stations'];
+        this.markets = this.configService.environment['markets'];
         this.marketsIata = [];
-        this.iconGeo = this._configService.getIconGeo();
-        this.iconRecent = this._configService.getIconRecent();
-        this.contact = this._configService.environment['contactphones'];
+        this.iconGeo = this.configService.getIconGeo();
+        this.iconRecent = this.configService.getIconRecent();
+        this.contact = this.configService.environment['contactphones'];
     }
 
     loadContactPhones(iata: string) {
@@ -187,60 +183,6 @@ export class SelectorService {
     }
 
     showMulticity(): boolean {
-        return this._configService.multicityEnabled();
-    }
-
-    /**
-     * Method that performs a get request to the
-     * [API] (https://fetch.spec.whatwg.org/#requestinit))
-     * to obtain the flight disable days, it receives an argument of type RequestOptions
-     * @param {IFlight} dataFlight
-     * @returns {*}
-     * @memberof SelectorService
-    */
-    getFlightDisabledDays(dataFlight: IFlight): any {
-
-      /**
-       * only do the request if the source and destination exists as parameter.
-       */
-      if (dataFlight.origin.code && dataFlight.destination.code) {
-        let key = dataFlight.origin.code + '_' + dataFlight.destination.code;
-        let currentDate: Date = new Date();
-        let fullYear: string = currentDate.getFullYear().toString();
-        let month: string = (currentDate.getMonth() + 1).toString();
-        let queryString = new URLSearchParams();
-
-        queryString.set('departure', dataFlight.origin.code);
-        queryString.set('arrival', dataFlight.destination.code);
-        queryString.set('year', fullYear);
-        queryString.set('month', month);
-        queryString.set('monthsRange', '5');
-        queryString.set('callback', 'JSONP_CALLBACK');
-
-        const headers = new Headers();
-        headers.set('Content-Type', 'text/html');
-        headers.set('Content-Type', 'application/xhtml+xml');
-        headers.set('Content-Type', 'application/xml');
-
-        let options = new RequestOptions({
-          headers: headers,
-          params: queryString
-        });
-
-        this._resourcesService.getFlightDisabledDays(options, key).subscribe(
-          (data) => {
-            data.Calendar.map((yearAndMonth) => {
-              const fecha = yearAndMonth.Year + '-' + yearAndMonth.Month;
-              yearAndMonth.BlankDays.map((day) => {
-                this.fligthDisabledDays.push(`${fecha}-${day}`)
-              })
-            });
-            console.log(this.fligthDisabledDays);
-          },
-          (error) => {
-            console.log(error);
-          }
-        );
-      }
+        return this.configService.multicityEnabled();
     }
 }

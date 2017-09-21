@@ -13,8 +13,8 @@ export class DiscountService {
   private typeDiscountListSubject: BehaviorSubject<string[]>;
   public typeDiscountList$: Observable<string[]>;
 
-  constructor(private _configService: ConfigService) {
-    this.configDiscount = this._configService.getConfigDiscount();
+  constructor(private configService: ConfigService) {
+    this.configDiscount = this.configService.getConfigDiscount();
     this.initTypeDiscountList();
     this.typeDiscountListSubject = new BehaviorSubject<string[]>(this.typeDiscountList);
     this.typeDiscountList$ = this.typeDiscountListSubject.asObservable();

@@ -8,11 +8,11 @@ import { ConfigService } from '../services/config.service';
 
 export class DictionaryPipe implements PipeTransform {
 
-    constructor(private _config: ConfigService) {
+    constructor(private config: ConfigService) {
     }
 
     transform(value: string, args: any[]): any {
         if (!value) { return };
-        return this._config.getDictionary(value);
+        return this.config.getDictionary(value);
     }
 }
