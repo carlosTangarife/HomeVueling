@@ -160,7 +160,7 @@ export class CalendarComponent implements OnInit {
           $(this).datepicker('setDate', currentDate);
         }
       } else if (code === 13) {
-        $('.ui-datepicker-current-day').click();
+        $(this).find('.ui-datepicker-current-day').click();
       } else {
         return false; // If other keys pressed.. return false
       }
