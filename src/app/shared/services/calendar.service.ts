@@ -14,7 +14,7 @@ export class CalendarService {
     private subjectIsRoundTrip = new BehaviorSubject<boolean>(this.isRoundTrip);
 
     private subjectIsGoing = new BehaviorSubject<boolean>(true);
-    private subjectIscomeBack = new BehaviorSubject<boolean>(false);
+    private subjectIsComeBack = new BehaviorSubject<boolean>(false);
 
     private subjectIsShowDatePicker = new BehaviorSubject<boolean>(this.isShowDatePicker);
 
@@ -23,7 +23,7 @@ export class CalendarService {
     isRoundTrip$ = this.subjectIsRoundTrip.asObservable();
 
     isGoing$ = this.subjectIsGoing.asObservable();
-    iscomeBack$ = this.subjectIscomeBack.asObservable();
+    isComeBack$ = this.subjectIsComeBack.asObservable();
 
     isShowDatePicker$ = this.subjectIsShowDatePicker.asObservable();
 
@@ -51,7 +51,7 @@ export class CalendarService {
       this.isComeBack = false;
       this.isGoing = true;
       this.subjectIsGoing.next(true);
-      this.subjectIscomeBack.next(false);
+      this.subjectIsComeBack.next(false);
       this.toggleShowDatePicker();
     }
 
@@ -59,7 +59,7 @@ export class CalendarService {
       this.isComeBack = true;
       this.isGoing = false;
       this.subjectIsGoing.next(false);
-      this.subjectIscomeBack.next(true);
+      this.subjectIsComeBack.next(true);
       this.toggleShowDatePicker();
     }
 
@@ -67,5 +67,4 @@ export class CalendarService {
       this.isShowDatePicker = !this.isShowDatePicker;
       this.subjectIsShowDatePicker.next(this.isShowDatePicker);
     }
-
 }

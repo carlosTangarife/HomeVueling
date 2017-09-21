@@ -45,8 +45,8 @@
       </div>
 
       <app-calendar-options class="searchbar-datepicker" [ngClass]="{'show': calendarService.isShowDatePicker$ | async}">
-        <div id="vyCalendarGoing"></div>
-        <div id="vyCalendarComeBack"></div>
+        <div id="vyCalendarGoing" tabindex="0" [ngClass]="{'hide': !calendarService.isGoing}"></div>
+        <div id="vyCalendarComeBack" tabindex="0" [ngClass]="{'hide': !calendarService.isComeBack}"></div>
       </app-calendar-options>
     </div>
   </div>
