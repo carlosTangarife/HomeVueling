@@ -1,4 +1,4 @@
 export interface ICheckIn {
-    Code: string,
+    BookingCode: string,
     Email: string,
 }
