@@ -7,10 +7,8 @@ import { Component, OnInit } from '@angular/core';
 })
 export class CalendarOptionsComponent implements OnInit {
 
-  public isRoundTrip: boolean;
-  public isOneWay: boolean;
-
   constructor(public calendarService: CalendarService) { }
+
   ngOnInit() {
   }
 

@@ -1,9 +1,16 @@
 <div class="col col-md-6" (click)="toggleDatePickerGoing()">
   <label class="form-input_label">Ida</label>
   <div class="input-group">
-    <input
+    <input *ngIf="!isMultiFlight"
       [ngModel]="dateGoing | date:'dd/MM/yy'"
       id="inputGoing"
+      type="text"
+      class="form-control js-searchbar-input js-searchbar-date-input-going"
+      placeholder="DD/MM/YYYY"
+      readonly="readonly">
+    <input *ngIf="isMultiFlight"
+      [ngModel]="dateGoing | date:'dd/MM/yy'"
+      id="inputMulti"
       type="text"
       class="form-control js-searchbar-input js-searchbar-date-input-going"
       placeholder="DD/MM/YYYY"
@@ -11,11 +18,8 @@
     <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
   </div>
 </div>
-<div class="col col-md-6">
-
-  <a class="js-add-date-range-to"
-    (click)="addComeBack()"
-    [ngClass]="{'activate': calendarService.isOneWay$ | async}">
+<div class="col col-md-6" *ngIf="!isMulti">
+  <a class="js-add-date-range-to" (click)="addComeBack()" [ngClass]="{'activate': calendarService.isOneWay$ | async}">
     Añadir vuelta
   </a>
 

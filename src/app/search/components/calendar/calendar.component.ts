@@ -18,14 +18,17 @@ export class CalendarComponent implements OnInit {
   @Input()
   dateComeBack: Date;
 
+  @Input()
+  isMulti: boolean;
+
+  @Input()
+  isMultiFlight: boolean;
+
   public minDateAux: Date;
-  public isOneWay: boolean;
-  public isComeBack: boolean;
   public customParams: Object;
-  public isRoundTrip: boolean;
+  public id: string;
 
   constructor(public calendarService: CalendarService) {
-    this.isComeBack = true;
     this.customParams = {
       minDate: 0,
       maxDate: 90,
@@ -38,7 +41,9 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     let self = this;
-    $('#vyCalendarGoing').datepicker({
+    this.id = this.isMultiFlight ? '#vyCalendarMulti' : '#vyCalendarGoing';
+    let idInput = this.isMultiFlight ? '#inputMulti' : '#inputGoing';
+    $(this.id).datepicker({
       minDate: 0,
       numberOfMonths: 3,
       showAnim: 'fade',
@@ -46,48 +51,57 @@ export class CalendarComponent implements OnInit {
         let dateSelected = $(this).datepicker('getDate');
         self.dateGoing = dateSelected;
         self.minDateAux = dateSelected;
-        $('#inputGoing').val($.datepicker.formatDate('dd/mm/y', dateSelected));
-        self.dateComeBack = new Date(self.dateGoing.getFullYear(), self.dateGoing.getMonth(), self.dateGoing.getDate() + 7 );
-        $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', self.dateComeBack));
+        $(idInput).val($.datepicker.formatDate('dd/mm/y', dateSelected));
+        if (!self.isMulti) {
+          self.dateComeBack = new Date(self.dateGoing.getFullYear(), self.dateGoing.getMonth(), self.dateGoing.getDate() + 7 );
+          $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', self.dateComeBack));
+        }
         self.calendarService.toggleShowDatePicker();
       }
     }).keydown(this.keyDownEvent);
-    $('#vyCalendarComeBack').datepicker({
-      rangeSelect: true,
-      numberOfMonths: 3,
-      minDate: this.minDateAux || 0,
-      showAnim: 'fade',
-      beforeShow: this.calendarBeforeShow,
-      beforeShowDay: function (date) {
-        date.setHours(0, 0, 0, 0);
-        let maxDate = self.dateComeBack;
-        let dateSelected = $(this).datepicker('getDate');
-        if (date.getTime() === self.dateGoing.valueOf()) {
-          return [true, 'ui-datepicker-travel-time ui-datepicker-current-day travelTime'];
+
+    if (!this.isMulti) {
+      $('#vyCalendarComeBack').datepicker({
+        rangeSelect: true,
+        numberOfMonths: 3,
+        minDate: this.minDateAux || 0,
+        showAnim: 'fade',
+        beforeShow: this.calendarBeforeShow,
+        beforeShowDay: function (date) {
+          date.setHours(0, 0, 0, 0);
+          let maxDate = self.dateComeBack;
+          let dateSelected = $(this).datepicker('getDate');
+          if (date.getTime() === self.dateGoing.valueOf()) {
+            return [true, 'ui-datepicker-travel-time ui-datepicker-current-day travelTime'];
+          }
+          if (dateSelected && date.getTime() === dateSelected.valueOf()) {
+            return [true, 'ui-datepicker-travel-time ui-datepicker-end-day travelTime endDay'];
+          }
+          if (date > self.dateGoing && date <= self.dateComeBack ) {
+            return [true, 'ui-datepicker-travel-time travelTime'];
+          }
+          return [true, ''];
+        },
+        onSelect: function () {
+          let dateSelected = $(this).datepicker('getDate');
+          self.dateComeBack = dateSelected;
+          $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', dateSelected));
+          self.calendarService.toggleShowDatePicker();
         }
-        if (dateSelected && date.getTime() === dateSelected.valueOf()) {
-          return [true, 'ui-datepicker-travel-time ui-datepicker-end-day travelTime endDay'];
-        }
-        if (date > self.dateGoing && date <= self.dateComeBack ) {
-          return [true, 'ui-datepicker-travel-time travelTime'];
-        }
-        return [true, ''];
-      },
-      onSelect: function () {
-        let dateSelected = $(this).datepicker('getDate');
-        self.dateComeBack = dateSelected;
-        $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', dateSelected));
-        self.calendarService.toggleShowDatePicker();
-      }
-    }).keydown(this.keyDownEvent);
+      }).keydown(this.keyDownEvent);
+    }
   }
 
   toggleDatePickerGoing() {
-    this.calendarService.onGoing();
     let self = this;
-    $('#vyCalendarGoing').parent().removeClass('range-datepicker');
-    $('#vyCalendarGoing').datepicker('setDate', self.dateGoing);
-    $('#vyCalendarGoing').datepicker('refresh');
+    if (this.isMultiFlight) {
+      this.calendarService.onMulti();
+    } else {
+      this.calendarService.onGoing();
+    }
+    $(this.id).parent().removeClass('range-datepicker');
+    $(this.id).datepicker('setDate', self.dateGoing);
+    $(this.id).datepicker('refresh');
   }
 
   toggleDatePickerComeBack() {

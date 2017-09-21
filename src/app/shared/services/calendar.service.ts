@@ -3,8 +3,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class CalendarService {
-    private isGoing = false;
+    private isGoing = true;
     private isComeBack = false;
+    private isMulti = false;
     private isOneWay = true;
     private isRoundTrip = false;
     private isShowDatePicker = false;
@@ -13,8 +14,9 @@ export class CalendarService {
     private subjectIsOneWay = new BehaviorSubject<boolean>(this.isOneWay);
     private subjectIsRoundTrip = new BehaviorSubject<boolean>(this.isRoundTrip);
 
-    private subjectIsGoing = new BehaviorSubject<boolean>(true);
-    private subjectIsComeBack = new BehaviorSubject<boolean>(false);
+    private subjectIsGoing = new BehaviorSubject<boolean>(this.isGoing);
+    private subjectIsComeBack = new BehaviorSubject<boolean>(this.isComeBack);
+    private subjectIsMulti = new BehaviorSubject<boolean>(this.isMulti);
 
     private subjectIsShowDatePicker = new BehaviorSubject<boolean>(this.isShowDatePicker);
 
@@ -24,6 +26,7 @@ export class CalendarService {
 
     isGoing$ = this.subjectIsGoing.asObservable();
     isComeBack$ = this.subjectIsComeBack.asObservable();
+    isMulti$ = this.subjectIsMulti.asObservable();
 
     isShowDatePicker$ = this.subjectIsShowDatePicker.asObservable();
 
@@ -48,18 +51,32 @@ export class CalendarService {
     }
 
     onGoing() {
-      this.isComeBack = false;
       this.isGoing = true;
-      this.subjectIsGoing.next(true);
-      this.subjectIsComeBack.next(false);
+      this.isComeBack = false;
+      this.isMulti = false;
+      this.subjectIsGoing.next(this.isGoing);
+      this.subjectIsComeBack.next(this.isComeBack);
+      this.subjectIsMulti.next(this.isMulti);
+      this.toggleShowDatePicker();
+    }
+
+    onMulti() {
+      this.isComeBack = false;
+      this.isGoing = false;
+      this.isMulti = true;
+      this.subjectIsGoing.next(this.isGoing);
+      this.subjectIsComeBack.next(this.isComeBack);
+      this.subjectIsMulti.next(this.isMulti);
       this.toggleShowDatePicker();
     }
 
     onComeBack() {
       this.isComeBack = true;
       this.isGoing = false;
-      this.subjectIsGoing.next(false);
-      this.subjectIsComeBack.next(true);
+      this.isMulti = false;
+      this.subjectIsGoing.next(this.isGoing);
+      this.subjectIsComeBack.next(this.isComeBack);
+      this.subjectIsMulti.next(this.isMulti);
       this.toggleShowDatePicker();
     }
 
