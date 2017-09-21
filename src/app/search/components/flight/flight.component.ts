@@ -43,7 +43,8 @@ export class FlightComponent implements OnInit {
         destination: {
           code: 'LAX',
           name: 'Los Ángeles'
-        }
+        },
+        going: new Date()
       },
       passengers: {
         Adults : 1,
@@ -75,8 +76,10 @@ export class FlightComponent implements OnInit {
 
   removeMulticity(multicity: boolean) {
     this.clickMulticity(multicity);
-    this.destination.showPopupDestination();
-    this.destination.isFocused.emit(this.destination.selectorService.viewPopup);
+    if (this.destination.selectorService.viewPopup) {
+      this.destination.showPopupDestination();
+      this.destination.isFocused.emit(this.destination.selectorService.viewPopup);
+    }
   }
 
   saveSearch() {

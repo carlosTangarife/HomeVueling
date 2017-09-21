@@ -1,0 +1,39 @@
+@import "variables";
+@import "placeholders";
+@import "mixins";
+
+@font-face {
+  font-family: 'BrandonText-Regular';
+  src: url('./assets/fonts/BrandonText-Regular.eot'); /* IE9 Compat Modes */
+  src: url('./assets/fonts/BrandonText-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./assets/fonts/BrandonText-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('./assets/fonts/BrandonText-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('./assets/fonts/BrandonText-Regular.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'BrandonText-Medium';
+  src: url('./assets/fonts/BrandonText-Medium.eot'); /* IE9 Compat Modes */
+  src: url('./assets/fonts/BrandonText-Medium.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./assets/fonts/BrandonText-Medium.woff') format('woff'), /* Pretty Modern Browsers */
+       url('./assets/fonts/BrandonText-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('./assets/fonts/BrandonText-Medium.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'BrandonGrotesque-Regular';
+  src: url('./assets/fonts/BrandonGrotesque-Regular.eot'); /* IE9 Compat Modes */
+  src: url('./assets/fonts/BrandonGrotesque-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./assets/fonts/BrandonGrotesque-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+       url('./assets/fonts/BrandonGrotesque-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('./assets/fonts/BrandonGrotesque-Regular.svg') format('svg'); /* Legacy iOS */
+}
+
+@font-face {
+  font-family: 'BrandonGrotesque-Medium';
+  src: url('./assets/fonts/BrandonGrotesque-Medium.eot'); /* IE9 Compat Modes */
+  src: url('./assets/fonts/BrandonGrotesque-Medium.woff2') format('woff2'), /* Super Modern Browsers */
+       url('./assets/fonts/BrandonGrotesque-Medium.woff') format('woff'), /* Pretty Modern Browsers */
+       url('./assets/fonts/BrandonGrotesque-Medium.ttf')  format('truetype'), /* Safari, Android, iOS */
+       url('./assets/fonts/BrandonGrotesque-Medium.svg') format('svg'); /* Legacy iOS */
+}

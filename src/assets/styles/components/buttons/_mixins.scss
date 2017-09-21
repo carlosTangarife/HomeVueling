@@ -1,0 +1,136 @@
+// Create a transition
+//
+// $args... - The arguments for the transition.
+//
+// Compatibility untested.
+
+@mixin transition($args...) {
+  -webkit-transition: $args;
+  -moz-transition: $args;
+  -ms-transition: $args;
+  -o-transition: $args;
+  transition: $args;
+}
+
+// Create a border radius.
+//
+// $start - The radius of the button boder.
+//
+// Compatibility untested.
+
+@mixin border-radius($radius) {
+  border-radius: $radius;
+  -webkit-border-radius: $radius;
+  -moz-border-radius: $radius;
+  -ms-border-radius: $radius;
+  -o-border-radius: $radius;
+}
+
+// Create a button variant
+//
+// $color 				- The color of the button.
+// $color-hover  		- The color of the button on hover.
+// $background			- The background color of the button.
+// $background-hover	- The background color of the button on hover.
+//
+// Compatibility untested.
+
+@mixin button-variant($color, $color-hover, $background, $background-hover, $color-border, $color-border-hover) {
+	color: $color;
+	border-color: $color-border;
+	background-color: $background;
+  &:active,
+	&:visited {
+		color: $color;
+	}
+	&:hover,
+	&:focus,
+	&.focus {
+	 color: $color-hover;
+	 border-color: $color-border-hover;
+	 background-color: $background-hover;
+	}
+	&:active,
+	&.active {
+	 color: $color-hover;
+	 border-color: $color-border-hover;
+	 background-color: $background-hover;
+	}
+	&:disabled,
+    &[disabled]{
+	  opacity: .4;
+	  cursor: default;
+	  &:hover,
+	  &:focus,
+	  &.focus {
+	  	color: $color;
+  		border-color:  $color-border;
+  		background-color: $background;
+	  }
+	}
+}
+
+// Creates a button size variant
+//
+// $font-size 				- The font size of the button.
+// $padding-horizontal   	- The horizontal padding of the button.
+// $padding-vertical		- The vertical padding of the button.
+// $border-radius			- The border radius of the button
+//
+// Compatibility untested.
+
+@mixin button-size($font-size, $padding-horizontal, $padding-vertical,  $border-radius) {
+	font-size: $font-size;
+	padding: $padding-horizontal $padding-vertical;
+	border-radius: $border-radius;
+}
+
+// Creates a button with variant
+//
+//
+// Compatibility untested.
+
+@mixin button-icon($positon, $padding-lateral, $icon-position) {
+	  position: relative;
+    font-family: $font-default-regular !important;
+   	@if $positon == 'right' {
+		padding-right: $padding-lateral;
+		&:after {
+			top: 50%;
+			content: "\e914";
+			position: absolute;
+			right: $icon-position;
+			transform: translateY(-50%);
+			font-family: 'new-vueling-icons';
+		}
+   } @else {
+      padding-left: $padding-lateral;
+      &:before {
+				top: 50%;
+				content: "\eb00";
+				position: absolute;
+				left: $icon-position;
+        transform: translateY(-50%) rotate(180deg);
+				font-family: 'vueling';
+			}
+   }
+}
+
+// Create a button variant
+//
+// $color 	    - The color of the button
+//
+// Compatibility untested.
+
+@mixin button-checkbox-variant($color) {
+  label {
+		span {
+			color: $color;
+			border: 1px solid $color;
+		}
+	}
+  input:checked + span {
+    color: white;
+		background-color: $color;
+	}
+}

@@ -1,0 +1,31 @@
+// compileCompressed: ./main.css
+// Atom sass-autocimpile package
+
+
+//Assets
+@import "assets/styles/assets/variables";
+@import "assets/styles/assets/mixins";
+@import "assets/styles/assets/helpers";
+
+//Init
+@import "assets/styles/init/reset";
+@import "assets/styles/init/bootstrap";
+
+//Components
+@import "assets/styles/components/fonts/fonts";
+@import "assets/styles/components/icons/icons";
+@import "assets/styles/components/navs/navs";
+@import "assets/styles/components/buttons/buttons";
+@import "assets/styles/components/forms/forms";
+@import "assets/styles/components/alerts/alerts";
+@import "assets/styles/components/lists/lists";
+@import "assets/styles/components/popovers/popovers";
+@import "assets/styles/components/datepicker/datepicker";
+
+//Layouts
+@import "assets/styles/layout/body";
+@import "assets/styles/layout/headerfooter";
+
+//Modules
+@import "assets/styles/modules/buscador/buscador";
+@import "assets/styles/modules/forms/forms";

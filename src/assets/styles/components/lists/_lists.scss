@@ -1,0 +1,91 @@
+//@import "variables";
+//@import "mixins";
+
+/****************************************************
+
+LISTS
+
++ list
+
+****************************************************/
+
+
+.list{
+  margin: 10px;
+  padding: 0;
+  display: table;
+}
+
+.list li{
+  margin:0;
+  padding: .5em .5em .5em 1.75em;
+  float: none !important;
+  width: auto;
+}
+
+.list li a{
+  color: inherit !important;
+}
+
+
+.list li a, .list-small li  {
+  padding: 0;
+}
+
+.list-small {
+  margin: 0;
+  font-size: $font-size-sm ;
+}
+
+
+.list li:before {
+  font-family: $icomoon-font-name;
+  content: '';
+  margin-left: -1em;
+  margin-right: .2em;
+  position: relative;
+  top: .1em;
+  color: $color-primary;
+}
+
+.list li.more a{
+  color: $color-primary !important;
+  text-decoration: underline;
+  margin-left: -1em;
+  line-height: 1em;
+}
+
+.list li.more:before {
+  content: none;
+}
+
+.list-menu {
+  padding: 0;
+  margin: 8px 0;
+  width: 100%;
+  border-top: $color-gray-60	1px solid;
+}
+
+.list-menu li{
+  border-bottom: $color-gray-70	1px solid;
+}
+
+
+.list.list-check li{
+  line-height: 140%;
+}
+
+.list.list-check li:before {
+  content: "";
+  color: #fff;
+  background: #fc0;
+  padding: 4px;
+  border-radius: 10px;
+  font-size: 10px;
+  margin-left: -28px;
+  margin-right: 10px;
+}
+
+.list li.turn-off:before {
+  content: "\e91d";
+}

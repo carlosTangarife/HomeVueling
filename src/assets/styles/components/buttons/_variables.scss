@@ -1,0 +1,84 @@
+/****************************************************
+VARIABLES BUTTONS
+****************************************************/
+
+/** Colors *****************************************/
+
+$button-text-color                   : $color-gray-80;
+$button-hover-bg-color               : $color-primary-light;
+$button-bg-color                     : $color-primary;
+$button-checkbox-dark                : $color-gray-70;
+$button-checkbox-light               : $color-gray-60;
+
+/** Font Family ************************************/
+
+$button-font-family                  : $font-default-regular;
+
+/** Font Size ************************************/
+$font-size--sm-regular               : $font-default-regular;
+
+/** General ************************************/
+$button-padding                      : 15px 28px 13px;
+$button-padding-small                : 10px 19px 7px;
+
+/** Variables **************************************/
+
+// Font Size
+
+$button-fontSize-default            : $font-size-default;
+$button-fontSize-xs									: $font-size-xs;
+$button-fontSize-sm									: $font-size--sm-regular;
+$button-fontSize-md									: $font-size-xl;
+$button-fontSize-lg									: $font-size-large;
+
+// Font Weight
+
+$font-weight-light									: 300;
+$font-weight-regular								: 400;
+$font-weight-bold										: 600;
+
+// Padding
+
+// Default
+$button-padding-v										: 11px;
+$button-padding-h										: 35px;
+$button-padding-h--icon							:	43px;
+
+// Attached
+$button-padding-v--attached					: 11px;
+$button-padding-right--attached			: 45px;
+$button-padding-left--attached			: 25px;
+
+// Large
+$button-padding-v--lg								: 16px;
+$button-padding-h--lg								: 35px;
+$button-padding-h--lg--icon					: 45px;
+
+// Small
+$button-padding-v--sm								: 9px;
+$button-padding-h--sm								: 25px;
+$button-padding-h--sm--icon					: 30px;
+
+// Extra Small
+$button-padding-v--xs								: 8.5px;
+$button-padding-h--xs								: 25px;
+$button-padding-h--xs--icon					: 23px;
+
+// Extra Extra Small
+$button-padding-v--xxs							: 5px;
+$button-padding-h--xxs							: 10px;
+
+// Extra Extra Small
+$button-padding-v--checkbox					: 5px;
+$button-padding-h--checkbox					: 17px;
+
+// Image
+$button-padding-image								: 5px;
+
+//Border Radius
+$border-radius-regular							: 50px;
+$border-radius-sm										: 10px;
+$border-radius-xs										: 20px;
+$border-radius-xxs										: 5px;
+
+/** Variables **************************************/

@@ -1,0 +1,82 @@
+//@import "variables";
+//@import "mixins";
+
+/****************************************************
+
+ALERTS
+
++
+
+****************************************************/
+
+.alert {
+  background-color: rgba(0,0,0,.10);
+  border-radius: 6px;
+  padding: 20px;
+  width: 100%;
+  margin: 0;
+  display: table;
+  line-height: 125%;
+  &.alert--icon {
+    padding: 10px 15px;
+  }
+  &.info {
+    color: #0da398;
+    background-color: #e6f5f4;
+  }
+  &.error {
+    border: solid 2px #d4470f;
+    background-color: #f6dacf;
+    .alert_wrap_title {
+      color: #333;
+    }
+    .alert_wrap_message {
+      color: #666;
+    }
+  }
+  .alert_wrap {
+    padding-left: 25px;
+    position: relative;
+    .icon {
+      top: 3px;
+      left: -4px;
+      font-size: 21px;
+      position: absolute;
+    }
+    .alert_wrap_title,
+    .alert_wrap_message {
+      display: block;
+    }
+    .alert_wrap_title {
+      font-weight: bold;
+      font-size: 14px;
+    }
+    .alert_wrap_message {
+      font-size: 12px;
+      line-height: 1.4em;
+    }
+    &:not(:first-child) {
+      margin-top: 7px;
+      padding-top: 7px;
+      border-top: solid 1px rgba(13,163,152, 0.2);
+      .icon {
+        top: 9px;
+      }
+    }
+  }
+}
+
+.alert-header {
+  font-size: 20px;
+  line-height: 26px;
+}
+
+.alert-header .icon {
+  font-size: 30px;
+}
+
+.alert-footer {
+  padding-top: 1em;
+  display: table;
+  width: 100%;
+}

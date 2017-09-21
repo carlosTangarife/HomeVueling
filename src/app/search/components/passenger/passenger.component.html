@@ -6,8 +6,8 @@
 <div class="input-group" (click)="togglePassengers()">
   <input type="text" class="form-control"
     id="passengers-input"
-    placeholder="{{passengers?.TotalPassengers}} {{getLabelPassengers() | dictionary}}"
-    readonly="readonly">
+    readonly="readonly"
+    value="{{passengers?.TotalPassengers}} {{getLabelPassengers() | dictionary}}">
   <span class="icon icon-arrow-down"></span>
 </div>
 

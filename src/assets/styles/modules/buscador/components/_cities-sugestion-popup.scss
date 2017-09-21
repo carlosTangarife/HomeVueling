@@ -1,0 +1,109 @@
+@import "../variables";
+@import "../placeholders";
+@import "../mixins";
+
+.cities-sugestion-popup {
+  left: 0px;
+  width: 500px;
+  overflow-y: hidden;
+  overflow-x: hidden;
+  li {
+    &:before {
+      width: 6px;
+      height: 6px;
+      content: '';
+      top: 50%;
+      transform: translateY(-50%);
+      left: -20px;
+      background-color: $popup-sugestion-list-dot-color;
+      position: absolute;
+      border-radius: 50px;
+    }
+    &.connection-flight {
+      &:before {
+        background-color: $color-accent-blue;
+      }
+    }
+  }
+  &.destination {
+    left: 0;
+  }
+  .cities-sugestion-popup_title {
+    padding: 10px 15px;
+    font-size: 16px;
+    font-weight: 700;
+    position: relative;
+    color: $popup-sugestion-title-color;
+    background-color: $popup-sugestion-title-bg;
+    .erase-label {
+      top: 50%;
+      right: 10px;
+      float: right;
+      cursor: pointer;
+      color: $popup-sugestion-title-label-color;
+      font-size: 14px;
+      position: absolute;
+      text-decoration: underline;
+      transform: translateY(-50%);
+    }
+  }
+  .cities-sugestion-popup_list {
+    overflow-y: scroll;
+    overflow-x: hidden;
+    max-height: 130px;
+    li {
+      cursor: pointer;
+      padding: 13px 20px 13px 35px;
+      position: relative;
+      transition: background-color .3s ease;
+      &:hover {
+        background-color: $popup-sugestion-list-hover-bg-color;
+      }
+      &:before {
+        left: 15px;
+      }
+      .list-item {
+        display: inline-block;
+        &:not(:first-child) {
+          margin-left: 5px;
+        }
+        &:nth-child(odd) {
+          font-weight: 700;
+        }
+      }
+      &:not(:last-child) {
+        border-bottom: 1px solid $popup-sugestion-separator-color;
+      }
+    }
+  }
+  .cities-sugestion-popup_legend {
+    border-top: 1px dotted $legend-top-border-color;
+    ul {
+      font-size: 12px;
+      padding: 10px;
+      text-align: center;
+      li {
+        position: relative;
+        display: inline-block;
+        &:last-child {
+          margin-left: 30px;
+        }
+      }
+    }
+    .cities-sugestion-popup_legend_actions {
+      display: flex;
+      padding: 15px;
+      align-items: center;
+      justify-content: space-between;
+      background-color: $legend-bg-color;
+      .link {
+        .icon {
+          color: $color-primary;
+        }
+        a {
+          font-size: 14px;
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,600 @@
+// compileCompressed: ../../../css/modules/buscador.css
+
+@import "variables";
+@import "placeholders";
+@import "mixins";
+
+.searchbar-container {
+  width: 100%;
+  min-height: 395px;
+  padding: 50px 50px 100px;
+  display: block;
+  position: relative;
+  color: $searchbar-font-color;
+  //look for remove
+  p, ul, li {
+    margin: 0;
+  }
+  .searchbar-overlay {
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    display: none;
+    position: fixed;
+    background: rgba(0,0,0,0.4);
+    animation: showNav .3s ease-in-out both;
+    z-index: 5;
+  }
+  .searchbar-titles {
+    width: 100%;
+    color: white;
+    position: relative;
+    text-align: center;
+    margin-bottom: 50px;
+    text-transform: uppercase;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.59);
+    z-index: 1;
+    h3, h2 {
+      margin: 10px 0;
+    }
+    h3 {
+      font-size: 18px;
+    }
+    h2 {
+      font-size: 30px;
+      font-weight: bold;
+    }
+  }
+  .searchbar-bg-image {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+    z-index: 0;
+  }
+  .searchbar-wrap {
+    display: block;
+  }
+  .searchbar-main {
+    left: 0;
+    right: 0;
+    width: 100%;
+    max-width: 1248px;
+    margin: 0 auto;
+    position: absolute;
+    transition: all 0.5s ease;
+    z-index: 6;
+    &.fixed {
+      max-width: 100%;
+      position: fixed;
+      top: 0;
+      right: 0;
+      left: 0;
+      width: 100%;
+      padding: 0;
+      box-sizing: border-box;
+      .searchbar-main_tabs {
+        display: none;
+      }
+      .searchbar-main_tab-content {
+        border-radius: 0;
+        .searchbar-main_tab-content_pane {
+          height: auto;
+          padding: 7px;
+          &.search {
+            .form-input {
+              padding: 3px 10px;
+              .searchbar-popup {
+                top: 51px;
+              }
+            }
+          }
+          &.check-in,
+          &.reservation {
+            padding: 10px;
+            .form-input {
+              padding: 3px 10px;
+              &.dates {
+                .input-group {
+                  input {
+                    margin: 0;
+                    font-size: 16px;
+                  }
+                }
+              }
+              > label,
+              .col > label {
+                margin-bottom: 2px;
+              }
+              > a {
+                top: 5px;
+              }
+              .input-group {
+                //@review
+                height: 55% !important;
+              }
+              .searchbar-popup {
+                //@review
+                top: 61px !important;
+              }
+            }
+          }
+          .pane-wrapper {
+            left: 0;
+            right: 0;
+            margin: 0 auto;
+            width: 1230px;
+            position: relative;
+            .tab-pane_title {
+              display: inline-block;
+              animation: showNav .5s ease-in-out both;
+            }
+            .tab-pane_lead-in {
+              display: none;
+            }
+            .tab-pane_options-container {
+              margin: 5px 0 17px 0;
+            }
+            .form-group {
+              .form-input {
+                &.focused {
+                  &:after {
+                    content: '';
+                    bottom: -9px;
+                  }
+                }
+                .form-input_label {
+                  display: none;
+                }
+                &.dates {
+                  a {
+                    top: 10px;
+                  }
+                  .form-checkbox--button {
+                    margin-top: 15px;
+                  }
+                  input {
+                    margin-top: 3px;
+                  }
+                }
+                .input-group,
+                .input-group input {
+                  height: 100%;
+                }
+                .input-group {
+                  .prefix {
+                    vertical-align: middle;
+                  }
+                }
+                .popover {
+                  top: 51px;
+                }
+                .searchbar-popup {
+                  &.cities-sugestion-popup {
+                    left: 0;
+                  }
+                }
+              }
+            }
+            .form-action {
+              .mv_button {
+                font-size: 16px;
+                padding: 11px 35px;
+              }
+            }
+          }
+        }
+        .searchbar-datepicker {
+          margin: 3px auto 0;
+          width: 1232px !important;
+        }
+      }
+    }
+    .searchbar-main_tabs {
+      border: none;
+      animation: showNav .5s ease-in-out both;
+      .searchbar-main_tabs_tab {
+        margin-bottom: 4px;
+        .tab {
+          border: none;
+          display: block;
+          margin-right: 2px;
+          padding: 10px 5px;
+          position: relative;
+          cursor: pointer;
+          text-transform: uppercase;
+          transition: all .1s ease-in;
+          line-height: 1.428571429;
+          border-radius: 4px 4px 0 0;
+          background-color: rgba(255, 255, 255, 0.8);
+          &:hover {
+            background-color: rgba(255, 255, 255, 0.85);
+            [class*="icon-"] {
+              color: $searchbar-font-color;
+            }
+          }
+          p, ul, li {
+            display: inline-block;
+          }
+          p, li {
+            font-size: 14px;
+            position: relative;
+            color: $searchbar-font-color;
+            padding: 0 12px 0 40px;
+            margin-bottom: 0;
+            [class*="icon-"] {
+              top: 50%;
+              left: 12px;
+              font-size: 20px;
+              position: absolute;
+              transform: translateY(-50%);
+            }
+          }
+          li {
+            a, [class*="icon-"] {
+              cursor: pointer;
+              color: $tab-link-color;
+            }
+            border-left: 1px solid $tab-link-boder-color;
+            a {
+              text-decoration: underline;
+            }
+          }
+        }
+        &.active {
+          margin-bottom: 0;
+          .tab {
+            cursor: default;
+            font-weight: bold;
+            border-bottom: 4px solid $color-regular-tab;
+            background-color: $color-regular-tab;
+          }
+          &:hover {
+            .tab {
+                background-color: $color-regular-tab;
+            }
+          }
+        }
+        &.searchbar-main_tabs_tab--search.active {
+          .tab {
+            border-bottom: 4px solid $color-primary;
+            background-color: $color-primary;
+          }
+        }
+      }
+      .searchbar-main_tabs_tab:not(:last-child) {
+        margin-right: 3px;
+      }
+    }
+    .searchbar-main_tab-content {
+      border-radius: 5px;
+      background-color: transparent;
+      .searchbar-main_tab-content_pane {
+        padding: 7px;
+        border-radius: 5px;
+        background-color: $regular-searchbar-bg-color;
+        &.search {
+          border-top-left-radius: 0;
+          background-color: $color-primary;
+          .form-input {
+            &:first-child {
+              .searchbar-popup {
+                left: -10px;
+              }
+            }
+            .searchbar-popup {
+              top: 85px;
+            }
+          }
+        }
+        &.check-in,
+        &.reservation {
+          padding: 20px;
+          .form {
+            width: 100%;
+            display: flex;
+            .form-input {
+              &:first-child {
+                .searchbar-popup {
+                  left: -20px;
+                }
+              }
+              .searchbar-popup {
+                top: 97px;
+              }
+            }
+          }
+        }
+        .pane-wrapper,
+        .form-group,
+        .form-action {
+          display: flex;
+          flex-wrap: wrap;
+        }
+        .tab-pane_alert {
+          margin-bottom: 15px;
+          .alert_wrap_message {
+            margin-top: 15px;
+            p {
+              font-size: 14px;
+              color: #666;
+            }
+          }
+        }
+        .tab-pane_lead-in {
+          width: 100%;
+          display: block;
+          font-size: 14px;
+          margin-bottom: 20px;
+        }
+        .tab-pane_title {
+          font-size: 18px;
+          font-weight: 600;
+          margin: 3px 30px 0 0;
+          padding-left: 35px;
+          display: none;
+          position: relative;
+          text-transform: uppercase;
+          [class*="icon-"] {
+            top: 0;
+            left: 0;
+            font-size: 25px;
+            position: absolute;
+          }
+        }
+        .tab-pane_options-container {
+          display: inline-block;
+          margin: 5px 0 25px 0;
+          .form-checkbox--button {
+            &:not(:first-of-type) {
+              margin-left: 10px;
+            }
+          }
+        }
+        .form-group {
+          background: transparent;
+          &.form-group--flight-search {
+            width: 83%;
+            .form-input {
+              width: 25%;
+              &.dates {
+                width: 28%;
+                padding-right: 0;
+              }
+            }
+          }
+          &.form-group--email {
+            width: 60%;
+            .form-input {
+              width: 50%;
+            }
+          }
+          &.form-group--destinations {
+            width: 75%;
+            .form-input {
+              width: 35%;
+              &.reservation-code {
+                width: 25%;
+              }
+              &.dates {
+                width: 40%;
+              }
+            }
+          }
+          .form-input {
+            cursor: pointer;
+            position: relative;
+            display: inline-block;
+            border: 1px solid white;
+            background-color: white;
+            &:first-child {
+              border-top-left-radius: 3px;
+              border-bottom-left-radius: 3px;
+            }
+            &:last-child {
+              border-top-right-radius: 3px;
+              border-bottom-right-radius: 3px;
+            }
+            &:not(:first-child) {
+              border-left: 1px solid $form-input-border;
+            }
+            &.focused {
+              border: 1px solid #666;
+              &:before,
+              &:after {
+                left: 0;
+                right: 0;
+                width: 0;
+                height: 0;
+                content: '';
+                margin-left: auto;
+                margin-right: auto;
+                border-left: 8px solid transparent;
+                border-right: 8px solid transparent;
+                position: absolute;
+              }
+              &:before {
+                bottom: -8px;
+                border-top: 8px solid white;
+                z-index: 6;
+              }
+              &:after {
+                bottom: -9px;
+                border-top: 8px solid black;
+                z-index: 5;
+              }
+            }
+            &.error {
+               border: 2px solid $validation-error-color;
+               label {
+                 color: $validation-error-color;
+               }
+            }
+            &.dates {
+              a,
+              .date-range-to {
+                transition: all .5s cubic-bezier(0.23, 0.24, 0.24, 1.05);;
+                &.activate {
+                  transform: translateX(0);
+                }
+              }
+              a {
+                right: 25px;
+                top: 32px;
+                cursor: pointer;
+                font-size: 14px;
+                font-weight: 600;
+                position: absolute;
+                text-align: center;
+                text-decoration: none;
+                transform: translateX(120px);
+                &:hover {
+                  text-decoration: underline;
+                  color: $color-secondary-dark;
+                }
+              }
+              .date-range-to {
+                transform: translateX(145px);
+              }
+              .form-checkbox--button {
+                float: right;
+                margin-top: 30px;
+              }
+              .input-group {
+                input,
+                .icon {
+                  font-size: 20px;
+                }
+                input {
+                  font-weight: bold;
+                  margin-top: 2px;
+                }
+                input::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+                  font-weight: lighter;
+                }
+                input::-moz-placeholder { /* Firefox 19+ */
+                  font-weight: lighter;
+                }
+                input:-ms-input-placeholder { /* IE 10+ */
+                  font-weight: lighter;
+                }
+                input:-moz-placeholder { /* Firefox 18- */
+                  font-weight: lighter;
+                }
+                .icon {
+                  top: 50%;
+                  right: 7px;
+                  transform: translateY(-50%);
+                }
+              }
+            }
+            &.passengers {
+              width: 22%;
+            }
+            > label,
+            > a {
+              display: inline-block;
+            }
+            > label,
+            .col label {
+              cursor: pointer;
+            }
+            > a {
+              top: 10px;
+              right: 10px;
+              font-size: 11px;
+              position: absolute;
+              text-decoration: underline;
+            }
+            .input-group {
+              width: 100%;
+              display: table;
+              position: relative;
+              .prefix,
+              input {
+                display: table-cell;
+                font-family: $input-font-family;
+              }
+              .prefix {
+                width: 20%;
+                font-size: 28px;
+                padding-right: 8px;
+                font-weight: bold;
+                vertical-align: top;
+                text-transform: uppercase;
+              }
+              input {
+                width: 100%;
+                height: 35px;
+                cursor: pointer;
+              }
+              .icon {
+                right: 0px;
+                top: 50%;
+                padding-left: 5px;
+                position: absolute;
+                transform: translateY(-50%);
+                background-color: white;
+              }
+            }
+            .searchbar-popup {
+              cursor: default;
+              position: absolute;
+              background-color: white;
+              border-radius: 3px;
+              display: none;
+              border: 1px solid #666;
+              box-shadow: 0 2px 9px 0 rgba(0, 0, 0, 0.27);
+              z-index: 2;
+            }
+          }
+          .aditional-flight {
+            padding: 0 10px;
+            display: flex;
+            cursor: pointer;
+            align-items: center;
+            background-color: $color-primary;
+            z-index: 1;
+            .icon {
+              color: white;
+              font-size: 35px;
+              margin-right: 5px;
+              &:hover {
+                text-decoration: none;
+              }
+            }
+            a {
+              text-decoration: underline;
+              &:hover {
+                color: $color-secondary-dark;
+              }
+            }
+          }
+          & + .form-group {
+            margin-top: 6px;
+          }
+        }
+        .form-action {
+          width: 17%;
+          padding: 0 10px 0 15px;
+          justify-content: center;
+          align-items: center;
+          .mv_button {
+            width: 100%;
+            font-size: 18px;
+            padding: 15px 35px;
+          }
+        }
+      }
+      .searchbar-datepicker {
+        display: none;
+        margin-top: 3px;
+      }
+    }
+  }
+}
+
+@import "components/cities-sugestion-popup";
+@import "components/passengers-popup";
