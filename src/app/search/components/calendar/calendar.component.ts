@@ -126,7 +126,7 @@ export class CalendarComponent implements OnInit {
     $(this).datepicker('refresh');
   }
 
-  keyDownEvent(e) {
+  keyDownEvent(event) {
     //   TAB: 9
     //  LEFT: 37
     //    UP: 38
@@ -134,10 +134,10 @@ export class CalendarComponent implements OnInit {
     //  DOWN: 40
     // ENTER: 13
     //             IE        OTHER
-    let code = e.keyCode || e.which;
+    let code = event.keyCode || event.which;
     // If key is not TAB
     if (code !== 9) {
-      e.preventDefault();
+      event.preventDefault();
       // And arrow keys used "for performance on other keys"
       if (code === 37 || code === 38 || code === 39 || code === 40) {
         // Get current date
