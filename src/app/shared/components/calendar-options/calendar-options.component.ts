@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-calendar-options',
-  templateUrl: './calendar-options.component.html',
-  styleUrls: ['./calendar-options.component.css']
+  templateUrl: './calendar-options.component.html'
 })
 export class CalendarOptionsComponent implements OnInit {
 
