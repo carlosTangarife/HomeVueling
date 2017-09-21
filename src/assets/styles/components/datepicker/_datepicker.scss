@@ -1,0 +1,300 @@
+
+.searchbar-datepicker {
+  border-radius: 3px;
+  border: solid 1px #666;
+  background-color: #fff;
+  &.range-datepicker {
+    .ui-datepicker {
+      .ui-datepicker-calendar {
+        tbody {
+          tr {
+            td {
+              a {
+                &:hover {
+                  transition: none;
+                  background-color: $color-primary;
+                  &:before {
+                    content: '';
+                    width: 0;
+                    height: 0;
+                    top: 16px;
+                    left: -9px;
+                    position: absolute;
+                    border-style: solid;
+                    transform: translateY(-50%);
+                    border-width: 12px 13px 12px 0;
+                    border-color: transparent #fc0 transparent transparent;
+                  }
+                }
+              }
+              &.ui-datepicker-current-day,
+              &.ui-datepicker-end-day {
+                a {
+                  border: none;
+                  background-color: $color-primary;
+                  &:hover {
+                    background-color: $color-primary;
+                  }
+                  &:after,
+                  &:before {
+                    content: none;
+                    width: 0;
+                    height: 0;
+                    position: absolute;
+                    border-style: solid;
+                    transform: translateY(-50%);
+                    background: transparent;
+                  }
+                }
+              }
+              &.ui-datepicker-current-day {
+                a {
+                  &:after {
+                    top: 15px;
+                    content: '';
+                    right: -37px;
+                    border-width: 12px 0 12px 13px;
+                    border-color: transparent transparent transparent #fc0;
+                  }
+                }
+                &.ui-datepicker-today {
+                  a {
+                    &:after,
+                    &:before {
+                      top: 16px;
+                    }
+                    &:after {
+                      right: -36px;
+                    }
+                    &:before {
+                      left: -7px;
+                    }
+                  }
+                }
+              }
+              &.ui-datepicker-end-day {
+                a {
+                  &:before {
+                    top: 16px;
+                    content: '';
+                    left: -9px;
+                    border-width: 12px 13px 12px 0;
+                    border-color: transparent #fc0 transparent transparent;
+                  }
+                }
+              }
+              &.ui-datepicker-travel-time {
+                background-image: url('http://static.vueling.com/cms/images/calendar_travelTime_bg.png');
+                background-position: center;
+                background-repeat: no-repeat;
+                background-size: 100% 25px;
+                &.ui-datepicker-current-day {
+                  background-position: 23px center;
+                }
+                &.ui-datepicker-end-day {
+                  background-position: -23px center;
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .searcbar-datepicker_title {
+    position: relative;
+    color: #666;
+    font-weight: 600;
+    background-color: #ddd;
+    border-top-right-radius: 3px;
+    border-top-left-radius: 3px;
+    .title {
+      top: 50%;
+      left: 50px;
+      transform: translateY(-50%);
+      text-transform: uppercase;
+      position: absolute;
+      .icon {
+        top: 50%;
+        left: -30px;
+        font-size: 22px;
+        position: absolute;
+        transform: translateY(-50%);
+      }
+    }
+    .options {
+      display: block;
+      padding: 15px;
+      text-align: center;
+      li {
+        display: inline-block;
+        input, label {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+  .ui-datepicker {
+    width: 100% !important;
+    border-radius: 0;
+    padding: 0;
+    border: none;
+    font-family: $font-default-regular;
+    border-bottom-right-radius: 3px;
+    border-bottom-left-radius: 3px;
+    .ui-datepicker-header {
+      border: none;
+      margin: 0 15px;
+      background-color: transparent;
+      text-transform: uppercase;
+      border-bottom: 3px solid #f3f3f3;
+      .ui-corner-all {
+        top: 50%;
+        padding: 7px;
+        cursor: pointer;
+        border-radius: 50%;
+        background-color: #f7f7f7;
+        transform: translateY(-50%);
+        &:before {
+          content: "\e914";
+          font-family: $font-icons;
+          top: 50%;
+          color: #bebebe;
+          position: absolute;
+          transform: translateY(-50%);
+        }
+        &.ui-state-hover {
+          border: none;
+          font-weight: 700;
+          background-color: $color-primary;
+          &:before {
+            color: white;
+          }
+        }
+        &.ui-datepicker-next {
+          right: 0;
+        }
+        &.ui-datepicker-prev {
+          left: 0;
+          &:before {
+            top: initial;
+            transform: rotate(180deg);
+          }
+        }
+        .ui-icon {
+          display: none;
+        }
+      }
+      .ui-datepicker-title {
+        color: #666;
+        font-size: 20px;
+        .ui-datepicker-year {
+          font-weight: 300;
+        }
+      }
+    }
+    .ui-datepicker-calendar {
+      thead {
+        color: #666;
+        font-size: 12px;
+        text-transform: uppercase;
+        th:last-child {
+          color: #ccc;
+        }
+      }
+      tbody {
+        tr {
+          td {
+            height: 32px;
+            position: relative;
+            &.ui-datepicker-current-day,
+            &.ui-datepicker-today {
+              a {
+                padding: 7px 0px;
+                &:hover {
+                  background-color: transparent;
+                }
+              }
+            }
+            &.ui-datepicker-current-day {
+              a {
+                color: #666;
+                border: 2px solid $color-primary;
+                &:after,
+                &:before {
+                  content: '';
+                  width: 10px;
+                  height: 10px;
+                  left: 0;
+                  right: 0;
+                  margin: auto;
+                  position: absolute;
+                  background-color: white;
+                }
+                &:after {
+                  top: -7px;
+                }
+                &:before {
+                  bottom: -7px;
+                }
+              }
+            }
+            &.ui-datepicker-today {
+              a {
+                font-weight: 600;
+                border: 1px solid #666;
+              }
+            }
+            a {
+              width: 32px;
+              height: 32px;
+              top: 50%;
+              left: 0;
+              right: 0;
+              margin: auto;
+              border: none;
+              padding: 9px 0px;
+              border-radius: 50%;
+              background: transparent;
+              text-align: center;
+              transform: translateY(-50%);
+              position: absolute;
+              &:hover {
+                background-color: #eee;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+  .searcbar-datepicker_legend {
+    margin: 0 20px;
+    padding: 15px 0;
+    border-top: 2px solid #f3f3f3;
+    .legend-item {
+      padding-left: 25px;
+      position: relative;
+      margin-right: 15px;
+      display: inline-block;
+      &:before {
+        content: " ";
+        width: 15px;
+        height: 15px;
+        top: 50%;
+        left: 0;
+        position: absolute;
+        border: 1px solid #666;
+        transform: translateY(-50%);
+        border-radius: 50%;
+        background-color: transparent;
+      }
+      &.selection {
+        &:before {
+          border: 1px solid $color-primary;
+          background-color: $color-primary;
+        }
+      }
+    }
+  }
+}

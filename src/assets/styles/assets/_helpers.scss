@@ -1,0 +1,32 @@
+// estos helpers /* */ ya los tenemos en bootstrap
+
+.floating-right { /* pull-right (bootstrap) */
+  float: right !important;
+}
+.floating-left { /* pull-left (bootstrap)*/
+  float: left !important;
+}
+.show {
+  display: block !important;
+}
+.show-table {
+  display: table !important;
+}
+.hide { /* hidden (bootstrap) */
+  display: none !important;
+}
+.no-result {
+  margin: 20px 0;
+}
+
+.margin-bottom-20 {
+  margin-bottom: 20px !important;
+}
+
+//remove
+.top-border {
+  border-top: 1px solid $color-gray-40;
+  @media (max-width: 767px) {
+    border-top: 0;
+  }
+}

@@ -1,0 +1,310 @@
+@import "variables";
+
+@font-face {
+  font-family: 'new-vueling-icons';
+  src:  url('./assets/fonts/new-vueling-icons.eot?akgmzt');
+  src:  url('./assets/fonts/new-vueling-icons.eot?akgmzt#iefix') format('embedded-opentype'),
+    url('./assets/fonts/new-vueling-icons.ttf?akgmzt') format('truetype'),
+    url('./assets/fonts/new-vueling-icons.woff?akgmzt') format('woff'),
+    url('./assets/fonts/new-vueling-icons.svg?akgmzt#new-vueling-icons') format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+[class^="icon-"], [class*=" icon-"] {
+  /* use !important to prevent issues with browser extensions that change fonts */
+  font-family: 'new-vueling-icons' !important;
+  speak: none;
+  font-style: normal;
+  font-weight: normal;
+  font-variant: normal;
+  text-transform: none;
+  line-height: 1;
+
+  /* Better Font Rendering =========== */
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+.icon-facebook {
+  &:before {
+    content: $icon-facebook;
+  }
+}
+.icon-instagram {
+  &:before {
+    content: $icon-instagram;
+  }
+}
+.icon-twitter {
+  &:before {
+    content: $icon-twitter;
+  }
+}
+.icon-youtube {
+  &:before {
+    content: $icon-youtube;
+  }
+}
+.icon-vueling-club .path1 {
+  &:before {
+    content: $icon-vueling-club-path1;
+    color: rgb(102, 102, 102);
+  }
+}
+.icon-vueling-club .path2 {
+  &:before {
+    content: $icon-vueling-club-path2;
+    margin-left: -4.8134765625em;
+    color: rgb(255, 204, 1);
+  }
+}
+.icon-vueling-club .path3 {
+  &:before {
+    content: $icon-vueling-club-path3;
+    margin-left: -4.8134765625em;
+    color: rgb(102, 102, 102);
+  }
+}
+.icon-my-vueling {
+  &:before {
+    content: $icon-my-vueling;
+  }
+}
+.icon-calendar .path1 {
+  &:before {
+    content: $icon-calendar-path1;
+    color: rgb(102, 102, 102);
+  }
+}
+.icon-calendar .path2 {
+  &:before {
+    content: $icon-calendar-path2;
+    margin-left: -0.92578125em;
+    color: rgb(255, 204, 0);
+  }
+}
+.icon-calendar .path3 {
+  &:before {
+    content: $icon-calendar-path3;
+    margin-left: -0.92578125em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-arrow-list {
+  &:before {
+    content: $icon-arrow-list;
+  }
+}
+.icon-hotel-plus-car {
+  &:before {
+    content: $icon-hotel-plus-car;
+  }
+}
+.icon-passenger {
+  &:before {
+    content: $icon-passenger;
+  }
+}
+.icon-baggage {
+  &:before {
+    content: $icon-baggage;
+  }
+}
+.icon-building {
+  &:before {
+    content: $icon-building;
+  }
+}
+.icon-car {
+  &:before {
+    content: $icon-car;
+  }
+}
+.icon-clock .path1 {
+  &:before {
+    content: $icon-clock-path1;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-clock .path2 {
+  &:before {
+    content: $icon-clock-path2;
+    margin-left: -1.01171875em;
+    color: rgb(102, 102, 102);
+  }
+}
+.icon-computer {
+  &:before {
+    content: $icon-computer;
+  }
+}
+.icon-location {
+  &:before {
+    content: $icon-location;
+  }
+}
+.icon-search {
+  &:before {
+    content: $icon-search;
+  }
+}
+.icon-settings {
+  &:before {
+    content: $icon-settings;
+  }
+}
+.icon-turn-off {
+  &:before {
+    content: $icon-turn-off;
+  }
+}
+.icon-vueling .path1 {
+  &:before {
+    content: $icon-vueling-path1;
+    color: rgb(255, 204, 0);
+  }
+}
+.icon-vueling .path2 {
+  &:before {
+    content: $icon-vueling-path2;
+    margin-left: -2.9521484375em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-vueling .path3 {
+  &:before {
+    content: $icon-vueling-path3;
+    margin-left: -2.9521484375em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-vueling .path4 {
+  &:before {
+    content: $icon-vueling-path4;
+    margin-left: -2.9521484375em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-vueling .path5 {
+  &:before {
+    content: $icon-vueling-path5;
+    margin-left: -2.9521484375em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-vueling .path6 {
+  &:before {
+    content: $icon-vueling-path6;
+    margin-left: -2.9521484375em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-vueling .path7 {
+  &:before {
+    content: $icon-vueling-path7;
+    margin-left: -2.9521484375em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-vueling .path8 {
+  &:before {
+    content: $icon-vueling-path8;
+    margin-left: -2.9521484375em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-airport {
+  &:before {
+    content: $icon-airport;
+  }
+}
+.icon-flight-status .path1 {
+  &:before {
+    content: $icon-flight-status-path1;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-flight-status .path2 {
+  &:before {
+    content: $icon-flight-status-path2;
+    margin-left: -1.01171875em;
+    color: rgb(255, 204, 0);
+  }
+}
+.icon-plane {
+  &:before {
+    content: $icon-plane;
+  }
+}
+.icon-plane-right {
+  &:before {
+    content: $icon-plane-right;
+  }
+}
+.icon-check-ok-rounded .path1 {
+  &:before {
+    content: $icon-check-ok-rounded-path1;
+    color: rgb(255, 204, 0);
+  }
+}
+.icon-check-ok-rounded .path2 {
+  &:before {
+    content: $icon-check-ok-rounded-path2;
+    margin-left: -1.01171875em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-check-ok-success {
+  &:before {
+    content: $icon-check-ok-success;
+  }
+}
+.icon-delete-flight {
+  &:before {
+    content: $icon-delete-flight;
+  }
+}
+.icon-exclamation-mark .path1 {
+  &:before {
+    content: $icon-exclamation-mark-path1;
+    color: rgb(212, 71, 15);
+  }
+}
+.icon-exclamation-mark .path2 {
+  &:before {
+    content: $icon-exclamation-mark-path2;
+    margin-left: -1.01171875em;
+    color: rgb(255, 255, 255);
+  }
+}
+.icon-info {
+  &:before {
+    content: $icon-info;
+  }
+}
+.icon-rounded-less {
+  &:before {
+    content: $icon-rounded-less;
+  }
+}
+.icon-rounded-more {
+  &:before {
+    content: $icon-rounded-more;
+  }
+}
+.icon-secondary-arrow-right {
+  &:before {
+    content: $icon-secondary-arrow-right;
+  }
+}
+.icon-arrow-down {
+  &:before {
+    content: $icon-arrow-down;
+  }
+}
+.icon-arrow-right {
+  &:before {
+    content: $icon-arrow-right;
+  }
+}

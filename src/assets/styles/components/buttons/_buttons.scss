@@ -1,0 +1,256 @@
+@import "variables";
+@import "mixins";
+
+/****************************************************
+
+BUTTONS
+
++ buttons
+	+ color variants
+	+ size
+	+ icon
+	+ icon attached
+
+****************************************************/
+
+// default
+.mv_button {
+	display: inline-block;
+	cursor: pointer;
+	outline: 0;
+  text-align: center;
+	text-decoration: none;
+	box-sizing: border-box;
+	text-decoration: none !important;
+	font-size: $button-fontSize-md;
+	padding: $button-padding-v $button-padding-h;
+	color: $color-gray-70;
+	@include border-radius($border-radius-regular);
+	@include transition(all .15s ease-in);
+	border: 2px solid $color-primary;
+	background-color: $color-primary;
+	font-family: $font-relevant;
+	font-weight: $font-weight-bold !important;
+	white-space: initial;
+	line-height: 1em;
+	&:active,
+	&:visited {
+		color: $color-gray-70;
+	}
+	&:hover,
+	&:focus,
+	&.focus {
+		color: $black;
+		border-color: $color-primary-dark	;
+		background-color: $color-primary-dark	;
+	}
+	&:disabled,
+    &[disabled]{
+	  opacity: .4;
+	  cursor: default;
+	  &:hover,
+	  &:focus,
+	  &.focus {
+	  	color:$color-gray-70;
+			border-color: $color-primary;
+			background-color: $color-primary;
+	  }
+	}
+
+	/**
+	* Buttons colors variant
+	* @include button-variant($color, $color-hover, $background, $background-hover)
+	*/
+
+	&.color-secundary {
+		@include button-variant(white, white, $color-secondary, $color-secondary-dark, $color-secondary, $color-secondary-dark);
+	}
+	&.color-darkGrey  {
+		@include button-variant(white, white, $color-gray-70, $color-gray-90, $color-gray-70, $color-gray-90);
+	}
+	&.color-lightGrey {
+		@include button-variant(white, white, $color-gray-20, $color-gray-30, $color-gray-20, $color-gray-30);
+	}
+	&.style-outline {
+		@include button-variant(#666, #333, transparent, #f3f3f3, #666, #333333);
+	}
+
+	/**
+	* Button sizes variant
+	* @include button-size($font-size, $padding-vertical, $padding-horizontal, $border-radius);
+	*/
+
+	&.size-lg {
+		@include button-size($button-fontSize-lg, $button-padding-v--lg, $button-padding-h--lg, $border-radius-regular);
+	}
+	&.size-md {
+		@include button-size($button-fontSize-md, $button-padding-v, $button-padding-h, $border-radius-regular);
+	}
+	&.size-ssm {
+		@include button-size($button-fontSize-xs, $button-padding-v--sm, $button-padding-h--sm, $border-radius-regular);
+	}
+	&.size-sm {
+		@include button-size($button-fontSize-sm, $button-padding-v--sm, $button-padding-h--sm, $border-radius-regular);
+	}
+	&.size-xs {
+		@include button-size($button-fontSize-xs, $button-padding-v--xs, $button-padding-h--xs, $border-radius-xs);
+		font-family: $font-default;
+		font-weight: $font-weight-bold;
+	}
+	&.size-xxs {
+		@include button-size($button-fontSize-xs, $button-padding-v--xxs, $button-padding-h--xxs, $border-radius-sm);
+		font-family: $font-default;
+		font-weight: $font-weight-bold;
+	}
+
+	/**
+	* Button Icon
+	* @include button-icon($positon, $padding-lateral, $icon-position);
+	*/
+
+	&.icon-right {
+			@include button-icon(right, $button-padding-h--icon, 13px);
+
+		&.size-lg {
+			@include button-icon(right, $button-padding-h--lg--icon, 15px);
+		}
+		&.size-sm {
+			@include button-icon(right, $button-padding-h--sm--icon, 8.5px);
+		}
+		&.size-xs {
+			@include button-icon(right, $button-padding-h--xs--icon, 6.5px);
+		}
+	}
+
+	&.icon-left {
+			@include button-icon(left, $button-padding-h--icon, 15px);
+
+		&.size-lg {
+			@include button-icon(left, $button-padding-h--lg--icon, 17px);
+		}
+		&.size-sm {
+			@include button-icon(left, $button-padding-h--sm--icon, 10.5px);
+		}
+		&.size-xs {
+			@include button-icon(left, $button-padding-h--xs--icon, 8.5px);
+		}
+	}
+
+	/**
+	* Button Image
+	*/
+	&.button-img {
+		 white-space: initial;
+		 padding: $button-padding-image;
+		 border-radius: $border-radius-sm;
+		 .button-img-cont,
+		 .button-text {
+			 padding: 0;
+			 display: table-cell;
+			 vertical-align: middle;
+		 }
+		 .button-img-cont {
+			 img {
+				 vertical-align: middle;
+				 -webkit-border-top-left-radius: $button-padding-image;
+				 -webkit-border-bottom-left-radius: $button-padding-image;
+				 -moz-border-radius-topleft: $button-padding-image;
+				 -moz-border-radius-bottomleft: $button-padding-image;
+				 border-top-left-radius: $button-padding-image;
+				 border-bottom-left-radius: $button-padding-image;
+		  }
+		 }
+		 .button-text {
+			 padding-left: 10px;
+			 text-align: left;
+			 font-size: 13px;
+			 font-weight: $font-weight-light;
+		  .btn-title {
+				color: white;
+				font-weight: $font-weight-bold;
+		  }
+		 }
+	}
+
+	/**
+	* Button Icon attached
+	*/
+
+	&[class*="attached"] {
+		&.right,
+		&.left {
+			border: none;
+		}
+		&.left {
+			border: none;
+			position: relative;
+			padding: $button-padding-v--attached $button-padding-right--attached $button-padding-v--attached $button-padding-left--attached;
+			&:after {
+				content: "\e913";
+				right: 0;
+				top: 0;
+				height: 100%;
+				width: 30px;
+				border-left: 0.8px solid white;
+				position: absolute;
+				line-height: 3.2em;
+				font-family: 'vueling';
+			}
+			&.disabled,
+	    &[disabled] {
+				border-radius: 0;
+				padding: $button-padding-v--attached $button-padding-left--attached;
+				border-top-left-radius: $border-radius-regular;
+				border-bottom-left-radius: $border-radius-regular;
+				&:after {
+					width: 25px;
+					content: "\e912";
+					border-left: none;
+				}
+	    }
+		}
+		&.right {
+			margin-left: -2px;
+			padding:  $button-padding-v--attached 10px;
+			border-radius: 0;
+			border-top-right-radius: $border-radius-regular;
+			border-bottom-right-radius: $border-radius-regular;
+		}
+	}
+}
+
+/**
+* Button checkbox
+*/
+
+.form-checkbox--button {
+	font-size: $button-fontSize-default;
+	display: inline-block;
+	background-color: transparent;
+	label {
+		cursor: pointer;
+		span {
+			color: $button-checkbox-light;
+			border: 1px solid $button-checkbox-light;
+			border-radius: $border-radius-xxs;
+			padding: $button-padding-v--checkbox $button-padding-h--checkbox;
+			font-weight: bold;
+			-webkit-touch-callout: none;
+	    -webkit-user-select: none;
+	    -khtml-user-select: none;
+	    -moz-user-select: none;
+	    -ms-user-select: none;
+	    user-select: none;
+		}
+	}
+	input:checked + span {
+		color: white;
+		background-color: $button-checkbox-light;
+	}
+	&.color-darkGrey {
+		@include button-checkbox-variant($button-checkbox-dark);
+	}
+	&.color-lightGrey {
+		@include button-checkbox-variant($button-checkbox-light);
+	}
+}

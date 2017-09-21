@@ -1,0 +1,214 @@
+@import "variables";
+@import "mixins";
+
+/****************************************************
+
+FORMS
+
++ input
++ select
++ button
++ icon
++ inverse
++ checkbox
++ responsive
+
+****************************************************/
+
+.input {
+  display: inline-block;
+  color: $color-gray-80	;
+  background-color: $white;
+  padding: 10px 10px;
+  border: $color-gray-25 solid 1px;
+  border-radius: 2px;
+  box-shadow: none;
+  margin: 0;
+  position: relative;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+  box-sizing: border-box;
+}
+
+.form-inline .input { width: 100%;}
+
+.form-inline .input-middle{margin-left:.75em;}
+
+.input input{
+  border: none;
+}
+
+.input::-webkit-input-placeholder{
+  color:$color-gray-60;
+}
+
+.input label,
+.input input::-webkit-input-placeholder{
+  color:$color-gray-40;
+}
+
+.input label {
+  font-size: $font-size-xs;
+  display: block;
+}
+
+
+.input.error {
+  border-color: $color-red;
+}
+.input.error .input-error{
+  display: block;
+}
+.input-error{
+  display: none;
+  color: $white;
+  background-color: $color-red;
+  padding: 15px;
+  position: absolute;
+  left:0;
+  border-radius: 5px;
+  z-index: 99;
+  width: 100%;
+  top: 110%;
+}
+.input-error:before {
+    content: '';
+    border-bottom: solid 7px $color-red;
+    left: 0;
+    right: 0;
+    top: -7px;
+    width: 1px;
+    margin: auto;
+    position: absolute;
+    border-left: solid 7px transparent;
+    border-right: solid 7px transparent;
+}
+
+.input.select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.selectwrap:after {
+  font-family: $font-icons;
+  font-size: 15px;
+  content:"";
+  position: relative;
+  right: 26px;
+  top: 3px;
+  color: $color-gray-70;
+  z-index: 1;
+  pointer-events: none;
+}
+
+
+.input.btn {
+
+}
+
+
+input[type=submit].icon {
+    position: relative;
+    left: -36px;
+    top: 3px;
+    border: none;
+    background-color: transparent;
+    color: #999;
+    font-size: 19px;
+}
+
+
+/* inverse */
+.input.inverse {
+    border: none;
+    background-color: #666;
+    color: #fff;
+}
+
+.input.inverse:focus{
+  background-color: $white;
+  color: $black;
+}
+
+.input.inverse::-webkit-input-placeholder{
+  color:$color-gray-40;
+}
+
+
+
+/* checkbox */
+.checkbox:not(:checked),
+.checkbox:checked {
+  position: absolute;
+  left: -9999px;
+}
+.checkbox:not(:checked) + label,
+.checkbox:checked + label {
+  position: relative;
+  padding-left: 1.5em;
+  cursor: pointer;
+}
+
+/* checkbox aspect */
+.checkbox:not(:checked) + label:before,
+.checkbox:checked + label:before {
+  content: '';
+  position: absolute;
+  left: 0; top: 0;
+  width: 1em; height: 1em;
+  border: 1px solid #ccc;
+  background: #fff;
+  border-radius: 4px;
+  box-shadow: inset 0 1px 3px rgba(0,0,0,.1);
+}
+/* checked mark aspect */
+.checkbox:not(:checked) + label:after,
+.checkbox:checked + label:after {
+  content: '✔';
+  position: absolute;
+  top: .1em; left: .3em;
+  font-size: 1em;
+  line-height: 0.8;
+  color: #999;
+  transition: all .2s;
+}
+/* checked mark aspect changes */
+.checkbox:not(:checked) + label:after {
+  opacity: 0;
+  transform: scale(0);
+}
+.checkbox:checked + label:after {
+  opacity: 1;
+  transform: scale(1);
+}
+/* disabled checkbox */
+.checkbox:disabled:not(:checked) + label:before,
+.checkbox:disabled:checked + label:before {
+  box-shadow: none;
+  border-color: #bbb;
+  background-color: #ddd;
+}
+.checkbox:disabled:checked + label:after {
+  color: #999;
+}
+.checkbox:disabled + label {
+  color: #aaa;
+}
+
+/* accessibility */
+.checkbox:checked:focus + label:before,
+.checkbox:not(:checked):focus + label:before {
+  border: 1px dotted blue;
+}
+
+/* hover style just for information */
+label:hover:before {
+  border: 1px solid #4778d9!important;
+}
+
+
+
+/* responsive */
+
+.form-inline .col-md-6 {padding: 0;}

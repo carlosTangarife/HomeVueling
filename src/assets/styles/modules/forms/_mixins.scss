@@ -1,0 +1,38 @@
+/****************************************************
+
+PLACEHOLDERS
+
+****************************************************/
+
+@mixin placeholder($font-size, $color) {
+  ::-webkit-input-placeholder {
+    font-size: $font-size;
+    color: $color;
+  }
+  :-moz-placeholder { /* Firefox 18- */
+    font-size: $font-size;
+    color: $color;
+  }
+  ::-moz-placeholder {  /* Firefox 19+ */
+    font-size: $font-size;
+    color: $color;
+  }
+  :-ms-input-placeholder {
+    font-size: $font-size;
+    color: $color;
+  }
+}
+/****************************************************
+
+INPUTS
+
+****************************************************/
+ @mixin search-input ($border,$padding,$color,$font-size){
+   border    : $border;
+   padding   : $padding;
+   color     : $color;
+   font-size : $font-size;
+   &:focus{
+     outline: none;
+   }
+ }

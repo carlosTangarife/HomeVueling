@@ -1,0 +1,45 @@
+//
+// BREADCRUMB
+// --------------------------------------------------
+
+// Breadcrumb
+//
+// Breadcrumb común de las aplicaciones. Es responsive.
+//
+// Markup: layout/breadcrumb.hbs
+//
+// Styleguide 52
+
+.breadcrumb{
+  //margin-left: $grid-gutter-width;
+  //@include completeOutterMargin;
+  @include genericMarginBottom;
+  li{
+    display: none;
+    &:last-child{
+      display: inline-block;
+    }
+    @include tablet{
+      display: inline-block;
+      & + li{
+        margin-left: .7em;
+        &:before{
+          font-family: 'Vueling_Back_Icons' !important;
+          content: $fvb-arrowRight;
+          margin-right: 1em;
+          font-size: 0.7em;
+        }
+      }
+    }
+  }
+  a{
+    text-decoration: none;
+    color: $breadcrumb_link;
+    @include desktop{
+      &:hover{
+        color: $breadcrumb_hover;
+      }
+    }
+  }
+
+}

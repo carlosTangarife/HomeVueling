@@ -1,0 +1,10 @@
+/****************************************************
+ 
+RESTYLING 
+Reescribiendo Bootstrap
+ 
+****************************************************/
+
+[class^="col-"], [class*=" col-"]{
+	box-sizing: border-box;
+}

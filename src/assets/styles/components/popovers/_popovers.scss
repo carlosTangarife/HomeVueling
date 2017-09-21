@@ -1,0 +1,40 @@
+@import "variables";
+//@import "mixins";
+
+/****************************************************
+
+POPOVERS
+
+****************************************************/
+.popover {
+  left: 0;
+  top: 83px;
+  width: 100%;
+  padding: 15px;
+  position: absolute;
+  border-radius: 5px;
+  &:before {
+    content: '';
+    left: 0;
+    right: 0;
+    top: -7px;
+    width: 1px;
+    margin: auto;
+    position: absolute;
+    border-left: solid 7px transparent;
+    border-right: solid 7px transparent;
+  }
+  .popover-content {
+    line-height: 1.5em;
+    font-size: $fs-popover-content;
+  }
+  &.popover--error {
+    background-color: $error-color;
+    &:before{
+      border-bottom: solid 7px $error-color;
+    }
+    .popover-content {
+      color: $text-error-color;
+    }
+  }
+}

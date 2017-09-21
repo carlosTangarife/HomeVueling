@@ -1,0 +1,604 @@
+/***************************************************/
+/* VARIABLES */
+$header-height: 68px;
+$megamenu-height: 280px;
+$megamenu-padding: 38px;
+
+/****************************************************
++ GRID
++ UTILS
++ ANIMATIONS
++ Z-INDEX
++ NAVBAR
+  + dropdown
++ MAIN MEN
+  + menu
+  + buscador
+  + login
++ MEGA MENU
++ NAV TABS
++ FOOTER
+****************************************************/
+
+/***************************************************/
+/* GRID */
+.col{
+  float: left;
+  padding: 0;
+}
+.col-last{
+  float: right;
+}
+
+
+
+/***************************************************/
+/* UTILS */
+.margin0 {margin: 0;}
+.padding0 {padding: 0;}
+small, .small {font-size: $font-size-sm;}
+.white {color: $white;}
+.colorbrand, .white:hover {color: $color-primary;}
+
+
+/***************************************************/
+/* ANIMATIONS */
+div, a, li, :before, :after, :focus, :hover {
+  transition: all 0.25s ease;
+}
+
+
+/***************************************************/
+/* Z-INDEX */
+#menuMain {z-index: 80;}
+#menuMain .nav{z-index: 100;}
+#menuMain .mega-menu {z-index: 90;}
+.dropdown-content {z-index: 999;}
+.navbar-main .tabLink.active:before,
+.navbar-main .tabLink.active:after {z-index: 200;}
+
+
+/***************************************************/
+/* ICONS */
+
+.icon-xs {
+  font-size:7px;
+}
+
+.icon-lg {
+  font-size:35px;
+}
+
+.icon-inverse {
+  color:$white;
+}
+
+.text-icon  {
+  display: table;
+}
+
+.text-icon span {
+  display: table-cell;
+  vertical-align: sub;
+}
+
+.text-icon .icon {
+  margin-right: 5px;
+}
+
+.text-icon .icon-first {
+  font-size: 37px;
+  display: block;
+  margin-top: -.25em;
+}
+.text-icon .icon-last {
+  font-size: 17px;
+  padding-left: 5px;
+  color:$white;
+}
+
+a:hover .icon,
+a.text-icon:hover .icon-last,
+.text-icon span  {
+  color:$color-primary;
+}
+
+a.text-icon:hover span,
+a.text-icon:hover .icon-flight-status .path2:before{
+  color:$white;
+}
+
+.icon-line, .icon-line li {
+  margin: 0 !important;
+  padding: 0 !important;
+  color:$color-gray-60;
+}
+
+.icon-line li{
+  float: left !important;
+}
+
+.icon-line .line{
+  border-top: dashed 1px;
+  padding: 1em !important;
+  margin: .5em .25em !important;
+}
+
+.icon-inverse.icon-vueling-club .path1:before {
+  color:$white;
+}
+
+.icon-inverse.icon-vueling-club .path3:before {
+  color:#ccc;
+}
+
+/***************************************************/
+/* NAVBAR */
+.navbar h1, .navbar h2, .navbar h3, .navbar h4 {
+  margin: 0;
+}
+
+.navbar .form-inline .input { width: 95%;}
+
+.navbar {
+  font-family: $font-default-regular;
+  font-size: $font-size-default;
+}
+
+.navbar .container {
+  display: block;
+  border: none;
+}
+
+.navbar li, .navbar-header, .navbar-nav {
+  float:left;
+}
+
+.navbar-brand .icon{
+  font-size: 34px;
+  margin: 7px 0;
+}
+
+.navbar a{
+  color:$white;
+  text-decoration: none;
+}
+
+.navbar.navbar-top {
+  color:$color-gray-40;
+  background-color: $color-gray-90;
+}
+
+li.sep {
+  padding: 10px 0;
+}
+/* dropdown  */
+.dropdown {
+    font-size: $font-size-md;
+    position: relative;
+    display: inline-block;
+    color:$color-gray-90;
+}
+
+.dropdown .icon-arrow-down {
+   font-size: 7px;
+   padding-left: 2px;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    box-shadow: 0 2px 4px 0 rgba(0, 0, 0, 0.5);
+    right: 0;
+    padding: 10px 0;
+}
+
+
+.dropdown:hover,
+.dropdown-content {
+    background-color: $white;
+}
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown-content li {
+    float: none;
+}
+
+.dropdown-content li a{
+    padding: 10px 15px;
+    display: block;
+}
+
+.dropdown:hover a,
+.dropdown-content a {
+    color:$color-gray-90;
+}
+
+.dropdown-content li a:hover {
+    background-color: $color-primary;
+}
+
+
+/* dropdown columns */
+ul.col  {
+  min-width: 200px;
+}
+
+ul.col3  {
+}
+
+ul.col li {
+  float: left;
+  width: 50%;
+}
+
+ul.col3 li {
+  width: 33.33333333333%;
+}
+
+.dropdown-site,
+.dropdown-site .dropdown-content {
+  min-width: 110px;
+}
+
+.dropdown-courence .col {
+  width: 380.4px;
+}
+.dropdown-lang .col {
+  width: 324px;
+  right: -134px;
+}
+
+/***************************************************/
+/* MAIN MENU */
+#menuMain {
+  height: $header-height;
+}
+
+.fixed {
+  position: fixed;
+  width: 100%;
+}
+
+#menuMain.fixed {
+  top:0;
+}
+#searchbar.fixed {
+  top:$header-height;
+  left:0;
+}
+/* menu */
+.navbar.navbar-main, #menuMain .mega-menu {
+  color:$color-gray-40;
+  background-color: $color-gray-80;
+}
+
+.navbar.navbar-main .nav a:hover,
+.navbar.navbar-main .nav .active a {
+    color:$color-primary;
+}
+
+.navbar-main .navbar-header {
+  margin: 14px 10px 14px 0px;
+}
+
+.navbar-main .navbar-nav {
+  margin-left: 5%;
+}
+
+.navbar-main .navbar-nav li a  {
+  font-size: $font-size-default ;
+  padding:25px;
+}
+
+// active
+.navbar-main .tabLink.active:before,
+.navbar-main .tabLink.active:after {
+  content: "";
+  position: absolute;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: transparent;
+  border-bottom: 0;
+  top: $header-height;
+  left: 33%;
+}
+
+.navbar-main .tabLink.active:before {
+  border-top-color: $color-gray-60;;
+  border-width: 14px;
+}
+.navbar-main .tabLink.active:after {
+  border-top-color: $color-gray-80;
+  border-width: 13px;
+  margin-left: 1px;
+  margin-top: -1px;
+}
+
+
+/* tabs */
+
+
+
+
+/* buscador */
+.navbar-search {
+  padding: 15px;
+  float: left;
+  margin-left: 5%;
+}
+
+
+.navbar-search .input {
+  padding: 11px 10px;
+  width: 281px;
+}
+
+
+/* login  */
+.navbar-login {
+  padding-top: 14px;
+  float: right;
+  font-size: $font-size-md ;
+  color: $color-primary;
+  margin-right: 30px;
+  position: relative;
+}
+
+.navbar-login .icon-my-vueling {
+  float:left;
+  font-size: 42px;
+  color:$color-gray-70;
+  margin-right: 10px;
+}
+
+.navbar-login .icon-my-vueling.log-in {
+    color: $color-primary;
+}
+
+
+.navbar-login .icon-vueling-club {
+  font-size: $font-size-h4;
+}
+
+.navbar-login .icon-vueling-club .path1:before {
+  color:$white
+}
+.navbar-login .icon-vueling-club .path3:before {
+  color:$color-gray-40;
+}
+
+.navbar-login p {
+  margin-top: 5px;
+}
+
+.navbar-login .tabLink.active:before, .navbar-login .tabLink.active:after {
+    left: 53%;
+}
+
+/***************************************************/
+/* MEGA MENU */
+
+#menuMain .mega-menu {
+  width: 100%;
+  position: absolute;
+  min-height: $megamenu-height;
+  visibility: hidden;
+  opacity: 0;
+}
+
+#menuMain .mega-menu.active {
+  border-top: 1px solid $color-gray-60;
+  visibility: visible;
+  opacity: 1;
+}
+
+#menuMain .mega-menu .container {
+  padding: $megamenu-padding !important;
+}
+
+.mega-menu a {
+   color:$color-primary;
+ }
+
+ .mega-menu .nav-tabs a {
+    color:inherit;
+  }
+
+
+.mega-menu h2 {
+  color:$color-primary;
+  font-size: $font-size-default ;
+  padding: 0;
+}
+
+.mega-menu h2 .icon {
+  margin-right: .25em;
+}
+
+.mega-menu h3{
+  color:$color-gray-40;
+  font-size: $font-size-h5;
+  margin-bottom: 10px;
+  line-height: 130%;
+}
+
+.mega-menu h4{
+  color:$color-gray-40;
+  font-size: $font-size-lg ;
+  margin-bottom: 17px;
+  line-height: 130%;
+}
+
+
+.mega-menu li a:hover {
+  color: $color-primary !important;
+}
+
+.mega-menu .col-md-2{
+  width: 17.66%;
+}
+
+.mega-menu .col-last {
+  padding: 0 38px;
+  border-left: $color-gray-60 dashed 1px;
+  width: 45%;
+  height: $megamenu-height - $megamenu-padding*2;
+}
+
+.mega-menu .col-last h3{
+  margin-bottom: 27px;
+}
+
+.navbar-main .mega-menu .col-first {
+  border-right: $color-gray-60 solid 1px;
+  margin-right: 25px;
+  width: 20%;
+  height: $megamenu-height - $megamenu-padding*2;
+}
+
+
+
+/***************************************************/
+/* FOOTER */
+#footer .mega-menu {
+  background-color: $color-gray-25	;
+}
+#footer .mega-menu .container {
+    padding: 15px !important;
+}
+
+#footer .mega-menu li {
+    padding: 10px 0;
+    font-size: $font-size-default;
+}
+
+#footer .mega-menu,
+#footer a,
+#footer h3,
+#footer .mega-menu li a {
+    color: $color-gray-70;
+}
+
+#footer a:hover {
+    color: $color-primary;
+}
+
+#footer .navbar {
+    color:$white;
+    background-color: $color-gray-60 ;
+    text-align: center;
+    padding: 10px;
+    font-size: $font-size-md ;
+}
+
+#footer .navbar a{
+    color:$white;
+}
+
+#footer .navbar a:hover{
+    color:$color-primary;
+}
+
+#footer .navbar a .icon{
+    color:$color-gray-60;
+}
+
+#footer .icons-social{
+  margin-left: 20px;
+  font-size: $font-size-xl ;
+}
+
+#footer .icons-social a .icon:before{
+    color:$color-gray-70;
+    margin: 5px;
+}
+
+#footer .icons-social a .icon:hover:before{
+    color:$color-gray-90;
+}
+
+#footer label {
+    width: 100%;
+    display: block;
+    padding: 15px 0 10px  0;
+    font-weight: bold;
+    font-size: $font-size-default;
+}
+
+#footer h3 {
+  padding: 15px 0 4px  0;
+  font-size: $font-size-md;
+  font-weight: bold;
+  margin: 0;
+}
+
+#footer small {
+    font-size: $font-size-xs;
+    color: $color-gray-30 ;
+}
+
+#footer .col-md-3.col-first {
+  width: 20%;
+}
+
+
+
+#footer .col-md-3.bordered{
+  border: $color-gray-40 dashed;
+  border-width: 0 1px 0 1px;
+  padding: 0 40px 20px 40px;
+  min-height: 230px;
+  width: 30%;
+}
+
+
+
+#footer .col-md-3.bordered select{
+  width: 100%;
+}
+
+#footer .col-last {
+  border:none; width: 50%;
+}
+
+#footer .alert {
+  padding: 25px 15px;
+  font-size: $font-size-md;
+  margin-top:20px;
+}
+#footer .alert img{
+  padding-left:8px;  max-height: 30px;
+  float: left;
+}
+
+#footer .input{
+  height: auto; width: 55%;
+}
+
+#footer .selectwrap:after {
+  position: absolute;
+  right: 50px;
+  top: 50px;
+}
+
+
+.info-tel {
+  font-size: $font-size-xl;
+  font-weight: bold;
+}
+
+
+/***************************************************/
+/* NAV TABS */
+.navbar-main .nav-tabs li a {
+  padding: 0px 40px 10px 40px;
+  font-weight: bold;
+}
+
+.navbar-main .tab-pane {
+  padding-top: 20px;
+}
