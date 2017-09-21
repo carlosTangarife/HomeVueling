@@ -17,7 +17,7 @@ export class DestinationSelectorComponent implements OnInit {
   multicityBtn: ElementRef;
 
   @Input()
-  dataFlight: IFlight;
+  dataFlight: any;
 
   @Output()
   clickDestination: EventEmitter<any> = new EventEmitter();
@@ -64,6 +64,8 @@ export class DestinationSelectorComponent implements OnInit {
     this.isFocused.emit(this.selectorService.viewPopup);
     let data = this.selectorService.isResidentsFamily(this.dataFlight.destination.code);
     this.outStation.emit(data);
+    debugger;
+    this.selectorService.getFlightDisabledDays(this.dataFlight);
   }
 
   deleteRecentStationsCookie(event) {

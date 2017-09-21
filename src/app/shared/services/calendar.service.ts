@@ -3,9 +3,9 @@ import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 
 @Injectable()
 export class CalendarService {
-    private isGoing = true;
-    private isComeBack = false;
-    private isMulti = false;
+    public isGoing = true;
+    public isComeBack = false;
+    public isMulti = false;
     private isOneWay = true;
     private isRoundTrip = false;
     private isShowDatePicker = false;

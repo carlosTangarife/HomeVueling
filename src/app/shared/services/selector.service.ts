@@ -1,11 +1,20 @@
+import { URLSearchParams, Headers, RequestOptions } from '@angular/http';
 import { Injectable } from '@angular/core';
+
+/*Local Services */
+import { environment } from '../../../environments/environment';
+import { ResourcesService } from './resources.service';
 import { StationService } from './station.service';
 import { ConfigService } from './config.service';
+
+/*third-party library*/
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { environment } from '../../../environments/environment';
+
+/*Models using interface */
+import { IContactPhonesType, IContactPhones } from '../../search/models/contact-phones.model';
 import { IStation, IMarket, IStationList } from '../models/station.model';
+import { IFlight } from '../../search/models/flight.model';
 import { IIcon } from '../models/commons.model';
-import { IContactPhonesType, IContactPhones } from "../../search/models/contact-phones.model";
 
 @Injectable()
 export class SelectorService {
@@ -24,9 +33,9 @@ export class SelectorService {
     public recentStations$ = this.subjectRecentStations.asObservable();
 
     private subjectListStations = new BehaviorSubject<any>(this.filteredStations);
-    public listStations$ = this.subjectListStations.asObservable();   
+    public listStations$ = this.subjectListStations.asObservable();
 
-    constructor(private _configService: ConfigService, private _stationService: StationService) {
+    constructor(private _configService: ConfigService, private _stationService: StationService, private _resourcesService: ResourcesService) {
         this.stations = this._configService.environment['stations'];
         this.markets = this._configService.environment['markets'];
         this.marketsIata = [];
@@ -35,21 +44,21 @@ export class SelectorService {
         this.contact = this._configService.environment['contactphones'];
     }
 
-    loadContactPhones(iata: string){                  
-        let cont = this.contact.phonesServices.find(x => x.CountryCode == iata)
-        if(cont){
+    loadContactPhones(iata: string) {
+        let cont = this.contact.phonesServices.find(x => x.CountryCode === iata)
+        if (cont) {
             let result: IContactPhones = {
                 CountryCode: cont.CountryCode,
-                TextPhoneInfo:{
-                    phoneNumber: cont.TextPhoneInfo.phoneNumber, 
-                    phoneInfoFirst: cont.TextPhoneInfo.phoneInfoFirst, 
+                TextPhoneInfo: {
+                    phoneNumber: cont.TextPhoneInfo.phoneNumber,
+                    phoneInfoFirst: cont.TextPhoneInfo.phoneInfoFirst,
                     phoneInfoLast: cont.TextPhoneInfo.phoneInfoLast
-                }                       
+                }
             };
             console.log(result);
-             return result;       
+             return result;
         }
-    }     
+    }
 
     loadStations() {
         this.filteredStations = this.stations.StationList;
@@ -177,5 +186,53 @@ export class SelectorService {
 
     showMulticity(): boolean {
         return this._configService.multicityEnabled();
+    }
+
+    /**
+     * Method that performs a get request to the
+     * [API] (https://fetch.spec.whatwg.org/#requestinit))
+     * to obtain the flight disable days, it receives an argument of type RequestOptions
+     * @param {IFlight} dataFlight
+     * @returns {*}
+     * @memberof SelectorService
+    */
+    getFlightDisabledDays(dataFlight: IFlight): any {
+
+      /**
+       * only do the request if the source and destination exists as parameter.
+       */
+      if (dataFlight.origin.code && dataFlight.destination.code) {
+        let key = dataFlight.origin.code + '_' + dataFlight.destination.code;
+        let currentDate: Date = new Date();
+        let fullYear: string = currentDate.getFullYear().toString();
+        let month: string = (currentDate.getMonth() + 1).toString();
+        let queryString = new URLSearchParams();
+
+        queryString.set('departure', dataFlight.origin.code);
+        queryString.set('arrival', dataFlight.destination.code);
+        queryString.set('year', fullYear);
+        queryString.set('month', month);
+        queryString.set('monthsRange', '24');
+        queryString.set('callback', 'JSONP_CALLBACK');
+
+        const headers = new Headers();
+        headers.set('Content-Type', 'text/html');
+        headers.set('Content-Type', 'application/xhtml+xml');
+        headers.set('Content-Type', 'application/xml');
+
+        let options = new RequestOptions({
+          headers: headers,
+          params: queryString
+        });
+
+        this._resourcesService.getFlightDisabledDays(options, key).subscribe(
+          (prueba) => {
+            console.log(prueba);
+          },
+          (error) => {
+            console.log(error);
+          }
+        );
+      }
     }
 }
