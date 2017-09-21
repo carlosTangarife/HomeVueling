@@ -1,13 +1,13 @@
-export interface IContactPhonesType{
+export interface IContactPhonesType {
     phonesSales: Array<IContactPhones>,
     phonesServices: Array<IContactPhones>
 };
 
-export interface IContactPhones{
-    CountryCode: string,   
-    TextPhoneInfo:{
-        phoneNumber: string, 
-        phoneInfoFirst: string, 
+export interface IContactPhones {
+    CountryCode: string,
+    TextPhoneInfo: {
+        phoneNumber: string,
+        phoneInfoFirst: string,
         phoneInfoLast: string
      }
-};
+}

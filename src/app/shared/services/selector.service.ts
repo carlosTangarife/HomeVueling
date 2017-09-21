@@ -9,6 +9,7 @@ import { ConfigService } from './config.service';
 
 /*third-party library*/
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { map } from 'rxjs/Operator/map'
 
 /*Models using interface */
 import { IContactPhonesType, IContactPhones } from '../../search/models/contact-phones.model';
@@ -28,6 +29,7 @@ export class SelectorService {
     public iconRecent: IIcon;
     public contactPhones: IContactPhonesType;
     public contact: any;
+    public fligthDisabledDays: Array<string>;
 
     private subjectRecentStations = new BehaviorSubject<any>(this.filteredStations);
     public recentStations$ = this.subjectRecentStations.asObservable();
@@ -212,7 +214,7 @@ export class SelectorService {
         queryString.set('arrival', dataFlight.destination.code);
         queryString.set('year', fullYear);
         queryString.set('month', month);
-        queryString.set('monthsRange', '24');
+        queryString.set('monthsRange', '5');
         queryString.set('callback', 'JSONP_CALLBACK');
 
         const headers = new Headers();
@@ -226,8 +228,14 @@ export class SelectorService {
         });
 
         this._resourcesService.getFlightDisabledDays(options, key).subscribe(
-          (prueba) => {
-            console.log(prueba);
+          (data) => {
+            data.Calendar.map((yearAndMonth) => {
+              const fecha = yearAndMonth.Year + '-' + yearAndMonth.Month;
+              yearAndMonth.BlankDays.map((day) => {
+                this.fligthDisabledDays.push(`${fecha}-${day}`)
+              })
+            });
+            console.log(this.fligthDisabledDays);
           },
           (error) => {
             console.log(error);
