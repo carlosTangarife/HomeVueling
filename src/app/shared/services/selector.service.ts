@@ -42,30 +42,17 @@ export class SelectorService {
         this.contact = this.configService.environment['contactphones'];
     }
 
-<<<<<<< HEAD
-    loadContactPhones(iata: string){
-        let cont = this.contact.phonesServices.find(x => x.CountryCode == iata)
-        if(cont){
-            let result: IContactPhones = {
-                CountryCode: cont.CountryCode,
-                TextPhoneInfo:{
-=======
     loadContactPhones(iata: string) {
         let cont = this.contact.phonesServices.find(x => x.CountryCode === iata)
         if (cont) {
             let result: IContactPhones = {
                 CountryCode: cont.CountryCode,
                 TextPhoneInfo: {
->>>>>>> 79eaa67faa9aa072376e3338786d862db97368dd
                     phoneNumber: cont.TextPhoneInfo.phoneNumber,
                     phoneInfoFirst: cont.TextPhoneInfo.phoneInfoFirst,
                     phoneInfoLast: cont.TextPhoneInfo.phoneInfoLast
                 }
             };
-<<<<<<< HEAD
-=======
-            console.log(result);
->>>>>>> 79eaa67faa9aa072376e3338786d862db97368dd
              return result;
         }
     }

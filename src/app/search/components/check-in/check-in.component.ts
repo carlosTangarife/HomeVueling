@@ -15,7 +15,7 @@ export class CheckInComponent implements OnInit {
     form;
     public dataCheckIn: ICheckIn
     public codeBook: string;
-    // public email: string;
+    public email: string;
     public submit: boolean;
     public keyCookie: string;
     public isOrigin: boolean;
@@ -23,6 +23,7 @@ export class CheckInComponent implements OnInit {
     public isShowStation: boolean;
     public station: IStation;
     public validation: boolean;
+    public isSpecial: boolean;
 
   @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
 
@@ -39,13 +40,26 @@ export class CheckInComponent implements OnInit {
     this.selectorService.loadStations();
     this.codeBook = this.checkInService.getCodeBooking(this.keyCookie);
     this.form = new FormGroup({
-      bookingCode: new FormControl(''),
+      bookingCode: new FormControl('', Validators.required),
       email: new FormControl('', Validators.compose([
         Validators.required,
-        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]')
+        Validators.pattern('[^ @]*@[^ @]*')
       ]))
     });
   }
+
+  omitSpecialCharacters(event: string) {
+    debugger;
+    const pattern = '([A-Z0-9a-z])';
+    let res = event.match(pattern);
+    console.log(res);
+    if (res != null) {
+      this.isSpecial = false;
+    } else {
+      this.isSpecial = true;
+    }
+  }
+
 
   changeTypeCheckIn(value) {
     this.isOrigin = value;
@@ -66,12 +80,6 @@ export class CheckInComponent implements OnInit {
   onSubmit() {
     this.submit = !this.submit;
   }
-
-  // showError = function(user){
-  //   console.log(user);
-  //   console.log(this.validation);
-  //   this.validation = !this.validation;
-  // }
 
    showError(user) {
      console.log(this.validation);
