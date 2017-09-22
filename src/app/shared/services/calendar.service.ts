@@ -5,7 +5,8 @@ import { ResourcesService } from '../../shared/services/resources.service';
 
 @Injectable()
 export class CalendarService {
-    public fligthDisabledDays: Array<string>;
+    public fligthGoingDisabledDays: Array<string>;
+    public fligthReturnDisabledDays: Array<string>;
     public isGoing = true;
     public isComeBack = false;
     public isMulti = false;
@@ -37,8 +38,9 @@ export class CalendarService {
     isCheckIn$ = this.subjectisCheckIn.asObservable();
 
     constructor(private resourcesService: ResourcesService) {
-      this.fligthDisabledDays = [];
       this.isCheckIn = 'false';
+      this.fligthGoingDisabledDays = [];
+      this.fligthReturnDisabledDays = [];
     }
 
     // Service message states
@@ -106,6 +108,15 @@ export class CalendarService {
       this.subjectIsShowDatePicker.next(this.isShowDatePicker);
     }
 
+    getFlightGoingDisabledDays(origin: string, destination: string): any {
+      this.fligthGoingDisabledDays = [];
+      this.getFlightDisabledDays(origin, destination, this.fligthGoingDisabledDays);
+    }
+
+    getFlightReturnDisabledDays(origin: string, destination: string): any {
+      this.fligthReturnDisabledDays = [];
+      this.getFlightDisabledDays(origin, destination, this.fligthReturnDisabledDays);
+    }
     /**
      * Method that performs a get request to the
      * [API] (https://fetch.spec.whatwg.org/#requestinit))
@@ -115,13 +126,12 @@ export class CalendarService {
      * @returns {*}
      * @memberof SelectorService
     */
-    getFlightDisabledDays(origin: string, destination: string): any {
+    getFlightDisabledDays(origin: string, destination: string, fligthDisabledDays: Array<string>): any {
         /**
          * only do the request if the source and destination exists as parameter.
          */
-        this.fligthDisabledDays = [];
         if (origin && destination) {
-            let key = origin + '_' + destination;
+            let key = 'calendarDays-' + origin + '_' + destination;
             let currentDate: Date = new Date();
             let fullYear: string = currentDate.getFullYear().toString();
             let month: string = (currentDate.getMonth() + 1).toString();
@@ -148,7 +158,7 @@ export class CalendarService {
                 data.Calendar.map((yearAndMonth) => {
                     const fecha = yearAndMonth.Year + '-' + yearAndMonth.Month;
                     yearAndMonth.BlankDays.map((day) => {
-                        this.fligthDisabledDays.push(`${fecha}-${day}`)
+                        fligthDisabledDays.push(`${fecha}-${day}`)
                     })
                 });
             }, (error) => {

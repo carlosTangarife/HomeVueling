@@ -20,7 +20,7 @@
         (isFocused)="isFocusedDestination=$event"
         (clickDestination)="origin.showPopupOrigin($event)"
         (clickMulticity)="clickMulticity($event)"
-        (outStation)="passenger.setResidentAndLargeFamily($event)">
+        (outStation)="passenger.setResidentAndLargeFamily($event); calendar.getFlightDisabledDays()">
     </div>
 
     <div app-calendar
@@ -28,7 +28,8 @@
         [isMulti]="dataFlight.multi.isActive"
         [isMultiFlight]="false"
         id="form-group--dates"
-        class="form-input dates">
+        class="form-input dates"
+        #calendar>
     </div>
 
     <div app-passenger
