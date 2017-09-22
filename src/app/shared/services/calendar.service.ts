@@ -107,7 +107,7 @@ export class CalendarService {
          */
         this.fligthDisabledDays = [];
         if (origin && destination) {
-            let key = origin + '_' + destination;
+            let key = 'calendarDays-' + origin + '_' + destination;
             let currentDate: Date = new Date();
             let fullYear: string = currentDate.getFullYear().toString();
             let month: string = (currentDate.getMonth() + 1).toString();
