@@ -17,7 +17,7 @@ export class DestinationSelectorComponent implements OnInit {
   multicityBtn: ElementRef;
 
   @Input()
-  dataFlight: IFlight;
+  dataFlight: any;
 
   @Output()
   clickDestination: EventEmitter<any> = new EventEmitter();

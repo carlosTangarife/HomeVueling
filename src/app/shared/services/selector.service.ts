@@ -1,11 +1,18 @@
 import { Injectable } from '@angular/core';
+
+/*Local Services */
+import { environment } from '../../../environments/environment';
 import { StationService } from './station.service';
 import { ConfigService } from './config.service';
+
+/*third-party library*/
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
-import { environment } from '../../../environments/environment';
+import { map } from 'rxjs/Operator/map'
+
+/*Models using interface */
+import { IContactPhonesType, IContactPhones } from '../../search/models/contact-phones.model';
 import { IStation, IMarket, IStationList } from '../models/station.model';
 import { IIcon } from '../models/commons.model';
-import { IContactPhonesType, IContactPhones } from "../../search/models/contact-phones.model";
 
 @Injectable()
 export class SelectorService {
@@ -26,26 +33,39 @@ export class SelectorService {
     private subjectListStations = new BehaviorSubject<any>(this.filteredStations);
     public listStations$ = this.subjectListStations.asObservable();
 
-    constructor(private _configService: ConfigService, private _stationService: StationService) {
-        this.stations = this._configService.environment['stations'];
-        this.markets = this._configService.environment['markets'];
+    constructor(private configService: ConfigService, private _stationService: StationService) {
+        this.stations = this.configService.environment['stations'];
+        this.markets = this.configService.environment['markets'];
         this.marketsIata = [];
-        this.iconGeo = this._configService.getIconGeo();
-        this.iconRecent = this._configService.getIconRecent();
-        this.contact = this._configService.environment['contactphones'];
+        this.iconGeo = this.configService.getIconGeo();
+        this.iconRecent = this.configService.getIconRecent();
+        this.contact = this.configService.environment['contactphones'];
     }
 
+<<<<<<< HEAD
     loadContactPhones(iata: string){
         let cont = this.contact.phonesServices.find(x => x.CountryCode == iata)
         if(cont){
             let result: IContactPhones = {
                 CountryCode: cont.CountryCode,
                 TextPhoneInfo:{
+=======
+    loadContactPhones(iata: string) {
+        let cont = this.contact.phonesServices.find(x => x.CountryCode === iata)
+        if (cont) {
+            let result: IContactPhones = {
+                CountryCode: cont.CountryCode,
+                TextPhoneInfo: {
+>>>>>>> 79eaa67faa9aa072376e3338786d862db97368dd
                     phoneNumber: cont.TextPhoneInfo.phoneNumber,
                     phoneInfoFirst: cont.TextPhoneInfo.phoneInfoFirst,
                     phoneInfoLast: cont.TextPhoneInfo.phoneInfoLast
                 }
             };
+<<<<<<< HEAD
+=======
+            console.log(result);
+>>>>>>> 79eaa67faa9aa072376e3338786d862db97368dd
              return result;
         }
     }
@@ -175,6 +195,6 @@ export class SelectorService {
     }
 
     showMulticity(): boolean {
-        return this._configService.multicityEnabled();
+        return this.configService.multicityEnabled();
     }
 }

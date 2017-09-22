@@ -1,7 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpModule } from '@angular/http';
+import { HttpModule, JsonpModule } from '@angular/http';
 import { SEARCH_COMPONENTS } from './index';
 import { SHARED_SERVICES, APP_INITIALIZER_PROV } from '../shared/consts/services';
 import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
@@ -11,7 +11,8 @@ import { DictionaryPipe } from '../shared/pipes/dictionary.pipe';
     CommonModule,
     FormsModule,
     ReactiveFormsModule,
-    HttpModule
+    HttpModule,
+    JsonpModule
   ],
   declarations: [
     ...SEARCH_COMPONENTS,

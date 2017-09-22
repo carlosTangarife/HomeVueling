@@ -4,26 +4,26 @@ import { ResourcesService } from './resources.service';
 @Injectable()
 export class ConfigService {
   environment = {};
-  constructor(private _resourcesService: ResourcesService) {}
+  constructor(private resourcesService: ResourcesService) {}
 
   load(): Promise<any> {
-    let loadStations = this._resourcesService
+    let loadStations = this.resourcesService
       .getStations()
       .map(res => (this.environment['stations'] = res))
       .share();
-    let loadMarkets = this._resourcesService
+    let loadMarkets = this.resourcesService
       .getMarkets()
       .map(res => (this.environment['markets'] = res))
       .share();
-    let loadTexts = this._resourcesService
+    let loadTexts = this.resourcesService
       .getTexts()
       .map(res => (this.environment['texts'] = res))
       .share();
-    let loadConfiguration = this._resourcesService
+    let loadConfiguration = this.resourcesService
       .getConfiguration()
       .map(res => (this.environment['configuration'] = res))
       .share();
-    let loadContactPhones = this._resourcesService
+    let loadContactPhones = this.resourcesService
       .getContactPhones()
       .map(res => (this.environment['contactphones'] = res))
       .share();

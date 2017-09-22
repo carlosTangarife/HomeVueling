@@ -15,8 +15,8 @@ export class IndexSearchComponent implements OnInit {
   listIconLink: IIconLink[];
   isReservation: boolean;
 
-  constructor(private _configService: ConfigService, public calendarService: CalendarService) {
-    this.searcherConfig = this._configService.environment['configuration'];
+  constructor(private configService: ConfigService, public calendarService: CalendarService) {
+    this.searcherConfig = this.configService.environment['configuration'];
     this.listIconLink = [];
     let tabsLink = this.searcherConfig.FlightSearch.Tab;
     for (let key in tabsLink) {

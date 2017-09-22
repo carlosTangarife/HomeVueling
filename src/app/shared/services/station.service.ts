@@ -9,8 +9,8 @@ export class StationService {
     numRecentSearchesOrigin: number;
     numRecentSearchesDestination: number;
 
-    constructor(private _cookiesWrapper: CookiesWrapper, private _configService: ConfigService) {
-        this.configStations = this._configService.getConfigStations();
+    constructor(private cookiesWrapper: CookiesWrapper, private configService: ConfigService) {
+        this.configStations = this.configService.getConfigStations();
         this.numRecentSearchesOrigin = this.configStations.RecentSearches.InOrigin;
         this.numRecentSearchesDestination = this.configStations.RecentSearches.InDestination;
     }
@@ -23,7 +23,7 @@ export class StationService {
             iataCode: stationCode,
             date: new Date()
         };
-        let cookie = this._cookiesWrapper.getCookie(key);
+        let cookie = this.cookiesWrapper.getCookie(key);
 
         if (cookie) {
             let numStations = isOrigin ? this.numRecentSearchesOrigin : this.numRecentSearchesDestination;
@@ -31,11 +31,11 @@ export class StationService {
         } else {
             stations.lastStationsSelected.push(stationSelected);
         }
-        this._cookiesWrapper.setCookie(key, stations);
+        this.cookiesWrapper.setCookie(key, stations);
     }
 
     getCookieStations(key: string): StationSelected[] {
-        let cookie: LastStationsSelected = this._cookiesWrapper.getCookie(key);
+        let cookie: LastStationsSelected = this.cookiesWrapper.getCookie(key);
         if (cookie) {
             return cookie.lastStationsSelected.sort((a, b) =>
                 Date.parse(b.date.toString()) - Date.parse(a.date.toString()));
@@ -45,7 +45,7 @@ export class StationService {
     }
 
     removeStations(key: string) {
-        this._cookiesWrapper.removeCookie(key);
+        this.cookiesWrapper.removeCookie(key);
     }
 
     showErase(): boolean {

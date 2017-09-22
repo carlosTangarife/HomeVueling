@@ -3,6 +3,7 @@ import { Component, OnInit, Input } from '@angular/core';
 import { Observable } from 'rxjs/Observable';
 import { Subject } from 'rxjs/Subject';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
+import { IFlight } from '../../models/flight.model';
 
 declare var jQuery: any;
 declare var $: any;
@@ -13,10 +14,7 @@ declare var $: any;
 })
 export class CalendarComponent implements OnInit {
   @Input()
-  dateGoing: Date;
-
-  @Input()
-  dateComeBack: Date;
+  dataFlight: IFlight
 
   @Input()
   isMulti: boolean;
@@ -47,14 +45,18 @@ export class CalendarComponent implements OnInit {
       minDate: 0,
       numberOfMonths: 3,
       showAnim: 'fade',
+      beforeShowDay: function (date) {
+        let dateText = $.datepicker.formatDate('yy-mm-dd', date);
+        return [self.calendarService.fligthDisabledDays.indexOf(dateText) === -1];
+      },
       onSelect: function() {
         let dateSelected = $(this).datepicker('getDate');
-        self.dateGoing = dateSelected;
+        self.dataFlight.going = dateSelected;
         self.minDateAux = dateSelected;
         $(idInput).val($.datepicker.formatDate('dd/mm/y', dateSelected));
         if (!self.isMulti) {
-          self.dateComeBack = new Date(self.dateGoing.getFullYear(), self.dateGoing.getMonth(), self.dateGoing.getDate() + 7 );
-          $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', self.dateComeBack));
+          self.dataFlight.return = new Date(self.dataFlight.going.getFullYear(), self.dataFlight.going.getMonth(), self.dataFlight.going.getDate() + 7 );
+          $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', self.dataFlight.return));
         }
         self.calendarService.toggleShowDatePicker();
       }
@@ -69,22 +71,22 @@ export class CalendarComponent implements OnInit {
         beforeShow: this.calendarBeforeShow,
         beforeShowDay: function (date) {
           date.setHours(0, 0, 0, 0);
-          let maxDate = self.dateComeBack;
+          let maxDate = self.dataFlight.return;
           let dateSelected = $(this).datepicker('getDate');
-          if (date.getTime() === self.dateGoing.valueOf()) {
+          if (date.getTime() === self.dataFlight.going.valueOf()) {
             return [true, 'ui-datepicker-travel-time ui-datepicker-current-day travelTime'];
           }
           if (dateSelected && date.getTime() === dateSelected.valueOf()) {
             return [true, 'ui-datepicker-travel-time ui-datepicker-end-day travelTime endDay'];
           }
-          if (date > self.dateGoing && date <= self.dateComeBack ) {
+          if (date > self.dataFlight.going && date <= self.dataFlight.return ) {
             return [true, 'ui-datepicker-travel-time travelTime'];
           }
           return [true, ''];
         },
         onSelect: function () {
           let dateSelected = $(this).datepicker('getDate');
-          self.dateComeBack = dateSelected;
+          self.dataFlight.return = dateSelected;
           $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', dateSelected));
           self.calendarService.toggleShowDatePicker();
         }
@@ -93,22 +95,21 @@ export class CalendarComponent implements OnInit {
   }
 
   toggleDatePickerGoing() {
-    let self = this;
+    this.calendarService.getFlightDisabledDays(this.dataFlight.origin.code, this.dataFlight.destination.code);
     if (this.isMultiFlight) {
       this.calendarService.onMulti();
     } else {
       this.calendarService.onGoing();
     }
     $(this.id).parent().removeClass('range-datepicker');
-    $(this.id).datepicker('setDate', self.dateGoing);
+    $(this.id).datepicker('setDate', this.dataFlight.going);
     $(this.id).datepicker('refresh');
   }
 
   toggleDatePickerComeBack() {
     this.calendarService.onComeBack();
-    let self = this;
     $('#vyCalendarComeBack').parent().addClass('range-datepicker');
-    $('#vyCalendarComeBack').datepicker('setDate', self.dateComeBack);
+    $('#vyCalendarComeBack').datepicker('setDate', this.dataFlight.return);
     $('#vyCalendarComeBack').datepicker('refresh');
   }
 
@@ -156,7 +157,6 @@ export class CalendarComponent implements OnInit {
       if (code === 37 || code === 38 || code === 39 || code === 40) {
         // Get current date
         let parts = $(this).val().split('/');
-        console.log(parts);
         let currentDate = new Date(parts[2], parts[1] - 1, parts[0]);
         // Show next/previous day/week
         switch (code) {

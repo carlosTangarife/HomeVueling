@@ -30,8 +30,8 @@ export class PassengerService {
   private extraSeatSubject: BehaviorSubject<number>;
   public extraSeat$: Observable<number>;
 
-  constructor(private _configService: ConfigService) {
-    this.configPassenger = this._configService.getConfigPassengers();
+  constructor(private configService: ConfigService) {
+    this.configPassenger = this.configService.getConfigPassengers();
     this.initTypePassengers();
     this.initObservables();
     this.initValues();
