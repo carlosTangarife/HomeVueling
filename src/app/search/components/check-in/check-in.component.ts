@@ -39,8 +39,11 @@ export class CheckInComponent implements OnInit {
     this.selectorService.loadStations();
     this.codeBook = this.checkInService.getCodeBooking(this.keyCookie);
     this.form = new FormGroup({
-      bookingCode: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.required)
+      bookingCode: new FormControl(''),
+      email: new FormControl('', Validators.compose([
+        Validators.required,
+        Validators.pattern('[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]')
+      ]))
     });
   }
 
@@ -64,15 +67,16 @@ export class CheckInComponent implements OnInit {
     this.submit = !this.submit;
   }
 
-  showError = function(user){
-    console.log(user);
-    console.log(this.validation);
-    this.validation = !this.validation;
-  }
-
-  // showError() {
+  // showError = function(user){
+  //   console.log(user);
   //   console.log(this.validation);
   //   this.validation = !this.validation;
   // }
+
+   showError(user) {
+     console.log(this.validation);
+     console.log(user);
+     this.validation = !this.validation;
+   }
 }
 
