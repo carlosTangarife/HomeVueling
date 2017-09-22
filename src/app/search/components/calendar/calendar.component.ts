@@ -47,7 +47,7 @@ export class CalendarComponent implements OnInit {
       showAnim: 'fade',
       beforeShowDay: function (date) {
         let dateText = $.datepicker.formatDate('yy-mm-d', date);
-        return [self.calendarService.fligthDisabledDays.indexOf(dateText) === -1];
+        return [self.calendarService.fligthGoingDisabledDays.indexOf(dateText) === -1];
       },
       onSelect: function() {
         let dateSelected = $(this).datepicker('getDate');
@@ -59,6 +59,7 @@ export class CalendarComponent implements OnInit {
           $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', self.dataFlight.return));
         }
         self.calendarService.toggleShowDatePicker();
+        self.calendarService.getFlightReturnDisabledDays(self.dataFlight.destination.code, self.dataFlight.origin.code);
       }
     }).keydown(this.keyDownEvent);
 
@@ -79,7 +80,7 @@ export class CalendarComponent implements OnInit {
       beforeShow: this.calendarBeforeShow,
       beforeShowDay: function (date) {
         let dateText = $.datepicker.formatDate('yy-mm-d', date);
-        if (self.calendarService.fligthDisabledDays.indexOf(dateText) === -1) {
+        if (self.calendarService.fligthReturnDisabledDays.indexOf(dateText) === -1) {
           date.setHours(0, 0, 0, 0);
           let maxDate = self.dataFlight.return;
           let dateSelected = $(this).datepicker('getDate');
@@ -106,8 +107,13 @@ export class CalendarComponent implements OnInit {
     }).keydown(this.keyDownEvent);
   }
 
+  getFlightDisabledDays() {
+    if (this.dataFlight) {
+      this.calendarService.getFlightGoingDisabledDays(this.dataFlight.origin.code, this.dataFlight.destination.code);
+    }
+  }
+
   toggleDatePickerGoing() {
-    this.calendarService.getFlightDisabledDays(this.dataFlight.origin.code, this.dataFlight.destination.code);
     if (this.isMultiFlight) {
       this.calendarService.onMulti();
     } else {
@@ -119,7 +125,6 @@ export class CalendarComponent implements OnInit {
   }
 
   toggleDatePickerComeBack() {
-    this.calendarService.getFlightDisabledDays(this.dataFlight.destination.code, this.dataFlight.origin.code);
     this.calendarService.onComeBack();
     $('#vyCalendarComeBack').parent().addClass('range-datepicker');
     $('#vyCalendarComeBack').datepicker('setDate', this.dataFlight.return);
