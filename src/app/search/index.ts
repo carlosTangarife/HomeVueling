@@ -17,7 +17,7 @@ import { DiscountListComponent } from './components/discount/discount-list/disco
 import { MulticityComponent } from './components/multicity/multicity.component';
 import { CalendarOptionsComponent } from '../shared/components/calendar-options/calendar-options.component';
 import { CheckInErrorComponent } from './errors/check-in-error/check-in-error.component';
-
+import { InputCalendarComponent } from '../shared/components/input-calendar/input-calendar.component'
 export const SEARCH_COMPONENTS = [
   IndexSearchComponent,
   CheckInComponent,
@@ -37,5 +37,6 @@ export const SEARCH_COMPONENTS = [
   MinusPlusComponent,
   DatePickerComponent,
   CalendarOptionsComponent,
-  CheckInErrorComponent
+  CheckInErrorComponent,
+  InputCalendarComponent
 ];
