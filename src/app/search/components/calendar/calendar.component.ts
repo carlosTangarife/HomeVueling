@@ -45,6 +45,14 @@ export class CalendarComponent implements OnInit {
       minDate: 0,
       numberOfMonths: 3,
       showAnim: 'fade',
+      beforeShow: function(dateText, inst) {
+        $('#ui-datepicker-div').css({
+          position: 'relative',
+          top: 0,
+          left: 0
+        });
+        $(this.id).append($('#ui-datepicker-div'));
+      },
       beforeShowDay: function (date) {
         let dateText = $.datepicker.formatDate('yy-mm-d', date);
         return [self.calendarService.fligthGoingDisabledDays.indexOf(dateText) === -1];
@@ -137,6 +145,12 @@ export class CalendarComponent implements OnInit {
   }
 
   calendarBeforeShow(input, inst) {
+    $('#ui-datepicker-div').css({
+      position: 'relative',
+      top: 0,
+      left: 0
+    });
+    $('#vyCalendarComeBack').append($('#ui-datepicker-div'));
     $(this).find('.ui-datepicker td').off();
     $(this).find('.ui-datepicker').on('mouseenter', 'td', function() {
       $('#vyCalendarComeBack .ui-datepicker td').removeClass('ui-datepicker-travel-time ui-datepicker-end-day');

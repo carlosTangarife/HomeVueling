@@ -1,13 +1,9 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-<<<<<<< HEAD
 import { FormGroup, FormControl, Validators } from '@angular/forms';
-import { CheckInService } from './check-in.service';
-=======
 import { environment } from '../../../../environments/environment';
 
 /*Local Services */
 import { CalendarService } from '../../../shared/services/calendar.service';
->>>>>>> 66ae2692c76ebae62a2136f4505f5566578999ad
 import { SelectorService } from '../../../shared/services/selector.service';
 import { CheckInService } from './check-in.service';
 
@@ -34,13 +30,10 @@ export class CheckInComponent implements OnInit {
     public isChecked: boolean;
     public isShowStation: boolean;
     public station: IStation;
-<<<<<<< HEAD
     public validation: boolean;
     public isSpecial: boolean;
-=======
     public flightTomorrow: Date;
     public isChekIn: boolean;
->>>>>>> 66ae2692c76ebae62a2136f4505f5566578999ad
 
   @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
 
@@ -50,12 +43,9 @@ export class CheckInComponent implements OnInit {
     this.isChecked = true;
     this.submit = true;
     this.keyCookie = environment.keyCheckInCookie;
-<<<<<<< HEAD
     this.validation = true;
-=======
     this.isChekIn = false;
     this.flightTomorrow = null;
->>>>>>> 66ae2692c76ebae62a2136f4505f5566578999ad
    }
 
   ngOnInit() {
@@ -74,7 +64,6 @@ export class CheckInComponent implements OnInit {
     debugger;
     const pattern = '([A-Z0-9a-z])';
     let res = event.match(pattern);
-    console.log(res);
     if (res != null) {
       this.isSpecial = false;
     } else {
@@ -134,10 +123,8 @@ export class CheckInComponent implements OnInit {
     this.submit = !this.submit;
   }
 
-   showError(user) {
-     console.log(this.validation);
-     console.log(user);
-     this.validation = !this.validation;
-   }
+  showError(user) {
+    this.validation = !this.validation;
+  }
 }
 

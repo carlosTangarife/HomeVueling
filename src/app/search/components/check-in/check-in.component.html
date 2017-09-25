@@ -20,7 +20,6 @@
    </div>
 </div>
 
-<<<<<<< HEAD
 <form class="container" [formGroup] = "form" (ngSubmit) = "showError(form.value)">
   <div *ngIf="isOrigin == false" class="form">
     <div class="form-group form-group--check-in">
@@ -34,16 +33,7 @@
             <div class="popover popover--error"
             *ngIf="!validation && form.controls.bookingCode.dirty == true">
                <div class="popover-content">Debes completar este campo.</div>                   
-            </div>       
-=======
-<div *ngIf="isOrigin == false" class="form">
-   <div class="form-group form-group--check-in">
-      <div class="form-input">
-         <label>Código de reserva</label>
-         <a href="#">¿Qué es?</a>
-         <div class="input-group">
-            <input type="text" id="origin-input" class="form-control js-searchbar-input" [ngModel]="codeBook" placeholder="Ej. XG6LM3" required>
->>>>>>> 66ae2692c76ebae62a2136f4505f5566578999ad
+            </div>
         </div>
       
       <div class="form-input">
@@ -58,22 +48,12 @@
                 <div *ngIf="form.controls.email.invalid == false" class="popover-content">Los datos introducidos no son correctos.</div>                 
               </div>  
       </div>
-<<<<<<< HEAD
+
           <div class="form-action">
             <!-- <a input type="submit" value="submit" href="#" (click)="onSubmit(); showError()" class="mv_button color-darkGrey size-md icon icon-right">Acceder</a> -->
             <a><input type="submit" value="Acceder" (click)="onSubmit()" class="mv_button color-darkGrey size-md icon icon-right"></a>
           </div>
-=======
-    <div class="form-input">
-         <label>Email del comprador </label>
-            <input type="text" id="destination-input" name="email" class="form-control js-searchbar-input"
-            required minlength="4" ngModel #email="ngModel"
-            placeholder="email@vueling.com">
-            <div class="popover popover--error" *ngIf="email.invalid && (email.dirty || email.touched)">
-              <div class="popover-content" *ngIf="email.errors.required">El campo es requerido.</div>
-              <div class="popover-content" *ngIf="email.errors.minlength">Debe tener 4 caracteres minimo.</div>
-            </div>
->>>>>>> 66ae2692c76ebae62a2136f4505f5566578999ad
+
     </div>
   </div>
 </form>

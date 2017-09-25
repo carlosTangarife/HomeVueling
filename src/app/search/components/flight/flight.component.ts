@@ -63,7 +63,6 @@ export class FlightComponent implements OnInit {
 
   onSubmit() {
     this.saveSearch();
-    console.log(this.dataFlight);
   }
 
   clickInput() {
