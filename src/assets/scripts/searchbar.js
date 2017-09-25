@@ -13,14 +13,41 @@ $(document).ready(function(){
   });
 
   $(function () {
-  //   $.fn.datepicker = function( options ) {
+    // $.fn.datepicker = function( options ) {
 
+    //     /* Verify an empty collection wasn't passed - Fixes #6976 */
+    //     if ( !this.length ) {
+    //       return this;
+    //     }
 
-  //   /* Append datepicker main container to body if not exist. */
-  //   if ( $( "#" + $.datepicker._mainDivId ).length === 0 ) {
-  //     $( "#vyCalendarGoing" ).append( $.datepicker.dpDiv );
-  //   }
-  // }
+    //     /* Initialise the date picker. */
+    //     if ( !$.datepicker.initialized ) {
+    //       $( document ).on( "mousedown", $.datepicker._checkExternalClick );
+    //       $.datepicker.initialized = true;
+    //     }
+
+    //     /* Append datepicker main container to body if not exist. */
+    //     // if ( $( "#" + $.datepicker._mainDivId ).length === 0 ) {
+    //       $( "#vyCalendarGoing" ).append( $.datepicker.dpDiv );
+    //     // }
+
+    //     var otherArgs = Array.prototype.slice.call( arguments, 1 );
+    //     if ( typeof options === "string" && ( options === "isDisabled" || options === "getDate" || options === "widget" ) ) {
+    //       return $.datepicker[ "_" + options + "Datepicker" ].
+    //         apply( $.datepicker, [ this[ 0 ] ].concat( otherArgs ) );
+    //     }
+    //     if ( options === "option" && arguments.length === 2 && typeof arguments[ 1 ] === "string" ) {
+    //       return $.datepicker[ "_" + options + "Datepicker" ].
+    //         apply( $.datepicker, [ this[ 0 ] ].concat( otherArgs ) );
+    //     }
+    //     return this.each( function() {
+    //       typeof options === "string" ?
+    //         $.datepicker[ "_" + options + "Datepicker" ].
+    //           apply( $.datepicker, [ this ].concat( otherArgs ) ) :
+    //         $.datepicker._attachDatepicker( this, options );
+    //     } );
+    //   };
+  }
     // $.extend($.datepicker, {
     //   // Reference the orignal function so we can override it and call it later
     //   _inlineDatepicker2: $.datepicker._inlineDatepicker,

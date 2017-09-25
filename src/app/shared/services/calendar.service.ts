@@ -45,7 +45,6 @@ export class CalendarService {
     }
 
     afterInit(id: string, contentDatePicker: string) {
-      console.log($('div#ui-datepicker-div').length);
       let self = this;
       this.id = '#' + id;
       $(this.id).datepicker({
@@ -54,19 +53,27 @@ export class CalendarService {
         onSelect: function() {
           self.toggleShowDatePicker();
         },
-        onClose: function() {
-          if (self.isShowDatePicker) {
-            self.toggleShowDatePicker()
-          };
-        },
-        afterShow: function(){
+        // onClose: function() {
+        //   if (self.isShowDatePicker) {
+        //     self.toggleShowDatePicker()
+        //   };
+        // },
+        // afterShow: function(){
+        //   setTimeout(function() {
+        //     // $('#ui-datepicker-div').css({'position': ''});
+        //   }, 0);
+        //   self.toggleShowDatePicker();
+        // },
+        beforeShow: function(uno, dos) {
           setTimeout(function() {
-            $('#ui-datepicker-div').css({'position': ''});
+            $('#vyCalendarGoing').append( $('#ui-datepicker-div'));
+            $('#ui-datepicker-div').css(
+              {'position': 'relative', 'top': '0px', 'left': '0px'}
+            );
+            self.toggleShowDatePicker();
           }, 0);
-          self.toggleShowDatePicker();
         }
       });
-      $('#vyCalendarGoing').append( $('#ui-datepicker-div'));
     }
 
     toggleShowDatePicker() {
