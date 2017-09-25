@@ -1,10 +1,12 @@
 <div class="col col-md-6">
-  <label class="form-input_label">Ida</label>
+  <label class="form-input_label">{{label}}</label>
   <div class="input-group">
     <input
+      [id]="id"
       type="text"
       class="form-control"
-      placeholder="DD/MM/YYYY"
+      placeholder="DD/MM/YY"
       readonly="readonly">
+      <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
   </div>
 </div>

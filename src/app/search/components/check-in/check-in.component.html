@@ -72,7 +72,8 @@
         </div>
 
         <div class="form-input dates">
-          <div class="col col-md-6" (click)="toggleShowCalendar()">
+
+          <!-- <div class="col col-md-6" (click)="toggleShowCalendar()">
             <label>Fecha del primer vuelo</label>
             <div class="input-group">
               <input
@@ -84,7 +85,14 @@
                 [ngModel]="flightTomorrow | date:'dd/MM/yy'">
               <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
             </div>
-          </div>
+          </div> -->
+
+          <app-input-calendar
+          [id]="'inputflightTomorrow'"
+          [argument]="'#vyCalendarComeBack'"
+          [label]="'Fecha del primer vuelo'">
+        </app-input-calendar>
+
           <div class="col col-md-6">
             <div class="form-checkbox--button" (click)="toggleFlightTomorrow()">
              <label>

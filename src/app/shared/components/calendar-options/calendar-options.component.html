@@ -1,8 +1,5 @@
 <div class="searcbar-datepicker_title">
-  <p class="title" *ngIf="calendarService.isGoing$ | async">
-    <span class="icon icon-plane-right"></span> Selecciona fecha de ida
-  </p>
-  <p class="title" *ngIf="calendarService.isComeBack$ | async">
+  <p class="title" *ngIf="true">
     <span class="icon icon-plane-left"></span> Selecciona fecha de vuelta
   </p>
   <ul class="options">
@@ -12,7 +9,6 @@
         type="radio"
         name="flight-option"
         value="ida-vuelta"
-        [checked]="calendarService.isRoundTrip$ | async"
         (change)="changeRoundTrip()"
       >
       <label for="roundTrip">Ida y vuelta</label>
@@ -24,7 +20,6 @@
         type="radio"
         name="flight-option"
         value="ida"
-        [checked]="calendarService.isOneWay$ | async"
         (change)="changeOneWay()"
       >
       <label for="oneWay">Solo ida</label>
@@ -37,5 +32,4 @@
   <p class="legend-item selection">Tu selección</p>
 </div>
 
-<!-- <ng-content></ng-content> -->
 <!-- <ng-content select="[content-show=true]"></ng-content> -->

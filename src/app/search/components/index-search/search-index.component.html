@@ -43,16 +43,46 @@
       <div id="tab-reservation" class="tab-pane fade searchbar-main_tab-content_pane reservation" *ngIf="searcherConfig.YourBooking.IsEnabled" [ngClass]="{'in active': isReservation}">
         <div app-reservation class="pane-wrapper"></div>
       </div>
-
-      <app-calendar-options class="searchbar-datepicker" [ngClass]="{'show': calendarService.isShowDatePicker$ | async}">
-        <div id="vyCalendarGoing" tabindex="0" [ngClass]="{'hide': !calendarService.isGoing}"></div>
-        <div id="vyCalendarComeBack" tabindex="0" [ngClass]="{'hide': !calendarService.isComeBack}"></div>
-        <div id="vyCalendarMulti" tabindex="0" [ngClass]="{'hide': !calendarService.isMulti}"></div>
-        <div id="vyCalendarCheckIn" tabindex="0" [ngClass]="{'hide': !calendarService.isCheckIn}"></div>
-
+<!--
+      <app-calendar-options class="searchbar-datepicker show">
+        <div id="vyCalendarGoing" tabindex="0"></div>
+        <div id="vyCalendarComeBack" tabindex="0"></div> -->
 
         <!-- <div id="vyCalendarCheckIn" tabindex="0" content-show="true" *ngIf="calendarService.isCheckIn"></div> -->
-      </app-calendar-options>
+      <!-- </app-calendar-options> -->
+      <div class="searchbar-datepicker" [ngClass]="{'show': calendarService.isShowDatePicker$ | async}">
+        <div class="searcbar-datepicker_title">
+          <p class="title">
+            <span class="icon icon-plane-left"></span> Selecciona fecha de vuelta
+          </p>
+          <ul class="options">
+            <li>
+              <input
+                id="roundTrip"
+                type="radio"
+                name="flight-option"
+                value="ida-vuelta"
+              >
+              <label for="roundTrip">Ida y vuelta</label>
+            </li>
+
+            <li>
+              <input
+                id="oneWay"
+                type="radio"
+                name="flight-option"
+                value="ida"
+              >
+              <label for="oneWay">Solo ida</label>
+            </li>
+          </ul>
+        </div>
+        <div id="vyCalendarGoing"></div>
+        <div class="searcbar-datepicker_legend">
+          <p class="legend-item">Hoy</p>
+          <p class="legend-item selection">Tu selección</p>
+        </div>
+      </div>
     </div>
   </div>
 </div>

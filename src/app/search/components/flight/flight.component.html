@@ -20,16 +20,22 @@
         (isFocused)="isFocusedDestination=$event"
         (clickDestination)="origin.showPopupOrigin($event)"
         (clickMulticity)="clickMulticity($event)"
-        (outStation)="passenger.setResidentAndLargeFamily($event); calendar.getFlightDisabledDays()">
+        (outStation)="passenger.setResidentAndLargeFamily($event)">
     </div>
 
-    <div app-calendar
-        [dataFlight]="dataFlight"
-        [isMulti]="dataFlight.multi.isActive"
-        [isMultiFlight]="false"
-        id="form-group--dates"
-        class="form-input dates"
-        #calendar>
+    <div class="form-input dates" id="form-group--dates">
+
+      <app-input-calendar
+        [id]="'going'"
+        [argument]="'#vyCalendarGoing'"
+        [label]="'Ida'">
+      </app-input-calendar>
+
+      <app-input-calendar
+        [id]="'return'"
+        [argument]="'#vyCalendarComeBack'"
+        [label]="'Vuelta'">
+      </app-input-calendar>
     </div>
 
     <div app-passenger

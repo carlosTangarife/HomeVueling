@@ -63,37 +63,6 @@ export class CheckInComponent implements OnInit {
     this.station = station.name;
   }
 
-  toggleShowCalendar() {
-    let self = this;
-    this.calendarService.toggleShowDatePicker();
-    this.isChekIn = !this.isChekIn;
-    this.isChekIn ? this.calendarService.onCheckIn() : this.calendarService.ofCheckIn()
-    $('#vyCalendarCheckIn').datepicker({
-      minDate: 0,
-      numberOfMonths: 3,
-      showAnim: 'fade',
-      beforeShow: function() {
-        $('#inputflightTomorrow').val($.datepicker.formatDate('dd/mm/y', this.flightTomorrow));
-        $('#vyCalendarCheckIn').datepicker('setDate', self.flightTomorrow);
-      },
-      onSelect: function() {
-        let dateSelected: Date;
-        dateSelected = $(this).datepicker('getDate');
-        self.flightTomorrow = dateSelected;
-        $('#inputflightTomorrow').val($.datepicker.formatDate('dd/mm/y', dateSelected));
-        self.calendarService.toggleShowDatePicker();
-        $(this).datepicker('destroy');
-      }
-    });
-
-  }
-
-  toggleFlightTomorrow() {
-    debugger;
-    this.flightTomorrow = new Date();
-    this.flightTomorrow.setDate(this.flightTomorrow.getDate() + 1);
-  }
-
   onSubmit() {
     this.submit = !this.submit;
   }

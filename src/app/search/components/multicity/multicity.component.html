@@ -21,12 +21,26 @@
   (clickMulticity)="clickMulticity()">
 </div>
 
-<div app-calendar
+<!-- <div app-calendar
   [dataFlight]="dataFlight"
   [isMulti]="dataFlight.isActive"
   [isMultiFlight]="true"
   id="form-group--dates"
   class="form-input dates js-second-flight">
+</div> -->
+
+<div class="form-input dates js-second-flight" id="form-group--dates">
+  <app-input-calendar
+    [id]="'goingMulti'"
+    [argument]="'#vyCalendarGoingMulti'"
+    [label]="'Ida'">
+  </app-input-calendar>
+
+  <app-input-calendar
+    [id]="'returnMulti'"
+    [argument]="'#vyCalendarComeBackMulti'"
+    [label]="'Vuelta'">
+  </app-input-calendar>
 </div>
 
 <div class="aditional-flight js-remove-aditional-flight" (click)="clickMulticity()">

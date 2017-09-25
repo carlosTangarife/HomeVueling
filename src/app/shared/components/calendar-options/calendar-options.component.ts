@@ -13,10 +13,10 @@ export class CalendarOptionsComponent implements OnInit {
   }
 
   changeRoundTrip() {
-    this.calendarService.roundTrip();
+    // this.calendarService.roundTrip();
   }
 
   changeOneWay() {
-    this.calendarService.oneWay();
+    // this.calendarService.oneWay();
   }
 }
