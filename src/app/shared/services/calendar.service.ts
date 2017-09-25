@@ -12,7 +12,7 @@ export class CalendarService {
     public isMulti = false;
     private isOneWay = true;
     private isRoundTrip = false;
-    private isShowDatePicker = false;
+    public isShowDatePicker = false;
     public isCheckIn: string;
     // Observable boolean sources
     private subjectIsOneWay = new BehaviorSubject<boolean>(this.isOneWay);
@@ -84,8 +84,8 @@ export class CalendarService {
     }
 
     onMulti() {
-      this.isComeBack = false;
       this.isGoing = false;
+      this.isComeBack = false;
       this.isMulti = true;
       this.subjectIsGoing.next(this.isGoing);
       this.subjectIsComeBack.next(this.isComeBack);
@@ -94,8 +94,8 @@ export class CalendarService {
     }
 
     onComeBack() {
-      this.isComeBack = true;
       this.isGoing = false;
+      this.isComeBack = true;
       this.isMulti = false;
       this.subjectIsGoing.next(this.isGoing);
       this.subjectIsComeBack.next(this.isComeBack);
@@ -117,6 +117,7 @@ export class CalendarService {
       this.fligthReturnDisabledDays = [];
       this.getFlightDisabledDays(origin, destination, this.fligthReturnDisabledDays);
     }
+
     /**
      * Method that performs a get request to the
      * [API] (https://fetch.spec.whatwg.org/#requestinit))

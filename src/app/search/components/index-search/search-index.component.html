@@ -44,14 +44,8 @@
         <div app-reservation class="pane-wrapper"></div>
       </div>
 
-      <app-calendar-options class="searchbar-datepicker" [ngClass]="{'show': calendarService.isShowDatePicker$ | async}">
-        <div id="vyCalendarGoing" tabindex="0" [ngClass]="{'hide': !calendarService.isGoing}"></div>
-        <div id="vyCalendarComeBack" tabindex="0" [ngClass]="{'hide': !calendarService.isComeBack}"></div>
-        <div id="vyCalendarMulti" tabindex="0" [ngClass]="{'hide': !calendarService.isMulti}"></div>
-        <div id="vyCalendarCheckIn" tabindex="0" [ngClass]="{'hide': !calendarService.isCheckIn}"></div>
-
-
-        <!-- <div id="vyCalendarCheckIn" tabindex="0" content-show="true" *ngIf="calendarService.isCheckIn"></div> -->
+      <app-calendar-options class="searchbar-datepicker" [ngClass]="{'show': calendarService.isShowDatePicker}">
+        <div id="vyCalendar" tabindex="0"></div>
       </app-calendar-options>
     </div>
   </div>

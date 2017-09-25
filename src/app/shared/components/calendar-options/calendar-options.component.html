@@ -13,8 +13,7 @@
         name="flight-option"
         value="ida-vuelta"
         [checked]="calendarService.isRoundTrip$ | async"
-        (change)="changeRoundTrip()"
-      >
+        (change)="changeRoundTrip()">
       <label for="roundTrip">Ida y vuelta</label>
     </li>
 
@@ -25,8 +24,7 @@
         name="flight-option"
         value="ida"
         [checked]="calendarService.isOneWay$ | async"
-        (change)="changeOneWay()"
-      >
+        (change)="changeOneWay()">
       <label for="oneWay">Solo ida</label>
     </li>
   </ul>

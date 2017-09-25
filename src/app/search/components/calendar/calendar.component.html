@@ -1,39 +1,23 @@
-<div class="col col-md-6" (click)="toggleDatePickerGoing()">
-  <label class="form-input_label">Ida</label>
-  <div class="input-group">
-    <input *ngIf="!isMultiFlight"
-      [ngModel]="dateGoing | date:'dd/MM/yy'"
-      id="inputGoing"
-      type="text"
-      class="form-control js-searchbar-input js-searchbar-date-input-going"
-      placeholder="DD/MM/YYYY"
-      readonly="readonly">
-    <input *ngIf="isMultiFlight"
-      [ngModel]="dateGoing | date:'dd/MM/yy'"
-      id="inputMulti"
-      type="text"
-      class="form-control js-searchbar-input js-searchbar-date-input-going"
-      placeholder="DD/MM/YYYY"
-      readonly="readonly">
-    <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
-  </div>
+<div app-date-picker
+  class="col col-md-6"
+  (click)="calendarService.onGoing()"
+  [inputId]="'inputGoing'"
+  [date]="dataFlight.going"
+  [label]="'Ida'">
 </div>
+
 <div class="col col-md-6" *ngIf="!isMulti">
-  <a class="js-add-date-range-to" (click)="addComeBack()" [ngClass]="{'activate': calendarService.isOneWay$ | async}">
+  <a class="js-add-date-range-to"
+    (click)="addComeBack()"
+    [ngClass]="{'activate': calendarService.isOneWay$ | async}">
     Añadir vuelta
   </a>
 
-  <div class="date-range-to js-date-range-to" (click)="toggleDatePickerComeBack()" [ngClass]="{'activate': calendarService.isRoundTrip$ | async}">
-    <label class="form-input_label">Vuelta</label>
-    <div class="input-group">
-      <input
-        [ngModel]="dateComeBack | date:'dd/MM/yy'"
-        id="inputComeBack"
-        type="text"
-        class="form-control js-searchbar-input js-searchbar-date-input-comeBack"
-        placeholder="DD/MM/YYYY"
-        readonly="readonly">
-      <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
-    </div>
+  <div app-date-picker class="date-range-to js-date-range-to"
+    (click)="calendarService.onComeBack()"
+    [ngClass]="{'activate': calendarService.isRoundTrip$ | async}"
+    [inputId]="'inputComeBack'"
+    [date]="dataFlight.return"
+    [label]="'Vuelta'">
   </div>
 </div>

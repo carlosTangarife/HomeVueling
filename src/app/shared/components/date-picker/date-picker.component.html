@@ -1,34 +1,11 @@
-<div class="searcbar-datepicker_title">
-  <p class="title">
-    <span class="icon icon-plane-right"></span> Selecciona fecha {{typeDatePicker}}
-  </p>
-  <ul class="options">
-    <li>
-      <input
-        id="roundTrip-{{typeDatePicker}}"
-        type="radio"
-        name="flight-option"
-        value="ida-vuelta"
-      >
-      <label for="roundTrip">Ida y vuelta</label>
-    </li>
-
-    <li>
-      <input
-        id="oneWay-{{typeDatePicker}}"
-        type="radio"
-        name="flight-option"
-        value="ida"
-        checked
-      >
-      <label for="oneWay">Solo ida</label>
-    </li>
-  </ul>
-</div>
-
-<div id="{{typeDatePicker}}"></div>
-
-<div class="searcbar-datepicker_legend">
-  <p class="legend-item">Hoy</p>
-  <p class="legend-item selection">Tu selección</p>
+<label class="form-input_label">{{label}}</label>
+<div class="input-group">
+  <input
+    [ngModel]="dataDate | date:'dd/MM/y'"
+    id="{{inputId}}"
+    type="text"
+    class="form-control js-searchbar-input js-searchbar-date-input-comeBack"
+    placeholder="DD/MM/YY"
+    readonly="readonly">
+  <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
 </div>

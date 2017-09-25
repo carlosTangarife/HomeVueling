@@ -29,5 +29,6 @@ $(document).ready(function(){
         }
       }
     });
+    $(document).unbind('mousedown', $.datepicker._checkExternalClick);
   }(jQuery));  
 });

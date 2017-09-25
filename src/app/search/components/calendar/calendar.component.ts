@@ -38,44 +38,44 @@ export class CalendarComponent implements OnInit {
   }
 
   ngOnInit() {
-    let self = this;
-    this.id = this.isMultiFlight ? '#vyCalendarMulti' : '#vyCalendarGoing';
-    let idInput = this.isMultiFlight ? '#inputMulti' : '#inputGoing';
-    $(this.id).datepicker({
-      minDate: 0,
-      numberOfMonths: 3,
-      showAnim: 'fade',
-      beforeShow: function(dateText, inst) {
-        $('#ui-datepicker-div').css({
-          position: 'relative',
-          top: 0,
-          left: 0
-        });
-        $(this.id).append($('#ui-datepicker-div'));
-      },
-      beforeShowDay: function (date) {
-        let dateText = $.datepicker.formatDate('yy-mm-d', date);
-        return [self.calendarService.fligthGoingDisabledDays.indexOf(dateText) === -1];
-      },
-      onSelect: function() {
-        let dateSelected = $(this).datepicker('getDate');
-        self.dataFlight.going = dateSelected;
-        self.minDateAux = dateSelected;
-        $(idInput).val($.datepicker.formatDate('dd/mm/y', dateSelected));
-        if (!self.isMulti) {
-          self.dataFlight.return = new Date(self.dataFlight.going.getFullYear(), self.dataFlight.going.getMonth(), self.dataFlight.going.getDate() + 7 );
-          $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', self.dataFlight.return));
-        }
-        self.calendarService.toggleShowDatePicker();
-        self.calendarService.getFlightReturnDisabledDays(self.dataFlight.destination.code, self.dataFlight.origin.code);
-      }
-    }).keydown(this.keyDownEvent);
+    // let self = this;
+    // this.id = this.isMultiFlight ? '#vyCalendarMulti' : '#vyCalendarGoing';
+    // let idInput = this.isMultiFlight ? '#inputMulti' : '#inputGoing';
+    // $(this.id).datepicker({
+    //   minDate: 0,
+    //   numberOfMonths: 3,
+    //   showAnim: 'fade',
+    //   beforeShow: function(dateText, inst) {
+    //     $('#ui-datepicker-div').css({
+    //       position: 'relative',
+    //       top: 0,
+    //       left: 0
+    //     });
+    //     $(this.id).append($('#ui-datepicker-div'));
+    //   },
+    //   beforeShowDay: function (date) {
+    //     let dateText = $.datepicker.formatDate('yy-mm-d', date);
+    //     return [self.calendarService.fligthGoingDisabledDays.indexOf(dateText) === -1];
+    //   },
+    //   onSelect: function() {
+    //     let dateSelected = $(this).datepicker('getDate');
+    //     self.dataFlight.going = dateSelected;
+    //     self.minDateAux = dateSelected;
+    //     $(idInput).val($.datepicker.formatDate('dd/mm/y', dateSelected));
+    //     if (!self.isMulti) {
+    //       self.dataFlight.return = new Date(self.dataFlight.going.getFullYear(), self.dataFlight.going.getMonth(), self.dataFlight.going.getDate() + 7 );
+    //       $('#inputComeBack').val($.datepicker.formatDate('dd/mm/y', self.dataFlight.return));
+    //     }
+    //     self.calendarService.toggleShowDatePicker();
+    //     self.calendarService.getFlightReturnDisabledDays(self.dataFlight.destination.code, self.dataFlight.origin.code);
+    //   }
+    // }).keydown(this.keyDownEvent);
 
-    this.calendarService.isRoundTrip$.subscribe(enabled => {
-      if (!enabled) {
-        $('#vyCalendarComeBack').datepicker('destroy');
-      }
-    });
+    // this.calendarService.isRoundTrip$.subscribe(enabled => {
+    //   if (!enabled) {
+    //     $('#vyCalendarComeBack').datepicker('destroy');
+    //   }
+    // });
   }
 
   initReturnDatePicker() {
@@ -127,9 +127,7 @@ export class CalendarComponent implements OnInit {
     } else {
       this.calendarService.onGoing();
     }
-    $(this.id).parent().removeClass('range-datepicker');
-    $(this.id).datepicker('setDate', this.dataFlight.going);
-    $(this.id).datepicker('refresh');
+    $('#vyCalendar').parent().removeClass('range-datepicker');
   }
 
   toggleDatePickerComeBack() {
