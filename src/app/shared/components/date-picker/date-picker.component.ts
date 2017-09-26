@@ -22,43 +22,31 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
   dateGoing: Date
 
   @Input()
-  fligthDisabledDays: Array<string>
+  flightDisabledDays: Array<string>
 
   @Output()
   selectedDate = new EventEmitter<Date>();
 
-  constructor() { }
+  constructor() {
+    this.flightDisabledDays = [];
+  }
 
   ngOnInit() {
+    $.datepicker.setDefaults($.extend($.datepicker.regional['es']));
   }
 
   ngAfterViewInit() {
     let self = this;
     $('#' + this.inputId).datepicker({
-      closeText: 'Cerrar',
-      prevText: '&#x3C;Ant',
-      nextText: 'Sig&#x3E;',
-      currentText: 'Hoy',
-      monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
-      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
-      monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun',
-      'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ],
-      dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
-      dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
-      dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
-      weekHeader: 'Sm',
       dateFormat: 'dd/mm/y',
       firstDay: 1,
-      isRTL: false,
-      showMonthAfterYear: false,
-      yearSuffix: '',
       minDate: 0,
       numberOfMonths: 3,
       showAnim: 'slideDown',
       beforeShow: self.calendarBeforeShow,
       beforeShowDay: function (date) {
         let dateText = $.datepicker.formatDate('yy-m-d', date);
-        if (self.fligthDisabledDays.indexOf(dateText) === -1) {
+        if (self.flightDisabledDays.indexOf(dateText) === -1) {
           if (self.dateGoing) {
             let maxDate = self.date;
             let dateSelected = $(this).datepicker('getDate');
