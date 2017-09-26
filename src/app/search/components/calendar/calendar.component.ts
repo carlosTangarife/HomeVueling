@@ -1,9 +1,9 @@
 import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IFlight } from '../../models/flight.model';
-import { CalendarService } from './../../../shared/services/calendar.service';
 import { FlightDatesService } from '../../../shared/services/flight-dates.service';
 import { DatePickerComponent } from '../../../shared/components/date-picker/date-picker.component';
+import { CalendarService } from '../../services/calendar.service';
 
 declare var jQuery: any;
 declare var $: any;
@@ -41,6 +41,11 @@ export class CalendarComponent implements OnInit {
   constructor(public flightDatesService: FlightDatesService, public calendarService: CalendarService) { }
 
   ngOnInit() {
+    this.calendarService.isOneWay$.subscribe(val => {
+      if (this.calendarService.isShowDatePicker && val) {
+        this.isFocused.emit(false);
+      }
+    });
   }
 
   getFlightDisabledDays() {

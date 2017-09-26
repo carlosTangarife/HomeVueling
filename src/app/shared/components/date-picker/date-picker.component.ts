@@ -1,5 +1,4 @@
 import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
-import { CalendarService } from 'app/shared/services/calendar.service';
 
 declare var jQuery: any;
 declare var $: any;

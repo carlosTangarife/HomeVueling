@@ -30,10 +30,10 @@ export class CalendarService {
 
     // Service message states
     oneWay() {
+      this.toggleModel();
       if (this.isComeBack) {
         this.toggleShowDatePicker();
       }
-      this.toggleModel();
     }
 
     roundTrip() {

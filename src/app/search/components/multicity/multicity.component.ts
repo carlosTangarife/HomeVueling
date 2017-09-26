@@ -1,9 +1,9 @@
 import { Component, OnInit, Output, EventEmitter, Input, ViewChild } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IFlight } from '../../models/flight.model';
-import { CalendarService } from '../../../shared/services/calendar.service';
 import { FlightDatesService } from '../../../shared/services/flight-dates.service';
 import { DatePickerComponent } from '../../../shared/components/date-picker/date-picker.component';
+import { CalendarService } from '../../services/calendar.service';
 
 @Component({
   selector: '[app-multicity]',

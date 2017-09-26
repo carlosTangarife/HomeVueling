@@ -44,43 +44,14 @@
         <div app-reservation class="pane-wrapper"></div>
       </div>
 
-      <app-calendar-options class="searchbar-datepicker" [ngClass]="{'show': calendarService.isShowDatePicker}">
-        <div class="searcbar-datepicker_title" grayBar *ngIf="!ischeckIn">
-          <p class="title" *ngIf="calendarService.isGoing$ | async">
-            <span class="icon icon-plane-right"></span> Selecciona fecha de ida
-          </p>
-          <p class="title" *ngIf="calendarService.isComeBack$ | async">
-            <span class="icon icon-plane-left"></span> Selecciona fecha de vuelta
-          </p>
-          <ul class="options">
-            <li>
-              <input
-                id="roundTrip"
-                type="radio"
-                name="flight-option"
-                value="ida-vuelta"
-                [checked]="calendarService.isRoundTrip$ | async"
-                (change)="changeRoundTrip()">
-              <label for="roundTrip">Ida y vuelta</label>
-            </li>
-            <li>
-              <input
-                id="oneWay"
-                type="radio"
-                name="flight-option"
-                value="ida"
-                [checked]="calendarService.isOneWay$ | async"
-                (change)="changeOneWay()">
-              <label for="oneWay">Solo ida</label>
-            </li>
-          </ul>
-        </div>
+      <div app-content-calendar class="searchbar-datepicker" [ngClass]="{'show': calendarService.isShowDatePicker}">
+        <div app-calendar-options class="searcbar-datepicker_title" grayBar *ngIf="!ischeckIn"></div>
         <div id="vyCalendar" tabindex="0" calendar></div>
         <div class="searcbar-datepicker_legend" legend *ngIf="!ischeckIn">
           <p class="legend-item">Hoy</p>
           <p class="legend-item selection">Tu selección</p>
         </div>
-      </app-calendar-options>
+      </div>
     </div>
   </div>
 </div>

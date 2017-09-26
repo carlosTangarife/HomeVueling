@@ -1,11 +1,12 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { ConfigService } from '../../../shared/services/config.service';
 import { IIconLink } from '../../../shared/models/commons.model';
-import { CalendarService } from '../../../shared/services/calendar.service';
+import { CalendarService } from '../../services/calendar.service';
 
 @Component({
   selector: 'app-index-search',
-  templateUrl: './search-index.component.html'
+  templateUrl: './search-index.component.html',
+  providers: [CalendarService]
 })
 export class IndexSearchComponent implements OnInit {
   isFlight: boolean;

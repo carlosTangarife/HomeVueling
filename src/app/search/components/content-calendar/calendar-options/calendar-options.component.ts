@@ -1,8 +1,8 @@
-import { CalendarService } from '../../services/calendar.service';
+import { CalendarService } from '../../../services/calendar.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-calendar-options',
+  selector: '[app-calendar-options]',
   templateUrl: './calendar-options.component.html'
 })
 export class CalendarOptionsComponent implements OnInit {

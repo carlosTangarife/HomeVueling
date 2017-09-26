@@ -3,9 +3,9 @@ import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 
 /*Local Services */
-import { CalendarService } from '../../../shared/services/calendar.service';
+import { CalendarService } from '../../services/calendar.service';
 import { SelectorService } from '../../../shared/services/selector.service';
-import { CheckInService } from '../check-in/check-in.service';
+import { CheckInService } from '../../services/check-in.service';
 
 /*Models using interface */
 import { IStation } from '../../../shared/models/station.model';
