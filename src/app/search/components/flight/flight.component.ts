@@ -18,6 +18,7 @@ export class FlightComponent implements OnInit {
   public isFocusedOrigin: boolean;
   public isFocusedDestination: boolean;
   public isFocusedPassengers: boolean;
+  public isFocusedCalendar: boolean;
 
   constructor(private _stationService: StationService) { }
 

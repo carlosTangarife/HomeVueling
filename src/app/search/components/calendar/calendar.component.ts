@@ -28,6 +28,9 @@ export class CalendarComponent implements OnInit {
   @Output()
   selectedDateGoing = new EventEmitter<Date>();
 
+  @Output()
+  isFocused = new EventEmitter<boolean>();
+
   public flightGoingDisabledDays = new Array<string>();
   public flightReturnDisabledDays = new Array<string>();
   private subjectFlightGoingDisabledDays = new BehaviorSubject<Array<string>>(this.flightGoingDisabledDays);
@@ -78,11 +81,13 @@ export class CalendarComponent implements OnInit {
       this.dateReturn.refresh();
     }
     this.selectedDateGoing.emit(event);
+    this.isFocused.emit(this.calendarService.isShowDatePicker);
   }
 
   selectedReturnDate(event: Date) {
     this.dataFlight.return = event;
     this.calendarService.toggleShowDatePicker();
+    this.isFocused.emit(this.calendarService.isShowDatePicker);
   }
 
   toggleDatePickerGoing() {
@@ -92,6 +97,7 @@ export class CalendarComponent implements OnInit {
       this.dateGoing.show();
     }
     this.dateGoing.refresh();
+    this.isFocused.emit(this.calendarService.isShowDatePicker);
   }
 
   toggleDatePickerComeBack() {
@@ -101,6 +107,7 @@ export class CalendarComponent implements OnInit {
       this.dateReturn.show();
     }
     this.dateReturn.refresh();
+    this.isFocused.emit(this.calendarService.isShowDatePicker);
   }
 
   addComeBack() {

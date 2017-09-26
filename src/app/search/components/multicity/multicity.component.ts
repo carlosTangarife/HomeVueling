@@ -21,6 +21,7 @@ export class MulticityComponent implements OnInit {
 
   public isFocusedOrigin: boolean;
   public isFocusedDestination: boolean;
+  public isFocusedCalendar: boolean;
   public flightDisabledDays = new Array<string>();
   private subjectFlightDisabledDays = new BehaviorSubject<Array<string>>(this.flightDisabledDays);
   public flightDisabledDays$ = this.subjectFlightDisabledDays.asObservable();
@@ -48,11 +49,13 @@ export class MulticityComponent implements OnInit {
       this.dateMulti.show();
     }
     this.dateMulti.refresh();
+    this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
   selectedMultiDate(event: Date) {
     this.dataFlight.multi.going = event;
     this.calendarService.toggleShowDatePicker();
+    this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
   clickMulticity() {

@@ -27,7 +27,8 @@
         [ngClass]="{'focused':isFocusedCalendar}"
         [dataFlight]="dataFlight"
         [isMulti]="dataFlight.multi.isActive"
-        (selectedDateGoing)="multicity.setMinDate($event)" >
+        (selectedDateGoing)="multicity.setMinDate($event)"
+        (isFocused)="isFocusedCalendar=$event">
     </div>
 
     <div app-passenger
