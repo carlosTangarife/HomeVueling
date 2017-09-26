@@ -16,7 +16,7 @@ import { DiscountComponent } from './components/discount/discount.component';
 import { DiscountListComponent } from './components/discount/discount-list/discount-list.component';
 import { MulticityComponent } from './components/multicity/multicity.component';
 import { CalendarOptionsComponent } from '../shared/components/calendar-options/calendar-options.component';
-import { CheckInErrorComponent } from './errors/check-in-error/check-in-error.component';
+import { CheckInErrorComponent } from './components/check-in-error/check-in-error.component';
 
 export const SEARCH_COMPONENTS = [
   IndexSearchComponent,
