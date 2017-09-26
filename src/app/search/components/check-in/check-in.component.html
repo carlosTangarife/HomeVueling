@@ -1,9 +1,6 @@
 <div app-check-in-error class="alert alert--icon error tab-pane_alert" *ngIf="validation"></div>
 
 <p class="tab-pane_lead-in">Obtén tus tarjetas de embarque para subir al avión: podrás imprimirlas o descargarlas en tu móvil.</p>
-<h3 class="tab-pane_title">
-   <span class="icon-computer"></span> Check-in online
-</h3>
 
 <div class="tab-pane_options-container">
    <div class="form-checkbox--button" (click)="showEmail()">
@@ -28,7 +25,7 @@
       <div class="input-group">
         <input
           type="text"
-          id="origin-input"
+          id="codeBookingCheckIn"
           class="form-control"
           placeholder="Ej. XG6LM3"
           required="required"
@@ -50,7 +47,7 @@
       <div class="input-group">
         <input
           type="email"
-          id="destination-input"
+          id="emailCheckIn"
           class="form-control"
           placeholder="email@vueling.com"
           required="required"
@@ -71,7 +68,7 @@
       <div class="input-group">
         <input
           type="text"
-          id="destination-input"
+          id="airportCheckIn"
           (click)="showStation()"
           class="form-control"
           placeholder="Ciudad"
