@@ -2,7 +2,7 @@
   <p>{{titleDiscount() | dictionary}}</p>
   <span class="icon icon-arrow-right"></span>
 </li>
-<li (click)="toggleDiscountList()" 
+<li (click)="toggleDiscountList()"
   [style.display]="typeSelected() ? 'list-item' : 'none' ">
   <p class="discount-item" [ngClass]="{'selected': typeSelected()}">{{typeDiscountSelected | dictionary}}</p>
 </li>

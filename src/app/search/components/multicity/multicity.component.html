@@ -1,6 +1,6 @@
 <div app-origin-selector
   id="form-group--origin"
-  class="form-input origin js-second-flight"
+  class="form-input origin"
   #originMulti
   [dataFlight]="dataFlight.multi.origin"
   [ngClass]="{'focused':isFocusedOrigin}"
@@ -10,7 +10,7 @@
 
 <div app-destination-selector
   id="form-group--destination"
-  class="form-input destination js-second-flight"
+  class="form-input destination"
   #destinationMulti
   [ngClass]="{'focused':isFocusedDestination}"
   [dataFlight]="dataFlight.multi"
@@ -20,7 +20,7 @@
   (outStation)="getFlightDisabledDays()">
 </div>
 
-<div id="form-group--dates" class="form-input dates js-second-flight" [ngClass]="{'focused':isFocusedCalendar}">
+<div id="form-group--dates" class="form-input dates" [ngClass]="{'focused':isFocusedCalendar}">
   <div app-date-picker #dateMulti
     class="col col-md-6"
     (click)="toggleDatePickerMulti()"
@@ -32,7 +32,7 @@
   </div>
 </div>
 
-<div class="aditional-flight js-remove-aditional-flight" (click)="clickMulticity()">
+<div class="aditional-flight" (click)="clickMulticity()">
   <span class="icon icon-delete-flight"></span>
   <a>Eiminar vuelo 2</a>
 </div>

@@ -38,13 +38,12 @@
         [ngClass]="{'focused':isFocusedPassengers}"
         [passengers]="dataFlight.passengers"
         [discount]="dataFlight.discount"
-        (click)="clickInput()"
         (isFocused)="isFocusedPassengers=$event">
     </div>
 </div>
 
 <div app-multicity #multicity
-    class="form-group form-group--flight-search hide js-second-flight-container"
+    class="form-group form-group--flight-search hide"
     [ngClass]="{'hide': !dataFlight.multi.isActive}"
     [dataFlight]="dataFlight"
     (removeMulticity)="removeMulticity($event)">
