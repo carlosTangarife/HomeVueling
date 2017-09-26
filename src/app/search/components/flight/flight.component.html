@@ -4,7 +4,6 @@
         #origin
         class="form-input origin"
         [ngClass]="{'focused':isFocusedOrigin}"
-        (click)="clickInput()"
         [dataFlight]="dataFlight.origin"
         (isFocused)="isFocusedOrigin=$event"
         (selectedOrigin)="destination.loadDestinations()">
@@ -15,7 +14,6 @@
         #destination
         class="form-input destination"
         [ngClass]="{'focused':isFocusedDestination}"
-        (click)="clickInput()"
         [dataFlight]="dataFlight"
         (isFocused)="isFocusedDestination=$event"
         (clickDestination)="origin.showPopupOrigin($event)"
@@ -23,12 +21,13 @@
         (outStation)="passenger.setResidentAndLargeFamily($event); calendar.getFlightDisabledDays()">
     </div>
 
-    <div app-calendar
-        [dataFlight]="dataFlight"
-        [isMulti]="dataFlight.multi.isActive"
+    <div app-calendar #calendar
         id="form-group--dates"
         class="form-input dates"
-        #calendar>
+        [ngClass]="{'focused':isFocusedCalendar}"
+        [dataFlight]="dataFlight"
+        [isMulti]="dataFlight.multi.isActive"
+        (selectedDateGoing)="multicity.setMinDate($event)" >
     </div>
 
     <div app-passenger
@@ -43,10 +42,10 @@
     </div>
 </div>
 
-<div app-multicity *ngIf="dataFlight.multi.isActive"
+<div app-multicity #multicity
     class="form-group form-group--flight-search hide js-second-flight-container"
     [ngClass]="{'hide': !dataFlight.multi.isActive}"
-    [dataFlight]="dataFlight.multi"
+    [dataFlight]="dataFlight"
     (removeMulticity)="removeMulticity($event)">
 </div>
 

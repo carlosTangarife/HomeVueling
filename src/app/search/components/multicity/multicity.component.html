@@ -2,8 +2,7 @@
   id="form-group--origin"
   class="form-input origin js-second-flight"
   #originMulti
-  (click)="clickInput()"
-  [dataFlight]="dataFlight.origin"
+  [dataFlight]="dataFlight.multi.origin"
   [ngClass]="{'focused':isFocusedOrigin}"
   (isFocused)="isFocusedOrigin=$event"
   (selectedOrigin)="destinationMulti.loadDestinations()">
@@ -13,25 +12,23 @@
   id="form-group--destination"
   class="form-input destination js-second-flight"
   #destinationMulti
-  (click)="clickInput()"
   [ngClass]="{'focused':isFocusedDestination}"
-  [dataFlight]="dataFlight"
+  [dataFlight]="dataFlight.multi"
   (isFocused)="isFocusedDestination=$event"
   (clickDestination)="originMulti.showPopupOrigin($event)"
   (clickMulticity)="clickMulticity()"
   (outStation)="getFlightDisabledDays()">
 </div>
 
-<div id="form-group--dates" class="form-input dates js-second-flight">
-  <div app-date-picker
-    #dateMulti
+<div id="form-group--dates" class="form-input dates js-second-flight" [ngClass]="{'focused':isFocusedCalendar}">
+  <div app-date-picker #dateMulti
     class="col col-md-6"
     (click)="toggleDatePickerMulti()"
     [inputId]="'inputMulti'"
-    [date]="dataFlight.going"
+    [date]="dataFlight.multi.going"
     [label]="'Ida'"
     [fligthDisabledDays]="flightDisabledDays$ | async"
-    (selectedDate)="selectedMultiDate()">
+    (selectedDate)="selectedMultiDate($event)">
   </div>
 </div>
 

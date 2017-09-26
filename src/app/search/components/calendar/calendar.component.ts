@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, ViewChild } from '@angular/core';
+import { Component, OnInit, Input, ViewChild, Output, EventEmitter } from '@angular/core';
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { IFlight } from '../../models/flight.model';
 import { CalendarService } from './../../../shared/services/calendar.service';
@@ -25,6 +25,9 @@ export class CalendarComponent implements OnInit {
   @Input()
   isMulti: boolean;
 
+  @Output()
+  selectedDateGoing = new EventEmitter<Date>();
+
   public flightGoingDisabledDays = new Array<string>();
   public flightReturnDisabledDays = new Array<string>();
   private subjectFlightGoingDisabledDays = new BehaviorSubject<Array<string>>(this.flightGoingDisabledDays);
@@ -43,6 +46,7 @@ export class CalendarComponent implements OnInit {
     if (this.dataFlight) {
       origin = this.dataFlight.origin.code;
       destination = this.dataFlight.destination.code;
+      this.selectedDateGoing.emit(this.dataFlight.going);
     }
     this.flightGoingDisabledDays = this.flightDatesService.getFlightDisabledDays(origin, destination);
     this.subjectFlightGoingDisabledDays.next(this.flightGoingDisabledDays);
@@ -66,11 +70,14 @@ export class CalendarComponent implements OnInit {
   selectedGoingDate(event: Date) {
     this.dataFlight.going = event;
     this.calendarService.toggleShowDatePicker();
-    if (this.dataFlight.return <= this.dataFlight.going) {
-      this.dataFlight.return = event;
-      this.dateReturn.setMinDate(this.dataFlight.return);
+    if (this.dateReturn) {
+      if (this.dataFlight.return <= this.dataFlight.going) {
+        this.dataFlight.return = event;
+      }
+      this.dateReturn.setMinDate(event);
+      this.dateReturn.refresh();
     }
-    this.dateReturn.refresh();
+    this.selectedDateGoing.emit(event);
   }
 
   selectedReturnDate(event: Date) {
@@ -81,20 +88,27 @@ export class CalendarComponent implements OnInit {
   toggleDatePickerGoing() {
     this.calendarService.onGoing();
     $('#vyCalendar').parent().removeClass('range-datepicker');
+    if (this.calendarService.isGoing) {
+      this.dateGoing.show();
+    }
     this.dateGoing.refresh();
   }
 
   toggleDatePickerComeBack() {
     this.calendarService.onComeBack();
     $('#vyCalendar').parent().addClass('range-datepicker');
+    if (this.calendarService.isComeBack) {
+      this.dateReturn.show();
+    }
     this.dateReturn.refresh();
   }
 
   addComeBack() {
+    this.dateReturn.setMinDate(this.dataFlight.going);
     if (this.dataFlight.return <= this.dataFlight.going) {
-      let date = new Date(this.dataFlight.going.getFullYear(), this.dataFlight.going.getMonth(), this.dataFlight.going.getDate() + 7);
+      let date = new Date(this.dataFlight.going.getFullYear(),
+        this.dataFlight.going.getMonth(), this.dataFlight.going.getDate() + 7);
       this.dataFlight.return = date;
-      this.dateReturn.setMinDate(date);
     }
     this.getFlightReturnDisabledDays();
     this.calendarService.roundTrip();
