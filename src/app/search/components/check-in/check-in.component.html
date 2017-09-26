@@ -1,4 +1,4 @@
-<div app-check-in-error *ngIf="submit==false"> </div>
+<!-- <div app-check-in-error *ngIf="submit==false"> </div> -->
 
 <p class="tab-pane_lead-in">Obtén tus tarjetas de embarque para subir al avión: podrás imprimirlas o descargarlas en tu móvil.</p>
 <h3 class="tab-pane_title">
@@ -6,117 +6,119 @@
 </h3>
 
 <div class="tab-pane_options-container">
-   <div class="form-checkbox--button" (click)="changeTypeCheckIn(false)">
+   <div class="form-checkbox--button" (click)="showEmail()">
       <label>
-      <input type="checkbox" checked hidden>
-      <span>Email del comprador</span>
+        <span>Email del comprador</span>
       </label>
    </div>
-   <div class="form-checkbox--button" (click)="changeTypeCheckIn(true)">
+   <div class="form-checkbox--button" (click)="showOriginDestination()">
       <label>
-      <input type="checkbox" hidden>
-      <span>Origen/Destino</span>
+        <span>Origen/Destino</span>
       </label>
    </div>
 </div>
 
-<form class="container" [formGroup] = "form" (ngSubmit) = "showError(form.value)">
-  <div *ngIf="isOrigin == false" class="form">
+<form class="form" (ngSubmit)="onSubmit(forma)" #forma="ngForm" novalidate="">
     <div class="form-group form-group--check-in">
-        <div class="form-input">
-          <label>Código de reserva</label>
-          <a href="#">¿Qué es?</a> 
-          <div class="input-group">                 
-              <input type="text" id="origin-input" name="bookingCode" class="form-control js-searchbar-input" formControlName="bookingCode"              
-               placeholder="Ej. XG6LM3" [(ngModel)]="codeBook" (keydown)=omitSpecialCharacters($event.key) >            
-          </div>
-            <div class="popover popover--error"
-            *ngIf="!validation && form.controls.bookingCode.dirty == true">
-               <div class="popover-content">Debes completar este campo.</div>                   
-            </div>
-        </div>
-      
       <div class="form-input">
-          <label>Email del comprador </label> 
-          <div class="input-group">       
-              <input type="email" id="destination-input" name="email" class="form-control js-searchbar-input" formControlName="email"              
-              placeholder="email@vueling.com" [(ngModel)]="email" > 
-          </div>                                 
-              <div class="popover popover--error" 
-              *ngIf="!validation && form.controls.email.dirty == true">               
-                <div class="popover-content">Debes completar este campo.</div>
-                <div *ngIf="form.controls.email.invalid == false" class="popover-content">Los datos introducidos no son correctos.</div>                 
-              </div>  
+        <label>Código de reserva</label>
+        <a href="#">¿Qué es?</a>
+        <div class="input-group">
+          <input
+            type="text"
+            id="origin-input"
+            class="form-control js-searchbar-input"
+            placeholder="Ej. XG6LM3"
+            required="required"
+            pattern="[A-Za-z0-9]{6}"
+            [(ngModel)]="codeBooking"
+            name="codeBookingg"
+            #codeBookingg="ngModel"
+            >
+        </div>
+        <div class="popover popover--error" *ngIf="validation && codeBookingg.errors?.required">
+          <div class="popover-content">Debes completar este campo.</div>
+        </div>
+
+        <div class="popover popover--error" *ngIf="validation && codeBookingg.errors?.pattern">
+          <div class="popover-content">Ingrese un codigo de reserva valido.</div>
+        </div>
       </div>
 
-          <div class="form-action">
-            <!-- <a input type="submit" value="submit" href="#" (click)="onSubmit(); showError()" class="mv_button color-darkGrey size-md icon icon-right">Acceder</a> -->
-            <a><input type="submit" value="Acceder" (click)="onSubmit()" class="mv_button color-darkGrey size-md icon icon-right"></a>
-          </div>
-
-    </div>
-  </div>
-</form>
-
-<div *ngIf="isOrigin == true" class="form">
-    <div class="form-group form-group--destinations">
-        <div class="form-input reservation-code">
-          <label>Código de reserva</label>
-          <a href="#">¿Qué es?</a>
-          <div class="input-group">
-            <input type="text" id="origin-input" name="bookingCode" class="form-control js-searchbar-input" 
-            required ngModel #bookingCode="ngModel" maxlength="8" 
-            [ngModel]="codeBook" placeholder="Ej. XG6LM3"> 
-          </div>
-          <div class="popover popover--error" *ngIf="bookingCode.invalid && (bookingCode.dirty || bookingCode.touched)">
-              <div class="popover-content" *ngIf="bookingCode.errors.required">Debes completar este campo.</div>              
-          </div>       
+      <div class="form-input" *ngIf="isEmail">
+        <label>Email del comprador </label>
+        <div class="input-group">
+          <input
+            type="email"
+            id="destination-input"
+            class="form-control js-searchbar-input"
+            placeholder="email@vueling.com"
+            required="required"
+            pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+            [(ngModel)]="email"
+            name="emaill"
+            #emaill="ngModel"
+            >
         </div>
 
-        <div class="form-input">
-          <label>Aeropuerto origen/destino</label>
-          <div class="input-group">
-            <input type="text" id="destination-input" (click)="showStation()" class="form-control js-searchbar-input"
-             placeholder="Ciudad" [(ngModel)]="station" required>
+        <div class="popover popover--error" *ngIf="validation && emaill.errors?.required">
+          <div class="popover-content">Debes completar este campo.</div>
+        </div>
 
-          </div>
-          <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup"
-          [ngClass]="{'show': isShowStation}" (click)="showStation(station)">
-            <div app-places
-                [label]="'allAirports'"
-                [data]="selectorService.listStations$"
-                (selectedEvent)="stationSelected($event)">
-            </div>
+        <div class="popover popover--error" *ngIf="validation && emaill.errors?.pattern">
+          <div class="popover-content">Los datos introducidos no son correctos.</div>
+        </div>
+      </div>
+
+      <div class="form-input" *ngIf="isOriginDestination">
+        <label>Aeropuerto origen/destino</label>
+        <div class="input-group">
+          <input
+            type="text"
+            id="destination-input"
+            (click)="showStation()"
+            class="form-control js-searchbar-input"
+            placeholder="Ciudad"
+            [(ngModel)]="station"
+            name="stationn"
+            #stationn="ngModel"
+            required>
+        </div>
+
+        <div class="popover popover--error" *ngIf="validation && stationn.errors?.required">
+          <div class="popover-content">Debes completar este campo.</div>
+        </div>
+
+        <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show': isShowStation}" (click)="showStation()">
+          <div app-places
+              [label]="'allAirports'"
+              [data]="selectorService.listStations$"
+              (selectedEvent)="stationSelected($event)">
           </div>
         </div>
 
-        <div class="form-input dates">
-          <div class="col col-md-6" (click)="toggleShowCalendar()">
+      </div>
+
+      <div class="form-input dates" *ngIf="isOriginDestination">
+          <div class="col col-md-6">
             <label>Fecha del primer vuelo</label>
             <div class="input-group">
-              <input
-                id="inputflightTomorrow"
-                type="text"
-                class="form-control hasDatepicker"
-                placeholder="DD/MM/YYYY"
-                readonly="readonly"
-                [ngModel]="flightTomorrow | date:'dd/mm/yy'">
+              <input type="text" class="form-control js-searchbar-input js-searchbar-date-input" placeholder="DD/MM/YY" readonly="readonly">
               <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
             </div>
           </div>
           <div class="col col-md-6">
-            <div class="form-checkbox--button" (click)="toggleFlightTomorrow()">
-             <label>
-               <input type="checkbox" hidden="">
-               <span>Mi vuelo es mañana</span>
-             </label>
+            <div class="form-checkbox--button">
+              <label>
+             <span>Mañana</span>
+           </label>
             </div>
           </div>
         </div>
-      </div>
+
       <div class="form-action">
-        <a href="#" (click)="onSubmit()" class="mv_button color-darkGrey size-md icon icon-right">Acceder</a>
+        <button type="submit" class="mv_button color-darkGrey size-md icon icon-right">Acceder</button>
       </div>
-</div>
 
-
+    </div>
+  </form>

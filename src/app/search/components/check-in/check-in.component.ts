@@ -1,5 +1,5 @@
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 
 /*Local Services */
@@ -20,67 +20,43 @@ declare var $: any;
   providers: [CheckInService, SelectorService]
 })
 export class CheckInComponent implements OnInit {
-    form;
-    public dataCheckIn: ICheckIn
-    public codeBook: string;
+    public codeBooking: string;
     public email: string;
-    public submit: boolean;
     public keyCookie: string;
-    public isOrigin: boolean;
-    public isChecked: boolean;
+    public isEmail: boolean;
+    public isOriginDestination: boolean;
     public isShowStation: boolean;
     public station: IStation;
     public validation: boolean;
-    public isSpecial: boolean;
     public flightTomorrow: Date;
-    public isChekIn: boolean;
 
   @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
 
   constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService) {
-    this.isOrigin = false;
+    this.isEmail = true;
+    this.isOriginDestination = false;
     this.isShowStation = false;
-    this.isChecked = true;
-    this.submit = true;
     this.keyCookie = environment.keyCheckInCookie;
-    this.validation = true;
-    this.isChekIn = false;
+    this.validation = false;
     this.flightTomorrow = null;
    }
 
   ngOnInit() {
     this.selectorService.loadStations();
-    this.codeBook = this.checkInService.getCodeBooking(this.keyCookie);
-    this.form = new FormGroup({
-      bookingCode: new FormControl('', Validators.required),
-      email: new FormControl('', Validators.compose([
-        Validators.required,
-        Validators.pattern('[^ @]*@[^ @]*')
-      ]))
-    });
+    this.codeBooking = this.checkInService.getCodeBooking(this.keyCookie);
   }
 
-  omitSpecialCharacters(event: string) {
-    debugger;
-    const pattern = '([A-Z0-9a-z])';
-    let res = event.match(pattern);
-    if (res != null) {
-      this.isSpecial = false;
-    } else {
-      this.isSpecial = true;
-    }
+  showEmail() {
+    this.isEmail = true;
+    this.isOriginDestination = false;
   }
 
-
-  changeTypeCheckIn(value) {
-    this.isOrigin = value;
+  showOriginDestination() {
+    this.isOriginDestination = true;
+    this.isEmail = false;
   }
 
-  toggleChecked() {
-    this.isChecked = !this.isChecked;
-  }
-
-  showStation(station: any) {
+  showStation() {
     this.isShowStation = !this.isShowStation;
   }
 
@@ -88,43 +64,8 @@ export class CheckInComponent implements OnInit {
     this.station = station.name;
   }
 
-  toggleShowCalendar() {
-    let self = this;
-    this.calendarService.toggleShowDatePicker();
-    this.isChekIn = !this.isChekIn;
-    this.isChekIn ? this.calendarService.onCheckIn() : this.calendarService.offCheckIn()
-    $('#vyCalendarCheckIn').datepicker({
-      minDate: 0,
-      numberOfMonths: 3,
-      showAnim: 'fade',
-      beforeShow: function() {
-        $('#inputflightTomorrow').val($.datepicker.formatDate('dd/mm/yy', this.flightTomorrow));
-        $('#vyCalendarCheckIn').datepicker('setDate', self.flightTomorrow);
-      },
-      onSelect: function() {
-        let dateSelected: Date;
-        dateSelected = $(this).datepicker('getDate');
-        self.flightTomorrow = dateSelected;
-        $('#inputflightTomorrow').val($.datepicker.formatDate('dd/mm/yy', dateSelected));
-        self.calendarService.toggleShowDatePicker();
-        $(this).datepicker('destroy');
-      }
-    });
-
-  }
-
-  toggleFlightTomorrow() {
-    debugger;
-    this.flightTomorrow = new Date();
-    this.flightTomorrow.setDate(this.flightTomorrow.getDate() + 1);
-  }
-
-  onSubmit() {
-    this.submit = !this.submit;
-  }
-
-  showError(user) {
-    this.validation = !this.validation;
+  onSubmit(forma: NgForm) {
+    this.validation = true;
   }
 }
 
