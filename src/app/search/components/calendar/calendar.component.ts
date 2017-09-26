@@ -42,7 +42,7 @@ export class CalendarComponent implements OnInit {
 
   ngOnInit() {
     this.calendarService.isOneWay$.subscribe(val => {
-      if (this.calendarService.isShowDatePicker && val) {
+      if (this.calendarService.isShowDatePicker && val && this.calendarService.isComeBack) {
         this.isFocused.emit(false);
       }
     });
