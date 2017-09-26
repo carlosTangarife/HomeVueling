@@ -98,14 +98,14 @@ export class CheckInComponent implements OnInit {
       numberOfMonths: 3,
       showAnim: 'fade',
       beforeShow: function() {
-        $('#inputflightTomorrow').val($.datepicker.formatDate('dd/mm/y', this.flightTomorrow));
+        $('#inputflightTomorrow').val($.datepicker.formatDate('dd/mm/yy', this.flightTomorrow));
         $('#vyCalendarCheckIn').datepicker('setDate', self.flightTomorrow);
       },
       onSelect: function() {
         let dateSelected: Date;
         dateSelected = $(this).datepicker('getDate');
         self.flightTomorrow = dateSelected;
-        $('#inputflightTomorrow').val($.datepicker.formatDate('dd/mm/y', dateSelected));
+        $('#inputflightTomorrow').val($.datepicker.formatDate('dd/mm/yy', dateSelected));
         self.calendarService.toggleShowDatePicker();
         $(this).datepicker('destroy');
       }

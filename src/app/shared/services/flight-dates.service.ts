@@ -15,7 +15,7 @@ export class FlightDatesService {
      * @returns {*}
      * @memberof SelectorService
     */
-    getFlightDisabledDays(origin: string, destination: string): Array<string> {
+    getFlightDisabledDays(origin?: string, destination?: string): Array<string> {
         /**
          * only do the request if the source and destination exists as parameter.
          */

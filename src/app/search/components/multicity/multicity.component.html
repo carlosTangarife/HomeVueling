@@ -24,9 +24,9 @@
 
 <div id="form-group--dates" class="form-input dates js-second-flight">
   <div app-date-picker
-    #calendar
+    #dateMulti
     class="col col-md-6"
-    (click)="calendarService.onMulti()"
+    (click)="toggleDatePickerMulti()"
     [inputId]="'inputMulti'"
     [date]="dataFlight.going"
     [label]="'Ida'"

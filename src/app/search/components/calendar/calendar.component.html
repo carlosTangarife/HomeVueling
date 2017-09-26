@@ -1,4 +1,5 @@
 <div app-date-picker
+  #dateGoing
   class="col col-md-6"
   (click)="toggleDatePickerGoing()"
   [inputId]="'inputGoing'"
@@ -15,7 +16,9 @@
     Añadir vuelta
   </a>
 
-  <div app-date-picker class="date-range-to js-date-range-to"
+  <div app-date-picker
+    #dateReturn
+    class="date-range-to js-date-range-to"
     (click)="toggleDatePickerComeBack()"
     [ngClass]="{'activate': calendarService.isRoundTrip$ | async}"
     [inputId]="'inputComeBack'"

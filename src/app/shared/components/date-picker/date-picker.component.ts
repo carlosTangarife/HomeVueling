@@ -85,6 +85,10 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
     }).keydown(this.keyDownEvent);
   }
 
+  refresh() {
+    $('#' + this.inputId).datepicker('refresh');
+  }
+
   calendarBeforeShow(input, inst) {
     setTimeout(function() {
       $('#ui-datepicker-div').css({
@@ -130,8 +134,7 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
     if (code !== 9) {
       event.preventDefault();
       if (code === 37 || code === 38 || code === 39 || code === 40) {
-        let parts = $(this).val().split('/');
-        let currentDate = new Date(parts[2], parts[1] - 1, parts[0]);
+        let currentDate = $(this).datepicker('getDate');
         switch (code) {
           case 37: currentDate.setDate(currentDate.getDate() - 1); break;
           case 38: currentDate.setDate(currentDate.getDate() - 7); break;
