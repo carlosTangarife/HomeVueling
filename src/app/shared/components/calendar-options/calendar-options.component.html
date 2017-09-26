@@ -1,36 +1,3 @@
-<div class="searcbar-datepicker_title" *ngIf="calendarService.isCheckIn$ | async">
-  <p class="title" *ngIf="calendarService.isGoing$ | async">
-    <span class="icon icon-plane-right"></span> Selecciona fecha de ida
-  </p>
-  <p class="title" *ngIf="calendarService.isComeBack$ | async">
-    <span class="icon icon-plane-left"></span> Selecciona fecha de vuelta
-  </p>
-  <ul class="options">
-    <li>
-      <input
-        id="roundTrip"
-        type="radio"
-        name="flight-option"
-        value="ida-vuelta"
-        [checked]="calendarService.isRoundTrip$ | async"
-        (change)="changeRoundTrip()">
-      <label for="roundTrip">Ida y vuelta</label>
-    </li>
-
-    <li>
-      <input
-        id="oneWay"
-        type="radio"
-        name="flight-option"
-        value="ida"
-        [checked]="calendarService.isOneWay$ | async"
-        (change)="changeOneWay()">
-      <label for="oneWay">Solo ida</label>
-    </li>
-  </ul>
-</div>
-<ng-content></ng-content>
-<div class="searcbar-datepicker_legend" *ngIf="calendarService.isCheckIn$ | async">
-  <p class="legend-item">Hoy</p>
-  <p class="legend-item selection">Tu selección</p>
-</div>
+<ng-content select="[grayBar]"></ng-content>
+<ng-content select="[calendar]"></ng-content>
+<ng-content select="[legend]"></ng-content>

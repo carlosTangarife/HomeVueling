@@ -34,10 +34,22 @@ export class IndexSearchComponent implements OnInit {
     this.isOverlay = false;
   }
 
-  stateTag(isFlight: boolean, ischeckIn: boolean, isReservation: boolean) {
-    this.isFlight = isFlight;
-    this.ischeckIn = ischeckIn;
-    this.isReservation = isReservation;
+  setTagFlight() {
+    this.isFlight = true;
+    this.ischeckIn = false;
+    this.isReservation = false;
+  }
+
+  setTagCheckin() {
+    this.isFlight = false;
+    this.ischeckIn = true;
+    this.isReservation = false;
+  }
+
+  setTagBooking() {
+    this.isFlight = false;
+    this.ischeckIn = false;
+    this.isReservation = true;
   }
 
   toggleClassOverlay() {

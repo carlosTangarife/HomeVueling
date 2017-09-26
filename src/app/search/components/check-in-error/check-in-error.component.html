@@ -1,27 +1,25 @@
-<div class="alert alert--icon error tab-pane_alert" *ngIf="submit == false">
-  <div class="alert_wrap">
-    <span class="icon icon-exclamation-mark"><span class="path1"></span><span class="path2"></span></span>
-    <p class="alert_wrap_title">No se ha encontrado la reserva. Por favor, verifica los datos y vuelve a intentarlo.</p>
-    <div class="alert_wrap_message">
-      <div class="row">
-        <div class="col-md-2">
-          <p><b>Teléfono de Atención al cliente.</b></p>
+<div class="alert_wrap" *ngIf="submit == false">
+  <span class="icon icon-exclamation-mark"><span class="path1"></span><span class="path2"></span></span>
+  <p class="alert_wrap_title">No se ha encontrado la reserva. Por favor, verifica los datos y vuelve a intentarlo.</p>
+  <div class="alert_wrap_message">
+    <div class="row">
+      <div class="col-md-2">
+        <p><b>Teléfono de Atención al cliente.</b></p>
+      </div>
+      <div class="col-md-3">
+        <div class="selectwrap">
+          <select [(ngModel)]="countryCode" name="value" #value="ngModel" class="form-control" (ngModelChange)="onChange()">
+            <option *ngFor="let country of countryInfo" [ngValue]="country.countryCode" >
+              {{country.name}} 
+            </option>
+          </select>
         </div>
-        <div class="col-md-3">
-          <div class="selectwrap">
-            <select [(ngModel)]="countryCode" name="value" #value="ngModel" class="form-control" (ngModelChange)="onChange()">
-              <option *ngFor="let country of countryInfo" [ngValue]="country.countryCode" >
-                {{country.name}} 
-              </option>
-            </select>
-          </div>
-        </div>
-        <div class="col-md-2">
-          <p>{{result?.TextPhoneInfo.phoneNumber}}</p>
-        </div>
-        <div class="col-md-4">
-          <p>{{result?.TextPhoneInfo.phoneInfoFirst}} {{result?.TextPhoneInfo.phoneInfoLast}} </p>          
-        </div>
+      </div>
+      <div class="col-md-2">
+        <p>{{result?.TextPhoneInfo.phoneNumber}}</p>
+      </div>
+      <div class="col-md-4">
+        <p>{{result?.TextPhoneInfo.phoneInfoFirst}} {{result?.TextPhoneInfo.phoneInfoLast}} </p>          
       </div>
     </div>
   </div>

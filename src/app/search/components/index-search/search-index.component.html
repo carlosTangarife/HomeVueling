@@ -8,7 +8,7 @@
   <div id="searchbar" class="searchbar-main container" (click)="showOverlay()">
     <ul class="nav nav-tabs searchbar-main_tabs">
       <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--search" *ngIf="searcherConfig.FlightSearch.IsEnabled" [ngClass]="{'active': isFlight}">
-        <div class="tab" data-toggle="tab" href="#home" (click)="stateTag(true, false, false)">
+        <div class="tab" data-toggle="tab" href="#home" (click)="setTagFlight()">
           <p><span app-icon class="icon {{searcherConfig.FlightSearch.Icon.Class}}"
             [icon]="searcherConfig.FlightSearch.Icon"></span>{{'flights' | dictionary}}
           </p>
@@ -17,14 +17,14 @@
       </li>
 
       <li class="searchbar-main_tabs_tab  searchbar-main_tabs_tab--check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'active': ischeckIn}">
-        <a class="tab" data-toggle="tab" href="#menu1" (click)="stateTag(false, true, false)">
+        <a class="tab" data-toggle="tab" href="#menu1" (click)="setTagCheckin()">
           <p><span app-icon class="icon {{searcherConfig.Checkin.Icon.Class}}"
             [icon]="searcherConfig.Checkin.Icon"></span>{{'checkinOnline' | dictionary}}</p>
         </a>
       </li>
 
       <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--reservation" *ngIf="searcherConfig.YourBooking.IsEnabled" [ngClass]="{'active': isReservation}">
-        <a class="tab" data-toggle="tab" href="#menu2" (click)="stateTag(false, false, true)">
+        <a class="tab" data-toggle="tab" href="#menu2" (click)="setTagBooking()">
           <p><span app-icon class="icon {{searcherConfig.YourBooking.Icon.Class}}"
             [icon]="searcherConfig.YourBooking.Icon"></span>{{'yourBooking' | dictionary}}</p>
         </a>
@@ -36,16 +36,50 @@
         <form app-flight autocomplete="off" class="pane-wrapper" novalidate></form>
       </div>
 
-      <div id="tab-checkin" class="tab-pane fade searchbar-main_tab-content_pane check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'in active': ischeckIn}">
+      <div id="tab-checkin" class="tab-pane searchbar-main_tab-content_pane check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'in active': ischeckIn}">
         <div app-check-in class="pane-wrapper"></div>
       </div>
 
-      <div id="tab-reservation" class="tab-pane fade searchbar-main_tab-content_pane reservation" *ngIf="searcherConfig.YourBooking.IsEnabled" [ngClass]="{'in active': isReservation}">
+      <div id="tab-reservation" class="tab-pane searchbar-main_tab-content_pane reservation" *ngIf="searcherConfig.YourBooking.IsEnabled" [ngClass]="{'in active': isReservation}">
         <div app-reservation class="pane-wrapper"></div>
       </div>
 
       <app-calendar-options class="searchbar-datepicker" [ngClass]="{'show': calendarService.isShowDatePicker}">
-        <div id="vyCalendar" tabindex="0"></div>
+        <div class="searcbar-datepicker_title" grayBar *ngIf="!ischeckIn">
+          <p class="title" *ngIf="calendarService.isGoing$ | async">
+            <span class="icon icon-plane-right"></span> Selecciona fecha de ida
+          </p>
+          <p class="title" *ngIf="calendarService.isComeBack$ | async">
+            <span class="icon icon-plane-left"></span> Selecciona fecha de vuelta
+          </p>
+          <ul class="options">
+            <li>
+              <input
+                id="roundTrip"
+                type="radio"
+                name="flight-option"
+                value="ida-vuelta"
+                [checked]="calendarService.isRoundTrip$ | async"
+                (change)="changeRoundTrip()">
+              <label for="roundTrip">Ida y vuelta</label>
+            </li>
+            <li>
+              <input
+                id="oneWay"
+                type="radio"
+                name="flight-option"
+                value="ida"
+                [checked]="calendarService.isOneWay$ | async"
+                (change)="changeOneWay()">
+              <label for="oneWay">Solo ida</label>
+            </li>
+          </ul>
+        </div>
+        <div id="vyCalendar" tabindex="0" calendar></div>
+        <div class="searcbar-datepicker_legend" legend *ngIf="!ischeckIn">
+          <p class="legend-item">Hoy</p>
+          <p class="legend-item selection">Tu selección</p>
+        </div>
       </app-calendar-options>
     </div>
   </div>

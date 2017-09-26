@@ -9,7 +9,6 @@ export class CalendarService {
     public isOneWay = true;
     public isRoundTrip = false;
     public isShowDatePicker = false;
-    public isCheckIn = false;
 
     // Observable boolean sources
     private subjectIsOneWay = new BehaviorSubject<boolean>(this.isOneWay);
@@ -18,7 +17,6 @@ export class CalendarService {
     private subjectIsComeBack = new BehaviorSubject<boolean>(this.isComeBack);
     private subjectIsMulti = new BehaviorSubject<boolean>(this.isMulti);
     private subjectIsShowDatePicker = new BehaviorSubject<boolean>(this.isShowDatePicker);
-    private subjectIsCheckIn = new BehaviorSubject<boolean>(this.isCheckIn);
 
     // Observable boolean streams
     isOneWay$ = this.subjectIsOneWay.asObservable();
@@ -27,7 +25,6 @@ export class CalendarService {
     isComeBack$ = this.subjectIsComeBack.asObservable();
     isMulti$ = this.subjectIsMulti.asObservable();
     isShowDatePicker$ = this.subjectIsShowDatePicker.asObservable();
-    isCheckIn$ = this.subjectIsCheckIn.asObservable();
 
     constructor() { }
 
@@ -59,10 +56,6 @@ export class CalendarService {
       this.subjectIsComeBack.next(this.isComeBack);
       this.subjectIsMulti.next(this.isMulti);
       this.toggleShowDatePicker();
-    }
-
-    onCheckIn() {
-      this.subjectIsCheckIn.next(this.isCheckIn);
     }
 
     onMulti() {

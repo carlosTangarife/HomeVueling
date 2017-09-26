@@ -111,7 +111,6 @@ export class CalendarComponent implements OnInit {
   }
 
   addComeBack() {
-    this.dateReturn.setMinDate(this.dataFlight.going);
     if (this.dataFlight.return <= this.dataFlight.going) {
       let date = new Date(this.dataFlight.going.getFullYear(),
         this.dataFlight.going.getMonth(), this.dataFlight.going.getDate() + 7);
