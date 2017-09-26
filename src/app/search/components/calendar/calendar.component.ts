@@ -44,26 +44,37 @@ export class CalendarComponent implements OnInit {
       origin = this.dataFlight.origin.code;
       destination = this.dataFlight.destination.code;
     }
-    this.flightGoingDisabledDays = this.flightDatesService.getFlightDisabledDays(this.dataFlight.origin.code, this.dataFlight.destination.code);
+    this.flightGoingDisabledDays = this.flightDatesService.getFlightDisabledDays(origin, destination);
     this.subjectFlightGoingDisabledDays.next(this.flightGoingDisabledDays);
-    this.flightReturnDisabledDays = this.flightDatesService.getFlightDisabledDays(this.dataFlight.destination.code, this.dataFlight.origin.code);
-    this.subjectFlightReturnDisabledDays.next(this.flightReturnDisabledDays);
+    if (this.calendarService.isRoundTrip) {
+      this.flightReturnDisabledDays = this.flightDatesService.getFlightDisabledDays(destination, origin);
+      this.subjectFlightReturnDisabledDays.next(this.flightReturnDisabledDays);
+    }
   }
 
-  selectedGoingDate() {
-    this.calendarService.toggleShowDatePicker();
+  getFlightReturnDisabledDays() {
     let origin = '';
     let destination = '';
     if (this.dataFlight) {
       origin = this.dataFlight.origin.code;
       destination = this.dataFlight.destination.code;
     }
-    this.flightReturnDisabledDays = this.flightDatesService.getFlightDisabledDays(this.dataFlight.destination.code, this.dataFlight.origin.code);
+    this.flightReturnDisabledDays = this.flightDatesService.getFlightDisabledDays(destination, origin);
     this.subjectFlightReturnDisabledDays.next(this.flightReturnDisabledDays);
+  }
+
+  selectedGoingDate(event: Date) {
+    this.dataFlight.going = event;
+    this.calendarService.toggleShowDatePicker();
+    if (this.dataFlight.return <= this.dataFlight.going) {
+      this.dataFlight.return = event;
+      this.dateReturn.setMinDate(this.dataFlight.return);
+    }
     this.dateReturn.refresh();
   }
 
-  selectedReturnDate() {
+  selectedReturnDate(event: Date) {
+    this.dataFlight.return = event;
     this.calendarService.toggleShowDatePicker();
   }
 
@@ -80,6 +91,12 @@ export class CalendarComponent implements OnInit {
   }
 
   addComeBack() {
+    if (this.dataFlight.return <= this.dataFlight.going) {
+      let date = new Date(this.dataFlight.going.getFullYear(), this.dataFlight.going.getMonth(), this.dataFlight.going.getDate() + 7);
+      this.dataFlight.return = date;
+      this.dateReturn.setMinDate(date);
+    }
+    this.getFlightReturnDisabledDays();
     this.calendarService.roundTrip();
   }
 }

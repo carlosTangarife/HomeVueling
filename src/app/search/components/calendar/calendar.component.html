@@ -6,7 +6,7 @@
   [date]="dataFlight.going"
   [label]="'Ida'"
   [fligthDisabledDays]="flightGoingDisabledDays$ | async"
-  (selectedDate)="selectedGoingDate()">
+  (selectedDate)="selectedGoingDate($event)">
 </div>
 
 <div class="col col-md-6" *ngIf="!isMulti">
@@ -26,6 +26,6 @@
     [label]="'Vuelta'"
     [fligthDisabledDays]="flightReturnDisabledDays$ | async"
     [dateGoing]="dataFlight.going"
-    (selectedDate)="selectedReturnDate()">
+    (selectedDate)="selectedReturnDate($event)">
   </div>
 </div>

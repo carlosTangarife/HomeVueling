@@ -6,8 +6,8 @@ export class CalendarService {
     public isGoing = true;
     public isComeBack = false;
     public isMulti = false;
-    private isOneWay = true;
-    private isRoundTrip = false;
+    public isOneWay = true;
+    public isRoundTrip = false;
     public isShowDatePicker = false;
     public isCheckIn = 'false';
 
