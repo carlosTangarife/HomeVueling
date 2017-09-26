@@ -100,21 +100,23 @@
       </div>
 
       <div class="form-input dates" *ngIf="isOriginDestination">
-          <div class="col col-md-6">
-            <label>Fecha del primer vuelo</label>
-            <div class="input-group">
-              <input type="text" class="form-control js-searchbar-input js-searchbar-date-input" placeholder="DD/MM/YY" readonly="readonly">
-              <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
-            </div>
-          </div>
-          <div class="col col-md-6">
-            <div class="form-checkbox--button">
-              <label>
-             <span>Mañana</span>
-           </label>
-            </div>
+        <div app-date-picker
+          class="col col-md-6"
+
+          [label]="'Fecha del primer vuelo'"
+          [inputId]="'inputDatePickerCheckIn'"
+          [date]="flightTomorrow"
+          (click)="showCalendar()"
+          (selectedDate)="selectedDate($event)"></div>
+
+        <div class="col col-md-6">
+          <div class="form-checkbox--button" (click)="myFlightTomorrow()">
+            <label>
+            <span>Mañana</span>
+          </label>
           </div>
         </div>
+      </div>
 
       <div class="form-action">
         <button type="submit" class="mv_button color-darkGrey size-md icon icon-right">Acceder</button>

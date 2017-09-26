@@ -64,6 +64,20 @@ export class CheckInComponent implements OnInit {
     this.station = station.name;
   }
 
+  showCalendar() {
+    this.calendarService.toggleShowDatePicker();
+  }
+
+  selectedDate(date: Date) {
+    this.flightTomorrow = date;
+    this.calendarService.toggleShowDatePicker();
+  }
+
+  myFlightTomorrow() {
+    this.flightTomorrow = new Date();
+    this.flightTomorrow.setDate(this.flightTomorrow.getDate() + 1);
+  }
+
   onSubmit(forma: NgForm) {
     this.validation = true;
   }
