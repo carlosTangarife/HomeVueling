@@ -5,7 +5,7 @@
   [inputId]="'inputGoing'"
   [date]="dataFlight.going"
   [label]="'Ida'"
-  [fligthDisabledDays]="flightGoingDisabledDays$ | async"
+  [flightDisabledDays]="flightGoingDisabledDays$ | async"
   (selectedDate)="selectedGoingDate($event)">
 </div>
 
@@ -24,7 +24,7 @@
     [inputId]="'inputComeBack'"
     [date]="dataFlight.return"
     [label]="'Vuelta'"
-    [fligthDisabledDays]="flightReturnDisabledDays$ | async"
+    [flightDisabledDays]="flightReturnDisabledDays$ | async"
     [dateGoing]="dataFlight.going"
     (selectedDate)="selectedReturnDate($event)">
   </div>
