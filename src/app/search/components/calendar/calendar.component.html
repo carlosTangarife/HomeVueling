@@ -6,11 +6,11 @@
   [date]="dataFlight.going"
   [label]="'Ida'"
   [fligthDisabledDays]="flightGoingDisabledDays$ | async"
-  (selectedDate)="selectedGoingDate()">
+  (selectedDate)="selectedGoingDate($event)">
 </div>
 
 <div class="col col-md-6" *ngIf="!isMulti">
-  <a class="js-add-date-range-to"
+  <a 
     (click)="addComeBack()"
     [ngClass]="{'activate': calendarService.isOneWay$ | async}">
     Añadir vuelta
@@ -18,7 +18,7 @@
 
   <div app-date-picker
     #dateReturn
-    class="date-range-to js-date-range-to"
+    class="date-range-to"
     (click)="toggleDatePickerComeBack()"
     [ngClass]="{'activate': calendarService.isRoundTrip$ | async}"
     [inputId]="'inputComeBack'"
@@ -26,6 +26,6 @@
     [label]="'Vuelta'"
     [fligthDisabledDays]="flightReturnDisabledDays$ | async"
     [dateGoing]="dataFlight.going"
-    (selectedDate)="selectedReturnDate()">
+    (selectedDate)="selectedReturnDate($event)">
   </div>
 </div>

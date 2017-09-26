@@ -14,17 +14,17 @@ export class FlightComponent implements OnInit {
   @ViewChild('destination')
   destination: DestinationSelectorComponent;
 
-  @Output()
-  stateOverlay = new EventEmitter<void>();
-
   public dataFlight: IFlight;
   public isFocusedOrigin: boolean;
   public isFocusedDestination: boolean;
   public isFocusedPassengers: boolean;
+  public isFocusedCalendar: boolean;
 
   constructor(private _stationService: StationService) { }
 
   ngOnInit() {
+    let today = new Date();
+    today.setHours(0, 0, 0, 0);
     this.dataFlight = {
       origin: {
         code: 'ALC',
@@ -44,7 +44,7 @@ export class FlightComponent implements OnInit {
           code: 'LAX',
           name: 'Los Ángeles'
         },
-        going: new Date()
+        going: new Date(today.getTime())
       },
       passengers: {
         Adults : 1,
@@ -56,17 +56,13 @@ export class FlightComponent implements OnInit {
       discount: {
         value: ''
       },
-      going: new Date(),
-      return: new Date()
+      going: new Date(today.getTime()),
+      return: new Date(today.getTime())
     };
   }
 
   onSubmit() {
     this.saveSearch();
-  }
-
-  clickInput() {
-    this.stateOverlay.emit();
   }
 
   clickMulticity(multicity: boolean) {

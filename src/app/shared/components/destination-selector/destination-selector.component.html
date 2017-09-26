@@ -7,7 +7,7 @@
     (keyup)="filterStationsByKey(destinationInput.value)"
     #destinationInput
     name="destination"
-    class="form-control js-searchbar-input"
+    class="form-control"
     placeholder="{{'destinationPlaceholder' | dictionary}}" required>
 </div>
 
@@ -47,7 +47,7 @@
       <div class="form-checkbox--button color-darkGrey" *ngIf="selectorService.showMulticity()">
         <label>
           <input type="checkbox" #multicityBtn hidden>
-          <span class="js-multiple-destinations" (click)="toogleMulticity()">{{'multicity' | dictionary}}</span>
+          <span (click)="toogleMulticity()">{{'multicity' | dictionary}}</span>
         </label>
       </div>
     </div>

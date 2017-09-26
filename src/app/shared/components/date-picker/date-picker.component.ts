@@ -25,7 +25,7 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
   fligthDisabledDays: Array<string>
 
   @Output()
-  selectedDate = new EventEmitter<string>();
+  selectedDate = new EventEmitter<Date>();
 
   constructor() { }
 
@@ -54,15 +54,14 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
       yearSuffix: '',
       minDate: 0,
       numberOfMonths: 3,
+      showAnim: 'slideDown',
       beforeShow: self.calendarBeforeShow,
       beforeShowDay: function (date) {
         let dateText = $.datepicker.formatDate('yy-m-d', date);
         if (self.fligthDisabledDays.indexOf(dateText) === -1) {
           if (self.dateGoing) {
-            date.setHours(0, 0, 0, 0);
             let maxDate = self.date;
             let dateSelected = $(this).datepicker('getDate');
-            self.dateGoing.setHours(0, 0, 0, 0);
             self.date = dateSelected;
             if (date.getTime() === self.dateGoing.valueOf()) {
               return [true, 'ui-datepicker-travel-time ui-datepicker-current-day travelTime'];
@@ -80,13 +79,21 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
         }
       },
       onSelect: function(dateText, inst) {
-        self.selectedDate.emit(dateText);
+        self.selectedDate.emit($(this).datepicker('getDate'));
       }
     }).keydown(this.keyDownEvent);
   }
 
+  show() {
+    $('#' + this.inputId).datepicker('show');
+  }
+
   refresh() {
     $('#' + this.inputId).datepicker('refresh');
+  }
+
+  setMinDate(date: Date) {
+    $('#' + this.inputId).datepicker('option', 'minDate', date);
   }
 
   calendarBeforeShow(input, inst) {

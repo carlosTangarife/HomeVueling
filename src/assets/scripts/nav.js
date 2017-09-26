@@ -1,6 +1,4 @@
 $(document).ready(function () {
-
-
 	// open mega menu
 	$('.tabLink').click(function (event) {
 		event.preventDefault();
@@ -34,11 +32,4 @@ $(document).ready(function () {
 			nav.removeClass("fixed");
 		}
 	});
-
-
-	// login form validation
-	$('.js-input-pass').click(function (event) {
-		$($(this)).addClass('error');
-	})
-
 })
