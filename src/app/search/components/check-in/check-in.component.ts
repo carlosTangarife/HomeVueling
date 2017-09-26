@@ -65,7 +65,6 @@ export class CheckInComponent implements OnInit {
   }
 
   showCalendar() {
-    this.calendarService.onCheckIn();
     this.calendarService.toggleShowDatePicker();
   }
 
