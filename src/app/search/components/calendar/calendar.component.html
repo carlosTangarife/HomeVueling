@@ -1,9 +1,11 @@
 <div app-date-picker
   class="col col-md-6"
-  (click)="calendarService.onGoing()"
+  (click)="toggleDatePickerGoing()"
   [inputId]="'inputGoing'"
   [date]="dataFlight.going"
-  [label]="'Ida'">
+  [label]="'Ida'"
+  [fligthDisabledDays]="flightGoingDisabledDays$ | async"
+  (selectedDate)="selectedGoingDate()">
 </div>
 
 <div class="col col-md-6" *ngIf="!isMulti">
@@ -14,10 +16,13 @@
   </a>
 
   <div app-date-picker class="date-range-to js-date-range-to"
-    (click)="calendarService.onComeBack()"
+    (click)="toggleDatePickerComeBack()"
     [ngClass]="{'activate': calendarService.isRoundTrip$ | async}"
     [inputId]="'inputComeBack'"
     [date]="dataFlight.return"
-    [label]="'Vuelta'">
+    [label]="'Vuelta'"
+    [fligthDisabledDays]="flightReturnDisabledDays$ | async"
+    [dateGoing]="dataFlight.going"
+    (selectedDate)="selectedReturnDate()">
   </div>
 </div>

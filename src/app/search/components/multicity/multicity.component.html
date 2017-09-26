@@ -18,15 +18,21 @@
   [dataFlight]="dataFlight"
   (isFocused)="isFocusedDestination=$event"
   (clickDestination)="originMulti.showPopupOrigin($event)"
-  (clickMulticity)="clickMulticity()">
+  (clickMulticity)="clickMulticity()"
+  (outStation)="getFlightDisabledDays()">
 </div>
 
-<div app-calendar
-  [dataFlight]="dataFlight"
-  [isMulti]="dataFlight.isActive"
-  [isMultiFlight]="true"
-  id="form-group--dates"
-  class="form-input dates js-second-flight">
+<div id="form-group--dates" class="form-input dates js-second-flight">
+  <div app-date-picker
+    #calendar
+    class="col col-md-6"
+    (click)="calendarService.onMulti()"
+    [inputId]="'inputMulti'"
+    [date]="dataFlight.going"
+    [label]="'Ida'"
+    [fligthDisabledDays]="flightDisabledDays$ | async"
+    (selectedDate)="selectedMultiDate()">
+  </div>
 </div>
 
 <div class="aditional-flight js-remove-aditional-flight" (click)="clickMulticity()">

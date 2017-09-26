@@ -92,7 +92,7 @@ export class CheckInComponent implements OnInit {
     let self = this;
     this.calendarService.toggleShowDatePicker();
     this.isChekIn = !this.isChekIn;
-    this.isChekIn ? this.calendarService.onCheckIn() : this.calendarService.ofCheckIn()
+    this.isChekIn ? this.calendarService.onCheckIn() : this.calendarService.offCheckIn()
     $('#vyCalendarCheckIn').datepicker({
       minDate: 0,
       numberOfMonths: 3,

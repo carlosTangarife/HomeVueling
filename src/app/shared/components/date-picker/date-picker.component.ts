@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
 import { CalendarService } from 'app/shared/services/calendar.service';
 
 declare var jQuery: any;
@@ -18,19 +18,16 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
   @Input()
   date: Date
 
-  public minDateAux: Date;
-  public customParams: any;
+  @Input()
+  dateGoing: Date
 
-  constructor(public calendarService: CalendarService) {
-    this.customParams = {
-      minDate: 0,
-      maxDate: 90,
-      numberOfMonths: 3,
-      firstDay: 1,
-      dateFormat: 'dd/mm/y',
-      dayNamesMin: ['Dom', 'Lun', 'Mar', 'Mie', 'Jue', 'Vie', 'Sab']
-    };
-  }
+  @Input()
+  fligthDisabledDays: Array<string>
+
+  @Output()
+  selectedDate = new EventEmitter<string>();
+
+  constructor() { }
 
   ngOnInit() {
   }
@@ -38,30 +35,87 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     let self = this;
     $('#' + this.inputId).datepicker({
+      closeText: 'Cerrar',
+      prevText: '&#x3C;Ant',
+      nextText: 'Sig&#x3E;',
+      currentText: 'Hoy',
+      monthNames: [ 'enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio',
+      'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre' ],
+      monthNamesShort: [ 'ene', 'feb', 'mar', 'abr', 'may', 'jun',
+      'jul', 'ago', 'sep', 'oct', 'nov', 'dic' ],
+      dayNames: [ 'domingo', 'lunes', 'martes', 'miércoles', 'jueves', 'viernes', 'sábado' ],
+      dayNamesShort: [ 'dom', 'lun', 'mar', 'mié', 'jue', 'vie', 'sáb' ],
+      dayNamesMin: [ 'D', 'L', 'M', 'X', 'J', 'V', 'S' ],
+      weekHeader: 'Sm',
+      dateFormat: 'dd/mm/y',
+      firstDay: 1,
+      isRTL: false,
+      showMonthAfterYear: false,
+      yearSuffix: '',
       minDate: 0,
       numberOfMonths: 3,
-      beforeShow: function(dateText, inst) {
-        setTimeout(function() {
-          $('#ui-datepicker-div').css({
-            position: 'relative',
-            top: 0,
-            left: 0
-          });
-          $('#vyCalendar').append($('#ui-datepicker-div'));
-        }, 0);
-      },
+      beforeShow: self.calendarBeforeShow,
       beforeShowDay: function (date) {
-        let dateText = $.datepicker.formatDate('yy-mm-d', date);
-        return [self.calendarService.fligthGoingDisabledDays.indexOf(dateText) === -1];
+        let dateText = $.datepicker.formatDate('yy-m-d', date);
+        if (self.fligthDisabledDays.indexOf(dateText) === -1) {
+          if (self.dateGoing) {
+            date.setHours(0, 0, 0, 0);
+            let maxDate = self.date;
+            let dateSelected = $(this).datepicker('getDate');
+            self.dateGoing.setHours(0, 0, 0, 0);
+            self.date = dateSelected;
+            if (date.getTime() === self.dateGoing.valueOf()) {
+              return [true, 'ui-datepicker-travel-time ui-datepicker-current-day travelTime'];
+            }
+            if (dateSelected && date.getTime() === dateSelected.valueOf()) {
+              return [true, 'ui-datepicker-travel-time ui-datepicker-end-day travelTime endDay'];
+            }
+            if (date > self.dateGoing && date <= self.date ) {
+              return [true, 'ui-datepicker-travel-time travelTime'];
+            }
+          }
+          return [true, ''];
+        } else {
+          return [false];
+        }
       },
-      onSelect: function(date, inst) {
-        self.calendarService.toggleShowDatePicker();
-        let dateSelected = $(this).datepicker('getDate');
-        self.date = dateSelected;
-        self.minDateAux = dateSelected;
-        // self.calendarService.getFlightReturnDisabledDays(self.dataFlight.destination.code, self.dataFlight.origin.code);
+      onSelect: function(dateText, inst) {
+        self.selectedDate.emit(dateText);
       }
     }).keydown(this.keyDownEvent);
+  }
+
+  calendarBeforeShow(input, inst) {
+    setTimeout(function() {
+      $('#ui-datepicker-div').css({
+        position: 'relative',
+        top: 0,
+        left: 0
+      });
+      $('#vyCalendar').append($('#ui-datepicker-div'));
+      if (input.id === 'inputComeBack') {
+        $('#vyCalendar').find('.ui-datepicker td').off();
+        $('#vyCalendar').find('.ui-datepicker').on('mouseenter', 'td', function() {
+          $('#vyCalendar .ui-datepicker td').removeClass('ui-datepicker-travel-time ui-datepicker-end-day');
+          $(this).parent().addClass('finalRow');
+          $('.finalRow').parents('.ui-datepicker-group-last').parent().find('.ui-datepicker-group-middle').find('tr').last().addClass('finalRowRangeOtherTable');
+          $('.finalRow').parents('.ui-datepicker-group-last').parent().find('.ui-datepicker-group-first').find('tr').last().addClass('finalRowRangeOtherTable');
+          $('.finalRow').parents('.ui-datepicker-group-middle').parent().find('.ui-datepicker-group-first').find('tr').last().addClass('finalRowRangeOtherTable');
+          $('.finalRowRangeOtherTable').find('td:not(.ui-datepicker-unselectable)').addClass('ui-datepicker-travel-time');
+          $('.finalRowRangeOtherTable').prevAll().find('td:not(.ui-datepicker-unselectable)').addClass('ui-datepicker-travel-time');
+          $('.finalRow').prevAll().find('td:not(.ui-datepicker-unselectable)').addClass('ui-datepicker-travel-time');
+          $(this).prevAll('td:not(.ui-datepicker-unselectable)').addClass('ui-datepicker-travel-time');
+          $(this).addClass('ui-datepicker-travel-time');
+        });
+        $('#vyCalendar').find('.ui-datepicker').on('mouseleave', 'td', function() {
+          $(this).parent().removeClass('finalRow');
+          $('#vyCalendar .ui-datepicker td').removeClass('ui-datepicker-travel-time');
+          $('.finalRowRange, .finalRowRangeOtherTable').removeClass('finalRowRange finalRowRangeOtherTable');
+          $('#vyCalendar .ui-datepicker').find('.travelTime').addClass('ui-datepicker-travel-time');
+          $('#vyCalendar .ui-datepicker').find('.endDay').addClass('ui-datepicker-end-day');
+        });
+      }
+    }, 0);
   }
 
   keyDownEvent(event) {
@@ -71,35 +125,26 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
     // RIGHT: 39
     //  DOWN: 40
     // ENTER: 13
-    //             IE        OTHER
+    // event.keyCode: IE
     let code = event.keyCode || event.which;
-    // If key is not TAB
     if (code !== 9) {
       event.preventDefault();
-      // And arrow keys used "for performance on other keys"
       if (code === 37 || code === 38 || code === 39 || code === 40) {
-        // Get current date
         let parts = $(this).val().split('/');
         let currentDate = new Date(parts[2], parts[1] - 1, parts[0]);
-        // Show next/previous day/week
         switch (code) {
-            // LEFT, -1 day
           case 37: currentDate.setDate(currentDate.getDate() - 1); break;
-            // UP, -1 week
           case 38: currentDate.setDate(currentDate.getDate() - 7); break;
-            // RIGHT, +1 day
           case 39: currentDate.setDate(currentDate.getDate() + 1); break;
-            // DOWN, +1 week
           case 40: currentDate.setDate(currentDate.getDate() + 7); break;
         }
-        // If result is ok then write it
         if (currentDate != null) {
           $(this).datepicker('setDate', currentDate);
         }
       } else if (code === 13) {
-        $(this).find('.ui-datepicker-current-day').click();
+        $(this).datepicker().find('.ui-datepicker-current-day').click();
       } else {
-        return false; // If other keys pressed.. return false
+        return false;
       }
     }
   }
