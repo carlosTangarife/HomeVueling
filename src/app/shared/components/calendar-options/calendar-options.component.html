@@ -1,4 +1,4 @@
-<div class="searcbar-datepicker_title">
+<div class="searcbar-datepicker_title" *ngIf="calendarService.isCheckIn$ | async">
   <p class="title" *ngIf="calendarService.isGoing$ | async">
     <span class="icon icon-plane-right"></span> Selecciona fecha de ida
   </p>
@@ -30,10 +30,7 @@
   </ul>
 </div>
 <ng-content></ng-content>
-<div class="searcbar-datepicker_legend">
+<div class="searcbar-datepicker_legend" *ngIf="calendarService.isCheckIn$ | async">
   <p class="legend-item">Hoy</p>
   <p class="legend-item selection">Tu selección</p>
 </div>
-
-<!-- <ng-content></ng-content> -->
-<!-- <ng-content select="[content-show=true]"></ng-content> -->
