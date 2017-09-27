@@ -124,4 +124,8 @@ export class CalendarComponent implements OnInit {
     this.getFlightReturnDisabledDays();
     this.calendarService.roundTrip();
   }
+
+  getGoingLabel(): string {
+    return this.dataFlight && this.dataFlight.multi.isActive ? 'Ida1' : 'Ida';
+  }
 }

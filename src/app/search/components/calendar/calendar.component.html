@@ -4,7 +4,7 @@
   (click)="toggleDatePickerGoing()"
   [inputId]="'inputGoing'"
   [date]="dataFlight.going"
-  [label]="'Ida'"
+  [label]="getGoingLabel()"
   [flightDisabledDays]="flightGoingDisabledDays$ | async"
   (selectedDate)="selectedGoingDate($event)">
 </div>
