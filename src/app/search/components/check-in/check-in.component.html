@@ -30,7 +30,7 @@
           class="form-control"
           placeholder="Ej. XG6LM3"
           pattern="[A-Za-z0-9]{6}"
-          [(ngModel)]="codeBooking"
+          [(ngModel)]="dataCheckIn.codeBooking"
           #codeBookingCheckin="ngModel"
           required>
       </div>
@@ -52,7 +52,7 @@
           class="form-control"
           placeholder="email@vueling.com"
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-          [(ngModel)]="email"
+          [(ngModel)]="dataCheckIn.email"
           #emailCheckin="ngModel"
           required>
       </div>
@@ -73,7 +73,7 @@
           (click)="showStation()"
           class="form-control"
           placeholder="Ciudad"
-          [(ngModel)]="station"
+          [(ngModel)]="dataCheckIn.originOrDestinationName"
           #stationCheckin="ngModel"
           required>
       </div>
@@ -94,9 +94,9 @@
         class="col col-md-6"
         [label]="'Fecha del primer vuelo'"
         [inputId]="'inputDatePickerCheckIn'"
-        [date]="flightTomorrow"
+        [date]="dataCheckIn.myFlightTomorrow"
         [validation]="validation"
-        [type]="Checkin"
+        [type]="'Checkin'"
         (click)="showCalendar()"
         (selectedDate)="selectedDate($event)">
       </div>

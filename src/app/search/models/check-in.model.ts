@@ -1,4 +1,7 @@
 export interface ICheckIn {
-    Code: string,
-    Email: string,
+    codeBooking?: string,
+    email?: string,
+    myFlightTomorrow?: Date,
+    originOrDestinationCode?: string,
+    originOrDestinationName?: string,
 }

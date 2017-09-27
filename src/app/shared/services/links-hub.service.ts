@@ -1,5 +1,8 @@
 import { Injectable } from '@angular/core';
 import { URLSearchParams } from '@angular/http';
+
+import { ICheckIn } from './../../search/models/check-in.model';
+
 @Injectable()
 export class LinksHubService {
   public url: string;
@@ -7,17 +10,17 @@ export class LinksHubService {
     this.url = 'https://skysales-bilbo.vueling.com/LinksHub.ashx?';
   }
 
-  linkReservation(checkInWithEmail: boolean) {
+  linkReservation(checkInWithEmail: boolean, dataCheckIn: ICheckIn) {
     let queryString = new URLSearchParams();
     if (checkInWithEmail) {
-        queryString.set('email', 'estefania.marin@newshore.es');
+        queryString.set('email', dataCheckIn.email);
       } else {
-        queryString.set('origin', 'AMS');
-        queryString.set('day', '19');
-        queryString.set('month', '4');
-        queryString.set('year', '2017');
+        queryString.set('origin', dataCheckIn.originOrDestinationCode);
+        queryString.set('day', dataCheckIn.myFlightTomorrow.getDate().toString());
+        queryString.set('month', (dataCheckIn.myFlightTomorrow.getMonth() + 1).toString());
+        queryString.set('year', dataCheckIn.myFlightTomorrow.getFullYear().toString());
       }
-      queryString.set('pnr', 'LYM1SD');
+      queryString.set('pnr', dataCheckIn.codeBooking);
       queryString.set('event', 'change');
       queryString.set('flow', 'c3');
       queryString.set('culture', 'es-ES');
@@ -28,18 +31,18 @@ export class LinksHubService {
       window.open(newHref, '_blank' );
   }
 
-  linkCheckInOnline(checkInWithEmail: boolean) {
+  linkCheckInOnline(checkInWithEmail: boolean, dataCheckIn: ICheckIn) {
     let queryString = new URLSearchParams();
 
     if (checkInWithEmail) {
-      queryString.set('email', 'estefania.marin@newshore.es');
+      queryString.set('email', dataCheckIn.email);
     } else {
-      queryString.set('origin', 'AMS');
-      queryString.set('day', '19');
-      queryString.set('month', '4');
-      queryString.set('year', '2017');
+      queryString.set('origin', dataCheckIn.originOrDestinationCode);
+      queryString.set('day', dataCheckIn.myFlightTomorrow.getDate().toString());
+      queryString.set('month', (dataCheckIn.myFlightTomorrow.getMonth() + 1).toString());
+      queryString.set('year', dataCheckIn.myFlightTomorrow.getFullYear().toString());
     }
-    queryString.set('pnr', 'LYM1SD');
+    queryString.set('pnr', dataCheckIn.codeBooking);
     queryString.set('event', 'checkin');
     queryString.set('flow', 'c3');
     queryString.set('culture', 'es-ES');

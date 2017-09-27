@@ -24,14 +24,11 @@ declare var $: any;
 export class CheckInComponent implements OnInit {
   @Output()
   selectedOrigin: EventEmitter<string> = new EventEmitter();
-
-  public codeBooking: string;
-  public email: string;
+  public dataCheckIn: ICheckIn;
   public keyCookie: string;
   public checkInWithEmail: boolean;
   public checkInWithOriginDestination: boolean;
   public isShowStation: boolean;
-  public station: IStation;
   public validation: boolean;
   public flightTomorrow: Date;
   public isFocusedCalendar: boolean;
@@ -43,12 +40,13 @@ export class CheckInComponent implements OnInit {
     this.isShowStation = false;
     this.keyCookie = environment.keyCheckInCookie;
     this.validation = false;
-    this.flightTomorrow = null;
+
+    this.dataCheckIn = {};
    }
 
   ngOnInit() {
     this.selectorService.loadStations();
-    this.codeBooking = this.checkInService.getCodeBooking(this.keyCookie);
+    this.dataCheckIn.codeBooking = this.checkInService.getCodeBooking(this.keyCookie);
   }
 
   showEmail() {
@@ -67,7 +65,8 @@ export class CheckInComponent implements OnInit {
   }
 
   stationSelected(station: any) {
-    this.station = station.name;
+    this.dataCheckIn.originOrDestinationCode = station.code;
+    this.dataCheckIn.originOrDestinationName = station.name;
     this.isFocusedStation = this.isShowStation;
   }
 
@@ -78,23 +77,25 @@ export class CheckInComponent implements OnInit {
   }
 
   selectedDate(date: Date) {
-    this.flightTomorrow = date;
+    this.dataCheckIn.myFlightTomorrow = date;
     this.calendarService.toggleShowDatePicker();
     this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
   myFlightTomorrow() {
-    this.flightTomorrow = new Date();
-    this.flightTomorrow.setDate(this.flightTomorrow.getDate() + 1);
-    this.flightTomorrow.setHours(0, 0, 0, 0);
+    this.dataCheckIn.myFlightTomorrow = new Date();
+    this.dataCheckIn.myFlightTomorrow.setDate(this.dataCheckIn.myFlightTomorrow.getDate() + 1);
+    this.dataCheckIn.myFlightTomorrow.setHours(0, 0, 0, 0);
   }
 
   onSubmit(chekInform: NgForm) {
-    this.validation = true;
     if (chekInform.valid) {
-      console.log(chekInform);
-      this._linksHubService.linkCheckInOnline(this.checkInWithEmail);
+      this.validation = false;
+      this._linksHubService.linkCheckInOnline(this.checkInWithEmail, this.dataCheckIn);
+    }else {
+      this.validation = true;
     }
+    console.log(this.dataCheckIn);
   }
 }
 
