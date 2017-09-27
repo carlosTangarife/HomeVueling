@@ -45,12 +45,8 @@
       </div>
 
       <div app-content-calendar class="searchbar-datepicker" [ngClass]="{'show': calendarService.isShowDatePicker}">
-        <div app-calendar-options class="searcbar-datepicker_title" grayBar *ngIf="!ischeckIn"></div>
+        <div app-calendar-options class="searcbar-datepicker_title" grayBar *ngIf="!ischeckIn && !isReservation"></div>
         <div id="vyCalendar" tabindex="0" calendar></div>
-        <div class="searcbar-datepicker_legend" legend *ngIf="!ischeckIn">
-          <p class="legend-item">Hoy</p>
-          <p class="legend-item selection">Tu selección</p>
-        </div>
       </div>
     </div>
   </div>

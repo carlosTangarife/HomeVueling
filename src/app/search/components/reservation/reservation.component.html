@@ -17,65 +17,65 @@
 
 <form class="form" (ngSubmit)="onSubmit(forma)" #forma="ngForm" novalidate="">
   <div class="form-group" [ngClass]="{'form-group--destinations': isOriginDestination, 'form-group--email': !isOriginDestination}">
-    <div class="form-input" [ngClass]="{'reservation-code': isOriginDestination}">
+    <div class="form-input" [ngClass]="{'reservation-code': isOriginDestination, 'error': validation && (codeBookingBooking.errors?.required || codeBookingBooking.errors?.pattern)}">
       <label>Código de reserva</label>
       <a href="#">¿Qué es?</a>
       <div class="input-group">
         <input
           type="text"
           id="codeBookingReservation"
+          name="codeBookingBooking"
           class="form-control"
           placeholder="Ej. XG6LM3"
-          required="required"
           pattern="[A-Za-z0-9]{6}"
           [(ngModel)]="codeBooking"
-          name="codeBookingg"
-          #codeBookingg="ngModel" />
+          #codeBookingBooking="ngModel"
+          required>
       </div>
-      <div class="popover popover--error" *ngIf="validation && codeBookingg.errors?.required">
+      <div class="popover popover--error" *ngIf="validation && codeBookingBooking.errors?.required">
         <div class="popover-content">Debes completar este campo.</div>
       </div>
-      <div class="popover popover--error" *ngIf="validation && codeBookingg.errors?.pattern">
+      <div class="popover popover--error" *ngIf="validation && codeBookingBooking.errors?.pattern">
         <div class="popover-content">Ingrese un codigo de reserva valido.</div>
       </div>
     </div>
 
-    <div class="form-input" *ngIf="isEmail">
+    <div class="form-input" *ngIf="isEmail" [ngClass]="{'error': validation && (emailBooking.errors?.required || emailBooking.errors?.pattern)}">
       <label>Email del comprador </label>
       <div class="input-group">
         <input
           type="email"
           id="emailReservation"
+          name="emailBooking"
           class="form-control"
           placeholder="email@vueling.com"
-          required="required"
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
           [(ngModel)]="email"
-          name="emaill"
-          #emaill="ngModel"/>
+          #emailBooking="ngModel"
+          required>
       </div>
-      <div class="popover popover--error" *ngIf="validation && emaill.errors?.required">
+      <div class="popover popover--error" *ngIf="validation && emailBooking.errors?.required">
         <div class="popover-content">Debes completar este campo.</div>
       </div>
-      <div class="popover popover--error" *ngIf="validation && emaill.errors?.pattern">
+      <div class="popover popover--error" *ngIf="validation && emailBooking.errors?.pattern">
         <div class="popover-content">Los datos introducidos no son correctos.</div>
       </div>
     </div>
-    <div class="form-input" *ngIf="isOriginDestination">
+    <div class="form-input" *ngIf="isOriginDestination" [ngClass]="{'focused': isFocusedStation, 'error': validation && stationBooking.errors?.required}">
       <label>Aeropuerto origen/destino</label>
       <div class="input-group">
         <input
           type="text"
           id="airportReservation"
+          name="stationBooking"
           (click)="showStation()"
           class="form-control"
           placeholder="Ciudad"
           [(ngModel)]="station"
-          name="stationn"
-          #stationn="ngModel"
-          required />
+          #stationBooking="ngModel"
+          required>
       </div>
-      <div class="popover popover--error" *ngIf="validation && stationn.errors?.required">
+      <div class="popover popover--error" *ngIf="validation && stationBooking.errors?.required">
         <div class="popover-content">Debes completar este campo.</div>
       </div>
       <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show': isShowStation}" (click)="showStation()">
@@ -86,12 +86,14 @@
         </div>
       </div>
     </div>
-    <div class="form-input dates" *ngIf="isOriginDestination">
+    <div class="form-input dates" *ngIf="isOriginDestination" [ngClass]="{'focused': isFocusedCalendar, 'error': validation && datePickerBooking.datePicker.errors?.required}">
       <div app-date-picker
+        #datePickerBooking
         class="col col-md-6"
         [label]="'Fecha del primer vuelo'"
         [inputId]="'inputDatePickerReservation'"
         [date]="flightTomorrow"
+        [validation]="validation"
         (click)="showCalendar()"
         (selectedDate)="selectedDate($event)">
       </div>

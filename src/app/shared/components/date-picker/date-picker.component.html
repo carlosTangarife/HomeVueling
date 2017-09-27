@@ -1,11 +1,16 @@
 <label class="form-input_label">{{label}}</label>
 <div class="input-group">
   <input
-    [ngModel]="date | date:'dd/MM/yy'"
     id="{{inputId}}"
+    name="datePicker"
     type="text"
     class="form-control"
     placeholder="DD/MM/YY"
-    readonly="readonly">
+    [ngModel]="date | date:'dd/MM/yy'"
+    #datePicker="ngModel"
+    readonly required>
   <span class="icon icon-calendar"><span class="path1"></span><span class="path2"></span><span class="path3"></span></span>
+</div>
+<div class="popover popover--error" *ngIf="validation && datePicker.errors?.required">
+  <div class="popover-content">Debes completar este campo.</div>
 </div>

@@ -16,7 +16,7 @@
     Añadir vuelta
   </a>
 
-  <div app-date-picker
+  <div app-date-picker *ngIf="calendarService.isRoundTrip$ | async"
     #dateReturn
     class="date-range-to"
     (click)="toggleDatePickerComeBack()"

@@ -26,6 +26,8 @@ export class ReservationComponent implements OnInit {
   public station: IStation;
   public validation: boolean;
   public flightTomorrow: Date;
+  public isFocusedCalendar: boolean;
+  public isFocusedStation: boolean;
 
   @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
 
@@ -55,19 +57,23 @@ export class ReservationComponent implements OnInit {
 
   showStation() {
     this.isShowStation = !this.isShowStation;
+    this.isFocusedStation = this.isShowStation;
   }
 
   stationSelected(station: any) {
     this.station = station.name;
+    this.isFocusedStation = this.isShowStation;
   }
 
   showCalendar() {
     this.calendarService.toggleShowDatePicker();
+    this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
   selectedDate(date: Date) {
     this.flightTomorrow = date;
     this.calendarService.toggleShowDatePicker();
+    this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
   myFlightTomorrow() {
