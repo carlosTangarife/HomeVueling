@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, AfterViewInit, Output, EventEmitter, ViewChild } from '@angular/core';
 
 declare var jQuery: any;
 declare var $: any;
@@ -8,6 +8,9 @@ declare var $: any;
   templateUrl: './date-picker.component.html'
 })
 export class DatePickerComponent implements OnInit, AfterViewInit {
+  @ViewChild('datePicker')
+  datePicker: Element;
+
   @Input()
   inputId: string;
 
@@ -15,13 +18,16 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
   label: string;
 
   @Input()
-  date: Date
+  date: Date;
 
   @Input()
-  dateGoing: Date
+  dateGoing: Date;
 
   @Input()
-  flightDisabledDays: Array<string>
+  flightDisabledDays: Array<string>;
+
+  @Input()
+  validation: boolean;
 
   @Output()
   selectedDate = new EventEmitter<Date>();
@@ -32,6 +38,7 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
 
   ngOnInit() {
     $.datepicker.setDefaults($.extend($.datepicker.regional['es']));
+    this.validation = false;
   }
 
   ngAfterViewInit() {

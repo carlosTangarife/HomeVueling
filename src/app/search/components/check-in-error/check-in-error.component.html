@@ -8,7 +8,7 @@
       </div>
       <div class="col-md-3">
         <div class="selectwrap">
-          <select [(ngModel)]="countryCode" name="value" #value="ngModel" class="form-control" (ngModelChange)="onChange()">
+          <select [(ngModel)]="countryCode" #value="ngModel" class="input select" (ngModelChange)="onChange()">
             <option *ngFor="let country of countryInfo" [ngValue]="country.countryCode" >
               {{country.name}} 
             </option>
