@@ -11,12 +11,17 @@ import { CheckInService } from '../../services/check-in.service';
 import { IStation } from '../../../shared/models/station.model';
 import { ICheckIn } from '../../models/check-in.model';
 
+declare var jQuery: any;
+declare var $: any;
+
 @Component({
   selector: '[app-reservation]',
   templateUrl: './reservation.component.html',
   providers: [CheckInService, SelectorService]
 })
 export class ReservationComponent implements OnInit {
+  @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
+
   public codeBooking: string;
   public email: string;
   public keyCookie: string;
@@ -28,8 +33,6 @@ export class ReservationComponent implements OnInit {
   public flightTomorrow: Date;
   public isFocusedCalendar: boolean;
   public isFocusedStation: boolean;
-
-  @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
 
   constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService) {
     this.isEmail = true;
@@ -66,6 +69,7 @@ export class ReservationComponent implements OnInit {
   }
 
   showCalendar() {
+    $('#vyCalendar').parent().removeClass('range-datepicker');
     this.calendarService.toggleShowDatePicker();
     this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }

@@ -17,9 +17,9 @@
    </div>
 </div>
 
-<form class="form" (ngSubmit)="onSubmit(forma)" #forma="ngForm" novalidate="">
-  <div class="form-group" [ngClass]="{'form-group--destinations': isOriginDestination, 'form-group--email': !isOriginDestination}">
-    <div class="form-input" [ngClass]="{'reservation-code': isOriginDestination, 'error': validation && (codeBookingCheckin.errors?.required || codeBookingCheckin.errors?.pattern)}">
+<form class="form" (ngSubmit)="onSubmit(chekInform)" #chekInform="ngForm" novalidate="">
+  <div class="form-group" [ngClass]="{'form-group--destinations': checkInWithOriginDestination, 'form-group--email': !checkInWithOriginDestination}">
+    <div class="form-input" [ngClass]="{'reservation-code': checkInWithOriginDestination, 'error': validation && (codeBookingCheckin.errors?.required || codeBookingCheckin.errors?.pattern)}">
       <label>Código de reserva</label>
       <a href="#">¿Qué es?</a>
       <div class="input-group">
@@ -42,7 +42,7 @@
       </div>
     </div>
 
-    <div class="form-input" *ngIf="isEmail" [ngClass]="{'error': validation && emailCheckin.errors?.required}">
+    <div class="form-input" *ngIf="checkInWithEmail" [ngClass]="{'error': validation && emailCheckin.errors?.required}">
       <label>Email del comprador </label>
       <div class="input-group">
         <input
@@ -63,7 +63,7 @@
         <div class="popover-content">Los datos introducidos no son correctos.</div>
       </div>
     </div>
-    <div class="form-input" *ngIf="isOriginDestination" [ngClass]="{'focused': isFocusedStation, 'error': validation && stationCheckin.errors?.required}">
+    <div class="form-input" *ngIf="checkInWithOriginDestination" [ngClass]="{'focused': isFocusedStation, 'error': validation && stationCheckin.errors?.required}">
       <label>Aeropuerto origen/destino</label>
       <div class="input-group">
         <input
@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div class="form-input dates" *ngIf="isOriginDestination" [ngClass]="{'focused': isFocusedCalendar, 'error': validation && datePickerCheckin.datePicker.errors?.required}">
+    <div class="form-input dates" *ngIf="checkInWithOriginDestination" [ngClass]="{'focused': isFocusedCalendar, 'error': validation && datePickerCheckin.datePicker.errors?.required}">
       <div app-date-picker
         #datePickerCheckin
         class="col col-md-6"

@@ -3,7 +3,7 @@ import { IconComponent } from '../shared/components/icon/icon.component';
 import { PlacesComponent } from '../shared/components/places/places.component';
 import { MinusPlusComponent } from '../shared/components/minus-plus/minus-plus.component';
 import { DatePickerComponent } from '../shared/components/date-picker/date-picker.component';
-import { IndexSearchComponent } from './components/index-search/search-index.component';
+import { IndexSearchComponent } from './components/index-search/index-search.component';
 import { CheckInComponent } from './components/check-in/check-in.component';
 import { ReservationComponent } from './components/reservation/reservation.component';
 import { FlightComponent } from './components/flight/flight.component';

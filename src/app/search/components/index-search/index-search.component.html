@@ -16,7 +16,7 @@
         </div>
       </li>
 
-      <li class="searchbar-main_tabs_tab  searchbar-main_tabs_tab--check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'active': ischeckIn}">
+      <li class="searchbar-main_tabs_tab  searchbar-main_tabs_tab--check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'active': isCheckIn}">
         <a class="tab" data-toggle="tab" href="#menu1" (click)="setTagCheckin()">
           <p><span app-icon class="icon {{searcherConfig.Checkin.Icon.Class}}"
             [icon]="searcherConfig.Checkin.Icon"></span>{{'checkinOnline' | dictionary}}</p>
@@ -33,10 +33,10 @@
     </ul>
     <div class="tab-content searchbar-main_tab-content">
       <div id="tab-search" class="tab-pane fade searchbar-main_tab-content_pane search" *ngIf="searcherConfig.FlightSearch.IsEnabled" [ngClass]="{'in active': isFlight}">
-        <form app-flight autocomplete="off" class="pane-wrapper" novalidate></form>
+        <form app-flight autocomplete="off" class="pane-wrapper" (isMulti)="setMulti($event)" novalidate></form>
       </div>
 
-      <div id="tab-checkin" class="tab-pane searchbar-main_tab-content_pane check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'in active': ischeckIn}">
+      <div id="tab-checkin" class="tab-pane searchbar-main_tab-content_pane check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'in active': isCheckIn}">
         <div app-check-in class="pane-wrapper"></div>
       </div>
 
@@ -45,7 +45,7 @@
       </div>
 
       <div app-content-calendar class="searchbar-datepicker" [ngClass]="{'show': calendarService.isShowDatePicker}">
-        <div app-calendar-options class="searcbar-datepicker_title" grayBar *ngIf="!ischeckIn && !isReservation"></div>
+        <div app-calendar-options class="searcbar-datepicker_title" grayBar *ngIf="showCalendarOptionsBar()"></div>
         <div id="vyCalendar" tabindex="0" calendar></div>
       </div>
     </div>

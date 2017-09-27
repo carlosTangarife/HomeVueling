@@ -14,6 +14,9 @@ export class FlightComponent implements OnInit {
   @ViewChild('destination')
   destination: DestinationSelectorComponent;
 
+  @Output()
+  isMulti = new EventEmitter<boolean>();
+
   public dataFlight: IFlight;
   public isFocusedOrigin: boolean;
   public isFocusedDestination: boolean;
@@ -67,6 +70,7 @@ export class FlightComponent implements OnInit {
 
   clickMulticity(multicity: boolean) {
     this.dataFlight.multi.isActive = multicity;
+    this.isMulti.next(this.dataFlight.multi.isActive);
   }
 
   removeMulticity(multicity: boolean) {
