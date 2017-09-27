@@ -4,12 +4,13 @@ import { environment } from '../../../../environments/environment';
 
 /*Local Services */
 import { CalendarService } from '../../services/calendar.service';
-import { SelectorService } from '../../../shared/services/selector.service';
 import { CheckInService } from '../../services/check-in.service';
+import { SelectorService } from '../../../shared/services/selector.service';
+import { LinksHubService } from './../../../shared/services/links-hub.service';
 
 /*Models using interface */
 import { IStation } from '../../../shared/models/station.model';
-import { ICheckIn } from '../../models/check-in.model';
+import { IReservation } from '../../models/reservation';
 
 declare var jQuery: any;
 declare var $: any;
@@ -21,41 +22,37 @@ declare var $: any;
 })
 export class ReservationComponent implements OnInit {
   @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
-
-  public codeBooking: string;
-  public email: string;
   public keyCookie: string;
-  public isEmail: boolean;
-  public isOriginDestination: boolean;
-  public isShowStation: boolean;
-  public station: IStation;
   public validation: boolean;
-  public flightTomorrow: Date;
-  public isFocusedCalendar: boolean;
+  public isShowStation: boolean;
   public isFocusedStation: boolean;
+  public isFocusedCalendar: boolean;
+  public isReservationWithEmail: boolean;
+  public dataReservation: IReservation;
+  public isReservationOriginDestination: boolean;
 
-  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService) {
-    this.isEmail = true;
-    this.isOriginDestination = false;
-    this.isShowStation = false;
-    this.keyCookie = environment.keyCheckInCookie;
+  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private _linksHubService: LinksHubService) {
     this.validation = false;
-    this.flightTomorrow = null;
+    this.dataReservation = {};
+    this.isShowStation = false;
+    this.isReservationWithEmail = true;
+    this.isReservationOriginDestination = false;
+    this.keyCookie = environment.keyCheckInCookie;
    }
 
   ngOnInit() {
     this.selectorService.loadStations();
-    this.codeBooking = this.checkInService.getCodeBooking(this.keyCookie);
+    this.dataReservation.codeBooking = this.checkInService.getCodeBooking(this.keyCookie);
   }
 
   showEmail() {
-    this.isEmail = true;
-    this.isOriginDestination = false;
+    this.isReservationWithEmail = true;
+    this.isReservationOriginDestination = false;
   }
 
   showOriginDestination() {
-    this.isOriginDestination = true;
-    this.isEmail = false;
+    this.isReservationOriginDestination = true;
+    this.isReservationWithEmail = false;
   }
 
   showStation() {
@@ -64,7 +61,8 @@ export class ReservationComponent implements OnInit {
   }
 
   stationSelected(station: any) {
-    this.station = station.name;
+    this.dataReservation.originOrDestinationName = station.name;
+    this.dataReservation.originOrDestinationCode = station.code;
     this.isFocusedStation = this.isShowStation;
   }
 
@@ -75,18 +73,24 @@ export class ReservationComponent implements OnInit {
   }
 
   selectedDate(date: Date) {
-    this.flightTomorrow = date;
+    this.dataReservation.myFlightTomorrow = date;
     this.calendarService.toggleShowDatePicker();
     this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
   myFlightTomorrow() {
-    this.flightTomorrow = new Date();
-    this.flightTomorrow.setDate(this.flightTomorrow.getDate() + 1);
-    this.flightTomorrow.setHours(0, 0, 0, 0);
+    this.dataReservation.myFlightTomorrow = new Date();
+    this.dataReservation.myFlightTomorrow.setDate(this.dataReservation.myFlightTomorrow.getDate() + 1);
+    this.dataReservation.myFlightTomorrow.setHours(0, 0, 0, 0);
   }
 
-  onSubmit(forma: NgForm) {
-    this.validation = true;
+  onSubmit(chekInform: NgForm) {
+    if (chekInform.valid) {
+      this.validation = false;
+      this._linksHubService.linkReservation(this.isReservationWithEmail, this.dataReservation);
+    }else {
+      this.validation = true;
+    }
+    console.log(this.dataReservation);
   }
 }

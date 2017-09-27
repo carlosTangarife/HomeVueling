@@ -24,24 +24,23 @@ declare var $: any;
 export class CheckInComponent implements OnInit {
   @Output()
   selectedOrigin: EventEmitter<string> = new EventEmitter();
-  public dataCheckIn: ICheckIn;
   public keyCookie: string;
-  public checkInWithEmail: boolean;
-  public checkInWithOriginDestination: boolean;
-  public isShowStation: boolean;
   public validation: boolean;
   public flightTomorrow: Date;
-  public isFocusedCalendar: boolean;
+  public dataCheckIn: ICheckIn;
+  public isShowStation: boolean;
   public isFocusedStation: boolean;
+  public checkInWithEmail: boolean;
+  public isFocusedCalendar: boolean;
+  public checkInWithOriginDestination: boolean;
 
   constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private _linksHubService: LinksHubService) {
+    this.dataCheckIn = {};
+    this.validation = false;
+    this.isShowStation = false;
     this.checkInWithEmail = true;
     this.checkInWithOriginDestination = false;
-    this.isShowStation = false;
     this.keyCookie = environment.keyCheckInCookie;
-    this.validation = false;
-
-    this.dataCheckIn = {};
    }
 
   ngOnInit() {

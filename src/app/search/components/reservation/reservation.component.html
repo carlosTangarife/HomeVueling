@@ -15,7 +15,7 @@
    </div>
 </div>
 
-<form class="form" (ngSubmit)="onSubmit(forma)" #forma="ngForm" novalidate="">
+<form class="form" (ngSubmit)="onSubmit(reservationForm)" #reservationForm="ngForm" novalidate="">
   <div class="form-group" [ngClass]="{'form-group--destinations': isOriginDestination, 'form-group--email': !isOriginDestination}">
     <div class="form-input" [ngClass]="{'reservation-code': isOriginDestination, 'error': validation && (codeBookingBooking.errors?.required || codeBookingBooking.errors?.pattern)}">
       <label>Código de reserva</label>
@@ -28,7 +28,7 @@
           class="form-control"
           placeholder="Ej. XG6LM3"
           pattern="[A-Za-z0-9]{6}"
-          [(ngModel)]="codeBooking"
+          [(ngModel)]="dataReservation.codeBooking"
           #codeBookingBooking="ngModel"
           required>
       </div>
@@ -40,7 +40,7 @@
       </div>
     </div>
 
-    <div class="form-input" *ngIf="isEmail" [ngClass]="{'error': validation && (emailBooking.errors?.required || emailBooking.errors?.pattern)}">
+    <div class="form-input" *ngIf="isReservationWithEmail" [ngClass]="{'error': validation && (emailBooking.errors?.required || emailBooking.errors?.pattern)}">
       <label>Email del comprador </label>
       <div class="input-group">
         <input
@@ -50,7 +50,7 @@
           class="form-control"
           placeholder="email@vueling.com"
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
-          [(ngModel)]="email"
+          [(ngModel)]="dataReservation.email"
           #emailBooking="ngModel"
           required>
       </div>
@@ -61,7 +61,7 @@
         <div class="popover-content">Los datos introducidos no son correctos.</div>
       </div>
     </div>
-    <div class="form-input" *ngIf="isOriginDestination" [ngClass]="{'focused': isFocusedStation, 'error': validation && stationBooking.errors?.required}">
+    <div class="form-input" *ngIf="isReservationOriginDestination" [ngClass]="{'focused': isFocusedStation, 'error': validation && stationBooking.errors?.required}">
       <label>Aeropuerto origen/destino</label>
       <div class="input-group">
         <input
@@ -71,7 +71,7 @@
           (click)="showStation()"
           class="form-control"
           placeholder="Ciudad"
-          [(ngModel)]="station"
+          [(ngModel)]="dataReservation.originOrDestinationName"
           #stationBooking="ngModel"
           required>
       </div>
@@ -86,15 +86,15 @@
         </div>
       </div>
     </div>
-    <div class="form-input dates" *ngIf="isOriginDestination" [ngClass]="{'focused': isFocusedCalendar, 'error': validation && datePickerBooking.datePicker.errors?.required}">
+    <div class="form-input dates" *ngIf="isReservationOriginDestination" [ngClass]="{'focused': isFocusedCalendar, 'error': validation && datePickerBooking.datePicker.errors?.required}">
       <div app-date-picker
         #datePickerBooking
         class="col col-md-6"
         [label]="'Fecha del primer vuelo'"
         [inputId]="'inputDatePickerBooking'"
-        [date]="flightTomorrow"
+        [date]="dataReservation.myFlightTomorrow"
         [validation]="validation"
-        [type]="YourBooking"
+        [type]="'YourBooking'"
         (click)="showCalendar()"
         (selectedDate)="selectedDate($event)">
       </div>
