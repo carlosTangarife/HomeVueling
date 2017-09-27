@@ -46,6 +46,12 @@ export class CalendarComponent implements OnInit {
         this.isFocused.emit(false);
       }
     });
+
+    this.calendarService.isGoing$.subscribe(val => {
+      if (!val) {
+        this.isFocused.emit(false);
+      }
+    });
   }
 
   getFlightDisabledDays() {
@@ -58,7 +64,7 @@ export class CalendarComponent implements OnInit {
     }
     this.flightGoingDisabledDays = this.flightDatesService.getFlightDisabledDays(origin, destination);
     this.subjectFlightGoingDisabledDays.next(this.flightGoingDisabledDays);
-    if (this.calendarService.isRoundTrip) {
+    if (this.dataFlight && !this.dataFlight.multi.isActive && this.calendarService.isRoundTrip) {
       this.flightReturnDisabledDays = this.flightDatesService.getFlightDisabledDays(destination, origin);
       this.subjectFlightReturnDisabledDays.next(this.flightReturnDisabledDays);
     }

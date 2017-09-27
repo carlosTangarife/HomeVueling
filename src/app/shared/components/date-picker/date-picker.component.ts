@@ -77,7 +77,8 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
         }
       },
       onSelect: function(dateText, inst) {
-        self.selectedDate.emit($(this).datepicker('getDate'));
+        let date = new Date(inst.selectedYear, inst.selectedMonth, inst.selectedDay);
+        self.selectedDate.emit(date);
       }
     }).keydown(this.keyDownEvent);
   }

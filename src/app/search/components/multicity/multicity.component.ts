@@ -5,6 +5,9 @@ import { FlightDatesService } from '../../../shared/services/flight-dates.servic
 import { DatePickerComponent } from '../../../shared/components/date-picker/date-picker.component';
 import { CalendarService } from '../../services/calendar.service';
 
+declare var jQuery: any;
+declare var $: any;
+
 @Component({
   selector: '[app-multicity]',
   templateUrl: './multicity.component.html'
@@ -29,6 +32,11 @@ export class MulticityComponent implements OnInit {
   constructor(public flightDatesService: FlightDatesService, public calendarService: CalendarService) { }
 
   ngOnInit() {
+    this.calendarService.isMulti$.subscribe(val => {
+      if (!val) {
+        this.isFocusedCalendar = false;
+      }
+    });
   }
 
   getFlightDisabledDays() {
@@ -45,6 +53,7 @@ export class MulticityComponent implements OnInit {
 
   toggleDatePickerMulti() {
     this.calendarService.onMulti();
+    $('#vyCalendar').parent().removeClass('range-datepicker');
     if (this.calendarService.isMulti) {
       this.dateMulti.show();
     }

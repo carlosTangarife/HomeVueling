@@ -5,12 +5,13 @@ import { CalendarService } from '../../services/calendar.service';
 
 @Component({
   selector: 'app-index-search',
-  templateUrl: './search-index.component.html',
+  templateUrl: './index-search.component.html',
   providers: [CalendarService]
 })
 export class IndexSearchComponent implements OnInit {
   isFlight: boolean;
-  ischeckIn: boolean;
+  isCheckIn: boolean;
+  isMulti: boolean;
   isOverlay: boolean;
   searcherConfig: any;
   listIconLink: IIconLink[];
@@ -30,26 +31,26 @@ export class IndexSearchComponent implements OnInit {
 
   ngOnInit() {
     this.isFlight = true;
-    this.ischeckIn = false;
+    this.isCheckIn = false;
     this.isReservation = false;
     this.isOverlay = false;
   }
 
   setTagFlight() {
     this.isFlight = true;
-    this.ischeckIn = false;
+    this.isCheckIn = false;
     this.isReservation = false;
   }
 
   setTagCheckin() {
     this.isFlight = false;
-    this.ischeckIn = true;
+    this.isCheckIn = true;
     this.isReservation = false;
   }
 
   setTagBooking() {
     this.isFlight = false;
-    this.ischeckIn = false;
+    this.isCheckIn = false;
     this.isReservation = true;
   }
 
@@ -63,5 +64,13 @@ export class IndexSearchComponent implements OnInit {
 
   hideOverlay() {
     this.isOverlay = false;
+  }
+
+  setMulti(value: boolean) {
+    this.isMulti = value;
+  }
+
+  showCalendarOptionsBar(): boolean {
+    return !this.isCheckIn && !this.isReservation && !this.isMulti;
   }
 }
