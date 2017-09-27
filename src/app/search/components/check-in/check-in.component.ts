@@ -6,6 +6,7 @@ import { environment } from '../../../../environments/environment';
 import { CalendarService } from '../../services/calendar.service';
 import { SelectorService } from '../../../shared/services/selector.service';
 import { CheckInService } from '../../services/check-in.service';
+import { LinksHubService } from './../../../shared/services/links-hub.service';
 
 /*Models using interface */
 import { IStation } from '../../../shared/models/station.model';
@@ -27,8 +28,8 @@ export class CheckInComponent implements OnInit {
   public codeBooking: string;
   public email: string;
   public keyCookie: string;
-  public isEmail: boolean;
-  public isOriginDestination: boolean;
+  public checkInWithEmail: boolean;
+  public checkInWithOriginDestination: boolean;
   public isShowStation: boolean;
   public station: IStation;
   public validation: boolean;
@@ -36,9 +37,9 @@ export class CheckInComponent implements OnInit {
   public isFocusedCalendar: boolean;
   public isFocusedStation: boolean;
 
-  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService) {
-    this.isEmail = true;
-    this.isOriginDestination = false;
+  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private _linksHubService: LinksHubService) {
+    this.checkInWithEmail = true;
+    this.checkInWithOriginDestination = false;
     this.isShowStation = false;
     this.keyCookie = environment.keyCheckInCookie;
     this.validation = false;
@@ -51,13 +52,13 @@ export class CheckInComponent implements OnInit {
   }
 
   showEmail() {
-    this.isEmail = true;
-    this.isOriginDestination = false;
+    this.checkInWithEmail = true;
+    this.checkInWithOriginDestination = false;
   }
 
   showOriginDestination() {
-    this.isOriginDestination = true;
-    this.isEmail = false;
+    this.checkInWithOriginDestination = true;
+    this.checkInWithEmail = false;
   }
 
   showStation() {
@@ -88,8 +89,12 @@ export class CheckInComponent implements OnInit {
     this.flightTomorrow.setHours(0, 0, 0, 0);
   }
 
-  onSubmit(forma: NgForm) {
+  onSubmit(chekInform: NgForm) {
     this.validation = true;
+    if (chekInform.valid) {
+      console.log(chekInform);
+      this._linksHubService.linkCheckInOnline(this.checkInWithEmail);
+    }
   }
 }
 
