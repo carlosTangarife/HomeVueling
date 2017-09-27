@@ -29,16 +29,20 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
   @Input()
   validation: boolean;
 
+  @Input()
+  type: string;
+
   @Output()
   selectedDate = new EventEmitter<Date>();
 
   constructor() {
     this.flightDisabledDays = [];
+    this.validation = false;
+    this.type = 'FlightSearch';
   }
 
   ngOnInit() {
     $.datepicker.setDefaults($.extend($.datepicker.regional['es']));
-    this.validation = false;
   }
 
   ngAfterViewInit() {
@@ -150,6 +154,14 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
       } else {
         return false;
       }
+    }
+  }
+
+  getFormatDate(): string {
+    if (this.type === 'FlightSearch') {
+      return 'dd/MM/yy';
+    } else {
+      return 'dd/MM/yyyy'
     }
   }
 }

@@ -82,6 +82,7 @@ export class CheckInComponent implements OnInit {
   myFlightTomorrow() {
     this.flightTomorrow = new Date();
     this.flightTomorrow.setDate(this.flightTomorrow.getDate() + 1);
+    this.flightTomorrow.setHours(0, 0, 0, 0);
   }
 
   onSubmit(forma: NgForm) {
