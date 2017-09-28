@@ -149,6 +149,10 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
     if (code !== 9) {
       if (code === 37 || code === 38 || code === 39 || code === 40) {
         let currentDate = $(this).datepicker('getDate');
+        if (!currentDate) {
+          currentDate = new Date();
+          currentDate.setHours(0, 0, 0, 0);
+        }
         switch (code) {
           case 37:
             currentDate.setDate(currentDate.getDate() - 1);
