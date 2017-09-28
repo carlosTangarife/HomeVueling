@@ -88,11 +88,20 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
   }
 
   refresh() {
+    let date = $('#' + this.inputId).datepicker('getDate');
     $('#' + this.inputId).datepicker('refresh');
   }
 
   setOption(option: string, value: any) {
     $('#' + this.inputId).datepicker('option', option, value);
+  }
+
+  addClassToContent(style: string) {
+    $('#vyCalendar').parent().addClass(style);
+  }
+
+  removeClassToContent(style: string) {
+    $('#vyCalendar').parent().removeClass(style);
   }
 
   calendarBeforeShow(input, inst) {

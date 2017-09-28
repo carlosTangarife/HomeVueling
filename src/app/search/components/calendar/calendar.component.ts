@@ -5,9 +5,6 @@ import { FlightDatesService } from '../../../shared/services/flight-dates.servic
 import { DatePickerComponent } from '../../../shared/components/date-picker/date-picker.component';
 import { CalendarService } from '../../services/calendar.service';
 
-declare var jQuery: any;
-declare var $: any;
-
 @Component({
   selector: '[app-calendar]',
   templateUrl: './calendar.component.html'
@@ -103,7 +100,7 @@ export class CalendarComponent implements OnInit {
 
   toggleDatePickerGoing() {
     this.calendarService.onGoing();
-    $('#vyCalendar').parent().removeClass('range-datepicker');
+    this.dateGoing.removeClassToContent('range-datepicker');
     if (this.calendarService.isGoing) {
       this.dateGoing.show();
     }
@@ -113,7 +110,7 @@ export class CalendarComponent implements OnInit {
 
   toggleDatePickerComeBack() {
     this.calendarService.onComeBack();
-    $('#vyCalendar').parent().addClass('range-datepicker');
+    this.dateReturn.addClassToContent('range-datepicker');
     if (this.calendarService.isComeBack) {
       this.dateReturn.show();
     }

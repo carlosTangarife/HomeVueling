@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 
@@ -11,9 +11,7 @@ import { LinksHubService } from './../../../shared/services/links-hub.service';
 /*Models using interface */
 import { IStation } from '../../../shared/models/station.model';
 import { ICheckIn } from '../../models/check-in.model';
-
-declare var jQuery: any;
-declare var $: any;
+import { DatePickerComponent } from '../../../shared/components/date-picker/date-picker.component';
 
 @Component({
   selector: '[app-check-in]',
@@ -21,12 +19,14 @@ declare var $: any;
   providers: [CheckInService, SelectorService]
 })
 export class CheckInComponent implements OnInit {
+  @ViewChild('datePickerCheckin')
+  datePickerCheckin: DatePickerComponent;
+
   @Output()
   selectedOrigin = new EventEmitter<string>();
 
   public keyCookie: string;
   public validation: boolean;
-  public flightTomorrow: Date;
   public dataCheckIn: ICheckIn;
   public isFocusedStation: boolean;
   public checkInWithEmail: boolean;
@@ -71,8 +71,9 @@ export class CheckInComponent implements OnInit {
   }
 
   showCalendar() {
-    $('#vyCalendar').parent().removeClass('range-datepicker');
+    this.datePickerCheckin.removeClassToContent('range-datepicker');
     this.calendarService.toggleShowDatePicker();
+    this.datePickerCheckin.refresh();
     this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 

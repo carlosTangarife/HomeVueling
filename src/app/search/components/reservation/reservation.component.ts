@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 
@@ -11,9 +11,7 @@ import { LinksHubService } from './../../../shared/services/links-hub.service';
 /*Models using interface */
 import { IStation } from '../../../shared/models/station.model';
 import { IReservation } from '../../models/reservation';
-
-declare var jQuery: any;
-declare var $: any;
+import { DatePickerComponent } from '../../../shared/components/date-picker/date-picker.component';
 
 @Component({
   selector: '[app-reservation]',
@@ -21,6 +19,9 @@ declare var $: any;
   providers: [CheckInService, SelectorService]
 })
 export class ReservationComponent implements OnInit {
+  @ViewChild('datePickerBooking')
+  datePickerBooking: DatePickerComponent;
+
   @Output()
   selectedOrigin = new EventEmitter<string>();
 
@@ -70,8 +71,9 @@ export class ReservationComponent implements OnInit {
   }
 
   showCalendar() {
-    $('#vyCalendar').parent().removeClass('range-datepicker');
+    this.datePickerBooking.removeClassToContent('range-datepicker');
     this.calendarService.toggleShowDatePicker();
+    this.datePickerBooking.refresh();
     this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
