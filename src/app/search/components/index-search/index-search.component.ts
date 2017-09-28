@@ -1,9 +1,11 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { ConfigService } from '../../../shared/services/config.service';
+
 import { IIconLink } from '../../../shared/models/commons.model';
+
+import { FlightService } from '../../services/flight.service';
 import { CalendarService } from '../../services/calendar.service';
 import { TabStateService } from '../../services/tab-state.service';
-import { FlightService } from '../../services/flight.service';
+import { ConfigService } from '../../../shared/services/config.service';
 
 @Component({
   selector: 'app-index-search',
@@ -15,7 +17,12 @@ export class IndexSearchComponent implements OnInit {
   isOverlay: boolean;
   listIconLink: IIconLink[];
 
-  constructor(private configService: ConfigService, private flightService: FlightService, public tabStateService: TabStateService, public calendarService: CalendarService) { }
+  constructor(
+    private configService: ConfigService,
+    private flightService: FlightService,
+    public tabStateService: TabStateService,
+    public calendarService: CalendarService,
+  ) { }
 
   ngOnInit() {
     this.flightService.initFlight();

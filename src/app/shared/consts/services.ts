@@ -8,6 +8,7 @@ import { CookiesWrapper } from '../services/cookies-wrapper.service';
 import { FlightDatesService } from '../services/flight-dates.service';
 import { LinksHubService } from './../services/links-hub.service';
 import { FlightService } from './../../search/services/flight.service';
+import { LoginService } from './../services/login.service';
 
 export function configServiceFactory(config: ConfigService) {
     let obs = config.load();
@@ -27,5 +28,6 @@ export const SHARED_SERVICES = [
     StationService,
     FlightDatesService,
     LinksHubService,
-    FlightService
+    FlightService,
+    LoginService
 ];
