@@ -1,7 +1,7 @@
 export interface ICheckIn {
     codeBooking?: string,
     email?: string,
-    date?: Date,
+    date: Date,
     originOrDestinationCode?: string,
     originOrDestinationName?: string,
     checkInWithEmail?: boolean,

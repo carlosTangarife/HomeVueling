@@ -15,9 +15,14 @@ import { environment } from '../../../environments/environment';
 @Injectable()
 export class FlightService {
   private dataFlight: IFlight;
-  public dataCheckIn: ICheckIn;
-  public dataReservation: IReservation;
-  constructor(private cookiesWrapper: CookiesWrapper) { }
+  private dataCheckIn: ICheckIn;
+  private dataReservation: IReservation;
+
+  constructor(private cookiesWrapper: CookiesWrapper) {
+    this.dataCheckIn = { date: null };
+    this.dataReservation = { date: null };
+    this.dataFlight = {};
+  }
 
   initFlight(): IFlight {
     let dataFlight = this.cookiesWrapper.getCookie(environment.keylastSearchFlight);
@@ -27,7 +32,7 @@ export class FlightService {
       this.dataFlight.multi.going = new Date(dataFlight.multi.going);
       this.dataFlight.going = new Date(dataFlight.going);
       this.dataFlight.return = new Date(dataFlight.return);
-    }else {
+    } else {
       let today = new Date();
       today.setHours(0, 0, 0, 0);
 
@@ -72,7 +77,7 @@ export class FlightService {
   initCheckInOnline( ): ICheckIn {
     let dataCheckInOnline = this.cookiesWrapper.getCookie(environment.keyCheckInCookie);
     if (dataCheckInOnline) {
-    }else {
+    } else {
       this.dataCheckIn.checkInWithEmail = true;
     }
     return this.dataCheckIn;
@@ -81,7 +86,7 @@ export class FlightService {
   initReservation( ): IReservation {
     let dataReservation = this.cookiesWrapper.getCookie(environment.keyReservation);
     if (dataReservation) {
-    }else {
+    } else {
       this.dataReservation.checkInWithEmail = true;
     }
     return this.dataReservation;
