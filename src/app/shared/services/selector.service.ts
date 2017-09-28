@@ -8,14 +8,12 @@ import { ConfigService } from './config.service';
 /*third-party library*/
 import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { map } from 'rxjs/Operator/map'
+import * as _ from 'lodash';
 
 /*Models using interface */
 import { IContactPhonesType, IContactPhones } from '../../search/models/contact-phones.model';
 import { IStation, IMarket, IStationList } from '../models/station.model';
 import { IIcon } from '../models/commons.model';
-
-declare var jQuery: any;
-declare var $: any;
 
 @Injectable()
 export class SelectorService {
@@ -37,8 +35,8 @@ export class SelectorService {
     public listStations$ = this.subjectListStations.asObservable();
 
     constructor(private configService: ConfigService, private _stationService: StationService) {
-        this.stations = $.extend(true, {}, this.configService.environment['stations']);
-        this.markets = $.extend(true, {}, this.configService.environment['markets']);
+        this.stations = _.cloneDeep(this.configService.environment['stations']);
+        this.markets = _.cloneDeep(this.configService.environment['markets']);
         this.marketsIata = [];
         this.iconGeo = this.configService.getIconGeo();
         this.iconRecent = this.configService.getIconRecent();

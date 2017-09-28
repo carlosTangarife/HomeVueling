@@ -138,22 +138,27 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
     // event.keyCode: IE
     let code = event.keyCode || event.which;
     if (code !== 9) {
-      event.preventDefault();
       if (code === 37 || code === 38 || code === 39 || code === 40) {
         let currentDate = $(this).datepicker('getDate');
         switch (code) {
-          case 37: currentDate.setDate(currentDate.getDate() - 1); break;
-          case 38: currentDate.setDate(currentDate.getDate() - 7); break;
-          case 39: currentDate.setDate(currentDate.getDate() + 1); break;
-          case 40: currentDate.setDate(currentDate.getDate() + 7); break;
+          case 37:
+            currentDate.setDate(currentDate.getDate() - 1);
+            break;
+          case 38:
+            currentDate.setDate(currentDate.getDate() - 7);
+            break;
+          case 39:
+            currentDate.setDate(currentDate.getDate() + 1);
+            break;
+          case 40:
+            currentDate.setDate(currentDate.getDate() + 7);
+            break;
         }
         if (currentDate != null) {
           $(this).datepicker('setDate', currentDate);
         }
       } else if (code === 13) {
         $(this).datepicker().find('.ui-datepicker-current-day').click();
-      } else {
-        return false;
       }
     }
   }
