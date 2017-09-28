@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { ResourcesService } from './resources.service';
+import * as _ from 'lodash';
 
 @Injectable()
 export class ConfigService {
@@ -40,6 +41,10 @@ export class ConfigService {
   getDictionary(key: string): string {
     let dictionary = this.environment['texts'].find(dic => dic.Key === key);
     return dictionary ? dictionary.Value : '';
+  }
+
+  getConfiguration(): any {
+    return _.cloneDeep(this.environment['configuration']);
   }
 
   getConfigStations(): any {

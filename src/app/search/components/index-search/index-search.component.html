@@ -7,40 +7,45 @@
   <img class="searchbar-bg-image" src="./assets/images/search/bg2.jpg" alt="">
   <div id="searchbar" class="searchbar-main container" (click)="showOverlay()">
     <ul class="nav nav-tabs searchbar-main_tabs">
-      <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--search" *ngIf="searcherConfig.FlightSearch.IsEnabled" [ngClass]="{'active': isFlight}">
-        <div class="tab" data-toggle="tab" href="#home" (click)="setTagFlight()">
-          <p><span app-icon class="icon {{searcherConfig.FlightSearch.Icon.Class}}"
-            [icon]="searcherConfig.FlightSearch.Icon"></span>{{'flights' | dictionary}}
+      <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--search" *ngIf="tabStateService.isEnabled('FlightSearch')" [ngClass]="{'active': tabStateService.isActive('FlightSearch')}">
+        <div class="tab" data-toggle="tab" href="#home" (click)="tabStateService.activeTab('FlightSearch')">
+          <p><span app-icon class="icon {{tabStateService.getTabConfiguration('FlightSearch', 'Icon').Class}}"
+            [icon]="tabStateService.getTabConfiguration('FlightSearch', 'Icon')"></span>{{'flights' | dictionary}}
           </p>
           <ul app-list-icon-link [listIconLink]="listIconLink"></ul>
         </div>
       </li>
 
-      <li class="searchbar-main_tabs_tab  searchbar-main_tabs_tab--check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'active': isCheckIn}">
-        <a class="tab" data-toggle="tab" href="#menu1" (click)="setTagCheckin()">
-          <p><span app-icon class="icon {{searcherConfig.Checkin.Icon.Class}}"
-            [icon]="searcherConfig.Checkin.Icon"></span>{{'checkinOnline' | dictionary}}</p>
+      <li class="searchbar-main_tabs_tab  searchbar-main_tabs_tab--check-in" *ngIf="tabStateService.isEnabled('Checkin')" [ngClass]="{'active': tabStateService.isActive('Checkin')}">
+        <a class="tab" data-toggle="tab" href="#menu1" (click)="tabStateService.activeTab('Checkin')">
+          <p><span app-icon class="icon {{tabStateService.getTabConfiguration('Checkin', 'Icon').Class}}"
+            [icon]="tabStateService.getTabConfiguration('Checkin', 'Icon')"></span>{{'checkinOnline' | dictionary}}</p>
         </a>
       </li>
 
-      <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--reservation" *ngIf="searcherConfig.YourBooking.IsEnabled" [ngClass]="{'active': isReservation}">
-        <a class="tab" data-toggle="tab" href="#menu2" (click)="setTagBooking()">
-          <p><span app-icon class="icon {{searcherConfig.YourBooking.Icon.Class}}"
-            [icon]="searcherConfig.YourBooking.Icon"></span>{{'yourBooking' | dictionary}}</p>
+      <li class="searchbar-main_tabs_tab searchbar-main_tabs_tab--reservation" *ngIf="tabStateService.isEnabled('YourBooking')" [ngClass]="{'active': tabStateService.isActive('YourBooking')}">
+        <a class="tab" data-toggle="tab" href="#menu2" (click)="tabStateService.activeTab('YourBooking')">
+          <p><span app-icon class="icon {{tabStateService.getTabConfiguration('YourBooking', 'Icon').Class}}"
+            [icon]="tabStateService.getTabConfiguration('YourBooking', 'Icon')"></span>{{'yourBooking' | dictionary}}</p>
         </a>
       </li>
 
     </ul>
     <div class="tab-content searchbar-main_tab-content">
+<<<<<<< Updated upstream
       <div id="tab-search" class="tab-pane fade searchbar-main_tab-content_pane search" *ngIf="searcherConfig.FlightSearch.IsEnabled" [ngClass]="{'in active': isFlight}">
         <div app-flight (isMulti)="setMulti($event)"></div>
+=======
+      <div id="tab-search" class="tab-pane fade searchbar-main_tab-content_pane search" *ngIf="tabStateService.isEnabled('FlightSearch')" [ngClass]="{'in active': tabStateService.isActive('FlightSearch')}">
+        <form app-flight autocomplete="off" class="pane-wrapper" (isMulti)="setMulti($event)" novalidate></form>
+>>>>>>> Stashed changes
       </div>
 
-      <div id="tab-checkin" class="tab-pane searchbar-main_tab-content_pane check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'in active': isCheckIn}">
+      <div id="tab-checkin" class="tab-pane searchbar-main_tab-content_pane check-in" *ngIf="tabStateService.isEnabled('Checkin')" [ngClass]="{'in active': tabStateService.isActive('Checkin')}">
         <div app-check-in class="pane-wrapper"></div>
       </div>
 
-      <div id="tab-reservation" class="tab-pane searchbar-main_tab-content_pane reservation" *ngIf="searcherConfig.YourBooking.IsEnabled" [ngClass]="{'in active': isReservation}">
+      <div id="tab-reservation" class="tab-pane searchbar-main_tab-content_pane reservation" *ngIf="tabStateService.isEnabled('YourBooking')" [ngClass]="{'in active': tabStateService.isActive('YourBooking')}">
         <div app-reservation class="pane-wrapper"></div>
       </div>
 

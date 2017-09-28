@@ -2,56 +2,31 @@ import { Component, OnInit, Input } from '@angular/core';
 import { ConfigService } from '../../../shared/services/config.service';
 import { IIconLink } from '../../../shared/models/commons.model';
 import { CalendarService } from '../../services/calendar.service';
+import { TabStateService } from '../../services/tab-state.service';
 
 @Component({
   selector: 'app-index-search',
   templateUrl: './index-search.component.html',
-  providers: [CalendarService]
+  providers: [TabStateService, CalendarService]
 })
 export class IndexSearchComponent implements OnInit {
-  isFlight: boolean;
-  isCheckIn: boolean;
   isMulti: boolean;
   isOverlay: boolean;
-  searcherConfig: any;
   listIconLink: IIconLink[];
-  isReservation: boolean;
 
-  constructor(private configService: ConfigService, public calendarService: CalendarService) {
-    this.searcherConfig = this.configService.environment['configuration'];
+  constructor(private configService: ConfigService, public tabStateService: TabStateService, public calendarService: CalendarService) { }
+
+  ngOnInit() {
+    this.tabStateService.setConfiguration(this.configService.getConfiguration());
+    let tabsLink = this.tabStateService.getTabConfiguration('FlightSearch', 'Tab');
     this.listIconLink = [];
-    let tabsLink = this.searcherConfig.FlightSearch.Tab;
     for (let key in tabsLink) {
       if (tabsLink.hasOwnProperty(key)) {
         tabsLink[key].Label = key;
         this.listIconLink.push(tabsLink[key]);
       }
     }
-  }
-
-  ngOnInit() {
-    this.isFlight = true;
-    this.isCheckIn = false;
-    this.isReservation = false;
     this.isOverlay = false;
-  }
-
-  setTagFlight() {
-    this.isFlight = true;
-    this.isCheckIn = false;
-    this.isReservation = false;
-  }
-
-  setTagCheckin() {
-    this.isFlight = false;
-    this.isCheckIn = true;
-    this.isReservation = false;
-  }
-
-  setTagBooking() {
-    this.isFlight = false;
-    this.isCheckIn = false;
-    this.isReservation = true;
   }
 
   toggleClassOverlay() {
@@ -71,6 +46,6 @@ export class IndexSearchComponent implements OnInit {
   }
 
   showCalendarOptionsBar(): boolean {
-    return !this.isCheckIn && !this.isReservation && !this.isMulti;
+    return this.tabStateService.isActive('FlightSearch') && !this.isMulti;
   }
 }
