@@ -1,3 +1,4 @@
+import { FlightService } from './../../services/flight.service';
 import { Component, OnInit, Input, Output, EventEmitter, ViewChild } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
@@ -33,7 +34,7 @@ export class CheckInComponent implements OnInit {
   public isFocusedCalendar: boolean;
   public checkInWithOriginDestination: boolean;
 
-  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private _linksHubService: LinksHubService) {
+  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private _linksHubService: LinksHubService, private _flightService: FlightService) {
     this.dataCheckIn = { date: null };
     this.validation = false;
     this.checkInWithEmail = true;
@@ -43,7 +44,7 @@ export class CheckInComponent implements OnInit {
 
   ngOnInit() {
     this.selectorService.loadStations();
-    this.dataCheckIn.codeBooking = this.checkInService.getCodeBooking(this.keyCookie);
+    this.dataCheckIn = this._flightService.initCheckInOnline();
   }
 
   showEmail() {

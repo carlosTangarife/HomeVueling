@@ -10,7 +10,7 @@ import { LinksHubService } from './../../../shared/services/links-hub.service';
 
 /*Models using interface */
 import { IStation } from '../../../shared/models/station.model';
-import { IReservation } from '../../models/reservation';
+import { IReservation } from '../../models/reservation.model';
 import { DatePickerComponent } from '../../../shared/components/date-picker/date-picker.component';
 
 @Component({

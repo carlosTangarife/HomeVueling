@@ -4,4 +4,5 @@ export interface IReservation {
   date: Date,
   originOrDestinationCode?: string,
   originOrDestinationName?: string,
+  checkInWithEmail?: boolean
 }
