@@ -33,7 +33,7 @@ export class ReservationComponent implements OnInit {
   public dataReservation: IReservation;
   public reservationWithOriginDestination: boolean;
 
-  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private _linksHubService: LinksHubService) {
+  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private linksHubService: LinksHubService) {
     this.validation = false;
     this.dataReservation = { date: null };
     this.reservationWithEmail = true;
@@ -94,7 +94,7 @@ export class ReservationComponent implements OnInit {
   onSubmit(checkInform: NgForm) {
     if (checkInform.valid) {
       this.validation = false;
-      this._linksHubService.linkReservation(this.reservationWithEmail, this.dataReservation);
+      this.linksHubService.linkReservation(this.reservationWithEmail, this.dataReservation);
     } else {
       this.validation = true;
     }

@@ -34,7 +34,7 @@ export class SelectorService {
     private subjectListStations = new BehaviorSubject<any>(this.filteredStations);
     public listStations$ = this.subjectListStations.asObservable();
 
-    constructor(private configService: ConfigService, private _stationService: StationService) {
+    constructor(private configService: ConfigService, private stationService: StationService) {
         this.stations = _.cloneDeep(this.configService.environment['stations']);
         this.markets = _.cloneDeep(this.configService.environment['markets']);
         this.marketsIata = [];
@@ -117,7 +117,7 @@ export class SelectorService {
 
     private getRecentStations(isOrigin: boolean): any {
         let keyCookie = isOrigin ? environment.keyLastSearchOriginCookie : environment.keyLastSearchDestinationCookie;
-        let cookie = this._stationService.getCookieStations(keyCookie);
+        let cookie = this.stationService.getCookieStations(keyCookie);
         return cookie.map(val => this.listStations.find(station => station.code === val.iataCode));
     }
 
@@ -166,7 +166,7 @@ export class SelectorService {
 
     deleteStations(isOrigin: boolean) {
         let keyCookie = isOrigin ? environment.keyLastSearchOriginCookie : environment.keyLastSearchDestinationCookie;
-        this._stationService.removeStations(keyCookie);
+        this.stationService.removeStations(keyCookie);
     }
 
     togglePopup() {
@@ -182,11 +182,11 @@ export class SelectorService {
     }
 
     showErase(): boolean {
-        return this._stationService.showErase();
+        return this.stationService.showErase();
     }
 
     showMapLink(): boolean {
-        return this._stationService.showMapLink();
+        return this.stationService.showMapLink();
     }
 
     showMulticity(): boolean {

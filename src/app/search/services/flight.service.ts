@@ -5,7 +5,6 @@ import { IFlight } from './../models/flight.model';
 import { ICheckIn } from '../models/check-in.model';
 import { IReservation } from '../models/reservation.model';
 
-
 /*Local Services */
 import { CookiesWrapper } from './../../shared/services/cookies-wrapper.service';
 
@@ -14,9 +13,9 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class FlightService {
-  private dataFlight: IFlight;
-  private dataCheckIn: ICheckIn;
-  private dataReservation: IReservation;
+  public dataFlight: IFlight;
+  public dataCheckIn: ICheckIn;
+  public dataReservation: IReservation;
 
   constructor(private cookiesWrapper: CookiesWrapper) {
     this.dataCheckIn = { date: null };
@@ -24,7 +23,7 @@ export class FlightService {
     this.dataFlight = {};
   }
 
-  initFlight(): IFlight {
+  initFlight() {
     let dataFlight = this.cookiesWrapper.getCookie(environment.keylastSearchFlight);
     if (dataFlight) {
       this.dataFlight = dataFlight;
@@ -71,24 +70,23 @@ export class FlightService {
       return: new Date(today.getDate() + 7)
       };
     }
-    return this.dataFlight
   }
 
-  initCheckInOnline( ): ICheckIn {
+  initCheckInOnline( ) {
     let dataCheckInOnline = this.cookiesWrapper.getCookie(environment.keyCheckInCookie);
     if (dataCheckInOnline) {
     } else {
-      this.dataCheckIn.checkInWithEmail = true;
+      this.dataCheckIn.checkInWithEmail = false;
+      this.dataCheckIn.checkInWithOriginDestination = true;
     }
-    return this.dataCheckIn;
   }
 
-  initReservation( ): IReservation {
+  initReservation( ) {
     let dataReservation = this.cookiesWrapper.getCookie(environment.keyReservation);
     if (dataReservation) {
     } else {
       this.dataReservation.checkInWithEmail = true;
+      this.dataReservation.checkInWithOriginDestination = false;
     }
-    return this.dataReservation;
   }
 }

@@ -11,6 +11,7 @@ import { IFlight } from '../../models/flight.model';
 
 /*third-party library */
 import { Observable } from 'rxjs/Observable';
+import * as _ from 'lodash';
 
 /*Environment */
 import { environment } from '../../../../environments/environment';
@@ -36,59 +37,12 @@ export class FlightComponent implements OnInit {
   public isFocusedPassengers: boolean;
   public isFocusedCalendar: boolean;
 
-  constructor(private _stationService: StationService, private cookiesWrapper: CookiesWrapper, private _flightService: FlightService) {
+  constructor(private stationService: StationService, private cookiesWrapper: CookiesWrapper, private flightService: FlightService) {
     this.dataFlight = {}
   }
 
   ngOnInit() {
-
-    this.dataFlight = this._flightService.initFlight();
-    // let today = new Date();
-    // today.setHours(0, 0, 0, 0);
-    // let dataFlight = this.cookiesWrapper.getCookie(environment.keylastSearchFlight);
-    // if (dataFlight) {
-    //   this.dataFlight = dataFlight;
-
-    //   this.dataFlight.multi.going = new Date(dataFlight.multi.going);
-    //   this.dataFlight.going = new Date(dataFlight.going);
-    //   this.dataFlight.return = new Date(dataFlight.return);
-
-    // }else {
-    //   this.dataFlight = {
-    //   origin: {
-    //     code: 'ALC',
-    //     name: 'Alicante'
-    //   },
-    //   destination: {
-    //     code: 'MAD',
-    //     name: 'Madrid'
-    //   },
-    //   multi: {
-    //     isActive: false,
-    //     origin: {
-    //       code: 'BCN',
-    //       name: 'Barcelona'
-    //     },
-    //     destination: {
-    //       code: 'LAX',
-    //       name: 'Los Ángeles'
-    //     },
-    //     going: new Date(today.getTime())
-    //   },
-    //   passengers: {
-    //     Adults : 1,
-    //     Infants : 0,
-    //     Children: 0,
-    //     ExtraSeat: 0,
-    //     TotalPassengers: 1
-    //   },
-    //   discount: {
-    //     value: ''
-    //   },
-    //   going: new Date(today.getTime()),
-    //   return: new Date(today.getTime())
-    // };
-    // }
+    this.dataFlight = _.cloneDeep(this.flightService.dataFlight);
   }
 
   clickMulticity(multicity: boolean) {
@@ -105,8 +59,8 @@ export class FlightComponent implements OnInit {
   }
 
   saveSearch() {
-    this._stationService.saveStation(this.dataFlight.origin.code, environment.keyLastSearchOriginCookie, true);
-    this._stationService.saveStation(this.dataFlight.destination.code, environment.keyLastSearchDestinationCookie, false);
+    this.stationService.saveStation(this.dataFlight.origin.code, environment.keyLastSearchOriginCookie, true);
+    this.stationService.saveStation(this.dataFlight.destination.code, environment.keyLastSearchDestinationCookie, false);
   }
 
   onSubmit(flightForm: NgForm) {

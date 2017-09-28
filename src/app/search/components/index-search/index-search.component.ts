@@ -3,6 +3,7 @@ import { ConfigService } from '../../../shared/services/config.service';
 import { IIconLink } from '../../../shared/models/commons.model';
 import { CalendarService } from '../../services/calendar.service';
 import { TabStateService } from '../../services/tab-state.service';
+import { FlightService } from '../../services/flight.service';
 
 @Component({
   selector: 'app-index-search',
@@ -14,9 +15,12 @@ export class IndexSearchComponent implements OnInit {
   isOverlay: boolean;
   listIconLink: IIconLink[];
 
-  constructor(private configService: ConfigService, public tabStateService: TabStateService, public calendarService: CalendarService) { }
+  constructor(private configService: ConfigService, private flightService: FlightService, public tabStateService: TabStateService, public calendarService: CalendarService) { }
 
   ngOnInit() {
+    this.flightService.initFlight();
+    this.flightService.initCheckInOnline();
+    this.flightService.initReservation();
     this.tabStateService.setConfiguration(this.configService.getConfiguration());
     let tabsLink = this.tabStateService.getTabConfiguration('FlightSearch', 'Tab');
     this.listIconLink = [];

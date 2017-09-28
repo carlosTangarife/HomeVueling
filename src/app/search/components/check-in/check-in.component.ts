@@ -32,7 +32,7 @@ export class CheckInComponent implements OnInit {
   public isFocusedStation: boolean;
   public isFocusedCalendar: boolean;
 
-  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private _linksHubService: LinksHubService, private _flightService: FlightService) {
+  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private linksHubService: LinksHubService, private flightService: FlightService) {
     this.dataCheckIn = { date: null };
     this.validation = false;
     this.keyCookie = environment.keyCheckInCookie;
@@ -40,7 +40,7 @@ export class CheckInComponent implements OnInit {
 
   ngOnInit() {
     this.selectorService.loadStations();
-    this.dataCheckIn = this._flightService.initCheckInOnline();
+    this.dataCheckIn = this.flightService.dataCheckIn;
   }
 
   showEmail() {
@@ -91,7 +91,7 @@ export class CheckInComponent implements OnInit {
   onSubmit(checkInform: NgForm) {
     if (checkInform.valid) {
       this.validation = false;
-      this._linksHubService.linkCheckInOnline(this.dataCheckIn.checkInWithEmail, this.dataCheckIn);
+      this.linksHubService.linkCheckInOnline(this.dataCheckIn.checkInWithEmail, this.dataCheckIn);
     } else {
       this.validation = true;
     }
