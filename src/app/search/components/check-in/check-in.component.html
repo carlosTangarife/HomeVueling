@@ -17,7 +17,7 @@
    </div>
 </div>
 
-<form class="form" (ngSubmit)="onSubmit(chekInform)" #chekInform="ngForm" novalidate>
+<form class="form" (ngSubmit)="onSubmit(checkInform)" #checkInform="ngForm" novalidate>
   <div class="form-group" [ngClass]="{'form-group--destinations': checkInWithOriginDestination, 'form-group--email': !checkInWithOriginDestination}">
     <div class="form-input" [ngClass]="{'reservation-code': checkInWithOriginDestination, 'error': validation && (codeBookingCheckin.errors?.required || codeBookingCheckin.errors?.pattern)}">
       <label>Código de reserva</label>

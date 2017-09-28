@@ -89,8 +89,8 @@ export class ReservationComponent implements OnInit {
     this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
-  onSubmit(chekInform: NgForm) {
-    if (chekInform.valid) {
+  onSubmit(checkInform: NgForm) {
+    if (checkInform.valid) {
       this.validation = false;
       this._linksHubService.linkReservation(this.reservationWithEmail, this.dataReservation);
     } else {

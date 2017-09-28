@@ -4,14 +4,14 @@
   (click)="toggleDatePickerGoing()"
   [inputId]="'inputGoing'"
   [currentDate]="dataFlight.going"
-  [label]="getGoingLabel()"
+  [label]="getGoingLabel"
   [format]="'dd/MM/yy'"
   [flightDisabledDays]="flightGoingDisabledDays$ | async"
   (selectedDate)="selectedGoingDate($event)">
 </div>
 
 <div class="col col-md-6" *ngIf="!isMulti">
-  <a 
+  <a
     (click)="addComeBack()"
     [ngClass]="{'activate': calendarService.isOneWay$ | async}">
     Añadir vuelta
