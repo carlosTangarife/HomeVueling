@@ -1,15 +1,16 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 
 /*Local Services */
 import { CalendarService } from '../../services/calendar.service';
-import { SelectorService } from '../../../shared/services/selector.service';
 import { CheckInService } from '../../services/check-in.service';
+import { SelectorService } from '../../../shared/services/selector.service';
+import { LinksHubService } from './../../../shared/services/links-hub.service';
 
 /*Models using interface */
 import { IStation } from '../../../shared/models/station.model';
-import { ICheckIn } from '../../models/check-in.model';
+import { IReservation } from '../../models/reservation';
 
 declare var jQuery: any;
 declare var $: any;
@@ -20,52 +21,52 @@ declare var $: any;
   providers: [CheckInService, SelectorService]
 })
 export class ReservationComponent implements OnInit {
-  @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
+  @Output()
+  selectedOrigin = new EventEmitter<string>();
 
-  public codeBooking: string;
-  public email: string;
   public keyCookie: string;
-  public isEmail: boolean;
-  public isOriginDestination: boolean;
-  public isShowStation: boolean;
-  public station: IStation;
   public validation: boolean;
-  public flightTomorrow: Date;
-  public isFocusedCalendar: boolean;
   public isFocusedStation: boolean;
+  public isFocusedCalendar: boolean;
+  public reservationWithEmail: boolean;
+  public dataReservation: IReservation;
+  public reservationWithOriginDestination: boolean;
 
-  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService) {
-    this.isEmail = true;
-    this.isOriginDestination = false;
-    this.isShowStation = false;
-    this.keyCookie = environment.keyCheckInCookie;
+  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private _linksHubService: LinksHubService) {
     this.validation = false;
-    this.flightTomorrow = null;
-   }
+    this.dataReservation = { date: null };
+    this.reservationWithEmail = true;
+    this.reservationWithOriginDestination = false;
+    this.keyCookie = environment.keyCheckInCookie;
+  }
 
   ngOnInit() {
     this.selectorService.loadStations();
-    this.codeBooking = this.checkInService.getCodeBooking(this.keyCookie);
+    this.dataReservation.codeBooking = this.checkInService.getCodeBooking(this.keyCookie);
   }
 
   showEmail() {
-    this.isEmail = true;
-    this.isOriginDestination = false;
+    this.reservationWithEmail = true;
+    this.reservationWithOriginDestination = false;
   }
 
   showOriginDestination() {
-    this.isOriginDestination = true;
-    this.isEmail = false;
+    this.reservationWithOriginDestination = true;
+    this.reservationWithEmail = false;
   }
 
   showStation() {
-    this.isShowStation = !this.isShowStation;
-    this.isFocusedStation = this.isShowStation;
+    this.dataReservation.originOrDestinationName = '';
+    this.selectorService.loadStations();
+    this.selectorService.togglePopup();
+    this.isFocusedStation = this.selectorService.viewPopup;
   }
 
   stationSelected(station: any) {
-    this.station = station.name;
-    this.isFocusedStation = this.isShowStation;
+    this.dataReservation.originOrDestinationName = station.name;
+    this.dataReservation.originOrDestinationCode = station.code;
+    this.selectorService.hidePopup();
+    this.isFocusedStation = this.selectorService.viewPopup;
   }
 
   showCalendar() {
@@ -75,18 +76,30 @@ export class ReservationComponent implements OnInit {
   }
 
   selectedDate(date: Date) {
-    this.flightTomorrow = date;
+    this.dataReservation.date = date;
     this.calendarService.toggleShowDatePicker();
     this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
   myFlightTomorrow() {
-    this.flightTomorrow = new Date();
-    this.flightTomorrow.setDate(this.flightTomorrow.getDate() + 1);
-    this.flightTomorrow.setHours(0, 0, 0, 0);
+    this.dataReservation.date = new Date();
+    this.dataReservation.date.setDate(this.dataReservation.date.getDate() + 1);
+    this.dataReservation.date.setHours(0, 0, 0, 0);
+    this.calendarService.hideDatePicker();
+    this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
-  onSubmit(forma: NgForm) {
-    this.validation = true;
+  onSubmit(chekInform: NgForm) {
+    if (chekInform.valid) {
+      this.validation = false;
+      this._linksHubService.linkReservation(this.reservationWithEmail, this.dataReservation);
+    } else {
+      this.validation = true;
+    }
+  }
+
+  filterStationsByKey(key: string) {
+    this.selectorService.filterByKey(key);
+    this.isFocusedStation = true;
   }
 }

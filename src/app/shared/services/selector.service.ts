@@ -14,6 +14,9 @@ import { IContactPhonesType, IContactPhones } from '../../search/models/contact-
 import { IStation, IMarket, IStationList } from '../models/station.model';
 import { IIcon } from '../models/commons.model';
 
+declare var jQuery: any;
+declare var $: any;
+
 @Injectable()
 export class SelectorService {
     public stations: IStationList;
@@ -34,16 +37,16 @@ export class SelectorService {
     public listStations$ = this.subjectListStations.asObservable();
 
     constructor(private configService: ConfigService, private _stationService: StationService) {
-        this.stations = this.configService.environment['stations'];
-        this.markets = this.configService.environment['markets'];
+        this.stations = $.extend(true, {}, this.configService.environment['stations']);
+        this.markets = $.extend(true, {}, this.configService.environment['markets']);
         this.marketsIata = [];
         this.iconGeo = this.configService.getIconGeo();
         this.iconRecent = this.configService.getIconRecent();
         this.contact = this.configService.environment['contactphones'];
     }
 
-    loadContactPhones(iata: string) {
-        let cont = this.contact.phonesServices.find(x => x.CountryCode === iata)
+    loadContactPhones(iata: string): IContactPhones {
+        let cont = this.contact.phonesServices.find(x => x.CountryCode === iata);
         if (cont) {
             let result: IContactPhones = {
                 CountryCode: cont.CountryCode,
@@ -53,11 +56,13 @@ export class SelectorService {
                     phoneInfoLast: cont.TextPhoneInfo.phoneInfoLast
                 }
             };
-             return result;
+            return result;
         }
+        return null;
     }
 
     loadStations() {
+        this.listStations = this.stations.StationList;
         this.filteredStations = this.stations.StationList;
         this.subjectListStations.next(this.filteredStations);
     }
@@ -138,11 +143,16 @@ export class SelectorService {
             }).filter(Boolean) : this.marketsIata = [];
     }
 
-    filterStationsByKey(isOrigin: boolean, key?: string) {
-        this.showPopup();
-        this.filteredStations = key ? this.listStations.filter(opt => this.existOption(opt, key.toLowerCase())) : this.listStations;
+    filterStationsByKey(key: string) {
+        this.filterByKey(key);
         this.filterStations(true);
         this.filterStations(false);
+    }
+
+    filterByKey(key: string) {
+        this.showPopup();
+        this.filteredStations = key ? this.listStations.filter(opt => this.existOption(opt, key.toLowerCase())) : this.listStations;
+        this.subjectListStations.next(this.filteredStations);
     }
 
     existOption(opt: any, key: string): boolean {

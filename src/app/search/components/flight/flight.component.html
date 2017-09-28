@@ -43,7 +43,7 @@
 </div>
 
 <div app-multicity #multicity
-    class="form-group form-group--flight-search hide"
+    class="form-group form-group--flight-search"
     [ngClass]="{'hide': !dataFlight.multi.isActive}"
     [dataFlight]="dataFlight"
     (removeMulticity)="removeMulticity($event)">

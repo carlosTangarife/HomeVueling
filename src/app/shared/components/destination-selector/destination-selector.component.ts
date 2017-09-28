@@ -96,8 +96,8 @@ export class DestinationSelectorComponent implements OnInit {
     this.dataFlight.destination.countryName = '';
   }
 
-  filterStationsByKey(key?: string) {
-    this.selectorService.filterStationsByKey(false, key ? key : null);
+  filterStationsByKey(key: string) {
+    this.selectorService.filterStationsByKey(key);
     this.isFocused.emit(this.selectorService.viewPopup);
   }
 

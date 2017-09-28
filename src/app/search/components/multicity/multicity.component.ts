@@ -71,18 +71,18 @@ export class MulticityComponent implements OnInit {
     this.removeMulticity.emit(false);
   }
 
-  setMinDate(event: Date) {
-    this.dateMulti.setMinDate(this.dataFlight.going);
+  setMinDate(date: Date) {
+    this.dateMulti.setOption('minDate', this.dataFlight.going);
     if (!this.dataFlight.multi.isActive) {
-      this.dataFlight.multi.going = new Date(event.getTime());
-    } else if (this.dataFlight.multi.going <= event) {
-      this.dataFlight.multi.going = new Date(event.getTime());
+      this.dataFlight.multi.going = new Date(date.getTime());
+    } else if (this.dataFlight.multi.going <= date) {
+      this.dataFlight.multi.going = new Date(date.getTime());
       if (this.dataFlight.origin.code && this.dataFlight.multi.origin.code
         && this.dataFlight.destination.code && this.dataFlight.multi.destination.code
         && this.dataFlight.origin.code === this.dataFlight.multi.origin.code
         && this.dataFlight.destination.code === this.dataFlight.multi.destination.code) {
-        this.dataFlight.multi.going.setDate(event.getDate() + 1);
-        this.dateMulti.setMinDate(this.dataFlight.multi.going);
+        this.dataFlight.multi.going.setDate(date.getDate() + 1);
+        this.dateMulti.setOption('minDate', this.dataFlight.multi.going);
       }
     }
     this.dateMulti.refresh();

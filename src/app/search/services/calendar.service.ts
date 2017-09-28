@@ -82,4 +82,9 @@ export class CalendarService {
       this.isShowDatePicker = !this.isShowDatePicker;
       this.subjectIsShowDatePicker.next(this.isShowDatePicker);
     }
+
+    hideDatePicker() {
+      this.isShowDatePicker = false;
+      this.subjectIsShowDatePicker.next(this.isShowDatePicker);
+    }
 }

@@ -81,22 +81,22 @@ export class CalendarComponent implements OnInit {
     this.subjectFlightReturnDisabledDays.next(this.flightReturnDisabledDays);
   }
 
-  selectedGoingDate(event: Date) {
-    this.dataFlight.going = event;
+  selectedGoingDate(date: Date) {
+    this.dataFlight.going = date;
     this.calendarService.toggleShowDatePicker();
     if (this.dateReturn) {
       if (this.dataFlight.return <= this.dataFlight.going) {
-        this.dataFlight.return = event;
+        this.dataFlight.return = date;
       }
-      this.dateReturn.setMinDate(event);
+      this.dateReturn.setOption('minDate', date);
       this.dateReturn.refresh();
     }
-    this.selectedDateGoing.emit(event);
+    this.selectedDateGoing.emit(date);
     this.isFocused.emit(this.calendarService.isShowDatePicker);
   }
 
-  selectedReturnDate(event: Date) {
-    this.dataFlight.return = event;
+  selectedReturnDate(date: Date) {
+    this.dataFlight.return = date;
     this.calendarService.toggleShowDatePicker();
     this.isFocused.emit(this.calendarService.isShowDatePicker);
   }

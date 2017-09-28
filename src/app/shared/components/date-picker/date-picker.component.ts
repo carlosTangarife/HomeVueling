@@ -18,10 +18,13 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
   label: string;
 
   @Input()
-  date: Date;
+  currentDate: Date;
 
   @Input()
-  dateGoing: Date;
+  minDate: Date;
+
+  @Input()
+  format: string;
 
   @Input()
   flightDisabledDays: Array<string>;
@@ -29,16 +32,13 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
   @Input()
   validation: boolean;
 
-  @Input()
-  type: string;
-
   @Output()
   selectedDate = new EventEmitter<Date>();
 
   constructor() {
     this.flightDisabledDays = [];
     this.validation = false;
-    this.type = 'FlightSearch';
+    this.format = 'dd/MM/yy';
   }
 
   ngOnInit() {
@@ -48,7 +48,7 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
   ngAfterViewInit() {
     let self = this;
     $('#' + this.inputId).datepicker({
-      dateFormat: 'dd/mm/y',
+      dateFormat: self.getFormatDateJs(),
       firstDay: 1,
       minDate: 0,
       numberOfMonths: 3,
@@ -57,17 +57,17 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
       beforeShowDay: function (date) {
         let dateText = $.datepicker.formatDate('yy-m-d', date);
         if (self.flightDisabledDays.indexOf(dateText) === -1) {
-          if (self.dateGoing) {
-            let maxDate = self.date;
+          if (self.minDate) {
+            let maxDate = self.currentDate;
             let dateSelected = $(this).datepicker('getDate');
-            self.date = dateSelected;
-            if (date.getTime() === self.dateGoing.valueOf()) {
+            self.currentDate = dateSelected;
+            if (date.getTime() === self.minDate.valueOf()) {
               return [true, 'ui-datepicker-travel-time ui-datepicker-current-day travelTime'];
             }
             if (dateSelected && date.getTime() === dateSelected.valueOf()) {
               return [true, 'ui-datepicker-travel-time ui-datepicker-end-day travelTime endDay'];
             }
-            if (date > self.dateGoing && date <= self.date ) {
+            if (date > self.minDate && date <= self.currentDate ) {
               return [true, 'ui-datepicker-travel-time travelTime'];
             }
           }
@@ -91,8 +91,8 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
     $('#' + this.inputId).datepicker('refresh');
   }
 
-  setMinDate(date: Date) {
-    $('#' + this.inputId).datepicker('option', 'minDate', date);
+  setOption(option: string, value: any) {
+    $('#' + this.inputId).datepicker('option', option, value);
   }
 
   calendarBeforeShow(input, inst) {
@@ -158,11 +158,12 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
     }
   }
 
-  getFormatDate(): string {
-    if (this.type === 'FlightSearch') {
-      return 'dd/MM/yy';
-    } else {
-      return 'dd/MM/yyyy'
+  getFormatDateJs(): string {
+    let formatjs = 'dd/mm/y';
+    if (this.format) {
+      let split = this.format.split('/');
+      formatjs = split[2].length > 2 ? 'dd/mm/yy' : 'dd/mm/y';
     }
+    return formatjs;
   }
 }
