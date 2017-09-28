@@ -3,8 +3,9 @@
   class="col col-md-6"
   (click)="toggleDatePickerGoing()"
   [inputId]="'inputGoing'"
-  [date]="dataFlight.going"
+  [currentDate]="dataFlight.going"
   [label]="getGoingLabel()"
+  [format]="'dd/MM/yy'"
   [flightDisabledDays]="flightGoingDisabledDays$ | async"
   (selectedDate)="selectedGoingDate($event)">
 </div>
@@ -22,10 +23,11 @@
     (click)="toggleDatePickerComeBack()"
     [ngClass]="{'activate': calendarService.isRoundTrip$ | async}"
     [inputId]="'inputComeBack'"
-    [date]="dataFlight.return"
+    [currentDate]="dataFlight.return"
+    [minDate]="dataFlight.going"
     [label]="'Vuelta'"
+    [format]="'dd/MM/yy'"
     [flightDisabledDays]="flightReturnDisabledDays$ | async"
-    [dateGoing]="dataFlight.going"
     (selectedDate)="selectedReturnDate($event)">
   </div>
 </div>

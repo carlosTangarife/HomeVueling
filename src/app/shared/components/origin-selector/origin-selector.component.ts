@@ -63,7 +63,7 @@ export class OriginSelectorComponent implements OnInit {
   }
 
   filterStationsByKey(key: string) {
-    this.selectorService.filterStationsByKey(true, key);
+    this.selectorService.filterStationsByKey(key);
     this.isFocused.emit(this.selectorService.viewPopup);
   }
 }

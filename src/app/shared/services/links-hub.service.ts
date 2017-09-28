@@ -16,9 +16,9 @@ export class LinksHubService {
         queryString.set('email', dataCheckIn.email);
       } else {
         queryString.set('origin', dataCheckIn.originOrDestinationCode);
-        queryString.set('day', dataCheckIn.myFlightTomorrow.getDate().toString());
-        queryString.set('month', (dataCheckIn.myFlightTomorrow.getMonth() + 1).toString());
-        queryString.set('year', dataCheckIn.myFlightTomorrow.getFullYear().toString());
+        queryString.set('day', dataCheckIn.date.getDate().toString());
+        queryString.set('month', (dataCheckIn.date.getMonth() + 1).toString());
+        queryString.set('year', dataCheckIn.date.getFullYear().toString());
       }
       queryString.set('pnr', dataCheckIn.codeBooking);
       queryString.set('event', 'change');
@@ -38,9 +38,9 @@ export class LinksHubService {
       queryString.set('email', dataCheckIn.email);
     } else {
       queryString.set('origin', dataCheckIn.originOrDestinationCode);
-      queryString.set('day', dataCheckIn.myFlightTomorrow.getDate().toString());
-      queryString.set('month', (dataCheckIn.myFlightTomorrow.getMonth() + 1).toString());
-      queryString.set('year', dataCheckIn.myFlightTomorrow.getFullYear().toString());
+      queryString.set('day', dataCheckIn.date.getDate().toString());
+      queryString.set('month', (dataCheckIn.date.getMonth() + 1).toString());
+      queryString.set('year', dataCheckIn.date.getFullYear().toString());
     }
     queryString.set('pnr', dataCheckIn.codeBooking);
     queryString.set('event', 'checkin');

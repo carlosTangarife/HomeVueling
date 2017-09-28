@@ -1,7 +1,7 @@
 export interface IReservation {
   codeBooking?: string,
   email?: string,
-  myFlightTomorrow?: Date,
+  date: Date,
   originOrDestinationCode?: string,
   originOrDestinationName?: string,
 }

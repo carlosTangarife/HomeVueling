@@ -17,7 +17,7 @@
    </div>
 </div>
 
-<form class="form" (ngSubmit)="onSubmit(chekInform)" #chekInform="ngForm" novalidate="">
+<form class="form" (ngSubmit)="onSubmit(chekInform)" #chekInform="ngForm" novalidate>
   <div class="form-group" [ngClass]="{'form-group--destinations': checkInWithOriginDestination, 'form-group--email': !checkInWithOriginDestination}">
     <div class="form-input" [ngClass]="{'reservation-code': checkInWithOriginDestination, 'error': validation && (codeBookingCheckin.errors?.required || codeBookingCheckin.errors?.pattern)}">
       <label>Código de reserva</label>
@@ -66,13 +66,13 @@
     <div class="form-input" *ngIf="checkInWithOriginDestination" [ngClass]="{'focused': isFocusedStation, 'error': validation && stationCheckin.errors?.required}">
       <label>Aeropuerto origen/destino</label>
       <div class="input-group">
-        <input
+        <input id="airportCheckIn"
           type="text"
-          id="airportCheckIn"
           name="stationCheckin"
-          (click)="showStation()"
           class="form-control"
           placeholder="Ciudad"
+          (click)="showStation()"
+          (keyup)="filterStationsByKey(stationCheckin.value)"
           [(ngModel)]="dataCheckIn.originOrDestinationName"
           #stationCheckin="ngModel"
           required>
@@ -80,7 +80,7 @@
       <div class="popover popover--error" *ngIf="validation && stationCheckin.errors?.required">
         <div class="popover-content">Debes completar este campo.</div>
       </div>
-      <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show': isShowStation}" (click)="showStation()">
+      <div id="origin-sugestion-popup" class="searchbar-popup cities-sugestion-popup" [ngClass]="{'show': selectorService.viewPopup}">
         <div app-places
           [label]="'allAirports'"
           [data]="selectorService.listStations$"
@@ -94,9 +94,9 @@
         class="col col-md-6"
         [label]="'Fecha del primer vuelo'"
         [inputId]="'inputDatePickerCheckIn'"
-        [date]="dataCheckIn.myFlightTomorrow"
+        [currentDate]="dataCheckIn.date"
         [validation]="validation"
-        [type]="'Checkin'"
+        [format]="'dd/MM/yyyy'"
         (click)="showCalendar()"
         (selectedDate)="selectedDate($event)">
       </div>

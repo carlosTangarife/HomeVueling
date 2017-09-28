@@ -31,7 +31,7 @@ export class FlightDatesService {
             queryString.set('arrival', destination);
             queryString.set('year', fullYear);
             queryString.set('month', month);
-            queryString.set('monthsRange', '5');
+            queryString.set('monthsRange', '10');
             queryString.set('callback', 'JSONP_CALLBACK');
             console.log(queryString.toString());
 

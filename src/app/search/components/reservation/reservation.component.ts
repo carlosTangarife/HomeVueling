@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter, ViewChild, ElementRef } from '@angular/core';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { FormGroup, FormControl, Validators, NgForm } from '@angular/forms';
 import { environment } from '../../../../environments/environment';
 
@@ -21,24 +21,24 @@ declare var $: any;
   providers: [CheckInService, SelectorService]
 })
 export class ReservationComponent implements OnInit {
-  @Output() selectedOrigin: EventEmitter<string> = new EventEmitter();
+  @Output()
+  selectedOrigin = new EventEmitter<string>();
+
   public keyCookie: string;
   public validation: boolean;
-  public isShowStation: boolean;
   public isFocusedStation: boolean;
   public isFocusedCalendar: boolean;
-  public isReservationWithEmail: boolean;
+  public reservationWithEmail: boolean;
   public dataReservation: IReservation;
-  public isReservationOriginDestination: boolean;
+  public reservationWithOriginDestination: boolean;
 
   constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private _linksHubService: LinksHubService) {
     this.validation = false;
-    this.dataReservation = {};
-    this.isShowStation = false;
-    this.isReservationWithEmail = true;
-    this.isReservationOriginDestination = false;
+    this.dataReservation = { date: null };
+    this.reservationWithEmail = true;
+    this.reservationWithOriginDestination = false;
     this.keyCookie = environment.keyCheckInCookie;
-   }
+  }
 
   ngOnInit() {
     this.selectorService.loadStations();
@@ -46,24 +46,27 @@ export class ReservationComponent implements OnInit {
   }
 
   showEmail() {
-    this.isReservationWithEmail = true;
-    this.isReservationOriginDestination = false;
+    this.reservationWithEmail = true;
+    this.reservationWithOriginDestination = false;
   }
 
   showOriginDestination() {
-    this.isReservationOriginDestination = true;
-    this.isReservationWithEmail = false;
+    this.reservationWithOriginDestination = true;
+    this.reservationWithEmail = false;
   }
 
   showStation() {
-    this.isShowStation = !this.isShowStation;
-    this.isFocusedStation = this.isShowStation;
+    this.dataReservation.originOrDestinationName = '';
+    this.selectorService.loadStations();
+    this.selectorService.togglePopup();
+    this.isFocusedStation = this.selectorService.viewPopup;
   }
 
   stationSelected(station: any) {
     this.dataReservation.originOrDestinationName = station.name;
     this.dataReservation.originOrDestinationCode = station.code;
-    this.isFocusedStation = this.isShowStation;
+    this.selectorService.hidePopup();
+    this.isFocusedStation = this.selectorService.viewPopup;
   }
 
   showCalendar() {
@@ -73,24 +76,30 @@ export class ReservationComponent implements OnInit {
   }
 
   selectedDate(date: Date) {
-    this.dataReservation.myFlightTomorrow = date;
+    this.dataReservation.date = date;
     this.calendarService.toggleShowDatePicker();
     this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
   myFlightTomorrow() {
-    this.dataReservation.myFlightTomorrow = new Date();
-    this.dataReservation.myFlightTomorrow.setDate(this.dataReservation.myFlightTomorrow.getDate() + 1);
-    this.dataReservation.myFlightTomorrow.setHours(0, 0, 0, 0);
+    this.dataReservation.date = new Date();
+    this.dataReservation.date.setDate(this.dataReservation.date.getDate() + 1);
+    this.dataReservation.date.setHours(0, 0, 0, 0);
+    this.calendarService.hideDatePicker();
+    this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
   onSubmit(chekInform: NgForm) {
     if (chekInform.valid) {
       this.validation = false;
-      this._linksHubService.linkReservation(this.isReservationWithEmail, this.dataReservation);
-    }else {
+      this._linksHubService.linkReservation(this.reservationWithEmail, this.dataReservation);
+    } else {
       this.validation = true;
     }
-    console.log(this.dataReservation);
+  }
+
+  filterStationsByKey(key: string) {
+    this.selectorService.filterByKey(key);
+    this.isFocusedStation = true;
   }
 }

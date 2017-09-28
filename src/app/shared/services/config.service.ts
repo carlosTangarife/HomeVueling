@@ -50,6 +50,10 @@ export class ConfigService {
     return this.environment['configuration'].FlightSearch.Pax;
   }
 
+  getConfigCalendar(key: string): any {
+    return this.environment['configuration'][key].Calendar;
+  }
+
   getConfigDiscount(): any {
     return this.environment['configuration'].FlightSearch.Discount;
   }

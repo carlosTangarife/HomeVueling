@@ -25,8 +25,9 @@
     class="col col-md-6"
     (click)="toggleDatePickerMulti()"
     [inputId]="'inputMulti'"
-    [date]="dataFlight.multi.going"
+    [currentDate]="dataFlight.multi.going"
     [label]="'Ida2'"
+    [format]="'dd/MM/yy'"
     [flightDisabledDays]="flightDisabledDays$ | async"
     (selectedDate)="selectedMultiDate($event)">
   </div>

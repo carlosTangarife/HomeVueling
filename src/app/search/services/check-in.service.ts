@@ -17,7 +17,8 @@ export class CheckInService {
     saveCheckIn(codeChekIn: string, email: string) {
         let checkin: ICheckIn = {
           codeBooking: codeChekIn,
-          email: email
+          email: email,
+          date: null
         };
     }
 }
