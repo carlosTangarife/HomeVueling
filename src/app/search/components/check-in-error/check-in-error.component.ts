@@ -9,7 +9,7 @@ import { SelectorService } from '../../../shared/services/selector.service';
 })
 export class CheckInErrorComponent implements OnInit {
   public submit: boolean;
-  public countryInfo: Array<Object>;
+  public countryInfo: Array<{countryCode: string, name: string}>;
   public countryCode: string;
   public result: IContactPhones;
 

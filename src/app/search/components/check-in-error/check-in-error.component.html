@@ -8,9 +8,9 @@
       </div>
       <div class="col-md-3">
         <div class="selectwrap">
-          <select [(ngModel)]="countryCode" #value="ngModel" class="input select" (ngModelChange)="onChange()">
+          <select [(ngModel)]="countryCode" class="input select" (ngModelChange)="onChange()">
             <option *ngFor="let country of countryInfo" [ngValue]="country.countryCode" >
-              {{country.name}} 
+              {{country.name}}
             </option>
           </select>
         </div>
@@ -19,7 +19,7 @@
         <p>{{result?.TextPhoneInfo.phoneNumber}}</p>
       </div>
       <div class="col-md-4">
-        <p>{{result?.TextPhoneInfo.phoneInfoFirst}} {{result?.TextPhoneInfo.phoneInfoLast}} </p>          
+        <p>{{result?.TextPhoneInfo.phoneInfoFirst}} {{result?.TextPhoneInfo.phoneInfoLast}} </p>
       </div>
     </div>
   </div>
