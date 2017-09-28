@@ -131,7 +131,7 @@ export class CalendarComponent implements OnInit {
     this.calendarService.roundTrip();
   }
 
-  getGoingLabel(): string {
+  get getGoingLabel(): string {
     return this.dataFlight && this.dataFlight.multi.isActive ? 'Ida1' : 'Ida';
   }
 }
