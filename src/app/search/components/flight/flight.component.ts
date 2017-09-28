@@ -1,8 +1,20 @@
 import { Component, OnInit, ChangeDetectionStrategy, Output, EventEmitter, ViewChild } from '@angular/core';
-import { Observable } from 'rxjs/Observable';
-import { IFlight } from '../../models/flight.model';
+import { NgForm } from '@angular/forms';
+
+/*Local Services */
 import { StationService } from '../../../shared/services/station.service';
+import { CookiesWrapper } from './../../../shared/services/cookies-wrapper.service';
+
+/*Models using interface */
+import { IFlight } from '../../models/flight.model';
+
+/*third-party library */
+import { Observable } from 'rxjs/Observable';
+
+/*Environment */
 import { environment } from '../../../../environments/environment';
+
+/*Component needed to use ViewChild*/
 import { DestinationSelectorComponent } from '../../../shared/components/destination-selector/destination-selector.component';
 
 @Component({
@@ -23,12 +35,21 @@ export class FlightComponent implements OnInit {
   public isFocusedPassengers: boolean;
   public isFocusedCalendar: boolean;
 
-  constructor(private _stationService: StationService) { }
+  constructor(private _stationService: StationService, private cookiesWrapper: CookiesWrapper) { }
 
   ngOnInit() {
     let today = new Date();
     today.setHours(0, 0, 0, 0);
-    this.dataFlight = {
+    let dataFlight = this.cookiesWrapper.getCookie(environment.keylastSearchFlight);
+    if (dataFlight) {
+      this.dataFlight = dataFlight;
+
+      this.dataFlight.multi.going = new Date(dataFlight.multi.going);
+      this.dataFlight.going = new Date(dataFlight.going);
+      this.dataFlight.return = new Date(dataFlight.return);
+
+    }else {
+      this.dataFlight = {
       origin: {
         code: 'ALC',
         name: 'Alicante'
@@ -62,10 +83,7 @@ export class FlightComponent implements OnInit {
       going: new Date(today.getTime()),
       return: new Date(today.getTime())
     };
-  }
-
-  onSubmit() {
-    this.saveSearch();
+    }
   }
 
   clickMulticity(multicity: boolean) {
@@ -84,5 +102,12 @@ export class FlightComponent implements OnInit {
   saveSearch() {
     this._stationService.saveStation(this.dataFlight.origin.code, environment.keyLastSearchOriginCookie, true);
     this._stationService.saveStation(this.dataFlight.destination.code, environment.keyLastSearchDestinationCookie, false);
+  }
+
+  onSubmit(flightForm: NgForm) {
+    console.log(flightForm, this.dataFlight);
+    this.saveSearch();
+    this.cookiesWrapper.setCookie(environment.keylastSearchFlight, this.dataFlight);
+    console.log(this.cookiesWrapper.getCookie(environment.keylastSearchFlight));
   }
 }

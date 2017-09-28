@@ -33,7 +33,7 @@
     </ul>
     <div class="tab-content searchbar-main_tab-content">
       <div id="tab-search" class="tab-pane fade searchbar-main_tab-content_pane search" *ngIf="searcherConfig.FlightSearch.IsEnabled" [ngClass]="{'in active': isFlight}">
-        <form app-flight autocomplete="off" class="pane-wrapper" (isMulti)="setMulti($event)" novalidate></form>
+        <div app-flight (isMulti)="setMulti($event)"></div>
       </div>
 
       <div id="tab-checkin" class="tab-pane searchbar-main_tab-content_pane check-in" *ngIf="searcherConfig.Checkin.IsEnabled" [ngClass]="{'in active': isCheckIn}">

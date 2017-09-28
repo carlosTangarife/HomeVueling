@@ -1,55 +1,56 @@
-<div class="form-group form-group--flight-search">
-    <div app-origin-selector
-        id="form-group--origin"
-        #origin
-        class="form-input origin"
-        [ngClass]="{'focused':isFocusedOrigin}"
-        [dataFlight]="dataFlight.origin"
-        (isFocused)="isFocusedOrigin=$event"
-        (selectedOrigin)="destination.loadDestinations()">
-    </div>
+<form autocomplete="off" novalidate class="pane-wrapper" (ngSubmit)="onSubmit(flightForm)" #flightForm="ngForm">
+  <div class="form-group form-group--flight-search">
+      <div app-origin-selector
+          id="form-group--origin"
+          #origin
+          class="form-input origin"
+          [ngClass]="{'focused':isFocusedOrigin}"
+          [dataFlight]="dataFlight.origin"
+          (isFocused)="isFocusedOrigin=$event"
+          (selectedOrigin)="destination.loadDestinations()">
+      </div>
 
-    <div app-destination-selector
-        id="form-group--destination"
-        #destination
-        class="form-input destination"
-        [ngClass]="{'focused':isFocusedDestination}"
-        [dataFlight]="dataFlight"
-        (isFocused)="isFocusedDestination=$event"
-        (clickDestination)="origin.showPopupOrigin($event)"
-        (clickMulticity)="clickMulticity($event)"
-        (outStation)="passenger.setResidentAndLargeFamily($event); calendar.getFlightDisabledDays()">
-    </div>
+      <div app-destination-selector
+          id="form-group--destination"
+          #destination
+          class="form-input destination"
+          [ngClass]="{'focused':isFocusedDestination}"
+          [dataFlight]="dataFlight"
+          (isFocused)="isFocusedDestination=$event"
+          (clickDestination)="origin.showPopupOrigin($event)"
+          (clickMulticity)="clickMulticity($event)"
+          (outStation)="passenger.setResidentAndLargeFamily($event); calendar.getFlightDisabledDays()">
+      </div>
 
-    <div app-calendar #calendar
-        id="form-group--dates"
-        class="form-input dates"
-        [ngClass]="{'focused':isFocusedCalendar}"
-        [dataFlight]="dataFlight"
-        [isMulti]="dataFlight.multi.isActive"
-        (selectedDateGoing)="multicity.setMinDate($event)"
-        (isFocused)="isFocusedCalendar=$event">
-    </div>
+      <div app-calendar #calendar
+          id="form-group--dates"
+          class="form-input dates"
+          [ngClass]="{'focused':isFocusedCalendar}"
+          [dataFlight]="dataFlight"
+          [isMulti]="dataFlight.multi.isActive"
+          (selectedDateGoing)="multicity.setMinDate($event)"
+          (isFocused)="isFocusedCalendar=$event">
+      </div>
 
-    <div app-passenger
-        id="form-group--passengers"
-        #passenger
-        class="form-input passengers"
-        [ngClass]="{'focused':isFocusedPassengers}"
-        [passengers]="dataFlight.passengers"
-        [discount]="dataFlight.discount"
-        (isFocused)="isFocusedPassengers=$event">
-    </div>
-</div>
+      <div app-passenger
+          id="form-group--passengers"
+          #passenger
+          class="form-input passengers"
+          [ngClass]="{'focused':isFocusedPassengers}"
+          [passengers]="dataFlight.passengers"
+          [discount]="dataFlight.discount"
+          (isFocused)="isFocusedPassengers=$event">
+      </div>
+  </div>
 
-<div app-multicity #multicity
-    class="form-group form-group--flight-search"
-    [ngClass]="{'hide': !dataFlight.multi.isActive}"
-    [dataFlight]="dataFlight"
-    (removeMulticity)="removeMulticity($event)">
-</div>
+  <div app-multicity #multicity
+      class="form-group form-group--flight-search"
+      [ngClass]="{'hide': !dataFlight.multi.isActive}"
+      [dataFlight]="dataFlight"
+      (removeMulticity)="removeMulticity($event)">
+  </div>
 
-<div class="form-action">
-    <button class="mv_button color-darkGrey size-md icon icon-right" (click)="onSubmit()">{{'search' | dictionary}}</button>
-</div>
-
+  <div class="form-action">
+      <button class="mv_button color-darkGrey size-md icon icon-right">{{'search' | dictionary}}</button>
+  </div>
+</form>
