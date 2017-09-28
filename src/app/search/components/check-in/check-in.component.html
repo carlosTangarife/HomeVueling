@@ -18,8 +18,8 @@
 </div>
 
 <form class="form" (ngSubmit)="onSubmit(checkInform)" #checkInform="ngForm" novalidate>
-  <div class="form-group" [ngClass]="{'form-group--destinations': checkInWithOriginDestination, 'form-group--email': !checkInWithOriginDestination}">
-    <div class="form-input" [ngClass]="{'reservation-code': checkInWithOriginDestination, 'error': validation && (codeBookingCheckin.errors?.required || codeBookingCheckin.errors?.pattern)}">
+  <div class="form-group" [ngClass]="{'form-group--destinations': dataCheckIn.checkInWithOriginDestination, 'form-group--email': !dataCheckIn.checkInWithOriginDestination}">
+    <div class="form-input" [ngClass]="{'reservation-code': dataCheckIn.checkInWithOriginDestination, 'error': validation && (codeBookingCheckin.errors?.required || codeBookingCheckin.errors?.pattern)}">
       <label>Código de reserva</label>
       <a href="#">¿Qué es?</a>
       <div class="input-group">
@@ -63,7 +63,7 @@
         <div class="popover-content">Los datos introducidos no son correctos.</div>
       </div>
     </div>
-    <div class="form-input" *ngIf="checkInWithOriginDestination" [ngClass]="{'focused': isFocusedStation, 'error': validation && stationCheckin.errors?.required}">
+    <div class="form-input" *ngIf="dataCheckIn.checkInWithOriginDestination" [ngClass]="{'focused': isFocusedStation, 'error': validation && stationCheckin.errors?.required}">
       <label>Aeropuerto origen/destino</label>
       <div class="input-group">
         <input id="airportCheckIn"
@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div class="form-input dates" *ngIf="checkInWithOriginDestination" [ngClass]="{'focused': isFocusedCalendar, 'error': validation && datePickerCheckin.datePicker.errors?.required}">
+    <div class="form-input dates" *ngIf="dataCheckIn.checkInWithOriginDestination" [ngClass]="{'focused': isFocusedCalendar, 'error': validation && datePickerCheckin.datePicker.errors?.required}">
       <div app-date-picker
         #datePickerCheckin
         class="col col-md-6"
