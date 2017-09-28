@@ -32,13 +32,8 @@
 
     </ul>
     <div class="tab-content searchbar-main_tab-content">
-<<<<<<< Updated upstream
       <div id="tab-search" class="tab-pane fade searchbar-main_tab-content_pane search" *ngIf="searcherConfig.FlightSearch.IsEnabled" [ngClass]="{'in active': isFlight}">
         <div app-flight (isMulti)="setMulti($event)"></div>
-=======
-      <div id="tab-search" class="tab-pane fade searchbar-main_tab-content_pane search" *ngIf="tabStateService.isEnabled('FlightSearch')" [ngClass]="{'in active': tabStateService.isActive('FlightSearch')}">
-        <form app-flight autocomplete="off" class="pane-wrapper" (isMulti)="setMulti($event)" novalidate></form>
->>>>>>> Stashed changes
       </div>
 
       <div id="tab-checkin" class="tab-pane searchbar-main_tab-content_pane check-in" *ngIf="tabStateService.isEnabled('Checkin')" [ngClass]="{'in active': tabStateService.isActive('Checkin')}">
