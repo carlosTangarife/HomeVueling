@@ -1,3 +1,4 @@
+import { BehaviorSubject } from 'rxjs/BehaviorSubject';
 import { Injectable } from '@angular/core';
 import { Http } from '@angular/http';
 
@@ -5,6 +6,8 @@ import { Http } from '@angular/http';
 import { IFlight } from './../models/flight.model';
 import { ICheckIn } from '../models/check-in.model';
 import { IReservation } from '../models/reservation.model';
+import { stateTab } from '../../search/enums/state-tab.enum';
+
 
 /*Local Services */
 import { LoginService } from './../../shared/services/login.service';
@@ -21,6 +24,9 @@ export class FlightService {
   public dataReservation: IReservation;
   public testReservation: any;
   public isLoged: boolean;
+  public stateTab: string;
+  public subjectStateTab = new BehaviorSubject<string>(this.stateTab);
+  public stateTab$ = this.subjectStateTab.asObservable();
 
   constructor(
     private cookiesWrapper: CookiesWrapper,
@@ -30,18 +36,29 @@ export class FlightService {
     this.dataCheckIn = { date: null };
     this.dataReservation = { date: null };
     this.dataFlight = {};
-
-    /* user status, can be true/false */
-    this.isLoged = this.loginService.isLoged('testBad@gmail.com');
+    this.stateTab = stateTab[stateTab.FlightSearch];
+    this.subjectStateTab.next(this.stateTab);
   }
 
   initFlight() {
+    this.initFlightData();
+    /* user status, can be true/false */
+    this.loginService.isLoged('test@gmail.com').subscribe((response) => {
+      this.isLoged = response;
+      this.initCheckInOnline();
+      this.initReservation();
+    },
+    (error) => {
+      console.log(error);
+    });
+  }
 
+  initFlightData() {
     /* get dataFligth from cookie */
     let dataFlight = this.cookiesWrapper.getCookie(environment.keylastSearchFlight);
 
     /* Cookies, unknown user */
-    if (dataFlight && !this.isLoged) {
+    if (dataFlight) {
       this.dataFlight = dataFlight;
 
       /* converts the text of the date returned the cookie into Date format */
@@ -92,32 +109,45 @@ export class FlightService {
   }
 
   initCheckInOnline( ) {
-    let dataCheckInOnline = this.cookiesWrapper.getCookie(environment.keyCheckInCookie);
-    if (dataCheckInOnline && !this.isLoged) {
-      /**
-       * TODO
-       */
+    if (!this.isLoged) {
+      let dataCheckInOnline = this.cookiesWrapper.getCookie(environment.keyCheckInCookie);
+
+      if (dataCheckInOnline) {
+        this.subjectStateTab.next(this.stateTab);
+      }
+
     } else {
       this.dataCheckIn.checkInWithEmail = true;
       this.dataCheckIn.checkInWithOriginDestination = false;
+
+      const url = 'https://vueling-json.herokuapp.com/index.php/getReservation/test1@gmail.com';
+      this.http.get(url).map((response) => response.json()).subscribe((response) => {
+        if (response && !response.checkIn) {
+          this.testReservation = response;
+          this.stateTab = stateTab[stateTab.Checkin];
+          this.subjectStateTab.next(this.stateTab);
+        }
+      });
+
     }
   }
 
   initReservation( ) {
-    let dataReservation = this.cookiesWrapper.getCookie(environment.keyReservation);
-    const url = 'https://vueling-json.herokuapp.com/index.php/getReservation/test1@gmail.com';
-    this.http.get(url).map((response) => response.json()).subscribe((response) => {
-      this.testReservation = response;
-      console.log(this.testReservation);
-      return response;
-    });
-    if (dataReservation && !this.isLoged) {
+    if (!this.isLoged) {
+      let dataReservation = this.cookiesWrapper.getCookie(environment.keyReservation);
       /**
        * TODO
        */
     } else {
       this.dataReservation.checkInWithEmail = true;
       this.dataReservation.checkInWithOriginDestination = false;
+
+      const url = 'https://vueling-json.herokuapp.com/index.php/getReservation/test1@gmail.com';
+      this.http.get(url).map((response) => response.json()).subscribe((response) => {
+        this.testReservation = response;
+        return response;
+      });
+
     }
   }
 }
