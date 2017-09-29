@@ -9,6 +9,9 @@ import { IndexHeaderComponent} from './header/components/index-header/index-head
 import { FooterModule } from './footer/footer.module';
 import { IndexFooterComponent } from './footer/components/index-footer/index-footer.component';
 
+import { MaterialModule } from './material.module';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+
 @NgModule({
   imports: [
     BrowserModule,
@@ -16,7 +19,9 @@ import { IndexFooterComponent } from './footer/components/index-footer/index-foo
     HeaderModule,
     FooterModule,
     PersistenceModule,
-    CookieModule.forRoot()
+    CookieModule.forRoot(),
+    MaterialModule,
+    BrowserAnimationsModule
   ],
   providers: [],
   declarations: []

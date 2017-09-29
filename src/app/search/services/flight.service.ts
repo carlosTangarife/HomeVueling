@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { Http } from '@angular/http';
 
 /*Models using interface */
 import { IFlight } from './../models/flight.model';
@@ -18,9 +19,13 @@ export class FlightService {
   public dataFlight: IFlight;
   public dataCheckIn: ICheckIn;
   public dataReservation: IReservation;
+  public testReservation: any;
   public isLoged: boolean;
 
-  constructor(private cookiesWrapper: CookiesWrapper, private loginService: LoginService
+  constructor(
+    private cookiesWrapper: CookiesWrapper,
+    private loginService: LoginService,
+    private http: Http
   ) {
     this.dataCheckIn = { date: null };
     this.dataReservation = { date: null };
@@ -93,13 +98,19 @@ export class FlightService {
        * TODO
        */
     } else {
-      this.dataCheckIn.checkInWithEmail = false;
-      this.dataCheckIn.checkInWithOriginDestination = true;
+      this.dataCheckIn.checkInWithEmail = true;
+      this.dataCheckIn.checkInWithOriginDestination = false;
     }
   }
 
   initReservation( ) {
     let dataReservation = this.cookiesWrapper.getCookie(environment.keyReservation);
+    const url = 'https://vueling-json.herokuapp.com/index.php/getReservation/test1@gmail.com';
+    this.http.get(url).map((response) => response.json()).subscribe((response) => {
+      this.testReservation = response;
+      console.log(this.testReservation);
+      return response;
+    });
     if (dataReservation && !this.isLoged) {
       /**
        * TODO

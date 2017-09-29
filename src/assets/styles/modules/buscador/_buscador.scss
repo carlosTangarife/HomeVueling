@@ -1,5 +1,3 @@
-// compileCompressed: ../../../css/modules/buscador.css
-
 @import "variables";
 @import "placeholders";
 @import "mixins";
@@ -400,8 +398,11 @@
             &:not(:first-child) {
               border-left: 1px solid $form-input-border;
             }
-            &.focused {
+            &.focused,
+            &.focused-bottom-arrow {
               border: 1px solid #666;
+            }
+            &.focused-bottom-arrow {
               &:before,
               &:after {
                 left: 0;
@@ -424,6 +425,12 @@
                 bottom: -9px;
                 border-top: 8px solid black;
                 z-index: 5;
+              }
+              &.error {
+                &:after {
+                  bottom: -10px;
+                  border-top: 8px solid $validation-error-color;
+                }
               }
             }
             &.error {
