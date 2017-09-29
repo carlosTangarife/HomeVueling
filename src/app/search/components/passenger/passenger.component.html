@@ -11,7 +11,7 @@
   <span class="icon icon-arrow-down"></span>
 </div>
 
-<div id="passengers-popup" class="searchbar-popup passengers-popup" [ngClass]="{'show-table':isShowPassengers, 'discount': (isResident || isLargeFamily)}">
+<div id="passengers-popup" class="searchbar-popup passengers-popup" [ngClass]="{'show':isShowPassengers, 'discount': (isResident || isLargeFamily)}">
   <ul class="passengers-popup_main">
     <li app-type-passenger
       *ngFor="let typePassenger of passengerService.typePassengerList$ | async"

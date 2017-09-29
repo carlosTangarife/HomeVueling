@@ -61,7 +61,7 @@
         <div class="popover-content">Los datos introducidos no son correctos.</div>
       </div>
     </div>
-    <div class="form-input" *ngIf="reservationWithOriginDestination" [ngClass]="{'focused': isFocusedStation, 'error': validation && stationBooking.errors?.required}">
+    <div class="form-input" *ngIf="reservationWithOriginDestination" [ngClass]="{'focused-bottom-arrow': isFocusedStation, 'error': validation && stationBooking.errors?.required}">
       <label>Aeropuerto origen/destino</label>
       <div class="input-group">
         <input id="airportReservation"
@@ -86,7 +86,7 @@
         </div>
       </div>
     </div>
-    <div class="form-input dates" *ngIf="reservationWithOriginDestination" [ngClass]="{'focused': isFocusedCalendar, 'error': validation && datePickerBooking.datePicker.errors?.required}">
+    <div class="form-input dates" *ngIf="reservationWithOriginDestination" [ngClass]="{'focused-bottom-arrow': isFocusedCalendar, 'error': validation && datePickerBooking.datePicker.errors?.required}">
       <div app-date-picker
         #datePickerBooking
         class="col col-md-6"
