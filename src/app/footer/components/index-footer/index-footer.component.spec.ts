@@ -2,7 +2,7 @@ import { async, ComponentFixture, TestBed } from '@angular/core/testing';
 
 import { IndexFooterComponent } from './index-footer.component';
 
-describe('IndexFooterComponent', () => {
+fdescribe('IndexFooterComponent', () => {
   let component: IndexFooterComponent;
   let fixture: ComponentFixture<IndexFooterComponent>;
 
@@ -19,7 +19,7 @@ describe('IndexFooterComponent', () => {
     fixture.detectChanges();
   });
 
-  it('should be created', () => {
+  fit('should be created', () => {
     expect(component).toBeTruthy();
   });
 });

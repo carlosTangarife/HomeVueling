@@ -1,25 +1,28 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { IconComponent } from './icon.component';
+import { FormsModule } from '@angular/forms';
 
-describe('IconComponent', () => {
+fdescribe('IconComponent', () => {
   let component: IconComponent;
   let fixture: ComponentFixture<IconComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ IconComponent ]
-    })
-    .compileComponents();
-  }));
-
   beforeEach(() => {
-    fixture = TestBed.createComponent(IconComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    debugger;
+    TestBed.configureTestingModule({
+      imports: [],
+      declarations: [IconComponent],
+    });
+    fixture = TestBed.createComponent(IconComponent)
   });
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
+  fit ('should be created', () => {
+    debugger;
+    expect(fixture).toBeTruthy();
+  });
+
+  fit ('should return a array not empty', () => {
+    debugger;
+    expect(component.paths).toBeDefined();
   });
 });
+
