@@ -3,7 +3,7 @@
   class="form-input origin"
   #originMulti
   [dataFlight]="dataFlight.multi.origin"
-  [ngClass]="{'focused':isFocusedOrigin}"
+  [ngClass]="{'focused-bottom-arrow':isFocusedOrigin}"
   (isFocused)="isFocusedOrigin=$event"
   (selectedOrigin)="destinationMulti.loadDestinations()">
 </div>
@@ -12,7 +12,7 @@
   id="form-group--destination"
   class="form-input destination"
   #destinationMulti
-  [ngClass]="{'focused':isFocusedDestination}"
+  [ngClass]="{'focused-bottom-arrow':isFocusedDestination}"
   [dataFlight]="dataFlight.multi"
   (isFocused)="isFocusedDestination=$event"
   (clickDestination)="originMulti.showPopupOrigin($event)"
@@ -20,7 +20,7 @@
   (outStation)="getFlightDisabledDays()">
 </div>
 
-<div id="form-group--dates" class="form-input dates" [ngClass]="{'focused':isFocusedCalendar}">
+<div id="form-group--dates" class="form-input dates" [ngClass]="{'focused-bottom-arrow':isFocusedCalendar}">
   <div app-date-picker #dateMulti
     class="col col-md-6"
     (click)="toggleDatePickerMulti()"

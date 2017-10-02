@@ -26,8 +26,6 @@ export class IndexSearchComponent implements OnInit {
 
   ngOnInit() {
     this.flightService.initFlight();
-    this.flightService.initCheckInOnline();
-    this.flightService.initReservation();
     this.tabStateService.setConfiguration(this.configService.getConfiguration());
     let tabsLink = this.tabStateService.getTabConfiguration('FlightSearch', 'Tab');
     this.listIconLink = [];
@@ -38,6 +36,10 @@ export class IndexSearchComponent implements OnInit {
       }
     }
     this.isOverlay = false;
+
+    this.flightService.stateTab$.subscribe(state => {
+      this.tabStateService.activeTab(this.flightService.stateTab);
+    });
   }
 
   toggleClassOverlay() {

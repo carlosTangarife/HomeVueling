@@ -4,7 +4,7 @@
           id="form-group--origin"
           #origin
           class="form-input origin"
-          [ngClass]="{'focused':isFocusedOrigin}"
+          [ngClass]="{'focused-bottom-arrow':isFocusedOrigin}"
           [dataFlight]="dataFlight.origin"
           (isFocused)="isFocusedOrigin=$event"
           (selectedOrigin)="destination.loadDestinations()">
@@ -14,7 +14,7 @@
           id="form-group--destination"
           #destination
           class="form-input destination"
-          [ngClass]="{'focused':isFocusedDestination}"
+          [ngClass]="{'focused-bottom-arrow':isFocusedDestination}"
           [dataFlight]="dataFlight"
           (isFocused)="isFocusedDestination=$event"
           (clickDestination)="origin.showPopupOrigin($event)"
@@ -25,7 +25,7 @@
       <div app-calendar #calendar
           id="form-group--dates"
           class="form-input dates"
-          [ngClass]="{'focused':isFocusedCalendar}"
+          [ngClass]="{'focused-bottom-arrow':isFocusedCalendar}"
           [dataFlight]="dataFlight"
           [isMulti]="dataFlight.multi.isActive"
           (selectedDateGoing)="multicity.setMinDate($event)"
@@ -36,7 +36,7 @@
           id="form-group--passengers"
           #passenger
           class="form-input passengers"
-          [ngClass]="{'focused':isFocusedPassengers}"
+          [ngClass]="{'focused-bottom-arrow':isFocusedPassengers}"
           [passengers]="dataFlight.passengers"
           [discount]="dataFlight.discount"
           (isFocused)="isFocusedPassengers=$event">

@@ -52,7 +52,7 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
       firstDay: 1,
       minDate: 0,
       numberOfMonths: 3,
-      showAnim: 'slideDown',
+      showAnim: '',
       beforeShow: self.calendarBeforeShow,
       beforeShowDay: function (date) {
         let dateText = $.datepicker.formatDate('yy-m-d', date);
@@ -105,13 +105,9 @@ export class DatePickerComponent implements OnInit, AfterViewInit {
   }
 
   calendarBeforeShow(input, inst) {
+    $('#vyCalendar').append($('#ui-datepicker-div'));
     setTimeout(function() {
-      $('#ui-datepicker-div').css({
-        position: 'relative',
-        top: 0,
-        left: 0
-      });
-      $('#vyCalendar').append($('#ui-datepicker-div'));
+      $('#ui-datepicker-div').css({position: 'relative', top: 0, left: 0});
       if (input.id === 'inputComeBack') {
         $('#vyCalendar').find('.ui-datepicker td').off();
         $('#vyCalendar').find('.ui-datepicker').on('mouseenter', 'td', function() {

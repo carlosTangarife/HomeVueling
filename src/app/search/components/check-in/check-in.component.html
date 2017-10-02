@@ -63,7 +63,7 @@
         <div class="popover-content">Los datos introducidos no son correctos.</div>
       </div>
     </div>
-    <div class="form-input" *ngIf="dataCheckIn.checkInWithOriginDestination" [ngClass]="{'focused': isFocusedStation, 'error': validation && stationCheckin.errors?.required}">
+    <div class="form-input" *ngIf="dataCheckIn.checkInWithOriginDestination" [ngClass]="{'focused-bottom-arrow': isFocusedStation, 'error': validation && stationCheckin.errors?.required}">
       <label>Aeropuerto origen/destino</label>
       <div class="input-group">
         <input id="airportCheckIn"
@@ -88,7 +88,7 @@
         </div>
       </div>
     </div>
-    <div class="form-input dates" *ngIf="dataCheckIn.checkInWithOriginDestination" [ngClass]="{'focused': isFocusedCalendar, 'error': validation && datePickerCheckin.datePicker.errors?.required}">
+    <div class="form-input dates" *ngIf="dataCheckIn.checkInWithOriginDestination" [ngClass]="{'focused-bottom-arrow': isFocusedCalendar, 'error': validation && datePickerCheckin.datePicker.errors?.required}">
       <div app-date-picker
         #datePickerCheckin
         class="col col-md-6"
