@@ -5,10 +5,15 @@ export interface IContactPhonesType {
 
 export interface IContactPhones {
     CountryCode: string,
-    TextPhoneInfo: TextPhoneInfo
+    TextPhoneInfo: ITextPhoneInfo
 }
 
-export interface TextPhoneInfo {
+export interface ICountryInfo {
+  countryCode: string,
+  name: string
+}
+
+export interface ITextPhoneInfo {
     phoneNumber: string,
     phoneInfoFirst: string,
     phoneInfoLast: string

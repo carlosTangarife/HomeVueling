@@ -1,4 +1,4 @@
-<div class="alert_wrap" *ngIf="submit == false">
+<div class="alert_wrap" *ngIf="!submit">
   <span class="icon icon-exclamation-mark"><span class="path1"></span><span class="path2"></span></span>
   <p class="alert_wrap_title">No se ha encontrado la reserva. Por favor, verifica los datos y vuelve a intentarlo.</p>
   <div class="alert_wrap_message">
@@ -8,7 +8,7 @@
       </div>
       <div class="col-md-3">
         <div class="selectwrap">
-          <select [(ngModel)]="countryCode" class="input select" (ngModelChange)="onChange()">
+          <select [(ngModel)]="countryCode" class="input select" (ngModelChange)="showTextPhoneInfo()">
             <option *ngFor="let country of countryInfo" [ngValue]="country.countryCode" >
               {{country.name}}
             </option>
@@ -16,10 +16,10 @@
         </div>
       </div>
       <div class="col-md-2">
-        <p>{{result?.TextPhoneInfo.phoneNumber}}</p>
+        <p>{{textPhoneInfo?.phoneNumber}}</p>
       </div>
       <div class="col-md-4">
-        <p>{{result?.TextPhoneInfo.phoneInfoFirst}} {{result?.TextPhoneInfo.phoneInfoLast}} </p>
+        <p>{{textPhoneInfo?.phoneInfoFirst}} {{textPhoneInfo?.phoneInfoLast}} </p>
       </div>
     </div>
   </div>

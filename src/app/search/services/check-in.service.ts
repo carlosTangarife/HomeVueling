@@ -1,13 +1,21 @@
 import { Injectable } from '@angular/core';
+
 import { ICheckIn } from '../models/check-in.model';
+
 import { CookiesWrapper } from '../../shared/services/cookies-wrapper.service';
+import { ResourcesService } from './../../shared/services/resources.service';
 
 @Injectable()
 export class CheckInService {
-    codeBooking: string;
-    key: string;
+    public environment: Object;
+    public codeBooking: string;
+    public key: string;
 
-    constructor(private _cookiesWrapper: CookiesWrapper) { }
+    constructor(private _cookiesWrapper: CookiesWrapper, private resourcesService: ResourcesService) {
+      this.environment = {};
+      this.codeBooking = '';
+      this.key = '';
+    }
 
     getCodeBooking(key: string): string {
         this.codeBooking = this._cookiesWrapper.getCookie(key);
@@ -20,5 +28,9 @@ export class CheckInService {
           email: email,
           date: null
         };
+    }
+
+    getContactPhones() {
+      let loadContactPhones = this.resourcesService.getContactPhones().map(res => (this.environment['contactphones'] = res)).share();
     }
 }
