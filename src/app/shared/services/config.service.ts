@@ -29,13 +29,13 @@ export class ConfigService {
       .map(res => (this.environment['contactphones'] = res))
       .share();
 
-    return (
-      loadStations.toPromise() &&
-      loadMarkets.toPromise() &&
-      loadTexts.toPromise() &&
-      loadConfiguration.toPromise() &&
+    return (Promise.all([
+      loadStations.toPromise(),
+      loadMarkets.toPromise(),
+      loadTexts.toPromise(),
+      loadConfiguration.toPromise(),
       loadContactPhones.toPromise()
-    );
+    ]));
   }
 
   getDictionary(key: string): string {
