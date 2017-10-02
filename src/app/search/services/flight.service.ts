@@ -21,6 +21,8 @@ import { environment } from '../../../environments/environment';
 
 @Injectable()
 export class FlightService {
+  public baseUrl: string;
+  public mockUser: string;
   public dataFlight: IFlight;
   public dataCheckIn: ICheckIn;
   public dataReservation: IReservation;
@@ -38,15 +40,16 @@ export class FlightService {
     this.dataCheckIn = { date: null };
     this.dataReservation = { date: null };
     this.dataFlight = {};
-    this.stateTab = stateTab[stateTab.FlightSearch];
-    this.subjectStateTab = new BehaviorSubject<string>(this.stateTab);
+    this.subjectStateTab = new BehaviorSubject<string>('');
     this.stateTab$ = this.subjectStateTab.asObservable();
+    this.baseUrl = 'https://vueling-json.herokuapp.com/index.php/';
+    this.mockUser = 'testBad@gmail.com';
   }
 
   initFlight() {
     this.initFlightData();
     /* user status, can be true/false */
-    this.loginService.isLoged('testbed@gmail.com').subscribe(
+    this.loginService.isLoged(this.mockUser).subscribe(
     (response) => {
       this.isLoged = response;
       this.initCheckInOnline();
@@ -110,9 +113,12 @@ export class FlightService {
       return: new Date(today.getDate() + 7)
       };
     }
+    this.stateTab = stateTab[stateTab.FlightSearch];
+    this.subjectStateTab.next(this.stateTab);
   }
 
   initCheckInOnline( ) {
+    debugger;
     if (!this.isLoged) {
       let dataCheckInOnline = this.cookiesWrapper.getCookie(environment.keyCheckInCookie);
 
@@ -125,8 +131,8 @@ export class FlightService {
       this.dataCheckIn.checkInWithEmail = true;
       this.dataCheckIn.checkInWithOriginDestination = false;
 
-      const url = 'https://vueling-json.herokuapp.com/index.php/getReservation/test1@gmail.com';
-      this.http.get(url).map((response) => response.json()).subscribe((response) => {
+      const method = 'getReservation/' + this.mockUser;
+      this.http.get(this.baseUrl + method).map((response) => response.json()).subscribe((response) => {
         if (response && !response.checkIn) {
           this.testReservation = response;
           this.stateTab = stateTab[stateTab.Checkin];
@@ -137,6 +143,7 @@ export class FlightService {
   }
 
   initReservation( ) {
+    debugger;
     if (!this.isLoged) {
       let dataReservation = this.cookiesWrapper.getCookie(environment.keyReservation);
 
@@ -148,8 +155,8 @@ export class FlightService {
       this.dataReservation.checkInWithEmail = true;
       this.dataReservation.checkInWithOriginDestination = false;
 
-      const url = 'https://vueling-json.herokuapp.com/index.php/getReservation/test1@gmail.com';
-      this.http.get(url).map((response) => response.json()).subscribe((response) => {
+      const method = 'getReservation/' + this.mockUser;
+      this.http.get(this.baseUrl + method).map((response) => response.json()).subscribe((response) => {
         if (response && response.checkIn) {
           this.testReservation = response;
           this.stateTab = stateTab[stateTab.YourBooking];
