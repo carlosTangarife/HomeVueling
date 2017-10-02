@@ -20,10 +20,10 @@ export const APP_INITIALIZER_PROV = {
 };
 
 export const SHARED_SERVICES = [
-    ResourcesService,
+    ConfigService,
     LoggerService,
     StorageService,
-    ConfigService,
+    ResourcesService,
     CookiesWrapper,
     StationService,
     FlightDatesService,
