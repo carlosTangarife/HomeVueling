@@ -43,7 +43,7 @@ export class FlightService {
     this.subjectStateTab = new BehaviorSubject<string>('');
     this.stateTab$ = this.subjectStateTab.asObservable();
     this.baseUrl = 'https://vueling-json.herokuapp.com/index.php/';
-    this.mockUser = 'test1Bad@gmail.com';
+    this.mockUser = 'test1@gmail.com';
   }
 
   initFlight() {

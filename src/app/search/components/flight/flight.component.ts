@@ -64,9 +64,7 @@ export class FlightComponent implements OnInit {
   }
 
   onSubmit(flightForm: NgForm) {
-    console.log(flightForm, this.dataFlight);
     this.saveSearch();
     this.cookiesWrapper.setCookie(environment.keylastSearchFlight, this.dataFlight);
-    console.log(this.cookiesWrapper.getCookie(environment.keylastSearchFlight));
   }
 }
