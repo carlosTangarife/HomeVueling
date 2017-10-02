@@ -7,7 +7,6 @@ fdescribe('MinusPlusComponent', () => {
   let fixture: ComponentFixture<MinusPlusComponent>;
 
   beforeEach(() => {
-    debugger;
     TestBed.configureTestingModule({
       imports: [],
       declarations: [MinusPlusComponent],

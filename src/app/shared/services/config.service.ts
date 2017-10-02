@@ -26,6 +26,8 @@ export class ConfigService {
       .share();
 
     return (Promise.all([
+      loadConfiguration.toPromise(),
+      loadTexts.toPromise(),
       loadStations.toPromise(),
       loadMarkets.toPromise(),
       loadTexts.toPromise(),
