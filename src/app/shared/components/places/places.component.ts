@@ -25,5 +25,5 @@ export class PlacesComponent implements OnInit {
 
   stationSelected(station: any) {
     this.selectedEvent.emit(station);
-  }
+   }
 }

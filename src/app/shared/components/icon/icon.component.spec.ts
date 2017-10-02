@@ -20,9 +20,9 @@ fdescribe('IconComponent', () => {
     expect(fixture).toBeTruthy();
   });
 
-  fit ('should return a array not empty', () => {
-    debugger;
-    expect(component.paths).toBeDefined();
-  });
+  // fit ('should return a array not empty', () => {
+  //   debugger;
+  //   expect(component.paths).toBeDefined();
+  // });
 });
 

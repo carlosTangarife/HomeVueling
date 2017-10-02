@@ -1,25 +1,21 @@
 import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-
 import { MinusPlusComponent } from './minus-plus.component';
+import { NO_ERRORS_SCHEMA } from '@angular/core';
 
-describe('MinusPlusComponent', () => {
+fdescribe('MinusPlusComponent', () => {
   let component: MinusPlusComponent;
   let fixture: ComponentFixture<MinusPlusComponent>;
 
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ MinusPlusComponent ]
-    })
-    .compileComponents();
-  }));
-
   beforeEach(() => {
-    fixture = TestBed.createComponent(MinusPlusComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    debugger;
+    TestBed.configureTestingModule({
+      imports: [],
+      declarations: [MinusPlusComponent],
+    });
+    fixture = TestBed.createComponent(MinusPlusComponent)
   });
 
-  it('should be created', () => {
-    expect(component).toBeTruthy();
+  fit('should be created', () => {
+    expect(fixture).toBeTruthy();
   });
 });
