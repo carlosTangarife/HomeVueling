@@ -7,7 +7,6 @@ fdescribe('IconComponent', () => {
   let fixture: ComponentFixture<IconComponent>;
 
   beforeEach(() => {
-    debugger;
     TestBed.configureTestingModule({
       imports: [],
       declarations: [IconComponent],
@@ -16,12 +15,10 @@ fdescribe('IconComponent', () => {
   });
 
   fit ('should be created', () => {
-    debugger;
     expect(fixture).toBeTruthy();
   });
 
   // fit ('should return a array not empty', () => {
-  //   debugger;
   //   expect(component.paths).toBeDefined();
   // });
 });

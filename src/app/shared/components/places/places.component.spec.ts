@@ -14,7 +14,6 @@ fdescribe('PlacesComponent', () => {
   let fixture: ComponentFixture<PlacesComponent>;
 
   beforeEach(async(() => {
-    debugger;
     TestBed.configureTestingModule({
       declarations: [ PlacesComponent, DictionaryPipe ],
       providers: [ ConfigService ],
@@ -31,7 +30,6 @@ fdescribe('PlacesComponent', () => {
     });
 
   fit ('should be created', () => {
-    debugger;
     expect(fixture).toBeTruthy();
   });
 

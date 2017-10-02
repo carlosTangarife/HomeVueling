@@ -43,7 +43,7 @@ export class FlightService {
     this.subjectStateTab = new BehaviorSubject<string>('');
     this.stateTab$ = this.subjectStateTab.asObservable();
     this.baseUrl = 'https://vueling-json.herokuapp.com/index.php/';
-    this.mockUser = 'testBad@gmail.com';
+    this.mockUser = 'test1Bad@gmail.com';
   }
 
   initFlight() {
@@ -117,8 +117,7 @@ export class FlightService {
     this.subjectStateTab.next(this.stateTab);
   }
 
-  initCheckInOnline( ) {
-    debugger;
+  initCheckInOnline() {
     if (!this.isLoged) {
       let dataCheckInOnline = this.cookiesWrapper.getCookie(environment.keyCheckInCookie);
 
@@ -126,7 +125,6 @@ export class FlightService {
         this.stateTab = stateTab[stateTab.Checkin];
         this.subjectStateTab.next(this.stateTab);
       }
-
     } else {
       this.dataCheckIn.checkInWithEmail = true;
       this.dataCheckIn.checkInWithOriginDestination = false;
@@ -142,8 +140,7 @@ export class FlightService {
     }
   }
 
-  initReservation( ) {
-    debugger;
+  initReservation() {
     if (!this.isLoged) {
       let dataReservation = this.cookiesWrapper.getCookie(environment.keyReservation);
 
