@@ -1,25 +1,31 @@
 import { Injectable } from '@angular/core';
+
 import { ResourcesService } from './resources.service';
+
 import * as _ from 'lodash';
 
 @Injectable()
 export class ConfigService {
   environment = {};
-  constructor(private resourcesService: ResourcesService) {}
+
+  constructor(private resourcesService: ResourcesService) { }
 
   load(): Promise<any> {
     let loadStations = this.resourcesService
       .getStations()
       .map(res => (this.environment['stations'] = res))
       .share();
+
     let loadMarkets = this.resourcesService
       .getMarkets()
       .map(res => (this.environment['markets'] = res))
       .share();
+
     let loadTexts = this.resourcesService
       .getTexts()
       .map(res => (this.environment['texts'] = res))
       .share();
+
     let loadConfiguration = this.resourcesService
       .getConfiguration()
       .map(res => (this.environment['configuration'] = res))
@@ -31,7 +37,7 @@ export class ConfigService {
       loadStations.toPromise(),
       loadMarkets.toPromise(),
       loadTexts.toPromise(),
-      loadConfiguration.toPromise()
+      loadConfiguration.toPromise(),
     ]));
   }
 
