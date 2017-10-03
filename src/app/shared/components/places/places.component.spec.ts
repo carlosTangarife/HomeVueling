@@ -3,34 +3,24 @@ import { PlacesComponent } from './places.component';
 import { NO_ERRORS_SCHEMA } from '@angular/core';
 import { DictionaryPipe } from '../../pipes/dictionary.pipe';
 import { ConfigService } from '../../services/config.service';
-// import { ResourcesService } from '../../services/resources.service';
-// import { LoggerService } from '../../services/logger.service';
-// import { StorageService } from '../../services/storage.service';
-// import { PersistenceService } from 'angular-persistence';
-// import { Http } from '@angular/http';
+import { MockDictionary } from '../testing/mocks';
 
 fdescribe('PlacesComponent', () => {
   let component: PlacesComponent;
   let fixture: ComponentFixture<PlacesComponent>;
-
-  beforeEach(async(() => {
-    TestBed.configureTestingModule({
-      declarations: [ PlacesComponent, DictionaryPipe ],
-      providers: [ ConfigService ],
-      schemas: [ NO_ERRORS_SCHEMA ]
-    })
-    .compileComponents();
-
-  }));
+  let configService: ConfigService;
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(PlacesComponent);
-    component = fixture.componentInstance;
-    fixture.detectChanges();
+    TestBed.configureTestingModule({
+      declarations: [ PlacesComponent, DictionaryPipe ],
+      providers: [ {provide: ConfigService, useClass: MockDictionary} ],
+      schemas: [ NO_ERRORS_SCHEMA ]
     });
-
-  fit ('should be created', () => {
-    expect(fixture).toBeTruthy();
+    component = TestBed.createComponent(PlacesComponent).componentInstance;
+    configService = TestBed.get(ConfigService);
   });
 
+  fit ('should be created', () => {
+    expect(component).toBeTruthy();
+  });
 });
