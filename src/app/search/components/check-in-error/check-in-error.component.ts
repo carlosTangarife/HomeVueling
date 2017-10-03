@@ -1,21 +1,20 @@
+import { ResourcesService } from './../../../shared/services/resources.service';
 import { Component, OnInit } from '@angular/core';
-import { IContactPhones } from '../../models/contact-phones.model';
+import { IContactPhonesType, ITextPhoneInfo, ICountryInfo } from '../../models/contact-phones.model';
 import { ConfigService } from '../../../shared/services/config.service';
-import { SelectorService } from '../../../shared/services/selector.service';
 
 @Component({
   selector: '[app-check-in-error]',
   templateUrl: './check-in-error.component.html'
 })
 export class CheckInErrorComponent implements OnInit {
-  public submit: boolean;
-  public countryInfo: Array<{countryCode: string, name: string}>;
+  public countryInfo: Array<ICountryInfo>;
   public countryCode: string;
-  public result: IContactPhones;
-
-  constructor(public selectorService: SelectorService) {
+  public contactPhones: IContactPhonesType;
+  public textPhoneInfo: ITextPhoneInfo;
+  constructor(private resourcesService: ResourcesService ) {
     this.countryCode = 'ES';
-    this.submit = false;
+
     this.countryInfo = [
       {countryCode: 'DE', name: 'Alemania'},
       {countryCode: 'AU', name: 'Austria'},
@@ -33,14 +32,24 @@ export class CheckInErrorComponent implements OnInit {
   }
 
   ngOnInit() {
-    this.result = this.selectorService.loadContactPhones(this.countryCode);
+    this.resourcesService.getContactPhones().subscribe((contactPhones) => {
+      this.contactPhones = contactPhones;
+    });
   }
 
-  onSubmit() {
-    this.submit = !this.submit;
+  showTextPhoneInfo() {
+    this.textPhoneInfo = this.loadContactPhones(this.countryCode);
   }
 
-  onChange() {
-     this.result = this.selectorService.loadContactPhones(this.countryCode);
+  private loadContactPhones(country: string): ITextPhoneInfo {
+    let contact = this.contactPhones.phonesServices.find(x => x.CountryCode === country);
+    if (contact) {
+      return {
+              phoneNumber: contact.TextPhoneInfo.phoneNumber,
+              phoneInfoFirst: contact.TextPhoneInfo.phoneInfoFirst,
+              phoneInfoLast: contact.TextPhoneInfo.phoneInfoLast
+        };
+    }
+    return null;
   }
 }

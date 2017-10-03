@@ -23,7 +23,6 @@ fdescribe('ListIconLinkComponent', () => {
       });
 
   fit('should be created', () => {
-    debugger;
     expect(fixture).toBeTruthy();
   });
 });

@@ -30,8 +30,9 @@
           class="form-control"
           placeholder="Ej. XG6LM3"
           pattern="[A-Za-z0-9]{6}"
+          ngModel
           [(ngModel)]="dataCheckIn.codeBooking"
-          #codeBookingCheckin="ngModel"
+          #codeBookingCheckin
           required>
       </div>
       <div class="popover popover--error" *ngIf="validation && codeBookingCheckin.errors?.required">
@@ -52,8 +53,9 @@
           class="form-control"
           placeholder="email@vueling.com"
           pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$"
+          ngModel
           [(ngModel)]="dataCheckIn.email"
-          #emailCheckin="ngModel"
+          #emailCheckin
           required>
       </div>
       <div class="popover popover--error" *ngIf="validation && emailCheckin.errors?.required">
@@ -73,8 +75,9 @@
           placeholder="Ciudad"
           (click)="showStation()"
           (keyup)="filterStationsByKey(stationCheckin.value)"
+          ngModel
           [(ngModel)]="dataCheckIn.originOrDestinationName"
-          #stationCheckin="ngModel"
+          #stationCheckin
           required>
       </div>
       <div class="popover popover--error" *ngIf="validation && stationCheckin.errors?.required">

@@ -24,18 +24,15 @@ export class ConfigService {
       .getConfiguration()
       .map(res => (this.environment['configuration'] = res))
       .share();
-    let loadContactPhones = this.resourcesService
-      .getContactPhones()
-      .map(res => (this.environment['contactphones'] = res))
-      .share();
 
-    return (
-      loadStations.toPromise() &&
-      loadMarkets.toPromise() &&
-      loadTexts.toPromise() &&
-      loadConfiguration.toPromise() &&
-      loadContactPhones.toPromise()
-    );
+    return (Promise.all([
+      loadConfiguration.toPromise(),
+      loadTexts.toPromise(),
+      loadStations.toPromise(),
+      loadMarkets.toPromise(),
+      loadTexts.toPromise(),
+      loadConfiguration.toPromise()
+    ]));
   }
 
   getDictionary(key: string): string {

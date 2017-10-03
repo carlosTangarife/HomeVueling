@@ -13,8 +13,12 @@ fdescribe('PlacesComponent', () => {
   let component: PlacesComponent;
   let fixture: ComponentFixture<PlacesComponent>;
 
+<<<<<<< HEAD
   beforeEach(() => {
     debugger;
+=======
+  beforeEach(async(() => {
+>>>>>>> ee925976f3be319c02087b5f1f6e85ae39fb5658
     TestBed.configureTestingModule({
       imports:  [ Http ],
       declarations: [ PlacesComponent, DictionaryPipe ],
@@ -33,7 +37,6 @@ fdescribe('PlacesComponent', () => {
     });
 
   fit ('should be created', () => {
-    debugger;
     expect(fixture).toBeTruthy();
   });
 

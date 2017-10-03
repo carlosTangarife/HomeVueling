@@ -32,7 +32,13 @@ export class CheckInComponent implements OnInit {
   public isFocusedStation: boolean;
   public isFocusedCalendar: boolean;
 
-  constructor(public checkInService: CheckInService, public selectorService: SelectorService, public calendarService: CalendarService, private linksHubService: LinksHubService, private flightService: FlightService) {
+  constructor(
+    public checkInService: CheckInService,
+    public selectorService: SelectorService,
+    public calendarService: CalendarService,
+    private linksHubService: LinksHubService,
+    private flightService: FlightService
+  ) {
     this.dataCheckIn = { date: null };
     this.validation = false;
     this.keyCookie = environment.keyCheckInCookie;
@@ -88,6 +94,11 @@ export class CheckInComponent implements OnInit {
     this.isFocusedCalendar = this.calendarService.isShowDatePicker;
   }
 
+  filterStationsByKey(key: string) {
+    this.selectorService.filterByKey(key);
+    this.isFocusedStation = true;
+  }
+
   onSubmit(checkInform: NgForm) {
     if (checkInform.valid) {
       this.validation = false;
@@ -95,10 +106,5 @@ export class CheckInComponent implements OnInit {
     } else {
       this.validation = true;
     }
-  }
-
-  filterStationsByKey(key: string) {
-    this.selectorService.filterByKey(key);
-    this.isFocusedStation = true;
   }
 }

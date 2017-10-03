@@ -11,7 +11,6 @@ import { map } from 'rxjs/Operator/map'
 import * as _ from 'lodash';
 
 /*Models using interface */
-import { IContactPhonesType, IContactPhones } from '../../search/models/contact-phones.model';
 import { IStation, IMarket, IStationList } from '../models/station.model';
 import { IIcon } from '../models/commons.model';
 
@@ -25,8 +24,6 @@ export class SelectorService {
     public viewPopup = false;
     public iconGeo: IIcon;
     public iconRecent: IIcon;
-    public contactPhones: IContactPhonesType;
-    public contact: any;
 
     private subjectRecentStations = new BehaviorSubject<any>(this.filteredStations);
     public recentStations$ = this.subjectRecentStations.asObservable();
@@ -40,23 +37,6 @@ export class SelectorService {
         this.marketsIata = [];
         this.iconGeo = this.configService.getIconGeo();
         this.iconRecent = this.configService.getIconRecent();
-        this.contact = this.configService.environment['contactphones'];
-    }
-
-    loadContactPhones(iata: string): IContactPhones {
-        let cont = this.contact.phonesServices.find(x => x.CountryCode === iata);
-        if (cont) {
-            let result: IContactPhones = {
-                CountryCode: cont.CountryCode,
-                TextPhoneInfo: {
-                    phoneNumber: cont.TextPhoneInfo.phoneNumber,
-                    phoneInfoFirst: cont.TextPhoneInfo.phoneInfoFirst,
-                    phoneInfoLast: cont.TextPhoneInfo.phoneInfoLast
-                }
-            };
-            return result;
-        }
-        return null;
     }
 
     loadStations() {
