@@ -35,6 +35,7 @@ export class CheckInErrorComponent implements OnInit {
     this.resourcesService.getContactPhones().subscribe((contactPhones) => {
       this.contactPhones = contactPhones;
     });
+    this.showTextPhoneInfo();
   }
 
   showTextPhoneInfo() {
